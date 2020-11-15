@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Lingfeng Zhu">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Lingfeng Zhu">
+    
+    <meta name="keywords" content="machine learning,deep learning,recommender system">
+    
+    <meta name="description" content="">
+    <meta name="description" content="此文整理了一些基本的排序算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SortAlgorithm">
+<meta property="og:url" content="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/index.html">
+<meta property="og:site_name" content="Vinn&#39;s Studio">
+<meta property="og:description" content="此文整理了一些基本的排序算法。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-15T00:30:08.000Z">
+<meta property="article:modified_time" content="2020-11-15T14:22:54.144Z">
+<meta property="article:author" content="Lingfeng Zhu">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>SortAlgorithm · Vinn&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Vinn&#39;s Studio</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">SortAlgorithm</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Vinn's Studio</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/mali.png)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            SortAlgorithm
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "algorithm">algorithm</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">7.6k</span>Reading time: <span class="post-count reading-time">33 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/11/15</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>此文整理了一些基本的排序算法。</p>
+<a id="more"></a>
+<h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><p>重复地访问过要排序的元素，依次比较相邻两个元素，如果他们的顺序错误就把他们调换过来，直到没有元素再需要交换，排序完成。这个算法的名字由来是因为越小(或越大)的元素会经由交换慢慢“浮”到数列的顶端。</p>
+<p>冒泡排序算法的运作如下（以从小到大排序为例）：</p>
+<ol>
+<li>正向遍历，对于每一对相邻元素，比较这两个元素的大小，如果前一个比后一个大，就把它们两个调换位置。完成一次遍历后，数组的最后一个元素就是最大元素；</li>
+<li>排除最后一个元素，针对剩余数组重复上述步骤；</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- 如果能在内部循环第一次运行时,使用一个旗标来表示有无需要交换的可能,可以把最优时间复杂度降低到O(n)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 稳定</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubbleSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> passnum <span class="keyword">in</span> range(len(alist)<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>): <span class="comment"># 从最后一个元素到第一个元素</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(passnum):</span><br><span class="line">            <span class="keyword">if</span> alist[i] &gt; alist[i+<span class="number">1</span>]:</span><br><span class="line">                temp = alist[i]</span><br><span class="line">                alist[i] = alist[i+<span class="number">1</span>]</span><br><span class="line">                alist[i+<span class="number">1</span>] = temp</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>] </span><br><span class="line">bubbleSort(alist)</span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># short bubble sort: 若第一次遍历时没有进行交换，则直接停止</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shortBubbleSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    exchanges = <span class="literal">True</span></span><br><span class="line">    passnum = len(alist) - <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> passnum &gt; <span class="number">0</span> <span class="keyword">and</span> exchanges:</span><br><span class="line">        exchanges = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(passnum):</span><br><span class="line">            <span class="keyword">if</span> alist[i] &gt; alist[i+<span class="number">1</span>]:</span><br><span class="line">                exchanges = <span class="literal">True</span></span><br><span class="line">                temp = alist[i]</span><br><span class="line">                alist[i] = alist[i+<span class="number">1</span>]</span><br><span class="line">                alist[i+<span class="number">1</span>] = temp</span><br><span class="line">        passnum = passnum - <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist=[<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">90</span>,<span class="number">50</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">100</span>,<span class="number">110</span>]  </span><br><span class="line">shortBubbleSort(alist)  </span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+</code></pre><h3 id="拓展：鸡尾酒排序"><a href="#拓展：鸡尾酒排序" class="headerlink" title="拓展：鸡尾酒排序"></a>拓展：鸡尾酒排序</h3><p>又称双向冒泡排序、鸡尾酒搅拌排序、搅拌排序、涟漪排序、来回排序或快乐小时排序, 是冒泡排序的一种变形。该算法与冒泡排序的不同处在于排序时是以双向在序列中进行排序。</p>
+<p>以从小到大排序为例：</p>
+<ol>
+<li>正向遍历：对于每一对相邻元素，比较这两个元素的大小，如果前一个比后一个大，就把它们两个调换位置。完成一次遍历后，数组的最后一个元素就是最大元素；</li>
+<li>反向遍历：排除最后一个元素，针对剩余数组，从后往前遍历，对于每一对相邻元素，比较这两个元素的大小，如果前一个比后一个大，就把它们两个调换位置。完成一次反向遍历后，数组的第一个元素就是最小元素；</li>
+<li>排除第一个和最后一个元素，针对剩余数组重复上述步骤1和2；</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- 如果序列在一开始已经大部分排序过的话,会接近O(n)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 稳定</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cocktailSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    size = len(alist)</span><br><span class="line">    sign = <span class="number">1</span> <span class="comment"># 标记：sign = 1 表示需要继续排序; sign = 0 表示已经完成排序</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(int(size / <span class="number">2</span>)):</span><br><span class="line">        <span class="keyword">if</span> sign:</span><br><span class="line">            sign = <span class="number">0</span> <span class="comment"># 先将 sign 设置为 0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i, size - <span class="number">1</span> - i):</span><br><span class="line">                <span class="keyword">if</span> alist[j] &gt; alist[j + <span class="number">1</span>]:</span><br><span class="line">                    alist[j], alist[j + <span class="number">1</span>] = alist[j + <span class="number">1</span>], alist[j]</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(size - <span class="number">2</span> - i, i, <span class="number">-1</span>):</span><br><span class="line">                <span class="keyword">if</span> alist[k] &lt; alist[k - <span class="number">1</span>]:</span><br><span class="line">                    alist[k], alist[k - <span class="number">1</span>] = alist[k - <span class="number">1</span>], alist[k]</span><br><span class="line">                    sign = <span class="number">1</span> <span class="comment"># 反向排序时还存在需要交换的相邻元素，因此整个排序过程还没有结束，故重新设置sign = 1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist=[<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">90</span>,<span class="number">50</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">100</span>,<span class="number">110</span>]  </span><br><span class="line">cocktailSort(alist)  </span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[20, 30, 40, 50, 60, 70, 80, 90, 100, 110]
+</code></pre><h2 id="Selection-Sort"><a href="#Selection-Sort" class="headerlink" title="Selection Sort"></a>Selection Sort</h2><p>依次遍历数组，每次都选出最大（最小）元素，放到数组最后（最前）的位置。</p>
+<p>选择排序算法的运作如下（以从小到大排序为例）：：</p>
+<ol>
+<li>遍历数组，找到最大元素，将它放到数组最后一个位置（通过与数组最后一个元素交换位置实现）；</li>
+<li>排除最后一个元素（即最大元素），针对剩下的数组重复上述步骤；</li>
+<li>持续每次对越来越少的元素重复上面的步骤，直到完成排序。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 不稳定</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectionSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> fillslot <span class="keyword">in</span> range(len(alist)<span class="number">-1</span>, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">        positionOfMax = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> location <span class="keyword">in</span> range(<span class="number">1</span>, fillslot + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> alist[location] &gt; alist[positionOfMax]:</span><br><span class="line">                positionOfMax = location</span><br><span class="line">                </span><br><span class="line">            temp = alist[fillslot]</span><br><span class="line">            alist[fillslot] = alist[positionOfMax]</span><br><span class="line">            alist[positionOfMax] = temp</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>, <span class="number">26</span>, <span class="number">93</span>, <span class="number">17</span>, <span class="number">77</span>, <span class="number">31</span>, <span class="number">44</span>, <span class="number">55</span>, <span class="number">20</span>] </span><br><span class="line">selectionSort(alist) </span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><h2 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h2><p>在数组中维护一个“已排序”的子序列，对于未排序数据(右手抓到的牌)，在已排序序列(左手已经排好序的手牌)中从后向前扫描，找到相应位置并插入。</p>
+<p>插入排序算法的运作如下（以从小到大排序为例）：</p>
+<ol>
+<li>将数组的第一个元素初始化为已排序子序列；</li>
+<li>取出下一个元素（已排序子序列的右边第一个元素）作为新元素，在已经排序的元素序列中从后向前扫描；</li>
+<li>如果已排序子序列中的某元素大于新元素，则将该元素后移一个位置，空出一个空位；</li>
+<li>重复步骤3，直到找到已排序的元素小于或者等于新元素；</li>
+<li>将新元素插入到空位中；</li>
+<li>重复步骤2 ~ 5，直到完成排序。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 ------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- 最坏情况为输入序列是降序排列的,此时时间复杂度O(n^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- 最好情况为输入序列是升序排列的,此时时间复杂度O(n)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 稳定</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insertionSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        currentvalue = alist[index]</span><br><span class="line">        position = index</span><br><span class="line">        <span class="keyword">while</span> position &gt; <span class="number">0</span> <span class="keyword">and</span> alist[position - <span class="number">1</span>] &gt; currentvalue:</span><br><span class="line">            alist[position] = alist[position - <span class="number">1</span>]</span><br><span class="line">            position = position - <span class="number">1</span></span><br><span class="line">        alist[position] = currentvalue</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>] </span><br><span class="line">insertionSort(alist) </span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><h3 id="拓展：二分插入排序"><a href="#拓展：二分插入排序" class="headerlink" title="拓展：二分插入排序"></a>拓展：二分插入排序</h3><p>对于插入排序，如果比较操作的代价比交换操作大的话，可以采用二分查找法来减少插入过程中比较操作的次数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(n^2)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 稳定</span><br></pre></td></tr></table></figure>
+<p>当n较大时，二分插入排序的比较次数比直接插入排序的最差情况好得多，但比直接插入排序的最好情况要差，所当以元素初始序列已经接近升序时，直接插入排序比二分插入排序比较次数少。二分插入排序元素移动次数与直接插入排序相同，依赖于元素初始序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binaryInsertSort</span><span class="params">(alist)</span>:</span></span><br><span class="line"><span class="comment"># 二分插入排序: 小-&gt;大</span></span><br><span class="line"><span class="comment"># 在直接插入排序的基础上使用了折半/二分查找的方法 </span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(alist)):</span><br><span class="line">        index = alist[i]</span><br><span class="line">        low = <span class="number">0</span></span><br><span class="line">        hight = i - <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> low &lt;= hight:</span><br><span class="line">            mid = (low + hight) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> index &gt; alist[mid]:</span><br><span class="line">                low = mid + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                hight = mid - <span class="number">1</span></span><br><span class="line">        <span class="comment"># 跳出循环后 low, mid 都是一样的, hight = low - 1</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i, low, <span class="number">-1</span>):</span><br><span class="line">            alist[j] = alist[j - <span class="number">1</span>]</span><br><span class="line">        alist[low] = index</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>] </span><br><span class="line">binaryInsertSort(alist) </span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><h2 id="Shell-Sort"><a href="#Shell-Sort" class="headerlink" title="Shell Sort"></a>Shell Sort</h2><p>希尔排序，即分组插入排序，也叫递减增量排序，是插入排序的一种更高效的改进版本：将数组按照一定的<strong>步长/增量</strong>（步长为 $n$ 表示：$\forall i$, 下标为$i$, $i+n$, $i+2n$, $i+3n$ … 的元素组成同一个子序列）拆分为若干个较小的子序列（事实上，若步长为 $n$， 则拆分为 $n$ 个子序列），然后对每个子序列分别使用插入排序（<strong>这样可以让一个元素一次性地朝最终位置前进一大步</strong>—&gt;<strong>克服了插入排序的一个导致低效的缺点：每步排序中，除了这一步的新元素外，其他元素都只能移动最多一位</strong>）；然后算法再取越来越小的步长进行分组插入排序，算法的最后一步就是普通的插入排序，但是到了这步，数组已经几乎排列好了（<strong>利用了插入排序在对几乎已经排好序的数据操作时效率较高的优点</strong>）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- 根据步长序列的不同而不同。已知最好的为O(n(logn)^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- O(n)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- 根据步长序列的不同而不同。</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 不稳定</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shellSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    sublistcount = len(alist) // <span class="number">2</span> <span class="comment"># 表示 步长 or 增量</span></span><br><span class="line">    <span class="keyword">while</span> sublistcount &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">for</span> startposition <span class="keyword">in</span> range(sublistcount):</span><br><span class="line">            gapInsertionSort(alist, startposition, sublistcount)</span><br><span class="line">        print(<span class="string">'After increments of size'</span>, sublistcount, <span class="string">'The list is'</span>, alist)</span><br><span class="line">        sublistcount = sublistcount //<span class="number">2</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gapInsertionSort</span><span class="params">(alist, start, gap)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    对 alist 中的一个子序列（该子序列以 start 作为起点，步长为 gap）进行插入排序</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(start+gap, len(alist), gap):</span><br><span class="line">        currentvalue = alist[i]</span><br><span class="line">        position = i</span><br><span class="line">        <span class="keyword">while</span> position &gt;= gap <span class="keyword">and</span> alist[position - gap] &gt; currentvalue:</span><br><span class="line">            alist[position] = alist[position - gap]</span><br><span class="line">            position = position - gap</span><br><span class="line">        alist[position] = currentvalue</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>, <span class="number">26</span>, <span class="number">93</span>, <span class="number">17</span>, <span class="number">77</span>, <span class="number">31</span>, <span class="number">44</span>, <span class="number">55</span>, <span class="number">20</span>] </span><br><span class="line">shellSort(alist) </span><br><span class="line">print(<span class="string">'Finally: '</span>, alist)</span><br></pre></td></tr></table></figure>
+<pre><code>After increments of size 4 The list is [20, 26, 44, 17, 54, 31, 93, 55, 77]
+After increments of size 2 The list is [20, 17, 44, 26, 54, 31, 77, 55, 93]
+After increments of size 1 The list is [17, 20, 26, 31, 44, 54, 55, 77, 93]
+Finally:  [17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>归并排序采用分治法（以从小到大排序为例）：</p>
+<ul>
+<li>分割：递归地把当前序列平均分割成两半，得到众多子序列 -&gt; 最终得到许多长度为1的子序列；</li>
+<li>集成/归并：在保持元素顺序的同时将两个子序列集成到一起 -&gt; 最终归并得到一个排好序的序列。一个归并单元的步骤如下：<ol>
+<li>申请空间，使其大小为两个已经排序的子序列之和，该空间用来存放合并后的序列，称为合并空间；</li>
+<li>设定两个指针，最初位置分别为两个已经排序序列的起始位置；</li>
+<li>比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动两个指针到下一位置；</li>
+<li>重复步骤3直到某一指针到达序列尾部；</li>
+<li>将另一序列剩下的所有元素直接复制到合并序列尾部；</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(n)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 稳定</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    print(<span class="string">'Splitting '</span>, alist)</span><br><span class="line">    <span class="keyword">if</span> len(alist) &gt; <span class="number">1</span>:</span><br><span class="line">        mid = len(alist) // <span class="number">2</span></span><br><span class="line">        lefthalf = alist[:mid]</span><br><span class="line">        righthalf = alist[mid:]</span><br><span class="line">        </span><br><span class="line">        mergeSort(lefthalf)</span><br><span class="line">        mergeSort(righthalf)</span><br><span class="line">        </span><br><span class="line">        i, j, k = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> <span class="comment"># i 为第一个子序列上的指针， j 为第二个子序列上的指针，k 为合并序列上的指针</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> i &lt; len(lefthalf) <span class="keyword">and</span> j &lt; len(righthalf):</span><br><span class="line">            <span class="keyword">if</span> lefthalf[i] &lt; righthalf[j]:</span><br><span class="line">                alist[k] = lefthalf[i]</span><br><span class="line">                i = i + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                alist[k] = righthalf[j]</span><br><span class="line">                j = j + <span class="number">1</span></span><br><span class="line">            k = k + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">while</span> i &lt; len(lefthalf):  </span><br><span class="line">            alist[k] = lefthalf[i]  </span><br><span class="line">            i = i + <span class="number">1</span> </span><br><span class="line">            k = k + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">while</span> j &lt; len(righthalf):  </span><br><span class="line">            alist[k] = righthalf[j]  </span><br><span class="line">            j = j + <span class="number">1</span> </span><br><span class="line">            k = k + <span class="number">1</span> </span><br><span class="line">    print(<span class="string">"Merging "</span>,alist)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>]  </span><br><span class="line">mergeSort(alist)  </span><br><span class="line">print(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>Splitting  [54, 26, 93, 17, 77, 31, 44, 55, 20]
+Splitting  [54, 26, 93, 17]
+Splitting  [54, 26]
+Splitting  [54]
+Merging  [54]
+Splitting  [26]
+Merging  [26]
+Merging  [26, 54]
+Splitting  [93, 17]
+Splitting  [93]
+Merging  [93]
+Splitting  [17]
+Merging  [17]
+Merging  [17, 93]
+Merging  [17, 26, 54, 93]
+Splitting  [77, 31, 44, 55, 20]
+Splitting  [77, 31]
+Splitting  [77]
+Merging  [77]
+Splitting  [31]
+Merging  [31]
+Merging  [31, 77]
+Splitting  [44, 55, 20]
+Splitting  [44]
+Merging  [44]
+Splitting  [55, 20]
+Splitting  [55]
+Merging  [55]
+Splitting  [20]
+Merging  [20]
+Merging  [20, 55]
+Merging  [20, 44, 55]
+Merging  [20, 31, 44, 55, 77]
+Merging  [17, 20, 26, 31, 44, 54, 55, 77, 93]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># another method</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(alist) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> alist</span><br><span class="line">    mid = len(alist) // <span class="number">2</span></span><br><span class="line">    left = mergeSort(alist[:mid])</span><br><span class="line">    right = mergeSort(alist[mid:])</span><br><span class="line">    <span class="keyword">return</span> merge(left, right)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(left, right)</span>:</span></span><br><span class="line">    r, l = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">while</span> l &lt; len(left) <span class="keyword">and</span> r &lt; len(right):</span><br><span class="line">        <span class="keyword">if</span> left[l] &lt;= right[r]:</span><br><span class="line">            result.append(left[l])</span><br><span class="line">            l += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result.append(right[r])</span><br><span class="line">            r += <span class="number">1</span></span><br><span class="line">    result += list(left[l:])</span><br><span class="line">    result += list(right[r:])</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>,<span class="number">26</span>,<span class="number">93</span>,<span class="number">17</span>,<span class="number">77</span>,<span class="number">31</span>,<span class="number">44</span>,<span class="number">55</span>,<span class="number">20</span>]  </span><br><span class="line">mergeSort(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><h2 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h2><p>快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序n个元素要O(nlogn)次比较。在最坏状况下则需要O(n^2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他O(nlogn)算法更快，因为它的内部循环可以在大部分的架构上很有效率地被实现出来。</p>
+<p>快速排序算法的运作如下（以从小到大排序为例）：</p>
+<ol>
+<li>从序列中挑出一个元素（通常选择第一个元素或者中间位置的元素），作为”基准”(pivot)；</li>
+<li>把所有比基准值小的元素放在基准前面，所有比基准值大的元素放在基准的后面（相同的数可以到任一边），这个过程称为分区(partition)操作；</li>
+<li>对每个分区递归地进行步骤1~2，递归的结束条件是序列的长度是0或1，这时序列整体已经排序完成。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 ------------ 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 --------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- 每次选取的基准都是最大（或最小）的元素，导致每次只划分出了一个分区，需要进行n-1次划分才能结束递归，时间复杂度为O(n^2)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- 每次选取的基准都恰好是中位数，这样每次都均匀的划分出两个分区，只需要logn次划分就能结束递归，时间复杂度为O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ 主要是递归造成的栈空间的使用(用来保存left和right等局部变量)，取决于递归树的深度，一般为O(logn)，最差为O(n)       </span><br><span class="line">&#x2F;&#x2F; 稳定性 ---------- 不稳定</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    pivotvalue = alist[first]</span><br><span class="line">    leftmark = first + <span class="number">1</span></span><br><span class="line">    rightmark = last</span><br><span class="line">    </span><br><span class="line">    done = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</span><br><span class="line">        <span class="keyword">while</span> leftmark &lt;= rightmark <span class="keyword">and</span> \</span><br><span class="line">        alist[leftmark] &lt;= pivotvalue:</span><br><span class="line">            leftmark = leftmark + <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">while</span> leftmark &lt;= rightmark <span class="keyword">and</span> \</span><br><span class="line">        alist[rightmark] &gt;= pivotvalue:</span><br><span class="line">            rightmark = rightmark - <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> leftmark &gt; rightmark:</span><br><span class="line">            done = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            temp = alist[leftmark]</span><br><span class="line">            alist[leftmark] = alist[rightmark]</span><br><span class="line">            alist[rightmark] = temp</span><br><span class="line">        </span><br><span class="line">    temp = alist[first]</span><br><span class="line">    alist[first] = alist[rightmark]</span><br><span class="line">    alist[rightmark] = temp</span><br><span class="line">    print(alist)</span><br><span class="line">    <span class="keyword">return</span> rightmark <span class="comment"># return the position  where the pivotvalue should be</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    quickSortHelper(alist, <span class="number">0</span>, len(alist) - <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSortHelper</span><span class="params">(alist, first, last)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first &lt; last:</span><br><span class="line">        splitpoint = partition(alist, first, last)</span><br><span class="line">        quickSortHelper(alist, first, splitpoint - <span class="number">1</span>)</span><br><span class="line">        quickSortHelper(alist, splitpoint + <span class="number">1</span>, last)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>, <span class="number">26</span>, <span class="number">93</span>, <span class="number">17</span>, <span class="number">77</span>, <span class="number">31</span>, <span class="number">44</span>, <span class="number">55</span>, <span class="number">20</span>]  </span><br><span class="line">quickSort(alist)  </span><br><span class="line">print(<span class="string">"Finally"</span>, alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[31, 26, 20, 17, 44, 54, 77, 55, 93]
+[17, 26, 20, 31, 44, 54, 77, 55, 93]
+[17, 26, 20, 31, 44, 54, 77, 55, 93]
+[17, 20, 26, 31, 44, 54, 77, 55, 93]
+[17, 20, 26, 31, 44, 54, 55, 77, 93]
+Finally [17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># another method: 更简洁，但是使用了额外空间</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quickSort</span><span class="params">(alist)</span>:</span>    </span><br><span class="line">    <span class="string">"""快速排序"""</span>    </span><br><span class="line">    <span class="keyword">if</span> len(alist) &gt;= <span class="number">2</span>:  <span class="comment"># 递归入口及出口        </span></span><br><span class="line">        mid = alist[len(alist)//<span class="number">2</span>]  <span class="comment"># 选取基准值，也可以选取第一个或最后一个元素        </span></span><br><span class="line">        left, right = [], []  <span class="comment"># 定义基准值左右两侧的列表        </span></span><br><span class="line">        alist.remove(mid)  <span class="comment"># 从原始数组中移除基准值        </span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> alist:            </span><br><span class="line">            <span class="keyword">if</span> num &gt;= mid:                </span><br><span class="line">                right.append(num)            </span><br><span class="line">            <span class="keyword">else</span>:                </span><br><span class="line">                left.append(num)        </span><br><span class="line">        <span class="keyword">return</span> quickSort(left) + [mid] + quickSort(right)    </span><br><span class="line">    <span class="keyword">else</span>:        </span><br><span class="line">        <span class="keyword">return</span> alist</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">54</span>, <span class="number">26</span>, <span class="number">93</span>, <span class="number">17</span>, <span class="number">77</span>, <span class="number">31</span>, <span class="number">44</span>, <span class="number">55</span>, <span class="number">20</span>]  </span><br><span class="line">quickSort(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[17, 20, 26, 31, 44, 54, 55, 77, 93]
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">答：这是考虑到排序算法的稳定性。对于基础类型，相同值是无差别的，排序前后相同值的相对位置并不重要，所以选择更为高效的快速排序，尽管它是不稳定的排序算法；而对于非基础类型，排序前后相等实例的相对位置不宜改变，所以选择稳定的归并排序。 </span><br><span class="line"></span><br><span class="line">### 拓展：链表快速排序</span><br><span class="line">step1:初始化时，i指向链表首元素；j &#x3D; i + 1，指向链表第二个元素。基准数字为当前i指向的数字；  </span><br><span class="line">step2:若j指向的元素大于基准数：直接跳过，执行j++；  </span><br><span class="line">step3:若j指向的元素小于基准数：首先i向后移动一位（i++），然后交换i和j所指向的元素（&#96;&#96;&#96;swap(i,j)&#96;&#96;&#96;），最后j向后移动一位（j++）；  </span><br><span class="line">step4:最后，当j已经超出索引，则一次循环结束，交换当前i指向的元素和基准数；  </span><br><span class="line">step5:以基准数现在所在的位置为界划分了左右两个子链表，递归这两个链表</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line"># 方法2</span><br><span class="line"># 链表结点类</span><br><span class="line">class Node():  </span><br><span class="line">    def __init__(self, item&#x3D;None):</span><br><span class="line">        self.item &#x3D; item  # 数据域</span><br><span class="line">        self.next &#x3D; None  # 指针域</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 链表类，生成链表以及定义相关方法</span><br><span class="line">class LinkList():</span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.head &#x3D; None</span><br><span class="line">        </span><br><span class="line">    # 生成链表，这里使用list来生成</span><br><span class="line">    def create(self, item):</span><br><span class="line">        self.head &#x3D; Node(item[0])</span><br><span class="line">        p &#x3D; self.head</span><br><span class="line">        for i in item[1:]:</span><br><span class="line">            p.next &#x3D; Node(i)</span><br><span class="line">            p &#x3D; p.next</span><br><span class="line"></span><br><span class="line">    # 遍历显示</span><br><span class="line">    def print(self):</span><br><span class="line">        p &#x3D; self.head</span><br><span class="line">        while p !&#x3D; None:</span><br><span class="line">            print(p.item, end&#x3D;&#39; &#39;)</span><br><span class="line">            p &#x3D; p.next</span><br><span class="line">        print()</span><br><span class="line"></span><br><span class="line">    # 根据索引取值</span><br><span class="line">    def getItem(self, index):</span><br><span class="line">        p &#x3D; self.head</span><br><span class="line">        count &#x3D; 0</span><br><span class="line">        while count !&#x3D; index:</span><br><span class="line">            p &#x3D; p.next</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">        return p.item</span><br><span class="line"></span><br><span class="line">    # 根据索引设值</span><br><span class="line">    def setItem(self, index, item):</span><br><span class="line">        p &#x3D; self.head</span><br><span class="line">        count &#x3D; -1</span><br><span class="line">        while count &lt; index-1:</span><br><span class="line">            p &#x3D; p.next</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">        p.item &#x3D; item</span><br><span class="line"></span><br><span class="line">    # 互换</span><br><span class="line">    def swapItem(self, i, j):</span><br><span class="line">        t &#x3D; self.getItem(j)</span><br><span class="line">        self.setItem(j, self.getItem(i))</span><br><span class="line">        self.setItem(i, t)</span><br><span class="line"></span><br><span class="line">    def quicksortofloop(self, left, right): # left 和 right 为首位元素的下标</span><br><span class="line">        if left &lt; right:</span><br><span class="line">            # 初始化</span><br><span class="line">            i &#x3D; left</span><br><span class="line">            j &#x3D; i+1</span><br><span class="line">            start &#x3D; self.getItem(i)</span><br><span class="line"></span><br><span class="line">            # 大循环条件，j不能超过链表长度</span><br><span class="line">            while (j &lt;&#x3D; right):</span><br><span class="line">                # 如果 j 指向的值大于等于基准数字，直接跳过</span><br><span class="line">                while (j &lt;&#x3D; right and self.getItem(j) &gt;&#x3D; start):</span><br><span class="line">                    j +&#x3D; 1</span><br><span class="line">                # 否则，j 指向的值小于基准，则交换</span><br><span class="line">                if (j &lt;&#x3D; right):</span><br><span class="line">                    i +&#x3D; 1</span><br><span class="line">                    self.swapItem(i, j)</span><br><span class="line">                    self.print()</span><br><span class="line">                    j +&#x3D; 1</span><br><span class="line">            self.swapItem(left, i)</span><br><span class="line">            self.quicksortofloop(left, i-1)</span><br><span class="line">            self.quicksortofloop(i+1, right)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">    L &#x3D; LinkList()</span><br><span class="line">    L.create([4, 2, 5, 3, 7, 9, 0, 1])</span><br><span class="line">    L.quicksortofloop(0, 7)</span><br><span class="line">    L.print()</span><br></pre></td></tr></table></figure>
+<pre><code>4 2 5 3 7 9 0 1 
+4 2 3 5 7 9 0 1 
+4 2 3 0 7 9 5 1 
+4 2 3 0 1 9 5 7 
+1 0 3 2 4 9 5 7 
+0 1 3 2 4 9 5 7 
+0 1 2 3 4 9 5 7 
+0 1 2 3 4 9 5 7 
+0 1 2 3 4 7 5 9 
+0 1 2 3 4 5 7 9 
+</code></pre><h2 id="Heap-Sort"><a href="#Heap-Sort" class="headerlink" title="Heap Sort"></a>Heap Sort</h2><p>堆排序利用了堆这种数据结构。二叉堆是一个近似完全二叉树的结构，并同时满足堆积的性质：即子节点的键值或索引总是小于（或者大于）它的父节点。</p>
+<p>通常堆是通过一维数组来实现的。在数组起始位置为0的情形中：</p>
+<ul>
+<li>父节点i的左子节点在位置(2i+1);</li>
+<li>父节点i的右子节点在位置(2i+2);</li>
+<li>子节点i的父节点在位置floor((i-1)/2);</li>
+</ul>
+<p>堆排序算法的运作如下（以从小到大排序为例）：</p>
+<ol>
+<li>由输入的无序数组构造一个最大堆（父结点的值总是大于它的孩子节点），作为初始的无序区；</li>
+<li>把堆顶元素（最大值）和堆尾元素（堆按层次遍历的最后一个元素，即实现堆的数组的最后一个元素）互换，这时候数组最后一个元素就已经是最大元素了；</li>
+<li>排除堆尾元素，对剩下的堆重新维持一个最大堆的结构；</li>
+<li>持续每次对越来越少的元素重复步骤2 ~ 3，直到堆的大小为1，此时按照层次遍历的顺序输出堆即是排序后的数组。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 分类 -------------- 内部比较排序</span><br><span class="line">&#x2F;&#x2F; 数据结构 ---------- 数组</span><br><span class="line">&#x2F;&#x2F; 最差时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 最优时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 平均时间复杂度 ---- O(nlogn)</span><br><span class="line">&#x2F;&#x2F; 所需辅助空间 ------ O(1)</span><br><span class="line">&#x2F;&#x2F; 稳定性 ------------ 不稳定，不稳定发生在堆顶元素与堆尾元素交换的时刻</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapSort</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sift_down</span><span class="params">(start, end)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        维持下标 start 对应的节点在最大堆中的位置： -&gt; 即 start 对应的节点的 percDown 过程</span></span><br><span class="line"><span class="string">        start: 目标节点的下标</span></span><br><span class="line"><span class="string">        end: 最大堆堆尾位置的下标</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        root = start</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            child = <span class="number">2</span> * root + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> child &gt; end:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> child + <span class="number">1</span> &lt;= end <span class="keyword">and</span> alist[child] &lt; alist[child + <span class="number">1</span>]:</span><br><span class="line">                child += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> alist[root] &lt; alist[child]:</span><br><span class="line">                alist[root], alist[child] = alist[child], alist[root]</span><br><span class="line">                root = child</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建最大堆</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> start <span class="keyword">in</span> range((len(alist) - <span class="number">2</span>) // <span class="number">2</span>, <span class="number">-1</span>, <span class="number">-1</span>): <span class="comment"># 反向遍历</span></span><br><span class="line">        sift_down(start, len(alist) - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 堆排序主体过程</span></span><br><span class="line">    <span class="keyword">for</span> end <span class="keyword">in</span> range(len(alist) - <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">        alist[<span class="number">0</span>], alist[end] = alist[end], alist[<span class="number">0</span>]</span><br><span class="line">        sift_down(<span class="number">0</span>, end - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> alist</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alist = [<span class="number">9</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line">heapSort(alist)</span><br></pre></td></tr></table></figure>
+<pre><code>[1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre><h2 id="Bucket-Sort"><a href="#Bucket-Sort" class="headerlink" title="Bucket Sort"></a>Bucket Sort</h2><p>如果有一个数组A，包含N个整数，值从min到max，我们可以得到一种非常快速的排序，桶排序（bucket sort）。申请一个数组S，里面含有（max-min+1）个桶，每个桶的值初始化为0。然后遍历数组A，读入A[i]时，S[A[i]-min]增加1（也就是说S记录了每个数字出现的次数）。所有输入被读进后，扫描数组S，对于S的下标为i的位置，输出s[i]个(i+min)，就能得出排好序的结果。该算法时间花费O(n+k)，其中k表示桶的长度；空间上不能原地排序。</p>
+<p>【例子】：<br>举个例子，排序一个数组[5,3,6,1,2,7,5,10]，值都在1-10之间，建立10个桶：  </p>
+<p>[0 0 0 0 0 0 0 0 0 0]    （桶）  </p>
+<p>[1 2 3 4 5 6 7 8 9 10]   （桶代表的值）  </p>
+<p>遍历数组，第一个数字5，第五个桶加1：[0 0 0 0 1 0 0 0 0 0]</p>
+<p>第二个数字3，第三个桶加1：[0 0 1 0 1 0 0 0 0 0]</p>
+<p>…</p>
+<p>遍历后</p>
+<p>[1 1 1 0 2 1 1 0 0 1] （桶）</p>
+<p>输出</p>
+<p>[1 2 3 5 5 6 7 10]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bucketSort</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    A: input list</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    n = len(A)</span><br><span class="line">    Amax = max(A)</span><br><span class="line">    Amin = min(A)</span><br><span class="line">    s = [<span class="number">0</span>] * (Amax - Amin + <span class="number">1</span>) <span class="comment"># buckets</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        s[A[i] - Amin] += <span class="number">1</span> <span class="comment"># 记录各个数字出现次数</span></span><br><span class="line">    </span><br><span class="line">    output = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        <span class="keyword">while</span> s[i] &gt; <span class="number">0</span>:</span><br><span class="line">            output.append(i + Amin)</span><br><span class="line">            s[i] -= <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">A = [<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">-3</span>,<span class="number">15</span>]</span><br><span class="line">print(bucketSort(A))</span><br></pre></td></tr></table></figure>
+<pre><code>[-3, 1, 2, 3, 5, 5, 6, 7, 10, 15]
+</code></pre><h3 id="拓展：区间-0-1-上均匀分布的桶排序"><a href="#拓展：区间-0-1-上均匀分布的桶排序" class="headerlink" title="拓展：区间[0,1)上均匀分布的桶排序"></a>拓展：区间[0,1)上均匀分布的桶排序</h3><p>当输入符合均匀分布时，例如，元素均匀的分布在区间[0,1)上，可以将桶排序与其它排序方法结合使用。</p>
+<p>如果序列的长度为n，就将[0,1)划分成n个相同大小的子区间(桶s)，然后将n个输入数分布它们属于的区间对应的各个桶中(如：假如输入10个数，则把区间[0,1)均匀划分为10个区间，而$0.09 \in [0, 0.1]$，所以0.09分配到桶s[0])。先对各个桶中的数进行排序，然后按照次序把各桶中的元素列出来即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bucketSort</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    A: input list, A中元素在0~1之间</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    n = len(A)</span><br><span class="line">    s = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(n)] <span class="comment"># buckets</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        s[int(x * n)].append(x) <span class="comment"># 将 x 分配到对应的区间中</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        s[i].sort() <span class="comment"># 对每个桶进行排序</span></span><br><span class="line">    </span><br><span class="line">    output = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        output.extend(s[i])</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">A = [<span class="number">0.09</span>,<span class="number">0.27</span>,<span class="number">0.81</span>,<span class="number">0.03</span>,<span class="number">0.48</span>]</span><br><span class="line">print(bucketSort(A))</span><br></pre></td></tr></table></figure>
+<pre><code>[0.03, 0.09, 0.27, 0.48, 0.81]
+</code></pre><h2 id="Radix-Sort"><a href="#Radix-Sort" class="headerlink" title="Radix Sort"></a>Radix Sort</h2><p>基数排序可以看做是特殊的桶排序，假设使用十进制数字，即基数B=10，假设输入列表A中数字的最高位数是m位，则可以从个位、十位、… 到第m位进行m次分桶（从低位向高位进行）：</p>
+<ul>
+<li><p>对于基数B=10的情况，分为 0 ~ 9 这十个桶，然后遍历原数组，将数字按照当前位数分配到对应的桶中（例如，数字为327，当前是按照十位数分桶，则327会被分到2号桶；若是数字10，当前按照个位数分桶，则10会被分到0号桶）。</p>
+</li>
+<li><p>每次按照某位数分完桶后，把每个数字按照现在桶的顺序排列，然后按这个顺序进行下一个位数的分桶，当最高位也分完桶之后，按当前桶的顺序输出就是排好序以后的结果。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">radixSort</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    A: input list</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    n = len(A)</span><br><span class="line">    B = <span class="number">10</span> <span class="comment"># 十进制下的基数设为10</span></span><br><span class="line">    m = len(str(max(A))) <span class="comment"># A中数字的最高位数</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(m): <span class="comment"># 进行m次分桶</span></span><br><span class="line">        s = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(B)] <span class="comment"># 按照基数设定桶</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">            s[x//(<span class="number">10</span>**k) % <span class="number">10</span>].append(x) <span class="comment"># 按照对应位数分桶, 显然 x//(10**k) % 10 就是 x 从右往左第 k+1 位对应的数字</span></span><br><span class="line">        A = [j <span class="keyword">for</span> i <span class="keyword">in</span> s <span class="keyword">for</span> j <span class="keyword">in</span> i] <span class="comment"># 按照桶的顺序更新数组：i 表示 s 中的每一个桶， j 表示桶 i 中的每一个数</span></span><br><span class="line">    <span class="keyword">return</span> A</span><br><span class="line"></span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">A = [<span class="number">99</span>, <span class="number">108</span>, <span class="number">425</span>, <span class="number">0</span>, <span class="number">10</span>, <span class="number">809</span>, <span class="number">32</span>, <span class="number">78</span>, <span class="number">933</span>, <span class="number">26</span>, <span class="number">3397</span>]</span><br><span class="line">print(radixSort(A))</span><br></pre></td></tr></table></figure>
+<pre><code>[0, 10, 26, 32, 78, 99, 108, 425, 809, 933, 3397]
+</code></pre><h2 id="Counting-Sort"><a href="#Counting-Sort" class="headerlink" title="Counting Sort"></a>Counting Sort</h2><p><strong>类型一</strong>：基于比较的计数排序（这个类型的计数排序无法突破基于比较的排序算法的时间复杂度下界，但是可以用于包含负数的数据）<br>对输入数组中的每一个数x，通过比较确定出小于x的数字的总个数p和等于x的数字的总个数q。有了这一信息就可以把x直接放到排序后数组中的相应位置（排序后数组的下标为 p 到 (p + q) 的位置上都应该放x）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countingSort</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    A: input list</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    n = len(A)</span><br><span class="line">    output = [<span class="literal">None</span>] * n</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        p = <span class="number">0</span> <span class="comment"># p 用于储存所有数字中小于 A[i] 的数字的个数</span></span><br><span class="line">        q = <span class="number">0</span> <span class="comment"># q 用于储存所有数字中等于 A[i] 的数字的个数</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> A[j] &lt; A[i]:</span><br><span class="line">                p += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> A[j] == A[i]:</span><br><span class="line">                q += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(p, p+q): <span class="comment"># 将数字放在输出数组的对应位置上</span></span><br><span class="line">            output[k] = A[i]</span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line">    </span><br><span class="line">A = [<span class="number">9</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">-9</span>]</span><br><span class="line">print(countingSort(A))</span><br></pre></td></tr></table></figure>
+<pre><code>[-9, 2, 2, 3, 3, 5, 6, 8, 9]
+</code></pre><p><strong>类型二</strong>：不基于比较的计数排序（时间复杂度O(n+k)，只能用于范围在 0 ~ k 内的数据）<br>对每一个输入的元素A[i]，通过辅助数组 c（而不是通过比较大小）确定A中小于等于 A[i] 的元素个数，具体方法为：  </p>
+<ul>
+<li>计算出 k = max(A)，以此确定输入数组的范围为 0 ~ k，然后申请一个长为(k+1)的数组c，下标为 0 ~ k  </li>
+<li>首先用 c[x] 储存A中数字x出现的次数  </li>
+<li>然后更新 c[x] 为A中小于等于x的数字出现的总次数  </li>
+<li>申请输出数组 output，基于数组c将A中数字x放入它排序后应该在的位置，然后相应的c[x]减去1，方便计算A中下一个重复的x的位置</li>
+</ul>
+<p>例如：假设有6个数小于等于 a[i]，所以 a[i] 应该放在输出数组的第6个位置（i.e. output[6-1]）上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countingSort</span><span class="params">(A)</span>:</span></span><br><span class="line">    k = max(A)</span><br><span class="line">    n = len(A)  <span class="comment"># 计算a序列的长度</span></span><br><span class="line">    output = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]  <span class="comment"># 设置输出序列并初始化为0</span></span><br><span class="line">    c = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(k + <span class="number">1</span>)]  <span class="comment"># 设置计数序列并初始化为0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 首先用 c[x] 储存A中数字x出现的次数</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        c[x] += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 然后更新 c[x] 为A中小于等于x的数字出现的总次数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(c)):</span><br><span class="line">        c[i] = c[i] + c[i<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 基于数组c将A中数字x放入它排序后应该在的位置，然后相应的c[x]减去1</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        output[c[x] - <span class="number">1</span>] = x</span><br><span class="line">        c[x] -= - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">A = [<span class="number">17</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">15</span>]</span><br><span class="line">print(countingSort(A))</span><br></pre></td></tr></table></figure>
+<pre><code>[3, 4, 5, 7, 9, 15, 17]
+</code></pre><p><strong>优化</strong>：突破 0 ~ k 的限制<br>之所以会有 0 ~ k 的限制是因为列表 c 的下标自然地从 0 开始标。因此如果考虑使用一个字典d[x]代替列表c[i]用来储存A中小与等于元素x = A[i]的元素个数，用键值取代下标，就能实现从 min(A) ~ max(A) 的标号，从而突破这一限制。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countingSort</span><span class="params">(A)</span>:</span></span><br><span class="line">    keys = range(min(A), max(A)+<span class="number">1</span>) <span class="comment"># A中最小元素到最大元素作为键值，取代下标</span></span><br><span class="line">    values = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(max(A) - min(A) + <span class="number">1</span>)] <span class="comment"># 设置计数序列并初始化为0</span></span><br><span class="line">    d = dict(zip(keys, values)) <span class="comment"># 设置计数字典</span></span><br><span class="line">    </span><br><span class="line">    n = len(A)  <span class="comment"># 计算a序列的长度</span></span><br><span class="line">    </span><br><span class="line">    output = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]  <span class="comment"># 设置输出序列并初始化为0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 首先用d[x]储存A中数字x出现的次数</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        d[x] += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 然后更新 d[x] 为A中小于等于x的数字出现的总次数</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(min(A)+<span class="number">1</span>, max(A)+<span class="number">1</span>):</span><br><span class="line">        d[x] = d[x] + d[x<span class="number">-1</span>]</span><br><span class="line">    <span class="comment"># 基于字典d将A中数字x放入它排序后应该在的位置，然后相应的d[x]减去1</span></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> A:</span><br><span class="line">        output[d[x] - <span class="number">1</span>] = x</span><br><span class="line">        d[x] -= - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">A = [<span class="number">17</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">15</span>,<span class="number">-9</span>,<span class="number">-12</span>]</span><br><span class="line">print(countingSort(A))</span><br></pre></td></tr></table></figure>
+<pre><code>[-12, -9, 3, 4, 5, 7, 9, 15, 17]
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">November 15th 2020, 8:30:08 am</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">November 15th 2020, 10:22:54 pm</a>
+            <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/06/29/BinarySearch/" title= "BinarySearch">
+                    <div class="prevTitle">BinarySearch</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:jolin.windy072@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/LingfengZhu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wechatQR.jpeg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.facebook.com/lingfeng.zhu.18/" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.linkedin.com/in/lingfeng-zhu-256315193/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="about">Powered by <a href="https://lingfengzhu.github.io/about/" target="_blank">Vinn</a></span><span class="iconfont-archer power">&#xe635;</span><span id="instituion-info">from <a href="https://www.wisc.edu/" target="_blank">UWM</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bubble-Sort"><span class="toc-number">1.</span> <span class="toc-text">Bubble Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展：鸡尾酒排序"><span class="toc-number">1.1.</span> <span class="toc-text">拓展：鸡尾酒排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selection-Sort"><span class="toc-number">2.</span> <span class="toc-text">Selection Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Insertion-Sort"><span class="toc-number">3.</span> <span class="toc-text">Insertion Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展：二分插入排序"><span class="toc-number">3.1.</span> <span class="toc-text">拓展：二分插入排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Shell-Sort"><span class="toc-number">4.</span> <span class="toc-text">Shell Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-Sort"><span class="toc-number">5.</span> <span class="toc-text">Merge Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Sort"><span class="toc-number">6.</span> <span class="toc-text">Quick Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heap-Sort"><span class="toc-number">7.</span> <span class="toc-text">Heap Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bucket-Sort"><span class="toc-number">8.</span> <span class="toc-text">Bucket Sort</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拓展：区间-0-1-上均匀分布的桶排序"><span class="toc-number">8.1.</span> <span class="toc-text">拓展：区间[0,1)上均匀分布的桶排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Radix-Sort"><span class="toc-number">9.</span> <span class="toc-text">Radix Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Counting-Sort"><span class="toc-number">10.</span> <span class="toc-text">Counting Sort</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 7
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >SortAlgorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2020/06/29/BinarySearch/" >BinarySearch</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2020/04/26/Delta-Method-in-Deep-Learning/" >Delta Method in Deep Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/18</span><a class="archive-post-title" href= "/2020/04/18/BackTrack/" >Backtracking</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/16</span><a class="archive-post-title" href= "/2020/04/16/Python-Syntax-with/" >Python Syntax: with</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/COVID-Survival-Anaysis/" >COVID-19 Survival Analysis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/Hexo-Guideline/" >Hexo Guideline</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="delta method"><span class="iconfont-archer">&#xe606;</span>delta method</span>
+    
+        <span class="sidebar-tag-name" data-tags="hexo"><span class="iconfont-archer">&#xe606;</span>hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="algorithm"><span class="iconfont-archer">&#xe60a;</span>algorithm</span>
+    
+        <span class="sidebar-category-name" data-categories="statistics"><span class="iconfont-archer">&#xe60a;</span>statistics</span>
+    
+        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+    
+        <span class="sidebar-category-name" data-categories="web-frontend"><span class="iconfont-archer">&#xe60a;</span>web-frontend</span>
+    
+        <span class="sidebar-category-name" data-categories="syntax"><span class="iconfont-archer">&#xe60a;</span>syntax</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Lingfeng Zhu"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->    
+     
+    </body>
+</html>
+
+
