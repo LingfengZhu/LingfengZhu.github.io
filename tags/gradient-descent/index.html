@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta property="og:type" content="website">
 <meta property="og:title" content="Vinn&#39;s Studio">
-<meta property="og:url" content="https://lingfengzhu.github.io/tags/Survival-Analysis/index.html">
+<meta property="og:url" content="https://lingfengzhu.github.io/tags/gradient-descent/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Lingfeng Zhu">
@@ -354,25 +354,34 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/27/COVID-Survival-Anaysis/" >
+        <a class="abstract-title" href = "/2020/12/08/Gradient-Descent/" >
             
-                <span>COVID-19 Survival Analysis</span>
+                <span>Gradient Descent</span>
         </a>
         <div class="abstract-content">
-            On March 11, 2020, the World Health Organization (WHO) declared COVID-19 a global pandemic. COVID-19 is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). It has now spread over 185 countries or territories with more than 300,000 reported cases, claiming...
+            
+
+
+一、普通梯度下降
+$\Theta$：参数集合，包括所有权重向量 $w$ 和偏置项 $b$；
+$\alpha$：学习率；
+$x^{(i)}$：样本 $i$ 的特征值；
+$y^{(i)}$：样本 $i$ 的类别标签；
+$J(\Theta | x, y)$：损失函数/目标函数；
+$\nabla_{\Theta} J(\Theta)$：损失函数 $J$ 对 参数 $\Theta$ 求导；
+
+1. Batch Gradient Descent在每一轮 Eppch 的训练过程中，只进行一次处理，同时处理整个训练集的所有样本（一次性存入内存）计算一次损失函数的梯度，并用该梯度对模型参数进行一次更...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/27</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/12/08</span>
             </div>
             <!-- tags  -->
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Survival Analysis">Survival Analysis</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "COVID-19">COVID-19</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "gradient descent">gradient descent</a>
     
 </div>
             

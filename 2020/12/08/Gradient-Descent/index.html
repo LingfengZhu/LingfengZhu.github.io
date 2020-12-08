@@ -20,25 +20,28 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta name="description" content="This article is the Final project for STAT 732. I summarized the major results and main contributions of a recent statistical paper (published 2019) named On the Delta Method for Uncertainty Appr">
+    <meta name="description" content="一、普通梯度下降 $\Theta$：参数集合，包括所有权重向量 $w$ 和偏置项 $b$； $\alpha$：学习率； $x^{(i)}$：样本 $i$ 的特征值； $y^{(i)}$：样本 $i$ 的类别标签； $J(\Theta | x, y)$：损失函数&#x2F;目标函数； $\nabla_{\Theta} J(\Theta)$：损失函数 $J$ 对 参数 $\Theta$ 求导；  1. B">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Delta Method in Deep Learning">
-<meta property="og:url" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/index.html">
+<meta property="og:title" content="Gradient Descent">
+<meta property="og:url" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
-<meta property="og:description" content="This article is the Final project for STAT 732. I summarized the major results and main contributions of a recent statistical paper (published 2019) named On the Delta Method for Uncertainty Appr">
+<meta property="og:description" content="一、普通梯度下降 $\Theta$：参数集合，包括所有权重向量 $w$ 和偏置项 $b$； $\alpha$：学习率； $x^{(i)}$：样本 $i$ 的特征值； $y^{(i)}$：样本 $i$ 的类别标签； $J(\Theta | x, y)$：损失函数&#x2F;目标函数； $\nabla_{\Theta} J(\Theta)$：损失函数 $J$ 对 参数 $\Theta$ 求导；  1. B">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/flow.jpg">
-<meta property="og:image" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/spectrum.jpg">
-<meta property="article:published_time" content="2020-04-26T07:19:17.000Z">
-<meta property="article:modified_time" content="2020-12-08T06:17:06.481Z">
+<meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/momentum.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/adagrad.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/rmsprop.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/rmsprop2.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/adam.png">
+<meta property="article:published_time" content="2020-12-08T06:15:47.000Z">
+<meta property="article:modified_time" content="2020-12-08T11:50:45.444Z">
 <meta property="article:author" content="Lingfeng Zhu">
-<meta property="article:tag" content="delta method">
+<meta property="article:tag" content="gradient descent">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/flow.jpg">
+<meta name="twitter:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/momentum.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Delta Method in Deep Learning · Vinn&#39;s Studio</title>
+    <title>Gradient Descent · Vinn&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -233,7 +236,7 @@
                 <a href="/" >Vinn&#39;s Studio</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Delta Method in Deep Learning</a>
+                <a href="#" class="post-name">Gradient Descent</a>
             </div>
     </div>
     
@@ -263,7 +266,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Delta Method in Deep Learning
+            Gradient Descent
             <!-- 404 -->
             
         </h1>
@@ -282,18 +285,18 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "delta method">delta method</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "gradient descent">gradient descent</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1.8k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3.1k</span>Reading time: <span class="post-count reading-time">12 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/04/26</span>
+                    <span class="post-intro-time">2020/12/08</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -421,96 +424,124 @@ height:50vh;
   src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<link rel="dns-prefetch" href="//cdn.bootcss.com" />
-
-<p>This article is the Final project for STAT 732. I summarized the major results and main contributions of a recent statistical <a href="https://arxiv.org/abs/1912.00832" target="_blank" rel="noopener">paper</a> (published 2019) named <strong>On the Delta Method for Uncertainty Approximation in Deep Learning</strong>, which utilizes large sample statistical theory in deep learning field and has significant future research potential. </p>
-<a id="more"></a>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><center>Introduction</center></h2><hr>
-<p>This paper proposes a low cost approximation to the well-known Delta method based on an approximate eigendecomposition of the positive curvature subspace of the Hessian matrix and shows that reasonable uncertainty approximations can be obtained even when the number of utilized Hessian eigenpairs is much lower than the number of model parameters.</p>
-<h2 id="Deep-Learning-Definitions"><a href="#Deep-Learning-Definitions" class="headerlink" title="Deep Learning Definitions"></a><center>Deep Learning Definitions</center></h2><hr>
-<h3 id="The-Architecture"><a href="#The-Architecture" class="headerlink" title="The Architecture"></a>The Architecture</h3><p>The paper uses a feed-forward neural network architecture with dense layers to introduce terminology. There are $L$ layers $l = 1,2,…,L$ with $T_l$ neurons in each layer. The input layer $l = 1$, is represented by the input vector $x_n=(x_{n,1}, x_{n,2},…,x_{n,T_1})^T$ where $n = 1,2,…,N$ is the input index. Each layer $l$ represented by weight matrices $W^{(l-1)} \in \mathbb{R}^{T_{l} \times T_{l-1}}$, bias vectors $b^{(l)} \in \mathbb{R}^{T_{l}}$ and vectorized activation functions $\delta^{(l)}$. The parameter vectors representing the layer-wise weights and biases can be defined as follows,</p>
-<script type="math/tex; mode=display">
-\omega^{(l)}=\left[\begin{array}{c}
-\text { flatten }\left(W^{(l)}\right) \\
-b^{(l)}
-\end{array}\right]=\left[\omega_{i}^{(l)}\right] \in \mathbb{R}^{P^{(l)}} \tag{1}</script><p>where $P^{(l)}$ denotes the number of parameters in layer $l$.</p>
-<h3 id="The-Model-Function"><a href="#The-Model-Function" class="headerlink" title="The Model Function"></a>The Model Function</h3><p>The architecture has the corresponding model function defined by,</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\hat{y}_{n}=& f\left(x_{n}, \omega\right) 
-= \sigma^{(L)}\left(W^{(L)} \sigma^{(L-1)}\left(\cdots \sigma^{(2)}\left(W^{(2)} x_{n}\right.\right.\right.
-&\left.\left.\left.+b^{(2)}\right)+\cdots\right)+b^{(L)}\right)
-\end{aligned} \tag{2}</script><h3 id="The-Cost-Function"><a href="#The-Cost-Function" class="headerlink" title="The Cost Function"></a>The Cost Function</h3><p>Use softmax cross-entropy with $L_2$-regularization as the cost function,</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-C(\omega) &=\frac{1}{N} \sum_{n=1}^{N} C_{n}\left(y_{n}, \hat{y}_{n}\right)+\frac{\lambda}{2} \sum_{p=1}^{P} \omega_{p}^{2} \\
-&=\frac{1}{N} \sum_{n=1}^{N}\left(-\sum_{m=1}^{T_{L}} y_{n, m} \log \hat{y}_{n, m}\right)+\frac{\lambda}{2} \sum_{p=1}^{P} \omega_{p}^{2}
-\end{aligned} \tag{3}</script><p>which is the average of $N$ per-example cross-entropy cost functions $C_{n}\left(y_{n}, \hat{y}_{n}\right)$.</p>
-<h3 id="Train"><a href="#Train" class="headerlink" title="Train"></a>Train</h3><p>Training of the neural network can be defined as finding an ‘optimal’ parameter vector $\hat{\omega}$ by minimizing the cost function (3).</p>
-<h2 id="Delta-Method-in-Deep-Learning"><a href="#Delta-Method-in-Deep-Learning" class="headerlink" title="Delta Method in Deep Learning"></a><center>Delta Method in Deep Learning</center></h2><hr>
-<h3 id="The-Delta-Method"><a href="#The-Delta-Method" class="headerlink" title="The Delta Method"></a>The Delta Method</h3><p>The Delta method views a neural network as non-linear regression. By a second-order Taylor expansion, it can be shown that the covariance of the model function (2) can be approximated by,</p>
-<script type="math/tex; mode=display">
-\operatorname{Cov}\left(f\left(x_{0}, \hat{\omega}\right)\right) \approx F \Sigma F^{T} \in \mathbb{R}^{T_{L} \times T_{L}} \tag{4}</script><p>where</p>
-<script type="math/tex; mode=display">
-F=\left[F_{i j}\right] \in \mathbb{R}^{T_{L} \times P}, F_{i j}=\left.\frac{\partial}{\partial \omega_{j}} f_{i}\left(x_{0}, \omega\right)\right|_{\omega=\hat{\omega}} \tag{5}</script><p>is the Jacobian matrix of the model function, and $\Sigma$ is the covariance matrix of the model parameters. An approximation of the variance associated with the prediction of $x_0$ can thus be found by the formula,</p>
-<script type="math/tex; mode=display">
-\sigma^{2}\left(x_{0}, \hat{\omega}\right) \approx \operatorname{diag}\left(F \Sigma F^{T}\right) \in \mathbb{R}^{T_{L}} \tag{6}</script><p>Furthermore, the approximate prediction uncertainty (standard deviation) associated with $x_0$ is defined as </p>
-<script type="math/tex; mode=display">
-\sigma\left(x_{0}, \hat{\omega}\right)=\sqrt{\sigma^{2}\left(x_{0}, \hat{\omega}\right)} \in \mathbb{R}^{T_{L}} \tag{7}</script><p>If and only if the parameter vector is a local minimum of the cost function (3), the covariance matrix of the model parameters can be estimated by the Hessian estimator,</p>
-<script type="math/tex; mode=display">
-\Sigma=\frac{1}{N} H(\hat{\omega})^{-1} \in \mathbb{R}^{P \times P} \tag{8}</script><p>where $H(\hat{\omega}) \in \mathbb{R}^{P \times P}$ is the Hessian matrix defined by</p>
-<script type="math/tex; mode=display">
-\left.H(\hat{\omega}) \stackrel{\text { def }}{=} \frac{\partial^{2} C(\omega)}{\partial \omega \partial \omega^{T}}\right|_{\omega=\hat{\omega}}=\left.\frac{1}{N} \sum_{n=1}^{N} \frac{\partial^{2} C_{n}}{\partial \omega \partial \omega^{T}}\right|_{\omega=\hat{\omega}}+\lambda I \tag{9}</script><h3 id="Problems-in-Application"><a href="#Problems-in-Application" class="headerlink" title="Problems in Application"></a>Problems in Application</h3><p>At this point, we can see that two fundamental difficulties arise when applying the Delta method in deep learning.</p>
-<ul>
-<li><strong>Problem 1</strong>: The sheer size of the Hessian matrix grows quadratically with $P$.</li>
-<li><strong>Problem 2</strong>: For the inverse of the Hessian matrix to be a valid covariance estimator, the Hessian matrix must be positive definite. That is, we are dependent on that the optimizer can find a true local minimum of the cost function.</li>
+<h1 id="一、普通梯度下降"><a href="#一、普通梯度下降" class="headerlink" title="一、普通梯度下降"></a>一、普通梯度下降</h1><ul>
+<li>$\Theta$：参数集合，包括所有权重向量 $w$ 和偏置项 $b$；</li>
+<li>$\alpha$：学习率；</li>
+<li>$x^{(i)}$：样本 $i$ 的特征值；</li>
+<li>$y^{(i)}$：样本 $i$ 的类别标签；</li>
+<li>$J(\Theta | x, y)$：损失函数/目标函数；</li>
+<li>$\nabla_{\Theta} J(\Theta)$：损失函数 $J$ 对 参数 $\Theta$ 求导；</li>
 </ul>
-<h3 id="Solving-the-Problems"><a href="#Solving-the-Problems" class="headerlink" title="Solving the Problems"></a>Solving the Problems</h3><p>The paper presents its approach to the Delta method in deep learning as a separate process carried out in <strong>two phases</strong> after the neural network has been trained. See <a href="#flow">Figure 1</a> for details.</p>
-<div id="flow"><center>Figure 1: The Delta method for quantifying the uncertainty in deep learning </center></div>
-
-<img src="/2020/04/26/Delta-Method-in-Deep-Learning/flow.jpg" class="" title="This is an image">
-<h4 id="Delta-Method-Initial-Phase"><a href="#Delta-Method-Initial-Phase" class="headerlink" title="Delta Method Initial Phase"></a>Delta Method Initial Phase</h4><p>This phase is carried out only once, and is done to compute an indirect approximation of the covariance matrix (8) based on an approximate eigendecomposition of the positive curvature subspace of the Hessian matrix. </p>
-<p>In this phase, people can efficiently compute eigenvalues and eigenvectors of the Hessian matrix via the <strong>Lanczos iteration</strong> and exact Hessian vector products. Since the method is not closely related to large sample statistical theory, I will not go deeper into the <strong>Lanczos iteration</strong> here. See  Python module <a href="https://github.com/gknilsen/pydeepdelta" target="_blank" rel="noopener"><code>pydeepdelta</code></a> for more details.</p>
-<h4 id="Delta-Method-Prediction-Phase"><a href="#Delta-Method-Prediction-Phase" class="headerlink" title="Delta Method Prediction Phase"></a>Delta Method Prediction Phase</h4><p>This second phase is carried out hand in hand with the regular neural network prediction process (2), and is used to approximate the associated prediction uncertainty governed by (7). This phase is based on the indirect covariance matrix approximation found in the <strong>Delta Method Initial Phase</strong>.</p>
-<p>Using the typical deep learning <strong>Hessian eigenvalue spectrum</strong>, the paper proposes a partitioning of the Hessian eigendecomposition which reveals that an approximation of the positive curvature subspace of the covariance matrix can be obtained without explicitly requiring to compute any of the $P-K$ Hessian eigenvectors and eigenvalues in the midpoint gap of the spectrum, where $P$ is the number of model parameters and $K$ is the number of utilized Hessian eigenpairs. I will not go deeper into the <strong>Hessian eigenvalue spectrum</strong> but focus on the approximation steps. See <a href="#spectrum">Figure 2</a> for an example of the spectrum.</p>
-<div id="spectrum"><center>Figure 2: A log-scale eigenvalue magnitude spectrum showing the first K/2 Hessian eigenvalues from each end of the full spectrum</center></div>
-
-<img src="/2020/04/26/Delta-Method-in-Deep-Learning/spectrum.jpg" class="" title="This is an image">
-<p>The full eigendecomposition of the Hessian matrix is deﬁned by</p>
+<h2 id="1-Batch-Gradient-Descent"><a href="#1-Batch-Gradient-Descent" class="headerlink" title="1. Batch Gradient Descent"></a>1. Batch Gradient Descent</h2><p>在每一轮 Eppch 的训练过程中，只进行一次处理，同时处理整个训练集的所有样本（一次性存入内存）计算一次损失函数的梯度，并用该梯度对模型参数进行一次更新，一轮 Epoch 中进行了一次更新：</p>
 <script type="math/tex; mode=display">
-H(\hat{\omega})=Q \Lambda Q^{T} \in \mathbb{R}^{P \times P} \tag{10}</script><p>where $Q \in \mathbb{R}^{P \times P}$ is the matrix whose $k$th column is the eigenvector $q_k$ of $H(\hat{\omega})$, and $\Lambda\in \mathbb{R}^{P \times P}$ is the diagonal matrix whose diagonal elements are the corresponding eigenvalues, $\Lambda_{kk} = \lambda_k$, assuming that the eigenvalues are sorted so that $\lambda_1 \geq \lambda_2 \geq … \geq \lambda_P$.<br>The eigendecomposition of the Hessian matrix can be partitioned as follows,</p>
+\Theta=\Theta-\alpha \cdot \nabla_{\Theta} J(\Theta)</script><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>若目标函数为凸函数，能够保证收敛到全局最优值；若目标函数为非凸函数，能够收敛到局部最优值；</li>
+<li>将大量数据视为矩阵直接进行向量化计算，向量化计算的效率高于使用循环计算；</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>由于每轮迭代都需要在整个数据集上计算一次，所以批量梯度下降可能非常慢；</li>
+<li>训练数较多时，需要较大内存；</li>
+<li>每个 Epoch 会计算很多相似样本的梯度，这部分计算是冗余的（这些相似样本对模型效果的影响是一相似甚至一致的，可能只需计算其中一个就足够了）</li>
+<li>批量梯度下降不允许在线更新模型（例如新增一个样本，则需要全部重新训练）；</li>
+</ul>
+<h2 id="2-Stochastic-Gradient-Descent"><a href="#2-Stochastic-Gradient-Descent" class="headerlink" title="2. Stochastic Gradient Descent"></a>2. Stochastic Gradient Descent</h2><p>在每一轮 Eppch 的训练过程中，进行 $sampleSize$ 次处理，每次处理一个样本，根据该样本计算损失函数的梯度，并用该梯度对模型参数进行更新。处理完所有样本后视为完成一轮 Epoch，一轮 Epoch 中进行了 $sampleSize$ 次更新：</p>
 <script type="math/tex; mode=display">
-\begin{aligned}
-H(\hat{\omega})=& H_{\mathrm{pos}}+H_{\mathrm{gap}}+H_{\mathrm{neg}} \in \mathbb{R}^{P \times P} \\
-=& Q_{\mathrm{pos}} \Lambda_{\mathrm{pos}} Q_{\mathrm{pos}}^{T}+Q_{\mathrm{gap}} \Lambda_{\mathrm{gap}} Q_{\mathrm{gap}}^{T} +Q_{\mathrm{neg}} \Lambda_{\mathrm{ncg}} Q_{\mathrm{neg}}^{T}
-\end{aligned} \tag{11}</script><p>where the subscripts ‘pos’, ‘gap’ and ‘neg’ are related to the spectrum. Ignoring the principal directions in the cost landscape of negative curvature (if any) by dropping the last term in the right hand side of (11) and assuming that $\lambda_{\frac{K}{2}} \approx \lambda_{P-\frac{K}{2}} \approx \lambda$, the covariance matrix (8) can be approximated by $\widetilde{\Sigma}$ where</p>
+For \space each \space i: \Theta=\Theta-\alpha \cdot \nabla_{\Theta} J(\Theta | x^{(i)},y^{(i)})</script><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>算法收敛速度比 Batch Gradient Descent 快（省去了冗余计算）；</li>
+<li>可以在线更新模型（例如新增一个样本，则只需基于之前的模型针对该样本继续训练即可）；</li>
+<li>有几率跳出一个比较差的局部最优解而收敛到一个更好的局部最优解甚至是全局最优解；</li>
+</ul>
+<h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>容易收敛到局部最优解，并且容易被困在鞍点；</li>
+<li>由于每次只处理一个样本，因此一个 Epoch 内需要进行很多次更新，可能会引入较多的 noise；</li>
+</ul>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>还有一个更为极端的 Stochastic Gradient Descent 算法：在每一轮 Eppch 的训练过程中，只进行一次处理，随机抽取一个样本，根据该样本计算一次损失函数的梯度，并用该梯度对模型参数进行一次更新。处理完该样本后视为完成一轮 Epoch，一轮 Epoch 中进行了一次更新：</p>
 <script type="math/tex; mode=display">
-\widetilde{\Sigma} \pm \Delta^{2}=\frac{1}{N}\left[Q_{\mathrm{pos}} \Lambda_{\mathrm{pos}}^{-1} Q_{\mathrm{pos}}^{T}+\left(\lambda_{\mathrm{gap}} \pm \lambda_{\epsilon}\right)^{-1} Q_{\mathrm{gap}} Q_{\mathrm{gap}}^{T}\right] \tag{12}</script><p>where</p>
+Randomly \space pick \space one \space i: \Theta=\Theta-\alpha \cdot \nabla_{\Theta} J(\Theta | x^{(i)},y^{(i)})</script><h2 id="3-Mini-batch-Gradient-Descent"><a href="#3-Mini-batch-Gradient-Descent" class="headerlink" title="3. Mini-batch Gradient Descent"></a>3. Mini-batch Gradient Descent</h2><p>设定一个 $miniBatchSize$，将样本随机划分为多个 mini-batch。在每一轮 Eppch 的训练过程中，进行 $\frac{sampleSize}{miniBatchSize}$ 次处理，每次处理一个 mini-batch，根据该样本计算损失函数的梯度，并用该梯度对模型参数进行更新。处理完所有 mini-batch 后视为完成一轮 Epoch，一轮 Epoch 中进行了 $\frac{sampleSize}{miniBatchSize}$ 次更新：</p>
 <script type="math/tex; mode=display">
-\lambda_{\mathrm{gap}} \pm \lambda_{\epsilon}=\frac{\lambda_{\frac{\kappa}{2}}+\lambda_{P-\frac{K}{2}}}{2} \pm \frac{\lambda_{\frac{K}{2}}-\lambda_{P-\frac{K}{2}}}{2} \in \mathbb{R} \tag{13}</script><p>The final form of the prediction variance approximation can be given by,</p>
-<script type="math/tex; mode=display">
-\widetilde{\sigma^{2}}\left(x_{0}, \hat{\omega}\right) \pm \delta^{2}=\operatorname{diag}\left\{F\left[\widetilde{\Sigma} \pm \Delta^{2}\right] F^{T}\right\} \in \mathbb{R}^{T_{L}} \tag{14}</script><p>where the associated error $\sigma^2$ is given by,</p>
-<script type="math/tex; mode=display">
-\delta^{2}=\frac{\lambda_{P-\frac{\kappa}{2}}^{-1}-\lambda_{\frac{K}{2}}^{-1}}{2 N} \operatorname{diag}\left\{F Q_{\mathrm{gap}} Q_{\mathrm{gap}}^{T} F^{T}\right\} \in \mathbb{R}^{T_{L}} \tag{15}</script><p>Based on the above results, people can approximate the positive curvature subspace of the covariance matrix (8), and apply it to efficiently compute an approximation of (7). Finally, the approximate prediction uncertainty is given by,</p>
-<script type="math/tex; mode=display">
-\widetilde{\sigma}\left(x_{0}, \hat{\omega}\right) \pm \epsilon^{2}=\sqrt{\widetilde{\sigma^{2}}\left(x_{0}, \hat{\omega}\right) \pm \delta^{2}} \in \mathbb{R}^{T_{L}} \tag{16}</script><p>with the corresponding error $\epsilon^2$ given by,</p>
-<script type="math/tex; mode=display">
-\epsilon^{2}=\frac{1}{2}\left(\sqrt{\widetilde{\sigma^{2}}\left(x_{0}, \hat{\omega}\right)+\delta^{2}}-\sqrt{\widetilde{\sigma^{2}}\left(x_{0}, \hat{\omega}\right)-\delta^{2}}\right) \tag{17}</script><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a><center>Summary</center></h2><hr>
-<p>The paper explored the classical Delta method in a deep learning classification context. By an approximation of the positive curvature subspace of the Hessian matrix, the paper shows that reasonable uncertainty approximations can be obtained even when the number of utilized Hessian eigenpairs is much lower than the number of model parameters. This result is promising since the sheer size of the Hessian matrix seems to be the main reason why the Delta method has not received much attention in deep learning. </p>
-<p>Here are some observed results that can be found in the original paper (I didn’t mention them before since they are not theoretical):</p>
-<ol>
-<li>The writers observed that prediction uncertainty in the classification context provides supplementing information to the traditional measure of probability. In particular, false positives seem to have a higher prediction uncertainty than true positives. Interestingly, this suggests that uncertainty quantification can be used to distinguish true positives from false positives.</li>
-<li>They also observed that uncertainty approximation based only on the output layer is surprisingly well correlated with full model approximations. This result is important because the computational burden to compute the Hessian eigendecomposition of a model’s output layer will generally be orders of magnitude lower compared to a full model. However, more research is required to conclude that this result holds for all models and all datasets.</li>
+\Theta=\Theta-\alpha \cdot \nabla_{\Theta} J(\Theta | x^{(i:i+m)},y^{(i:i+m)})</script><p>其中 $m$ 表示 $miniBatchSize$。</p>
+<h3 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>VS SGD:<ul>
+<li>更新次数比 SGD 少，因此引入的 noise 会比较少，收敛比较稳定；</li>
+<li>每次针对整个 mini-batch 计算梯度，利用到了向量化运算的优势；</li>
+</ul>
+</li>
+<li>VS BGD:<ul>
+<li>计算效率比 BGD 更高；</li>
+<li>内存占用比 BGD 更小；</li>
+</ul>
+</li>
 </ol>
+<p>是目前的主流方法。</p>
+<h2 id="4-普通梯度下降算法面临的挑战"><a href="#4-普通梯度下降算法面临的挑战" class="headerlink" title="4. 普通梯度下降算法面临的挑战"></a>4. 普通梯度下降算法面临的挑战</h2><ol>
+<li>每次的更新方向完全依赖于当前计算出的梯度，可能导致不稳定；</li>
+<li>选择适当的学习率 $\alpha$ 较为困难：太小的学习率会导致收敛缓慢，而太大的学习率会造成较大的波动和震荡，妨碍收敛；</li>
+<li>对于不同的参数应该考虑使用不同学习率：对于经常更新的参数，我们已经积累了大量关于它的知识，不希望被单个样本影响太大，希望学习速率慢一些；对于偶尔更新的参数，我们了解的信息太少，希望能从每个偶然出现的样本身上多学一些，即学习速率大一些；</li>
+<li>鞍点：普通梯度下降容易陷入马鞍面，最后被困在鞍点；</li>
+</ol>
+<h1 id="二、引入-Momentum-的优化算法"><a href="#二、引入-Momentum-的优化算法" class="headerlink" title="二、引入 Momentum 的优化算法"></a>二、引入 Momentum 的优化算法</h1><p>将梯度下降找最优解比作小球向下滚到最低点，借用物理中的动量概念，模拟物体运动时的惯性。下文中的梯度方向都是指”负梯度方向“。</p>
+<h2 id="0-Exponentially-Weighted-Average-EWA"><a href="#0-Exponentially-Weighted-Average-EWA" class="headerlink" title="0. Exponentially Weighted Average (EWA)"></a>0. Exponentially Weighted Average (EWA)</h2><p>对于数据 $\theta_1,\theta_2,…,\theta_t$，初始化一个数 $v_0 = 0$，考虑使用公式：</p>
+<script type="math/tex; mode=display">
+v_{t}=\beta v_{t-1}+(1-\beta) \theta_{t}</script><p>就能从散乱的原数据序列 $\{\theta_i\}_{1\sim t}$ 中得到一组新的序列 $\{v_i\}_{1\sim t}$，且经过基本的变换，有：</p>
+<script type="math/tex; mode=display">
+v_t = (1-\beta) (\theta_t + \beta \theta_{t-1} + \beta^2 \theta_{t-2} + ... + \beta^{t-1}\theta_1)</script><p>通过这种算法计算的均值的特性：越后面的 $\theta$ 对均值的影响越大（即权重越大）。</p>
+<p>$\theta$ 的权重满足：</p>
+<script type="math/tex; mode=display">
+1 + \beta + \beta^2 + ... + \beta^{t-1} = \frac{1-\beta^t}{1-\beta} \rightarrow^{t \rightarrow \infty} \frac{1}{1-\beta}</script><p>当取 $\beta \geq 0.9$ 时，即 $1-\beta \rightarrow 0$ 有：</p>
+<script type="math/tex; mode=display">
+\lim_{1-\beta\rightarrow0}\beta^{\frac{1}{1-\beta}}=^{\epsilon=1-\beta}\lim_{\epsilon\rightarrow0}(1-\epsilon)^{1/\epsilon} \approx 1/e \approx 0.36</script><h3 id="偏置修正-bias-correction"><a href="#偏置修正-bias-correction" class="headerlink" title="偏置修正 (bias correction)"></a>偏置修正 (bias correction)</h3><p>由于 $v_0=0$，因此 $v_1=(1-\beta)\theta_1$，而这样计算出来的 $v_1$ 就比原来的 $\theta_1$ 要小很多，导致一开始的那些 $v$ 都会比较偏小。</p>
+<p>为了解决这一问题，考虑使用下式替换：</p>
+<script type="math/tex; mode=display">
+v_t = \frac{v_t}{1-\beta^t}</script><p>这样，当 $t$ 比较小时，可以适当增大 $v_t$，而当 $t$ 比较大时，分子会趋向于 1，不会影响 $v_t$ 的值。</p>
+<h2 id="1-Gradient-Descent-with-Momentum"><a href="#1-Gradient-Descent-with-Momentum" class="headerlink" title="1. Gradient Descent with Momentum"></a>1. Gradient Descent with Momentum</h2><p>（将梯度下降找最优解比作小球向下滚到最低点）借用物理中的动量概念，模拟物体运动时的惯性：即更新的时候在一定程度上保留之前更新的方向（惯性），同时利用当前计算出来的梯度（加速度）微调最终的更新方向：使用指数加权平均（Exponentially Weighted Average）实现。这样一来，可以在一定程度上增加稳定性（防止因为当前梯度方向的改变较大而造成震荡），从而更快地学习，并且还有一定摆脱局部最优的能力：</p>
+<script type="math/tex; mode=display">
+v_{t}=\beta \cdot v_{t-1}+ (1-\beta) \cdot \nabla_{\Theta} J(\Theta) \\
+\Theta = \Theta-v_t</script><p>其中 $\beta$ 为比例参数（替代了学习率），一般选择 $0.9 \sim 0.99$ 之间的某个数；$v_t$ 就是第 $t$ 步更新时的动量，而上一步时的动量 $v_{t-1}$ 对于这一步来说就是惯性；这一步计算出来的梯度 $\nabla_{\Theta} J(\Theta)$ 可以看做这一步施加的加速度。</p>
+<p>算法会观察历史动量 $v_{t-1}$：历史动量方向与当前梯度 $\nabla_{\Theta} J(\Theta)$ 方向越是一致，速度就会越快；历史动量方向与当前梯度 $\nabla_{\Theta} J(\Theta)$ 方向越是不一致，速度就会越慢。</p>
+<h2 id="2-Nesterov-Momentum"><a href="#2-Nesterov-Momentum" class="headerlink" title="2. Nesterov Momentum"></a>2. Nesterov Momentum</h2><p>在上述算法的基础上考虑改进：在小球向下滚动的过程中，若小球能够<strong>提前知道</strong>在哪些地方坡面会上升，在遇到上升坡面之前，小球就开始减速，则就能更快地滚到最低点。类比到梯度下降中，就是在计算当前梯度时，不是计算 ”当前位置 $\Theta$“ 的梯度 $\nabla_{\Theta} J(\Theta)$，而是用 ”正常情况下，下一步应该会到达的位置“（用 $\Theta - \beta v_{t-1}$ 近似）的梯度 $\nabla_{\Theta}J\left(\Theta-\beta v_{t-1}\right)$ 替代：</p>
+<script type="math/tex; mode=display">
+v_{t}=\beta \cdot v_{t-1}+ (1-\beta) \cdot \nabla_{\Theta} J\left(\Theta-\beta v_{t-1}\right) \\
+\Theta = \Theta-v_t</script><p>核心思想：如果当前位置为 $\Theta$，则下一步到达的位置应当为 $\Theta-\beta v_t$，而由于此时 $v_t$ 还未被计算出来，因此用 $v_{t-1}$ 近似。这个近似的 ”前瞻/展望“ 位置 $\Theta-\beta v_{t-1}$ 就类似小球目前还未滚到的前方位置，因此在这个位置求梯度就能让小球提前知道前方的情况，从而加速算法的收敛。</p>
+<img src="/2020/12/08/Gradient-Descent/momentum.png" class="" title="This is an image">
+<h1 id="三、自适应学习率优化算法"><a href="#三、自适应学习率优化算法" class="headerlink" title="三、自适应学习率优化算法"></a>三、自适应学习率优化算法</h1><p>在迭代的过程中，根据梯度的计算情况，对学习率 $\alpha$ 自动进行一定的调整。下文中的所有 $\epsilon$ 都是作为平滑项，为了防止分母为 0 而存在，一般取值为 $10^{-8}$。</p>
+<h2 id="1-AdaGrad"><a href="#1-AdaGrad" class="headerlink" title="1. AdaGrad"></a>1. AdaGrad</h2><p>对于经常更新的参数，我们已经积累了大量关于它的知识，不希望被单个样本影响太大，希望学习速率慢一些；对于偶尔更新的参数，我们了解的信息太少，希望能从每个偶然出现的样本身上多学一些，即学习速率大一些。因此，如果能够衡量 ”参数出现的频率“，我们就能相应地调整其对应的学习率。</p>
+<p>假设向量 $\vec{g}_t$ 表示第 $t$ 轮时计算得到的梯度（即 $\vec g = \nabla_{\Theta} J(\Theta)$ ），它的分量 $g_{i,t}$ 表示第 $t$ 轮时第 $i$ 个参数 $\theta_i$ 的梯度；假设向量 $\vec{r}_t$ 表示第 $t$ 轮时参数的出现频率它的分量 $r_{i,t}$ 表示第 $t$ 轮时第 $i$ 个参数 $\theta_i$ 的出现频率。</p>
+<p>AdaGrad 算法用参数 $i$ ”到第 $t$ 轮为止梯度值的平方和“ 来衡量该参数 $i$ ”到第 $t$ 轮为止的出现频率“：</p>
+<script type="math/tex; mode=display">
+r_{i,t} = \sum_{\tau=1}^tg_{i,\tau}^2</script><p> $\vec r$ 初始化为 $\vec 0$，则每步算法的迭代步骤如下：</p>
+<script type="math/tex; mode=display">
+\vec r = \vec r + \vec g \odot \vec g \\
+\Theta = \Theta - \frac{\alpha}{\sqrt{\vec r}+\epsilon} \odot \vec g</script><p>其中 $\odot$ 表示”逐元素相乘“，根号表示”逐元素开根号“。</p>
+<p>则显然对于越大的 $r_i$，相应的学习率 $\frac{\alpha}{\sqrt{r_i}+\epsilon}$ 也就越小，即参数 $\theta_i$ 的学习速率就越低。</p>
+<p><strong>优点</strong>：算法在稀疏数据场景下表现很好。</p>
+<p><strong>缺点</strong>：由于 $\vec r$ 是递增的，因此在训练的中后期，会使得学习率单调递减至趋向 0，可能会使得训练过程提前结束，即便后续还有数据也无法学到必要的知识。</p>
+<img src="/2020/12/08/Gradient-Descent/adagrad.png" class="" title="This is an image">
+<h2 id="2-RMSprop-Root-Mean-Square-prop"><a href="#2-RMSprop-Root-Mean-Square-prop" class="headerlink" title="2. RMSprop (Root Mean Square prop)"></a>2. RMSprop (Root Mean Square prop)</h2><p>为了解决 AdaGrad 中 $\vec r$ 一直递增导致学习率递减趋向于 0 的问题，考虑使用指数加权平均（Exponentially Weighted Average）引入一个新的权重超参数 $\rho$ 来控制 $\vec r$ 的取值范围，用参数 $i$ ”到第 $t$ 轮为止梯度值的平方值的加权平均（而不是平方和）“ 来衡量该参数 $i$ ”到第 $t$ 轮为止的出现频率“：</p>
+<script type="math/tex; mode=display">
+\vec r = \rho\vec r + (1-\rho)\vec g \odot \vec g \\
+\Theta = \Theta - \frac{\alpha}{\sqrt{\vec r}+\epsilon} \odot \vec g</script><p>通过使用”平方值的加权平均”替换“平方和”，RMSprop 缓解了 AdaGrad 算法学习率下降过快的问题。</p>
+<img src="/2020/12/08/Gradient-Descent/rmsprop.png" class="" title="This is an image">
+<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>类似于之前的 Nesterov Momentum 算法，在 RMSprop 中也可以通过在“前瞻/展望位置”替换“当前位置”计算当前梯度，来实现带有 Nesterov Momentum 的 RMSprop 算法。即：用 $\vec g = \nabla_{\Theta}J\left(\Theta-\beta v_{t-1}\right)$ 替换原来的 $\vec g$ 即可。</p>
+<img src="/2020/12/08/Gradient-Descent/rmsprop2.png" class="" title="This is an image">
+<h2 id="3-Adam-Adaptive-Moment-Estimation"><a href="#3-Adam-Adaptive-Moment-Estimation" class="headerlink" title="3. Adam (Adaptive Moment Estimation)"></a>3. Adam (Adaptive Moment Estimation)</h2><p>Adam 算法可以看做结合了 momentum 算法（梯度一阶矩）和 RMSprop 算法（梯度二阶矩）的结合体。它利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率，同时对初期的矩估计进行了偏差修正。Adam的优点主要在于经过偏置校正后，每一次迭代学习率都有个确定范围，使得参数比较平稳。公式如下：</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}
+\vec m_{t}=\beta_{1} m_{t-1}+\left(1-\beta_{1}\right) \vec g_{t} \\
+\vec v_{t}=\beta_{2} v_{t-1}+\left(1-\beta_{2}\right) \vec g_{t} \odot \vec g_{t} \\
+\hat{m}_{t}=\frac{\vec m_{t}}{1-\beta_{1}^{t}} \\
+\hat{v}_{t}=\frac{\vec v_{t}}{1-\beta_{2}^{t}} \\
+\Theta_{t+1}=\Theta_{t}-\frac{\alpha}{\sqrt{\hat{v}_{t}}+\epsilon} \hat{m}_{t}
+\end{array}</script><p>其中 $\beta_1$ 一般取值为 $0.9$，而 $\beta_2$ 则一般取值为 $0.999$。</p>
+<img src="/2020/12/08/Gradient-Descent/adam.png" class="" title="This is an image">
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
-            <p>Original Link：<a href="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/">https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/</a> 
-            <p>Published：<a href="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/">April 26th 2020, 3:19:17 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/">December 8th 2020, 2:17:06 pm</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">December 8th 2020, 2:15:47 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">December 8th 2020, 7:50:45 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -518,17 +549,12 @@ H(\hat{\omega})=& H_{\mathrm{pos}}+H_{\mathrm{gap}}+H_{\mathrm{neg}} \in \mathbb
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/06/29/BinarySearch/" title= "Binary Search">
-                    <div class="nextTitle">Binary Search</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/04/18/BackTrack/" title= "Backtracking">
-                    <div class="prevTitle">Backtracking</div>
+                <a href= "/2020/11/16/Time-Complexity/" title= "Time Complexity">
+                    <div class="prevTitle">Time Complexity</div>
                 </a>
             
         </li>
@@ -659,7 +685,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Learning-Definitions"><span class="toc-number">2.</span> <span class="toc-text">Deep Learning Definitions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Architecture"><span class="toc-number">2.1.</span> <span class="toc-text">The Architecture</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Model-Function"><span class="toc-number">2.2.</span> <span class="toc-text">The Model Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Cost-Function"><span class="toc-number">2.3.</span> <span class="toc-text">The Cost Function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Train"><span class="toc-number">2.4.</span> <span class="toc-text">Train</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delta-Method-in-Deep-Learning"><span class="toc-number">3.</span> <span class="toc-text">Delta Method in Deep Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Delta-Method"><span class="toc-number">3.1.</span> <span class="toc-text">The Delta Method</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problems-in-Application"><span class="toc-number">3.2.</span> <span class="toc-text">Problems in Application</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Solving-the-Problems"><span class="toc-number">3.3.</span> <span class="toc-text">Solving the Problems</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Delta-Method-Initial-Phase"><span class="toc-number">3.3.1.</span> <span class="toc-text">Delta Method Initial Phase</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Delta-Method-Prediction-Phase"><span class="toc-number">3.3.2.</span> <span class="toc-text">Delta Method Prediction Phase</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">4.</span> <span class="toc-text">Summary</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、普通梯度下降"><span class="toc-number">1.</span> <span class="toc-text">一、普通梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Batch-Gradient-Descent"><span class="toc-number">1.1.</span> <span class="toc-text">1. Batch Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Stochastic-Gradient-Descent"><span class="toc-number">1.2.</span> <span class="toc-text">2. Stochastic Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Mini-batch-Gradient-Descent"><span class="toc-number">1.3.</span> <span class="toc-text">3. Mini-batch Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-普通梯度下降算法面临的挑战"><span class="toc-number">1.4.</span> <span class="toc-text">4. 普通梯度下降算法面临的挑战</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、引入-Momentum-的优化算法"><span class="toc-number">2.</span> <span class="toc-text">二、引入 Momentum 的优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-Exponentially-Weighted-Average-EWA"><span class="toc-number">2.1.</span> <span class="toc-text">0. Exponentially Weighted Average (EWA)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#偏置修正-bias-correction"><span class="toc-number">2.1.1.</span> <span class="toc-text">偏置修正 (bias correction)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Gradient-Descent-with-Momentum"><span class="toc-number">2.2.</span> <span class="toc-text">1. Gradient Descent with Momentum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Nesterov-Momentum"><span class="toc-number">2.3.</span> <span class="toc-text">2. Nesterov Momentum</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、自适应学习率优化算法"><span class="toc-number">3.</span> <span class="toc-text">三、自适应学习率优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-AdaGrad"><span class="toc-number">3.1.</span> <span class="toc-text">1. AdaGrad</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-RMSprop-Root-Mean-Square-prop"><span class="toc-number">3.2.</span> <span class="toc-text">2. RMSprop (Root Mean Square prop)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Adam-Adaptive-Moment-Estimation"><span class="toc-number">3.3.</span> <span class="toc-text">3. Adam (Adaptive Moment Estimation)</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
