@@ -23,14 +23,14 @@
     <meta name="description" content="BERT 全称 Bidirectional Encoder Representations from Transformers，是一种较新的语言模型。自Google在 2018 年 10 月底公布 BERT 在 11 项 NLP 任务中的卓越表现后，BERT 引起了社区极大的关注与讨论，被认为是 NLP 领域的极大突破。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BERT">
-<meta property="og:url" content="https://lingfengzhu.github.io/2021/04/19/BERT/index.html">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/05/25/BERT/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
 <meta property="og:description" content="BERT 全称 Bidirectional Encoder Representations from Transformers，是一种较新的语言模型。自Google在 2018 年 10 月底公布 BERT 在 11 项 NLP 任务中的卓越表现后，BERT 引起了社区极大的关注与讨论，被认为是 NLP 领域的极大突破。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-19T06:41:41.000Z">
-<meta property="article:modified_time" content="2021-04-23T13:51:22.874Z">
+<meta property="article:published_time" content="2021-05-25T14:40:06.000Z">
+<meta property="article:modified_time" content="2021-05-25T14:41:40.764Z">
 <meta property="article:author" content="Lingfeng Zhu">
-<meta property="article:tag" content="gradient descent">
+<meta property="article:tag" content="Nature Language Processing">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -279,7 +279,7 @@ height:50vh;
                 
                     <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "gradient descent">gradient descent</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Nature Language Processing">Nature Language Processing</a>
     
 </div>
                 
@@ -290,7 +290,7 @@ height:50vh;
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2021/04/19</span>
+                    <span class="post-intro-time">2021/05/25</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -449,7 +449,7 @@ height:50vh;
 <p>代码中继承该父类的这些 <code>****Processor(DataProcessor)</code> 类，各自代表一个内置的示例数据集，且各自都实现了上述四个方法：前三个方法用于获取 <strong>训练、验证、测试</strong> 的输入数据，并将每条数据封装为 <code>InputExample</code> 类；第四个方法则用于获取 <strong>标签</strong>。</p>
 <blockquote>
 <p><code>InputExample</code> 类的定义如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InputExample</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""A single training/test example for simple sequence classification."""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, guid, text_a, text_b=None, label=None)</span>:</span></span><br><span class="line">        <span class="string">"""Constructs a InputExample.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Args:</span></span><br><span class="line"><span class="string">          guid: Unique id for the example.</span></span><br><span class="line"><span class="string">          text_a: string. The untokenized text of the first sequence. For single</span></span><br><span class="line"><span class="string">            sequence tasks, only this sequence must be specified.</span></span><br><span class="line"><span class="string">          text_b: (Optional) string. The untokenized text of the second sequence.</span></span><br><span class="line"><span class="string">            Only must be specified for sequence pair tasks.</span></span><br><span class="line"><span class="string">          label: (Optional) string. The label of the example. This should be</span></span><br><span class="line"><span class="string">            specified for train and dev examples, but not for test examples.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.guid = guid</span><br><span class="line">        self.text_a = text_a</span><br><span class="line">        self.text_b = text_b</span><br><span class="line">        self.label = label</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InputExample</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="string">"""A single training/test example for simple sequence classification."""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, guid, text_a, text_b=None, label=None)</span>:</span></span><br><span class="line">  <span class="string">"""Constructs a InputExample.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    guid: Unique id for the example.</span></span><br><span class="line"><span class="string">    text_a: string. The untokenized text of the first sequence. For single</span></span><br><span class="line"><span class="string">      sequence tasks, only this sequence must be specified.</span></span><br><span class="line"><span class="string">    text_b: (Optional) string. The untokenized text of the second sequence.</span></span><br><span class="line"><span class="string">      Only must be specified for sequence pair tasks.</span></span><br><span class="line"><span class="string">    label: (Optional) string. The label of the example. This should be</span></span><br><span class="line"><span class="string">      specified for train and dev examples, but not for test examples.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  self.guid = guid</span><br><span class="line">  self.text_a = text_a</span><br><span class="line">  self.text_b = text_b</span><br><span class="line">  self.label = label</span><br></pre></td></tr></table></figure>
 <p>每个 <code>InputExample</code> 类就是一条输入的样本，其中：</p>
 <ul>
 <li>属性 <code>guid</code> 为该样本的唯一 ID；</li>
@@ -515,7 +515,7 @@ height:50vh;
 <li><code>output_dir</code> ：模型输出地址</li>
 </ul>
 <p>由于需要设置的参数较多，因此我们将其统一放置到 shell 脚本中，在<code>run_classifier.py</code> 的相同路径下创建名为 <code>fine-tuning_classifier.sh</code> 的脚本，如下所示：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bash</span></span><br><span class="line">export BERT_BASE_DIR=../chinese_L-12_H-768_A-12 #全局变量 下载的预训练bert地址</span><br><span class="line">export MY_DATASET=../data #全局变量 数据集所在地址</span><br><span class="line">python run_classifier.py --task_name=classifier  --do_train=true --do_eval=true --do_predict=true --data_dir=$MY_DATASET --vocab_file=$BERT_BASE_DIR/vocab.txt --bert_config_file=$BERT_BASE_DIR/bert_config.json --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt --max_seq_length=32  --train_batch_size=64 --learning_rate=5e-5 --num_train_epochs=10.0 --output_dir=../fine_tuning_out/text_classifier_64_epoch10_5e5</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/env bashexport BERT_BASE_DIR=../chinese_L-12_H-768_A-12 <span class="comment">#全局变量 下载的预训练bert地址export MY_DATASET=../data #全局变量 数据集所在地址python run_classifier.py --task_name=classifier  --do_train=true --do_eval=true --do_predict=true --data_dir=$MY_DATASET --vocab_file=$BERT_BASE_DIR/vocab.txt --bert_config_file=$BERT_BASE_DIR/bert_config.json --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt --max_seq_length=32  --train_batch_size=64 --learning_rate=5e-5 --num_train_epochs=10.0 --output_dir=../fine_tuning_out/text_classifier_64_epoch10_5e5</span></span></span><br></pre></td></tr></table></figure>
 <p>在命令行使用如下命令执行该脚本：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh ./fine-tuning_classifier.sh</span><br></pre></td></tr></table></figure>
 <p>在 <code>output_dir</code> 中就能得到 fine-tune 训练好的模型，以及在测试集上的预测结果等。</p>
@@ -525,9 +525,9 @@ height:50vh;
     
         <div class="license-wrapper">
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
-            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/04/19/BERT/">https://lingfengzhu.github.io/2021/04/19/BERT/</a> 
-            <p>Published：<a href="https://lingfengzhu.github.io/2021/04/19/BERT/">April 19th 2021, 2:41:41 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/04/19/BERT/">April 23rd 2021, 9:51:22 pm</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/05/25/BERT/">https://lingfengzhu.github.io/2021/05/25/BERT/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/05/25/BERT/">May 25th 2021, 10:40:06 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/05/25/BERT/">May 25th 2021, 10:41:40 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -535,17 +535,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2021/05/24/conda/" title= "conda">
-                    <div class="nextTitle">conda</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2021/02/05/Docker/" title= "Docker">
-                    <div class="prevTitle">Docker</div>
+                <a href= "/2021/05/24/conda/" title= "conda">
+                    <div class="prevTitle">conda</div>
                 </a>
             
         </li>
@@ -822,10 +817,6 @@ top:50vh;
     
     
     
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 13
@@ -844,12 +835,12 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">05/24</span><a class="archive-post-title" href= "/2021/05/24/conda/" >conda</a>
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2021/05/25/BERT/" >BERT</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">04/19</span><a class="archive-post-title" href= "/2021/04/19/BERT/" >BERT</a>
+            <span class="archive-post-date">05/24</span><a class="archive-post-title" href= "/2021/05/24/conda/" >conda</a>
         </li>
     
     
@@ -921,21 +912,23 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
+        <span class="sidebar-tag-name" data-tags="Nature Language Processing"><span class="iconfont-archer">&#xe606;</span>Nature Language Processing</span>
+    
+        <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
     
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
-        <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
-    
         <span class="sidebar-tag-name" data-tags="delta method"><span class="iconfont-archer">&#xe606;</span>delta method</span>
+    
+        <span class="sidebar-tag-name" data-tags="docker"><span class="iconfont-archer">&#xe606;</span>docker</span>
     
         <span class="sidebar-tag-name" data-tags="hexo"><span class="iconfont-archer">&#xe606;</span>hexo</span>
     
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+        <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
     
-        <span class="sidebar-tag-name" data-tags="docker"><span class="iconfont-archer">&#xe606;</span>docker</span>
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
     
@@ -974,15 +967,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="statistics"><span class="iconfont-archer">&#xe60a;</span>statistics</span>
-    
         <span class="sidebar-category-name" data-categories="algorithm"><span class="iconfont-archer">&#xe60a;</span>algorithm</span>
+    
+        <span class="sidebar-category-name" data-categories="statistics"><span class="iconfont-archer">&#xe60a;</span>statistics</span>
     
         <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
     
-        <span class="sidebar-category-name" data-categories="web-frontend"><span class="iconfont-archer">&#xe60a;</span>web-frontend</span>
-    
         <span class="sidebar-category-name" data-categories="syntax"><span class="iconfont-archer">&#xe60a;</span>syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="web-frontend"><span class="iconfont-archer">&#xe60a;</span>web-frontend</span>
     
         <span class="sidebar-category-name" data-categories="conda"><span class="iconfont-archer">&#xe60a;</span>conda</span>
     
