@@ -28,7 +28,7 @@
 <meta property="og:description" content="In this post, I will discuss the python syntax with. We can use this syntax in exception handling to make the code cleaner and much more readable. It simplifies the management of common resources like">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-16T12:01:49.000Z">
-<meta property="article:modified_time" content="2020-04-19T02:18:17.632Z">
+<meta property="article:modified_time" content="2021-07-07T07:04:51.412Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -285,7 +285,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">571</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">570</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -428,7 +428,7 @@ height:50vh;
 <p>To use <code>with</code> in python, there are some definitions to understand:</p>
 <h3 id="Context-Management-Protocol"><a href="#Context-Management-Protocol" class="headerlink" title="Context Management Protocol"></a>Context Management Protocol</h3><p>Context Management Protocol contains two methods: <code>.__enter__()</code> and <code>.__exit__()</code>. The former (<code>.__enter__()</code> method) is to allocate resource, while the latter (<code>.__exit__()</code> method) is to free the resource.</p>
 <p>An object with these two methods can be processed by <code>with</code>.</p>
-<h3 id="Context-Manager"><a href="#Context-Manager" class="headerlink" title="Context Manager"></a>Context Manager</h3><p>An object with methods <code>.__enter__()</code> and <code>.__exit__()</code> is called as context manager. For this example, the output of <code>open(&#39;aFile.txt&#39;)</code> (which is an object) is the context manager.</p>
+<h3 id="Context-Manager"><a href="#Context-Manager" class="headerlink" title="Context Manager"></a>Context Manager</h3><p>An object with methods <code>.__enter__()</code> and <code>.__exit__()</code> is called context manager. For this example, the <strong>output</strong> of <code>open(&#39;aFile.txt&#39;)</code> (which is an object) is the context manager.</p>
 <h3 id="Context-Expression"><a href="#Context-Expression" class="headerlink" title="Context Expression"></a>Context Expression</h3><p>The syntax after <code>with</code> is called context expression. This syntax should return a context manager. For this example, <code>open(&#39;aFile.txt&#39;)</code> is a context expression.</p>
 <h3 id="With-body"><a href="#With-body" class="headerlink" title="With-body"></a>With-body</h3><p>The syntaxes wrapped up by <code>with</code> syntax are called with-body. For this example, <code>data = f.read()</code> is the with-body.</p>
 <h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a><center>Usage</center></h2><hr>
@@ -450,7 +450,7 @@ height:50vh;
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> Manager(<span class="string">'Amy'</span>) <span class="keyword">as</span> test:</span><br><span class="line">    <span class="keyword">raise</span>(Exception)</span><br><span class="line">    print(<span class="string">"[with-body]: The name is %s."</span> % test.name)</span><br></pre></td></tr></table></figure>
 <p>The output is as follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Enter Amy]: Allocate resource.</span><br><span class="line">[Exit Amy]: Free resource.</span><br><span class="line">[Exit Amy]: Exited with exception raised.</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">  File <span class="string">"..."</span>, line 27, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    raise(Exception)</span><br></pre></td></tr></table></figure>
-<h2 id="Function-nested"><a href="#Function-nested" class="headerlink" title="Function ```nested()```"></a><center>Function ```nested()```</center></h2><hr>
+<h2 id="Function-nested"><a href="#Function-nested" class="headerlink" title="Function nested()"></a><center>Function nested()</center></h2><hr>
 <p>Module <code>contextlib</code> provided three objects, <code>contextmanager</code>, function <code>nested()</code> and <code>closing</code>. I will focus on <code>nested()</code> here.</p>
 <p>Function <code>nested()</code> can organize many Context Managers together without nested syntaxes.</p>
 <p>See this example:</p>
@@ -465,7 +465,7 @@ height:50vh;
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2020/04/16/Python-Syntax-with/">https://lingfengzhu.github.io/2020/04/16/Python-Syntax-with/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2020/04/16/Python-Syntax-with/">April 16th 2020, 8:01:49 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/04/16/Python-Syntax-with/">April 19th 2020, 10:18:17 am</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/04/16/Python-Syntax-with/">July 7th 2021, 3:04:51 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -614,7 +614,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Definitions"><span class="toc-number">2.</span> <span class="toc-text">Definitions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Management-Protocol"><span class="toc-number">2.1.</span> <span class="toc-text">Context Management Protocol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Manager"><span class="toc-number">2.2.</span> <span class="toc-text">Context Manager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Expression"><span class="toc-number">2.3.</span> <span class="toc-text">Context Expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#With-body"><span class="toc-number">2.4.</span> <span class="toc-text">With-body</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Usage"><span class="toc-number">3.</span> <span class="toc-text">Usage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-nested"><span class="toc-number">4.</span> <span class="toc-text">Function &#96;&#96;&#96;nested()&#96;&#96;&#96;</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Definitions"><span class="toc-number">2.</span> <span class="toc-text">Definitions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Management-Protocol"><span class="toc-number">2.1.</span> <span class="toc-text">Context Management Protocol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Manager"><span class="toc-number">2.2.</span> <span class="toc-text">Context Manager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Expression"><span class="toc-number">2.3.</span> <span class="toc-text">Context Expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#With-body"><span class="toc-number">2.4.</span> <span class="toc-text">With-body</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Usage"><span class="toc-number">3.</span> <span class="toc-text">Usage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-nested"><span class="toc-number">4.</span> <span class="toc-text">Function nested()</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -760,9 +760,26 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 13
+        Total : 14
         </div>
         <!-- search  -->
         
@@ -775,6 +792,11 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href= "/2021/07/05/Python-Logging/" >Python Logging</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -855,13 +877,15 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Nature Language Processing"><span class="iconfont-archer">&#xe606;</span>Nature Language Processing</span>
-    
-        <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
-    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="Nature Language Processing"><span class="iconfont-archer">&#xe606;</span>Nature Language Processing</span>
+    
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="delta method"><span class="iconfont-archer">&#xe606;</span>delta method</span>
     
@@ -870,8 +894,6 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="hexo"><span class="iconfont-archer">&#xe606;</span>hexo</span>
     
         <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
-    
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
     
@@ -910,13 +932,13 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="algorithm"><span class="iconfont-archer">&#xe60a;</span>algorithm</span>
-    
         <span class="sidebar-category-name" data-categories="statistics"><span class="iconfont-archer">&#xe60a;</span>statistics</span>
     
-        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+        <span class="sidebar-category-name" data-categories="algorithm"><span class="iconfont-archer">&#xe60a;</span>algorithm</span>
     
         <span class="sidebar-category-name" data-categories="syntax"><span class="iconfont-archer">&#xe60a;</span>syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
     
         <span class="sidebar-category-name" data-categories="web-frontend"><span class="iconfont-archer">&#xe60a;</span>web-frontend</span>
     
