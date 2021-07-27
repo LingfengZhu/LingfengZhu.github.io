@@ -28,7 +28,7 @@
 <meta property="og:description" content="排序算法在很多领域得到相当重视，尤其是在大量数据的处理方面。一个优秀的算法可以节省大量的资源。此文整理了一些基本的排序算法以及相关拓展。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-15T00:35:38.000Z">
-<meta property="article:modified_time" content="2020-12-07T05:32:59.889Z">
+<meta property="article:modified_time" content="2021-07-27T12:24:32.616Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
@@ -285,7 +285,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">14.5k</span>Reading time: <span class="post-count reading-time">59 min</span></span>
+                        <span>Word count: <span class="post-count word-count">15k</span>Reading time: <span class="post-count reading-time">61 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -528,12 +528,40 @@ height:50vh;
 </table>
 </div>
 <h2 id="Basic-Definitions"><a href="#Basic-Definitions" class="headerlink" title="Basic Definitions"></a>Basic Definitions</h2><ul>
-<li><strong>排序算法稳定性</strong> (Sorting Algorithm Stability): 假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变（即在原序列中，<code>r[i]==r[j]</code> 且 <code>r[i]</code> 在 <code>r[j]</code> 之前，而在排序后的序列中，<code>r[i]</code> 仍在 <code>r[j]</code> 之前），则称这种排序算法是稳定的；否则称为不稳定的。</li>
-<li><strong>基于比较的排序算法</strong>: 若一个排序算法是基于内部比较的，则他的时间复杂度不可能优于 $O(n\log n)$。这就是基于内部比较的排序算法的时间复杂度下限。</li>
-<li><strong>最优时间复杂度</strong> (Best Case Time Complexity): 最好情况下（一般为给定数组已经排序完成；最好情况视具体排序算法而定），该排序算法的时间复杂度。</li>
-<li><strong>最差时间复杂度</strong> (Worst Case Time Complexity): 最坏情况下（如：给定数组的排列完全随机或给定数组已经反向排序等；最差情况视具体排序算法而定），该排序算法的时间复杂度。</li>
-<li><strong>平均时间复杂度</strong> (Average Case Time Complexity): 所有可能情况下 该排序算法的时间复杂度的平均值。</li>
-<li><strong>注意</strong>：本文中的 $\log n$ 默认底数为 $2$。</li>
+<li><p><strong>排序算法稳定性</strong> (Sorting Algorithm Stability): 假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变（即在原序列中，<code>r[i]==r[j]</code> 且 <code>r[i]</code> 在 <code>r[j]</code> 之前，而在排序后的序列中，<code>r[i]</code> 仍在 <code>r[j]</code> 之前），则称这种排序算法是稳定的；否则称为不稳定的。</p>
+</li>
+<li><p><strong>基于比较的排序算法</strong>: 若一个排序算法是基于内部比较的，则一般情况下，他的平均时间复杂度不可能优于 $O(n\log n)$​。这就是基于内部比较的排序算法的时间复杂度下限。</p>
+<blockquote>
+<p> <strong>Proof</strong>: </p>
+<ol>
+<li><p>对于 n 个未知的待排序元素，可能的排序结果共有 $A_n^n = n!$ 种；</p>
+</li>
+<li><p>在经过一次比较后，有两个元素之间的前后顺序被确定，在这个情况下，可能的排序结果剩下 $\frac{n!}{2}$​​ 种：</p>
+<p>假设比较了序列中的 A 和 B 这两个元素：A 与 B 在序列中的地位是平等的，在 $n!$ 种可能的排序结果中，A 排在 B 前面的结果数与 A 排在 B 后面的结果数相等，均为 $\frac{n!}{2}$（注意到当 $n &gt; 1$ 时，$n!$ 的因子中包含 2，因此 $n!$ 必为偶数），经过比较后，A 与 B 之间的前后顺序确定，不妨假设 A 大于 B，则排序结果中，A 排在 B 前面的那 $\frac{n!}{2}$ 种结果不再成立，剩下 A 排在 B 后面的那 $\frac{n!}{2}$​ 种结果；</p>
+</li>
+<li><p>依此类推，每经过一次比较，可能的排序结果数都会减半，直到经过 m 次比较，剩余 $\frac{n!}{2^m}$​​​ 种可能的排序结果；</p>
+</li>
+<li><p>当 $\frac{n!}{2^m} \leq 1$​​ 时，可能的排序结果只剩一种，此时排序结束，计算此时的比较次数 m:</p>
+<script type="math/tex; mode=display">
+\frac{n!}{2^m} \leq 1 \\
+2^m \geq n! \\
+m \geq \log{n!}</script><p>（还可以这样考虑：n 个数有 $n!$​ 个可能的排列情况，也就是说基于比较的排序算法的判定树有 $n!$​ 个叶子结点；排序需要的最少比较次数可以近似地看做这棵树的深度 $\log{n!}$）</p>
+<p>利用斯特林公式（Stirling’s approximation）$n ! \approx \sqrt{2 \pi n}\left(\frac{n}{e}\right)^{n}$​，有：</p>
+<script type="math/tex; mode=display">
+m \geq \log{n!} \approx log(\sqrt{2 \pi n}\left(\frac{n}{e}\right)^{n})=\log{\sqrt{2 \pi }} + \frac{1}{2}\log{n} + n\log{\frac{n}{e}}</script><p>即，最少的比较次数为：</p>
+<script type="math/tex; mode=display">
+O(m) = O\left(n\log{n}-n\log{e} + \frac{1}{2}\log{n} + \log{\sqrt{2 \pi }}\right)=O(n\log{n})</script></li>
+</ol>
+</blockquote>
+</li>
+<li><p><strong>最优时间复杂度</strong> (Best Case Time Complexity): 最好情况下（一般为给定数组已经排序完成；最好情况视具体排序算法而定），该排序算法的时间复杂度。</p>
+</li>
+<li><p><strong>最差时间复杂度</strong> (Worst Case Time Complexity): 最坏情况下（如：给定数组的排列完全随机或给定数组已经反向排序等；最差情况视具体排序算法而定），该排序算法的时间复杂度。</p>
+</li>
+<li><p><strong>平均时间复杂度</strong> (Average Case Time Complexity): 所有可能情况下 该排序算法的时间复杂度的平均值。</p>
+</li>
+<li><p><strong>注意</strong>：本文中的 $\log n$ 默认底数为 $2$。</p>
+</li>
 </ul>
 <p>关于时间复杂度的更多信息参见：<a href="https://lingfengzhu.xyz/2020/11/16/Time-Complexity/" target="_blank" rel="noopener">时间复杂度</a></p>
 <h2 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h2><p><strong>冒泡排序</strong><br>重复地访问过要排序的元素，依次比较相邻两个元素，如果他们的顺序错误就把他们调换过来，直到没有元素再需要交换，排序完成。这个算法的名字由来是因为越小(或越大)的元素会经由交换慢慢“浮”到数列的顶端。</p>
@@ -925,7 +953,7 @@ Finally [17, 20, 26, 31, 44, 54, 55, 77, 93]
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">November 15th 2020, 8:35:38 am</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">December 7th 2020, 1:32:59 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/11/15/SortAlgorithm/">July 27th 2021, 8:24:32 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -1237,6 +1265,10 @@ top:50vh;
     
     
     
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 14
@@ -1337,23 +1369,23 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
-    
-        <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
-    
         <span class="sidebar-tag-name" data-tags="algorithm"><span class="iconfont-archer">&#xe606;</span>algorithm</span>
     
         <span class="sidebar-tag-name" data-tags="Nature Language Processing"><span class="iconfont-archer">&#xe606;</span>Nature Language Processing</span>
     
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+        <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
-        <span class="sidebar-tag-name" data-tags="delta method"><span class="iconfont-archer">&#xe606;</span>delta method</span>
+        <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
         <span class="sidebar-tag-name" data-tags="docker"><span class="iconfont-archer">&#xe606;</span>docker</span>
     
+        <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
+    
+        <span class="sidebar-tag-name" data-tags="delta method"><span class="iconfont-archer">&#xe606;</span>delta method</span>
+    
         <span class="sidebar-tag-name" data-tags="hexo"><span class="iconfont-archer">&#xe606;</span>hexo</span>
     
-        <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
     
@@ -1392,9 +1424,9 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="statistics"><span class="iconfont-archer">&#xe60a;</span>statistics</span>
-    
         <span class="sidebar-category-name" data-categories="algorithm"><span class="iconfont-archer">&#xe60a;</span>algorithm</span>
+    
+        <span class="sidebar-category-name" data-categories="statistics"><span class="iconfont-archer">&#xe60a;</span>statistics</span>
     
         <span class="sidebar-category-name" data-categories="syntax"><span class="iconfont-archer">&#xe60a;</span>syntax</span>
     
