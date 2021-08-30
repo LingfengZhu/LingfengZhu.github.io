@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/rmsprop2.png">
 <meta property="og:image" content="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/adam.png">
 <meta property="article:published_time" content="2020-12-08T06:15:47.000Z">
-<meta property="article:modified_time" content="2021-04-19T06:42:49.810Z">
+<meta property="article:modified_time" content="2021-08-30T06:41:09.269Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta property="article:tag" content="gradient descent">
 <meta name="twitter:card" content="summary">
@@ -291,7 +291,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">3.2k</span>Reading time: <span class="post-count reading-time">12 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3.7k</span>Reading time: <span class="post-count reading-time">14 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -480,17 +480,29 @@ Randomly \space pick \space one \space i: \Theta=\Theta-\alpha \cdot \nabla_{\Th
 <li>鞍点：普通梯度下降容易陷入马鞍面，最后被困在鞍点；</li>
 </ol>
 <h1 id="引入-Momentum-的优化算法"><a href="#引入-Momentum-的优化算法" class="headerlink" title="引入 Momentum 的优化算法"></a>引入 Momentum 的优化算法</h1><p>将梯度下降找最优解比作小球向下滚到最低点，借用物理中的动量概念，模拟物体运动时的惯性。下文中的梯度方向都是指”负梯度方向“。</p>
-<h2 id="Exponentially-Weighted-Average-EWA"><a href="#Exponentially-Weighted-Average-EWA" class="headerlink" title="Exponentially Weighted Average (EWA)"></a>Exponentially Weighted Average (EWA)</h2><p>对于数据 $\theta_1,\theta_2,…,\theta_t$，初始化一个数 $v_0 = 0$，初始化一个参数 $\beta \in (0,1)$，考虑使用公式：</p>
+<h2 id="Exponentially-Weighted-Moving-Average-EWA，EWMA"><a href="#Exponentially-Weighted-Moving-Average-EWA，EWMA" class="headerlink" title="Exponentially Weighted Moving-Average (EWA，EWMA)"></a>Exponentially Weighted Moving-Average (EWA，EWMA)</h2><p><strong>加权移动平均法</strong>会对观察值分别给予不同的权数，按不同权数求得移动平均值，并以最后的移动平均值为基础，确定预测值的方法。加权移动平均法假设观察期较近的近期观察值对预测值有较大影响，它更能反映近期变化的趋势。</p>
+<p><strong>指数移动加权平均法</strong>，是指各数值的加权系数<strong>随时间呈指数式递减</strong>，越靠近当前时刻的数值加权系数就越大。与传统的平均法相比，指数移动加权平均法的特点有：</p>
+<ul>
+<li>不需要保存过去所有的数值；</li>
+<li>二是计算量显著减小；</li>
+</ul>
+<p>对于数据 $\theta_1,\theta_2,…,\theta_t$，初始化一个数 $v_0 = 0$，初始化一个参数 $\beta \in (0,1)$，考虑使用公式：</p>
 <script type="math/tex; mode=display">
 v_{t}=\beta v_{t-1}+(1-\beta) \theta_{t}</script><p>就能从散乱的原数据序列 $\{\theta_i\}_{1\sim t}$ 中得到一组新的序列 $\{v_i\}_{1\sim t}$，且经过基本的变换，有：</p>
 <script type="math/tex; mode=display">
-v_t = (1-\beta) (\theta_t + \beta \theta_{t-1} + \beta^2 \theta_{t-2} + ... + \beta^{t-1}\theta_1)</script><p>通过这种算法计算的均值的特性：越后面的 $\theta$ 对均值的影响越大（即权重越大）。</p>
-<p>$\theta$ 的权重满足：</p>
+v_t = (1-\beta) (\theta_t + \beta \theta_{t-1} + \beta^2 \theta_{t-2} + ... + \beta^{t-1}\theta_1)</script><p>上式的 $v_t$ 就是对 $\theta_1,\theta_2,…,\theta_t$ 的<strong>指数加权平均</strong>（EWA）。通过这种算法计算的均值的特性：越靠近最新值 $\theta_t$ 的 $\theta_i$ 对均值的影响越大（即权重越大），越靠近最初值 $\theta_0$ 的 $\theta_i$ 对均值的影响越小（即权重越小）；随着距离最新值 $\theta_t$ 的距离越来越远，$\theta_i$ 的权重呈指数下降：系数 $\beta$ 反应权重下降的速率，$\beta$ 值越小，权重下降的速度越快。</p>
+<p>如果不看 $(1-\beta)$ 这一项，剩下的式子中，$\theta$ 的权重之和满足：</p>
 <script type="math/tex; mode=display">
-1 + \beta + \beta^2 + ... + \beta^{t-1} = \frac{1-\beta^t}{1-\beta} \rightarrow^{t \rightarrow \infty} \frac{1}{1-\beta}</script><p>当取 $\beta \geq 0.9$ 时，即 $1-\beta \rightarrow 0$ 有：</p>
+1 + \beta + \beta^2 + ... + \beta^{t-1} = \frac{1-\beta^t}{1-\beta} \overset{t \rightarrow \infty}{\rightarrow} \frac{1}{1-\beta}</script><p>显然，如果再乘上 $(1-\beta)$ 这一项，各个 $\theta$ 的权重随着 $t$ 的增大趋向于 1。</p>
+<p>当 $1-\beta \rightarrow 0$ 时，有：</p>
 <script type="math/tex; mode=display">
-\lim_{1-\beta\rightarrow0}\beta^{\frac{1}{1-\beta}}=^{\epsilon=1-\beta}\lim_{\epsilon\rightarrow0}(1-\epsilon)^{1/\epsilon} \approx 1/e \approx 0.36</script><h3 id="偏置修正-bias-correction"><a href="#偏置修正-bias-correction" class="headerlink" title="偏置修正 (bias correction)"></a>偏置修正 (bias correction)</h3><p>由于 $v_0=0$，因此 $v_1=(1-\beta)\theta_1$，而这样计算出来的 $v_1$ 就比原来的 $\theta_1$ 要小很多，导致一开始的那些 $v$ 都会比较偏小。</p>
-<p>为了解决这一问题，考虑使用下式替换：</p>
+\lim_{1-\beta\rightarrow0}\beta^{\frac{1}{1-\beta}}\overset{\epsilon=1-\beta}{=} \lim_{\epsilon\rightarrow0}(1-\epsilon)^{\frac{1}{\epsilon}} \approx \frac{1}{e} \approx 0.36</script><p>数学上一般会以 $\frac{1}{e}$ 作为一个临界值，权重小于 $\frac{1}{e}$ 的项直接忽略：</p>
+<ul>
+<li>当 $\beta =0.9$ 时，由于 $0.9^{10}$ 约等于 $\frac{1}{e}$ ，因此计算出的 $v_t$ 可以认为是距离 $\theta_t$ 最近的 10 个数值的指数加权平均（其他距离 $\theta_t$ 更远的项直接被忽略了）；</li>
+<li>当 $\beta =0.98$ 时，由于 $0.98^{50}$ 约等于 $\frac{1}{e}$ ，因此计算出的 $v_t$ 可以认为是距离 $\theta_t$ 最近的 50 个数值的指数加权平均（其他距离 $\theta_t$ 更远的项直接被忽略了）；</li>
+</ul>
+<h3 id="偏置修正-bias-correction"><a href="#偏置修正-bias-correction" class="headerlink" title="偏置修正 (bias correction)"></a>偏置修正 (bias correction)</h3><p>由于 $v_0=0$，因此 $v_1=(1-\beta)\theta_1$，而这样计算出来的 $v_1$ 就比原来的 $\theta_1$ 要小很多，导致一开始当那些  $t$ 的值比较小时，$v_t$ 都会比较偏小。</p>
+<p>为了解决这一问题，考虑使用下式替换原来的迭代式：</p>
 <script type="math/tex; mode=display">
 v_t = \frac{v_t}{1-\beta^t}</script><p>这样，当 $t$ 比较小时，可以适当增大 $v_t$，而当 $t$ 比较大时，分子会趋向于 1，不会影响 $v_t$ 的值。</p>
 <h2 id="Gradient-Descent-with-Momentum"><a href="#Gradient-Descent-with-Momentum" class="headerlink" title="Gradient Descent with Momentum"></a>Gradient Descent with Momentum</h2><p>（将梯度下降找最优解比作小球向下滚到最低点）借用物理中的动量概念，模拟物体运动时的惯性：即更新的时候在一定程度上保留之前更新的方向（惯性），同时利用当前计算出来的梯度（加速度）微调最终的更新方向：使用指数加权平均（Exponentially Weighted Average）实现。这样一来，可以在一定程度上增加稳定性（防止因为当前梯度方向的改变较大而造成震荡），从而更快地学习，并且还有一定摆脱局部最优的能力：</p>
@@ -541,7 +553,7 @@ r_{i,t} = \sum_{\tau=1}^tg_{i,\tau}^2</script><p> $\vec r$ 初始化为 $\vec 0$
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">December 8th 2020, 2:15:47 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">April 19th 2021, 2:42:49 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/12/08/Gradient-Descent/">August 30th 2021, 2:41:09 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -690,7 +702,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#普通梯度下降"><span class="toc-number">1.</span> <span class="toc-text">普通梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Batch-Gradient-Descent"><span class="toc-number">1.1.</span> <span class="toc-text">Batch Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stochastic-Gradient-Descent"><span class="toc-number">1.2.</span> <span class="toc-text">Stochastic Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mini-batch-Gradient-Descent"><span class="toc-number">1.3.</span> <span class="toc-text">Mini-batch Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通梯度下降算法面临的挑战"><span class="toc-number">1.4.</span> <span class="toc-text">普通梯度下降算法面临的挑战</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引入-Momentum-的优化算法"><span class="toc-number">2.</span> <span class="toc-text">引入 Momentum 的优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Exponentially-Weighted-Average-EWA"><span class="toc-number">2.1.</span> <span class="toc-text">Exponentially Weighted Average (EWA)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#偏置修正-bias-correction"><span class="toc-number">2.1.1.</span> <span class="toc-text">偏置修正 (bias correction)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Descent-with-Momentum"><span class="toc-number">2.2.</span> <span class="toc-text">Gradient Descent with Momentum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nesterov-Momentum"><span class="toc-number">2.3.</span> <span class="toc-text">Nesterov Momentum</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自适应学习率优化算法"><span class="toc-number">3.</span> <span class="toc-text">自适应学习率优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AdaGrad"><span class="toc-number">3.1.</span> <span class="toc-text">AdaGrad</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSprop-Root-Mean-Square-prop"><span class="toc-number">3.2.</span> <span class="toc-text">RMSprop (Root Mean Square prop)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam-Adaptive-Moment-Estimation"><span class="toc-number">3.3.</span> <span class="toc-text">Adam (Adaptive Moment Estimation)</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#普通梯度下降"><span class="toc-number">1.</span> <span class="toc-text">普通梯度下降</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Batch-Gradient-Descent"><span class="toc-number">1.1.</span> <span class="toc-text">Batch Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点"><span class="toc-number">1.1.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点"><span class="toc-number">1.1.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stochastic-Gradient-Descent"><span class="toc-number">1.2.</span> <span class="toc-text">Stochastic Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺点-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意"><span class="toc-number">1.2.3.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mini-batch-Gradient-Descent"><span class="toc-number">1.3.</span> <span class="toc-text">Mini-batch Gradient Descent</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#优点-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通梯度下降算法面临的挑战"><span class="toc-number">1.4.</span> <span class="toc-text">普通梯度下降算法面临的挑战</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引入-Momentum-的优化算法"><span class="toc-number">2.</span> <span class="toc-text">引入 Momentum 的优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Exponentially-Weighted-Moving-Average-EWA，EWMA"><span class="toc-number">2.1.</span> <span class="toc-text">Exponentially Weighted Moving-Average (EWA，EWMA)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#偏置修正-bias-correction"><span class="toc-number">2.1.1.</span> <span class="toc-text">偏置修正 (bias correction)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Descent-with-Momentum"><span class="toc-number">2.2.</span> <span class="toc-text">Gradient Descent with Momentum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nesterov-Momentum"><span class="toc-number">2.3.</span> <span class="toc-text">Nesterov Momentum</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自适应学习率优化算法"><span class="toc-number">3.</span> <span class="toc-text">自适应学习率优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AdaGrad"><span class="toc-number">3.1.</span> <span class="toc-text">AdaGrad</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSprop-Root-Mean-Square-prop"><span class="toc-number">3.2.</span> <span class="toc-text">RMSprop (Root Mean Square prop)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam-Adaptive-Moment-Estimation"><span class="toc-number">3.3.</span> <span class="toc-text">Adam (Adaptive Moment Estimation)</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
@@ -857,9 +869,59 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 14
+        Total : 18
         </div>
         <!-- search  -->
         
@@ -872,6 +934,26 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2021/08/30/Federated-Learning/" >Federated Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2021/08/27/Transfer-Learning/" >Transfer Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Decorator/" >Decorator</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Python-args-and-kwargs/" >Python *args and **kwargs</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -965,15 +1047,15 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
-        <span class="sidebar-tag-name" data-tags="docker"><span class="iconfont-archer">&#xe606;</span>docker</span>
-    
-        <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
-    
-        <span class="sidebar-tag-name" data-tags="hexo"><span class="iconfont-archer">&#xe606;</span>hexo</span>
+        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
     
         <span class="sidebar-tag-name" data-tags="delta method"><span class="iconfont-archer">&#xe606;</span>delta method</span>
     
-        <span class="sidebar-tag-name" data-tags="python"><span class="iconfont-archer">&#xe606;</span>python</span>
+        <span class="sidebar-tag-name" data-tags="docker"><span class="iconfont-archer">&#xe606;</span>docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="hexo"><span class="iconfont-archer">&#xe606;</span>hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="gradient descent"><span class="iconfont-archer">&#xe606;</span>gradient descent</span>
     
         <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
     
@@ -1018,9 +1100,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="syntax"><span class="iconfont-archer">&#xe60a;</span>syntax</span>
     
-        <span class="sidebar-category-name" data-categories="web-frontend"><span class="iconfont-archer">&#xe60a;</span>web-frontend</span>
-    
         <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+    
+        <span class="sidebar-category-name" data-categories="web-frontend"><span class="iconfont-archer">&#xe60a;</span>web-frontend</span>
     
         <span class="sidebar-category-name" data-categories="conda"><span class="iconfont-archer">&#xe60a;</span>conda</span>
     
