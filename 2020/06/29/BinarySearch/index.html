@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Lingfeng Zhu">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Lingfeng Zhu">
+    
+    <meta name="keywords" content="machine learning,deep learning,recommender system">
+    
+    <meta name="description" content="">
+    <meta name="description" content="Binary search can reduce the time complexity to O(logN) for sorted items’ search. I summarized a framework to slove all the binary search problems under different situation in this post.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binary Search">
+<meta property="og:url" content="https://lingfengzhu.github.io/2020/06/29/BinarySearch/index.html">
+<meta property="og:site_name" content="Vinn&#39;s Studio">
+<meta property="og:description" content="Binary search can reduce the time complexity to O(logN) for sorted items’ search. I summarized a framework to slove all the binary search problems under different situation in this post.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-29T00:30:08.000Z">
+<meta property="article:modified_time" content="2021-09-08T07:57:35.810Z">
+<meta property="article:author" content="Lingfeng Zhu">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>Binary Search · Vinn&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Vinn&#39;s Studio</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Binary Search</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Vinn's Studio</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/mali.png)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Binary Search
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Algorithm">Algorithm</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">604</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/06/29</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>Binary search can reduce the time complexity to O(logN) for <strong>sorted</strong> items’ search. I summarized a framework to slove all the binary search problems under different situation in this post.</p>
+<a id="more"></a>
+<h2 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a><center>Framework</center></h2><hr>
+<h3 id="Main-Factors"><a href="#Main-Factors" class="headerlink" title="Main Factors"></a>Main Factors</h3><p>Here are some modifiable main factors for binary search problems.</p>
+<ol>
+<li><strong>Right Boundary</strong>: The right boundary of the search range. <code>len(nums)</code> or <code>len(nums)-1</code> are some commen choices.</li>
+<li><strong>Continue Condition</strong>: The condition that binary search should continue. <code>while(left &lt;= right)</code> or <code>while(left &lt; right)</code> are some commen choices.</li>
+<li><strong>Target Found</strong>: The action you take when found the target. Depends on specific problem.</li>
+<li><strong>Search One/Other Part</strong>: If the target is not found, you wil then search the two divided parts. <code>left = mid+1</code> and <code>left = mid</code> are 2 examples.</li>
+</ol>
+<p>Where <code>nums</code> is the given list of numbers and <code>target</code> is the target number.</p>
+<h3 id="Main-Framework"><a href="#Main-Framework" class="headerlink" title="Main Framework"></a>Main Framework</h3><p>The main framework of binary search can be seen as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span><span class="params">(nums, target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="string">'Right Boundary'</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="string">'Continue Condition'</span>:</span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="string">'Target Found'</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            <span class="string">'Search One Part'</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            <span class="string">'Search The Other Part'</span></span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<p>Where <code>nums</code> is the given list of numbers and <code>target</code> is the target number.</p>
+<h2 id="Some-Points"><a href="#Some-Points" class="headerlink" title="Some Points"></a><center>Some Points</center></h2><hr>
+<p>Based on different choices of <code>right</code>, our search interval can be different: If you let <code>right = len(nums)</code>, then to search over <code>nums</code>,  the index search interval should be <code>[left, right)</code>; If you let <code>right = len(nums)-1</code>, then to search over <code>nums</code>,  the index search interval should be <code>[left, right]</code>. In a word, based on how you set <code>right</code>, the search interval has two forms: <code>[·,·)</code> or <code>[·,·]</code>. Different forms have different settings, choose the suitable one based on specific problems.</p>
+<h3 id="Form-1-Search-left-right"><a href="#Form-1-Search-left-right" class="headerlink" title="Form 1: Search [left, right)"></a>Form 1: Search <code>[left, right)</code></h3><ol>
+<li><strong>Right Boundary</strong>: <code>right = len(nums)</code></li>
+<li><strong>Continue Condition</strong>: <code>while(left &lt; right)</code>; the loop will stop when <code>left == right</code>, at which time the search interval is <code>[right, right)</code>, which is an empty interval meaning that the loop should be stopped.</li>
+<li><strong>Search One/Other Part</strong>: Each step we take a <code>mid</code> away, and then the search interval is divided into two parts: <code>[left, mid)</code> and <code>[mid+1, right)</code>. To search the first part, we have <code>right = mid</code>; To search the latter part, we have <code>left = mid+1</code>.</li>
+</ol>
+<h3 id="Form-2-Search-left-right"><a href="#Form-2-Search-left-right" class="headerlink" title="Form 2: Search [left, right]"></a>Form 2: Search <code>[left, right]</code></h3><ol>
+<li><strong>Right Boundary</strong>: <code>right = len(nums)-1</code></li>
+<li><strong>Continue Condition</strong>: <code>while(left &lt;= right)</code>; the loop will stop when <code>left == right+1</code>, at which time the search interval is <code>[right+1, right]</code>, which is an empty interval meaning that the loop should be stopped.</li>
+<li><strong>Search One/Other Part</strong>: Each step we take a <code>mid</code> away, and then the search interval is divided into two parts: <code>[left, mid-1]</code> and <code>[mid+1, right]</code>. To search the first part, we have <code>right = mid-1</code>; To search the latter part, we have <code>left = mid+1</code>.</li>
+</ol>
+<h3 id="Notice"><a href="#Notice" class="headerlink" title="Notice"></a>Notice</h3><p>When the loop stops, all the items on the left of <code>left</code> will satisfies the <code>if-else</code> condition of <code>left = mid+1</code>；all the items on the right of <code>right</code> will satisfies the <code>if-else</code> condition of <code>right = mid</code> or <code>right = mid-1</code>.</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a><center>Examples</center></h2><hr>
+<h3 id="Search-a-number"><a href="#Search-a-number" class="headerlink" title="Search a number"></a>Search a number</h3><p>Given a list of numbers <code>nums</code> and a number <code>target</code>, try to find out if <code>target</code> is in <code>nums</code> or not. If so, return the index of <code>target</code>; otherwise, return -1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span><span class="params">(nums, target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = len(nums)<span class="number">-1</span> <span class="comment"># Right Boundary</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> left &lt;= right: <span class="comment"># Continue Condition</span></span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="keyword">return</span> mid <span class="comment"># Target Found</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            left = mid + <span class="number">1</span> <span class="comment"># Search One Part</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            right = mid - <span class="number">1</span> <span class="comment"># Search The Other Part</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">https://lingfengzhu.github.io/2020/06/29/BinarySearch/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">June 29th 2020, 8:30:08 am</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">September 8th 2021, 3:57:35 pm</a>
+            <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/11/15/SortAlgorithm/" title= "Sort Algorithm">
+                    <div class="nextTitle">Sort Algorithm</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/04/26/Delta-Method-in-Deep-Learning/" title= "Delta Method in Deep Learning">
+                    <div class="prevTitle">Delta Method in Deep Learning</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:jolin.windy072@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/LingfengZhu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wechatQR.jpeg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.facebook.com/lingfeng.zhu.18/" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.linkedin.com/in/lingfeng-zhu-256315193/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="about">Powered by <a href="https://lingfengzhu.github.io/about/" target="_blank">Vinn</a></span><span class="iconfont-archer power">&#xe635;</span><span id="instituion-info">from <a href="https://www.wisc.edu/" target="_blank">UWM</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Framework"><span class="toc-number">1.</span> <span class="toc-text">Framework</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-Factors"><span class="toc-number">1.1.</span> <span class="toc-text">Main Factors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Main-Framework"><span class="toc-number">1.2.</span> <span class="toc-text">Main Framework</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Some-Points"><span class="toc-number">2.</span> <span class="toc-text">Some Points</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Form-1-Search-left-right"><span class="toc-number">2.1.</span> <span class="toc-text">Form 1: Search [left, right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Form-2-Search-left-right"><span class="toc-number">2.2.</span> <span class="toc-text">Form 2: Search [left, right]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Notice"><span class="toc-number">2.3.</span> <span class="toc-text">Notice</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-number">3.</span> <span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Search-a-number"><span class="toc-number">3.1.</span> <span class="toc-text">Search a number</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 20
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2021/09/06/ERNIE/" >ERNIE</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/03</span><a class="archive-post-title" href= "/2021/09/03/Two-Pointer/" >Two-Pointer</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2021/08/30/Federated-Learning/" >Federated Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2021/08/27/Transfer-Learning/" >Transfer Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Decorator/" >Decorator</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Python-args-and-kwargs/" >Python *args and **kwargs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href= "/2021/07/05/Python-Logging/" >Python Logging</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2021/05/25/BERT/" >BERT</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/24</span><a class="archive-post-title" href= "/2021/05/24/Conda/" >Conda</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2021/01/06/Trie-Tree/" >Trie Tree</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2020/12/08/Gradient-Descent/" >Gradient Descent</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2020/11/16/Time-Complexity/" >Time Complexity</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2020/06/29/BinarySearch/" >Binary Search</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2020/04/26/Delta-Method-in-Deep-Learning/" >Delta Method in Deep Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/18</span><a class="archive-post-title" href= "/2020/04/18/BackTrack/" >Backtracking</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/16</span><a class="archive-post-title" href= "/2020/04/16/Python-Syntax-with/" >Python Syntax: with</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/COVID-Survival-Anaysis/" >COVID-19 Survival Analysis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/Hexo-Guideline/" >Hexo Guideline</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+    
+        <span class="sidebar-tag-name" data-tags="Algorithm"><span class="iconfont-archer">&#xe606;</span>Algorithm</span>
+    
+        <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
+    
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
+    
+        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Lingfeng Zhu"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
+     
+    </body>
+</html>
+
+
