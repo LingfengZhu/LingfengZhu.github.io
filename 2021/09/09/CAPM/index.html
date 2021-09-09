@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Lingfeng Zhu">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Lingfeng Zhu">
+    
+    <meta name="keywords" content="machine learning,deep learning,recommender system">
+    
+    <meta name="description" content="">
+    <meta name="description" content="资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAPM">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/09/09/CAPM/index.html">
+<meta property="og:site_name" content="Vinn&#39;s Studio">
+<meta property="og:description" content="资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/1.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/2.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/3.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/4.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/5.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/6.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/7.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/8.png">
+<meta property="article:published_time" content="2021-09-09T07:02:32.000Z">
+<meta property="article:modified_time" content="2021-09-09T07:08:48.445Z">
+<meta property="article:author" content="Lingfeng Zhu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lingfengzhu.github.io/2021/09/09/CAPM/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>CAPM · Vinn&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Vinn&#39;s Studio</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">CAPM</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Vinn's Studio</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            CAPM
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">5.2k</span>Reading time: <span class="post-count reading-time">19 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/09/09</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <script type="text/javascript"
+  src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<p>资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票资产，而定价则<strong>试图解释资本市场如何决定股票收益率，进而决定股票价格</strong>。</p>
+<a id="more"></a>
+<h2 id="模型概述"><a href="#模型概述" class="headerlink" title="模型概述"></a>模型概述</h2><p>这个世界的一大基本规律是：<strong>风险越高，收益越高</strong>。当一个产品风险低而收益高时，一定会有大量资金涌入瓜分掉收益。因此，通过研究资本收益与风险之间的定量关系，我们可以判断金融产品价格的<strong>”合理性“</strong>：如果风险过高而价格过低，或风险过低而价格过高，就说明定价很可能不合理，价格变动的可能性较大。CAPM 模型就是用于<strong>研究资本的收益与风险之间的定量关系</strong>的模型。</p>
+<p>在一些假设的基础上，CAPM 推导出了资产的定价模型，通过无风险利率、市场收益率、以及β系数可以得到某种资产的“理论”价格，从而帮助投资者对股票进行评价。</p>
+<h2 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h2><p>CAPM模型是建立在一系列假设的基础上的，其中主要包括：</p>
+<ol>
+<li>所有投资者均追求单期财富的<strong>期望效用最大化</strong>，并以各备选组合的<strong>期望收益</strong>和<strong>标准差</strong>为基础进行组合选择；$\leftarrow$ 投资者希望期望收益达到最大，标准差（用于衡量风险）达到最小</li>
+<li>所有投资者都可以及时免费获得充分的市场信息；</li>
+<li>市场上<strong>有且只有</strong>一种<strong>无风险利率</strong>，且所有投资者均能以<strong>无风险利率</strong>无限制地借入或贷出资金；</li>
+<li>所有投资者拥有同样预期，即：对于所有资产收益的<strong>均值</strong>、<strong>方差</strong>和<strong>协方差</strong>等，投资者均有完全相同的主观估计；</li>
+<li>所有资产均可被完全细分，拥有充分的流动性且没有交易成本；</li>
+<li>没有税金；</li>
+<li>所有投资者均为价格接受者，即：任何一个投资者的买卖行为都不会对股票价格产生影响；</li>
+<li>所有资产的数量是给定的和固定不变的。</li>
+</ol>
+<h2 id="模型详情"><a href="#模型详情" class="headerlink" title="模型详情"></a>模型详情</h2><p>对于一个给定的资产 $i$，它的期望收益率和<strong>市场投资组合</strong>（包含市场上存在的所有资产种类，且各种资产所占的比例和每种资产的总市值占市场总市值的比例相同的投资组合，可以近似看做整个市场）的期望收益率之间的关系可以表示为：</p>
+<script type="math/tex; mode=display">
+E\left(r_{i}\right)=r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right]</script><ul>
+<li>随机变量 $r_i$ 表示资产 $i$ 的收益率，$E(r_i)$ 表示资产 $i$ 的期望收益率（或普通股的资本成本率）；</li>
+<li>随机变量 $r_M$ 表示<strong>市场投资组合</strong>（详见 1.4. 中的定义）的收益率，$E(r_M)$ 表示<strong>市场组合</strong>的期望收益率（通常用股票价格指数收益率的<strong>平均值</strong>或所有股票的<strong>平均收益</strong>率来代替）；</li>
+<li>变量 $r_f$ 表示<strong>无风险收益率</strong>（通常以<strong>短期国债的利率</strong>或银行业间同业拆借利率来估计）；</li>
+<li>$\beta_{iM}$ 表示风险资产 $i$ 的<strong>系统性风险系数</strong>，$\beta_{iM} = \frac{Cov(r_i, r_M)}{Var(r_M)}$（通常利用单个风险资产和市场组合的历史数据进行计算，之后再进行显著性检验）；</li>
+<li>$E(r_M)-r_f$ 就是<strong>市场风险溢价</strong>（Market Risk Premium），即<strong>市场投资组合</strong>的期望收益率与<strong>无风险收益率</strong>之差；</li>
+</ul>
+<h2 id="模型理解"><a href="#模型理解" class="headerlink" title="模型理解"></a>模型理解</h2><ol>
+<li><p><strong>市场风险溢价</strong> $E(r_M) - r_f$ 就是<strong>证券投资市场的平均收益水平</strong>相对于<strong>无风险利率</strong>多出来的利润（可以理解为股票大盘相对于短期国债多出来的收益）：</p>
+<ul>
+<li>只有这个差值大于 0 时，才会有承担风险投资股票的理由；</li>
+<li>如果这个差值小于或等于 0，则投资股票的买收益还不如几乎零风险的国债；</li>
+</ul>
+</li>
+<li><p><strong>系统性风险指数</strong> $\beta_{iM}$ 衡量了某个<strong>具体资产</strong> $i$ 的风险水平（波动水平）和<strong>整个证券投资市场平均</strong>风险水平（波动水平）的比值：</p>
+<ul>
+<li><p>$\beta_{iM}$ 衡量了单个风险证券 $i$ 与整个市场组合 $M$ 的联动性：</p>
+<ul>
+<li>$\beta_{iM} &gt; 1$ 表示资产 $i$ 的波动（风险）大于市场平均水平，资产 $i$ 被称为“攻击性股票”，市场上涨/下跌时，其；升幅/跌幅较大（例如某资产 $i$ 的 $\beta_{iM} = 10$，则当市场上涨/下跌 10% 时，该证券上涨/下跌 100%）；</li>
+<li>$\beta_{iM} &lt; 1$ 表示资产 $i$ 的波动（风险）小于市场平均水平，资产 $i$ 被称为“防御性股票”，市场上涨/下跌时，其；升幅/跌幅较小（例如某资产 $i$ 的 $\beta_{iM} = 0.1$，则当市场上涨/下跌 10% 时，该证券上涨/下跌 1%）；</li>
+<li>$\beta_{iM} = 1$ 表示资产 $i$ 的波动（风险）与市场平均水平一致，资产 $i$ 被称为“中立性股票”，市场上涨/下跌时，其；升幅/跌幅与市场一致（例如某资产 $i$ 的 $\beta_{iM} = 01$，当市场上涨/下跌 10% 时，该证券上涨/下跌 10%）；</li>
+</ul>
+</li>
+<li><p>$\beta$ 类似一种杠杆，代表了具体资产相对于<strong>市场组合</strong>的风险：$\beta_{iM}$ 越大，表明该具体资产 $i$ 的风险越大，则其相应的期望收益应该也越大（风险溢价）；</p>
+</li>
+</ul>
+</li>
+<li><p><strong>无风险收益率</strong> $r_f$ 是指没有风险的投资产品能够得到的投资回报率，任何有风险的投资的收益率都应该超过 $r_f$，否则就没必要承担不确定性的风险了；</p>
+</li>
+<li><p>综合上述几点，模型公式中，将特定资产 $i$ 的收益率定义为：保证达到<strong>无风险收益率</strong> $r_f$ 的条件下，再加上体现<strong>该资产系统性风险溢价</strong>的 $\beta_{im}$ 与体现<strong>证券投资市场风险溢价</strong>的 $E(r_m)-r_f$ 乘积。</p>
+</li>
+</ol>
+<h2 id="模型原理"><a href="#模型原理" class="headerlink" title="模型原理"></a>模型原理</h2><h3 id="1-资本市场线-Capital-Market-Line"><a href="#1-资本市场线-Capital-Market-Line" class="headerlink" title="1. 资本市场线 (Capital Market Line)"></a>1. 资本市场线 (Capital Market Line)</h3><h4 id="1-1-图形推理过程"><a href="#1-1-图形推理过程" class="headerlink" title="1.1. 图形推理过程"></a>1.1. 图形推理过程</h4><h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step.1"></a>Step.1</h5><p>如下图所示，纵轴是某证券组合 P 的<strong>期望收益率</strong> $E(r_P)$，横轴是该组合 P 的<strong>标准差</strong> $\sigma_P$（标准差反映了组合收益的变动情况，即风险大小，标准差越大，收益变动越大，越不稳定，说明风险越大）；图中的每一个点都代表由某几个风险资产按一定比例组成的资产组合。假设图中<strong>灰色区域</strong>就是所有投资者的可行区域（灰色区域的<strong>黑色外沿线</strong>就是<strong>风险-收益双曲线</strong>），则在<strong>不考虑无风险资产时</strong>：</p>
+<ul>
+<li>根据假设 1、2，我们知道投资者将会从所有风险证券组合构成的<strong>可行区域</strong>（下图的灰色区域）中选择其<strong>最优证券组合</strong>（最优组合就存在于灰色区域的<strong>外圈黑色沿线的上半部分</strong>：以某证券组合 A 点为例，在外沿线上面总能找到一个点 B，它的风险与 A 一样，但收益更高）；</li>
+<li>根据假设 4，我们知道对于所有投资者来说风险可行区域（灰色区域）都是相同的；</li>
+</ul>
+<img src="/2021/09/09/CAPM/1.png" class="" title="This is an image">
+<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step.2"></a>Step.2</h5><p>若要考虑<strong>无风险资产</strong>，则由于假设 3，市场上有且只有一种无风险资产 C，其标准差（即风险）为 0（因此处于纵轴上），其期望收益率就是无风险利率 $r_f$：</p>
+<ul>
+<li>投资者可以将钱全部投向于某个<strong>最优的资产组合</strong>（灰色区域的<strong>外圈黑色沿线的上半部分</strong>上的某个点，比如 B），那么获得的期望收益和承担的风险将是 $E(r_B)$ 和 $\sigma_B$；</li>
+<li>投资者也可以将钱全部投向<strong>无风险资产</strong> C，那么获得收益和承担的风险将是 $r_f$ 和 0；</li>
+<li>事情当然没有那么极端，更多投资者会考虑按一定的<strong>比例</strong>，把部分钱投资于某个<strong>最优资产组合</strong> B、部分投资于<strong>无风险资产</strong> C：将 CB 连线，在这条线段上的任何一个点都是资产组合 B 与资产组合 C 按照某个<strong>比例</strong>的<strong>再组合</strong>（这个具体<strong>比值</strong>决定了这个<strong>再组合</strong>在线段 CB 上的具体位置：例如，若 C 和 B 各占 50% 的比重，则这个<strong>再组合</strong>就在线段 BC 的中点）；</li>
+</ul>
+<img src="/2021/09/09/CAPM/2.png" class="" title="This is an image">
+<h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step.3"></a>Step.3</h5><p>事实上，在<strong>不考虑无风险资产</strong>的时候，<strong>黑色沿线上半部分</strong>上的点都是<strong>最优资产组合</strong>，但是在<strong>考虑无风险资产</strong>时，存在一个唯一的最优资产组合：</p>
+<ul>
+<li>若从 C 点向<strong>灰色区域的上半部分</strong>做一条切线，则切点 M 就是唯一的<strong>最优资产组合</strong>：从黑色沿线上半部分任取一个点 B，无论 B 如何选择，线段 CM 上的点均可以在相同<strong>标准差</strong>的情况下比 CB 上的点获取更高的期望收益；</li>
+<li>此时，由于假设 1，投资者们果断抛弃除 M 之外所有其他的风险组合；</li>
+</ul>
+<img src="/2021/09/09/CAPM/3.png" class="" title="This is an image">
+<h4 id="1-2-切点组合"><a href="#1-2-切点组合" class="headerlink" title="1.2. 切点组合"></a>1.2. 切点组合</h4><p>上述切点对应的风险组合（即点 M），就称为切点组合。</p>
+<h4 id="1-3-分离定理"><a href="#1-3-分离定理" class="headerlink" title="1.3. 分离定理"></a>1.3. 分离定理</h4><p>分离定理又称分离特性，指在<strong>投资组合</strong>中可以以<strong>无风险利率</strong>自由借贷的情况下，投资人选择投资组合时都会选择<strong>无风险资产</strong>（即点 C）和<strong>最优风险投资组合</strong>（即切点 M）的<strong>再组合</strong>（即线段 CM 上的某个点），与个别投资者的偏好无关。</p>
+<ul>
+<li>因为这切点 M 相对于其他的投资组合在风险上或是报酬上都具有优势，所以不管谁投资都会选择 M；</li>
+<li>投资人对收益/风险的不同态度，只会影响<strong>投入的资金数量</strong>或<strong>无风险资产 C 与最优风险投资组合 M 的投入比例</strong>，而不会影响<strong>最优风险投资组合点</strong>（即切点 M）的位置；</li>
+</ul>
+<h4 id="1-4-市场组合"><a href="#1-4-市场组合" class="headerlink" title="1.4. 市场组合"></a>1.4. 市场组合</h4><p>市场组合是指市场中<strong>所有风险资产</strong>的组合，且每种风险资产在该组合中所占的比重（即每种资产在该组合中的构成比例）<strong>等于</strong>这种风险资产的市值占市场所有风险资产总市值的比重（即每种资产的相对市值）。</p>
+<blockquote>
+<p>定理：切点组合一定是市场组合</p>
+<p>简单证明：</p>
+<p>首先证明市场上所有的风险证券必然会被包含在切点组合 M 中</p>
+<ul>
+<li>假设市场上有一种风险证券 E，它没有被包括在切点组合 M 中；</li>
+<li>则根据分离定理，所有投资人都选择了那个最优的组合 M 并搭配无风险证券，没有人会持有 E；</li>
+<li>此时，这个风险证券 E 没有需求只有供给，导致 E 的价格一直下降，直到人们认为 E 有利可图，并将其持有；</li>
+<li>此时，E 就被纳入了切点组合中，新的切点组合变成了包含 E 的 M’，但这个 M’ 仍然是市场上最优的风险组合，并与投资者的偏好无关；</li>
+<li>可见，市场上所有的风险证券必然会被包含在切点组合 M 中；</li>
+</ul>
+<p>然后证明切点组合 M 中每种风险证券的构成比例等于该风险证券的相对市值</p>
+<ul>
+<li>假设市场中某个投资者 $i$ 持有的证券中，切点组合  M 的比例为 $\alpha_i$，无风险资产的比例为 $1-\alpha_i$，若用 $\omega_{j}$ 表示切点组合 M 中风险资产 $j$ 的权重，$W_0^i$ 表示投资者 $i$ 的初始财富，则有：<ol>
+<li>投资者 $i$ 投资于 M 中某个风险资产 $j$ 的金额为 $\alpha_iW_0^i\omega_{j}$；</li>
+<li>投资者 $i$ 投资于切点组合 M 中的总金额为 $\alpha_iW_0^i$；</li>
+<li>由 1 得，市场中全体投资者投资于某个风险资产 $j$ 的总金额为 $\sum_i\alpha_iW_0^i\omega_j$；</li>
+<li>由 2 得，市场中全体投资者投资于切点组合 M 的总财富为 $V = \sum_i\alpha_iW_0^i$，显然这也就是投资于市场所有风险资产的总财富；</li>
+<li>由 4 得，若用 $\gamma_j$ 表示市场组合中风险资产 $j$ 的权重，则市场中投资于风险资产 $j$ 的总金额为 $\gamma_jV = \sum_i\alpha_iW_0^i\gamma_j$；</li>
+<li>结合 3 和 5，有：$\sum_i\alpha_iW_0^i\omega_j = \sum_i\alpha_iW_0^i\gamma_j$，即：$\omega_j = \gamma_j, \forall j$</li>
+</ol>
+</li>
+<li>可见，切点组合 M 中每种风险证券的构成比例均等于该风险证券的相对市值</li>
+</ul>
+</blockquote>
+<h4 id="1-5-资本市场线-Capital-Market-Line"><a href="#1-5-资本市场线-Capital-Market-Line" class="headerlink" title="1.5. 资本市场线 (Capital Market Line)"></a>1.5. 资本市场线 (Capital Market Line)</h4><p>线段 CM上的每个点代表 “风险组合M + 无风险资产C” 按一定比例搭配起来的一个再组合，这些再组合称为<strong>有效组合</strong>。从无风险资产 C 出发，穿过切点 M 的这条<strong>射线</strong>，就被称为<strong>资本市场线</strong>（CML）。它描述了<strong>有效组合的风险与收益之间的关系</strong>。</p>
+<img src="/2021/09/09/CAPM/4.png" class="" title="This is an image">
+<h5 id="1-5-1-线段-CM-之外的延长线也算资本市场线的原因"><a href="#1-5-1-线段-CM-之外的延长线也算资本市场线的原因" class="headerlink" title="1.5.1. 线段 CM 之外的延长线也算资本市场线的原因"></a>1.5.1. 线段 CM 之外的延长线也算资本市场线的原因</h5><p>这是因为假设 3 中提到没有卖空和买空的限制，投资者可以无限制地借入或者贷出<strong>无风险资金</strong>，投入到切点组合中。</p>
+<p>举一个例子，对于某风险厌恶<strong>较重</strong>的投资者来说，他可能会选择一半资金投资于无风险资产 C，一半资金投资于切点组合 M，那么他会选择有效组合 CM1：</p>
+<script type="math/tex; mode=display">
+CM1 = 0.5 C + 0.5 M</script><p>对于某风险厌恶<strong>较轻</strong>的投资者来说，他可能会<strong>借入</strong>部分无风险资产 C（假设借入金额为本金的一半），连同自己的本金一起投入到切点组合 M 上，那么他会选择有效组合 CM2：</p>
+<script type="math/tex; mode=display">
+CM2 = -0.5 C + 1.5 M</script><p>可见。CM1 位于线段 CM 上，而 CM2 则位于线段 CM 之外的延长线上。因此，延长线也算在<strong>资本市场线</strong>内，延长线上的点也都是<strong>有效组合</strong>。</p>
+<img src="/2021/09/09/CAPM/5.png" class="" title="This is an image">
+<h5 id="1-5-2-资本市场线的几何公式表达"><a href="#1-5-2-资本市场线的几何公式表达" class="headerlink" title="1.5.2. 资本市场线的几何公式表达"></a>1.5.2. 资本市场线的几何公式表达</h5><p>资本市场线描述了<strong>有效组合</strong>的<strong>风险</strong>和<strong>收益</strong>之间的关系。显然，代入直线的几何表达 $y = kx + b$，这个关系的几何公式表达如下：</p>
+<script type="math/tex; mode=display">
+E(r_P) = r_f + \frac{E(r_M)-r_f}{\sigma_M}\sigma_P</script><img src="/2021/09/09/CAPM/6.png" class="" title="This is an image">
+<p>其中 $E(r_M) - r_f$ 其实就是切点组合 M 的<strong>风险溢价</strong>（或称为风险收益、风险报酬）。这条<strong>资本市场线</strong>就反应了有效组合的预期收益率（代表收益）与其标准差（代表风险）之间的关系。</p>
+<h4 id="2-证券市场线-Security-Market-Line-i-e-CAPM-模型的图形形式"><a href="#2-证券市场线-Security-Market-Line-i-e-CAPM-模型的图形形式" class="headerlink" title="2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式"></a>2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式</h4><p>CML 面向的对象是<strong>有效组合</strong>，如果将面向的对象改为单个风险证券，就能得到<strong>证券市场线</strong>（SML）。</p>
+<ul>
+<li>由于单个证券本身是一个<strong>非有效</strong>的组合，始终位于 CML 的下方，因此<strong>不能</strong>直接代入 CML 的公式将单个证券 $i$ 的风险与收益关系表示为 $E(r_i) = r_f + \frac{E(r_M)-r_f}{\sigma_M}\sigma_i$； </li>
+</ul>
+<img src="/2021/09/09/CAPM/7.png" class="" title="This is an image">
+<h5 id="2-1-证券市场线的公式表达-i-e-CAPM-模型的推理过程（Sharpe-的证明）"><a href="#2-1-证券市场线的公式表达-i-e-CAPM-模型的推理过程（Sharpe-的证明）" class="headerlink" title="2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）"></a>2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）</h5><p>假设有一个资产组合 $P$，其中投资于风险证券 $i$ 的比例为 $x_i$，其他资产全部投资于市场组合 $M$，则有：</p>
+<script type="math/tex; mode=display">
+P = x_ii + (1-x_i)M\\
+r_P = x_ir_i + (1-x_i)r_M\\</script><p>据此可以计算 $P$ 的<strong>期望收益率</strong>和<strong>标准差</strong>为：</p>
+<script type="math/tex; mode=display">
+E(r_P) = x_iE(r_i) + (1-x_i)E(r_M) \\
+\sigma_P = \sqrt{Var(P)} = \sqrt{Var(x_ii + (1-x_i)M)} \\
+=\sqrt{x_i^2Var(i) + (1-x_i)^2Var(M) + 2x_i(1-x_i)Cov(i,M)} \\
+= \sqrt{x_i^2\sigma_i^2 + (1-x_i)^2\sigma_M^2 + 2x_i(1-x_i)\sigma_{iM}}</script><p>其中 $r_i$ 表示资产 $i$ 的收益率；$\sigma_i$ 表示资产 $i$ 的标准差；$\sigma_{iM}$ 表示 $i$ 与 $M$ 的协方差；$i,P,r_i,r_P$ 均为随机变量。</p>
+<p>上述结果分别对变量 $x_i$ 求导：</p>
+<script type="math/tex; mode=display">
+\frac{\partial{E(r_P)}}{\partial{x_i}} = E(r_i) - E(r_M) \\
+\frac{\partial{\sigma_P}}{\partial{x_i}} = \frac{x_{i} \sigma_{i}^{2}-\sigma_{M}^{2}+x_{i} \sigma_{M}^{2}+\sigma_{i M}-2 x_{i} \sigma_{i M}}{\left(x_{i}^{2} \sigma_{i}^{2}+\left(1-x_{i}\right)^{2} \sigma_{M}^{2}+2 x_{i}\left(1-x_{i}\right) \sigma_{i M}\right)^{1 / 2}}</script><p>显然所有这样的投资组合 $P$，都位于线段 $iM$ 上。通过上述结果，可以计算出线段 $iM$ 的斜率为：</p>
+<script type="math/tex; mode=display">
+\frac{E(r_P)}{\sigma_P} = \frac{\partial{E(r_P)}}{\partial{x_i}}/\frac{\partial{\sigma_P}}{\partial{x_i}} = \frac{\left(E(r_{i})-E(r_{M})\right)\left(x_{i}^{2} \sigma_{i}^{2}+\left(1-x_{i}\right)^{2} \sigma_{M}^{2}+2 x_{i}\left(1-x_{i}\right) \sigma_{i M}\right)^{1 / 2}}{x_{i} \sigma_{i}^{2}-\sigma_{M}^{2}+x_{i} \sigma_{M}^{2}+\sigma_{i M}-2 x_{i} \sigma_{i M}}</script><p>若取 $x_i = 0$，即资产组合 $P$ 全部投资于市场组合 $M$，则显然此时线段 $iM$ 应该与资本市场线 CML 重合：即在 $x_i = 0$ 时，线段 $iM$ 的斜率应当等于 CML 的斜率。</p>
+<p>将 $x_i=0$ 代入上式可得 $iM$ 此时的斜率为：</p>
+<script type="math/tex; mode=display">
+\frac{E(r_P)}{\sigma_P}\bigg|_{x_i=0} = \frac{\left(E(r_{i})-E(r_{M})\right) \sigma_{M}}{\sigma_{i M}-\sigma_{M}^{2}}</script><p>该斜率与 CML 的斜率相等，即：</p>
+<script type="math/tex; mode=display">
+\frac{\left(E(r_{i})-E(r_{M})\right) \sigma_{M}}{\sigma_{i M}-\sigma_{M}^{2}} = \frac{E(r_M)-r_f}{\sigma_M}</script><p>整理上式可得：</p>
+<script type="math/tex; mode=display">
+E(r_i) = r_f + \frac{E(r_M)-r_f}{\sigma_M^2}\sigma_{iM}</script><p>根据 $\beta$ 系数的定义 $\beta_{iM} = \frac{Cov(r_i, r_M)}{Var(r_M)} = \frac{\sigma_{iM}}{\sigma_M^2}$，则代入上式有：</p>
+<script type="math/tex; mode=display">
+E(r_i) = r_f + \beta_{iM}(E(r_M)-r_f)</script><p>不难发现这就是 CAPM 模型的公式，若以风险证券 $i$ 对应的 $\beta_{iM}$ 作为横坐标，以 $i$ 的期望收益 $E(r_i)$ 作为纵坐标，则该公式唯一确定的那条射线就是<strong>证券市场线</strong>。</p>
+<h4 id="2-2-证券市场线-Security-Market-Line"><a href="#2-2-证券市场线-Security-Market-Line" class="headerlink" title="2.2. 证券市场线 (Security Market Line)"></a>2.2. 证券市场线 (Security Market Line)</h4><p>在考虑单个证券时，不再用标准差来度量风险，而是使用该证券对应的 $\beta$ 系数（$\beta_{iM}$ 反映了单个证券 $i$ 与整体市场组合 M 的联动性，而不是 $i$ 自己的离散程度），以风险证券 $i$ 对应的 $\beta_{iM}$ 作为横坐标，以 $i$ 的期望收益 $E(r_i)$ 作为纵坐标作图，画出 SML：</p>
+<img src="/2021/09/09/CAPM/8.png" class="" title="This is an image">
+<h3 id="3-CML-和-SML-的对比"><a href="#3-CML-和-SML-的对比" class="headerlink" title="3. CML 和 SML 的对比"></a>3. CML 和 SML 的对比</h3><ol>
+<li>横轴：SML 以 $\beta$ 系数为横轴，仅衡量系统性风险；CML 以标准差为横轴，既包括系统风险又包括非系统风险；</li>
+<li>纵轴：均为是期望收益率 $E(r_P)$；</li>
+<li>斜率：SML 的斜率为 $E(r_M)-r_f$，也称风险溢价，表示系统风险的风险价格；CML 的斜率为 $\frac{E(r_M)-r_f}{\sigma_M}$，表示整体风险的风险价格；</li>
+<li>SML 利用 $\beta$ 系数描述市场均单项资产或资产组合的风险；CML利用整个资产组合的标准差描述风险，且仅适用于风险资产和无风险资产构成的有效组合，而无法描述单个证券；</li>
+<li>SML 和 CML 中 $r_M$ 的含义略有不同：在 SML 中表示“必要收益率”，即投资“前”要求得到的最低收益率；在 CML 中表示“期望收益率”，投资“后”期望获得的报酬率；</li>
+<li>SML 的作用在于将“必要报酬率”带入股票估价模型，计算股票的内在价值；CML 作用在于根据期望收益率确定投资组合的比例。</li>
+</ol>
+<h2 id="拓展：超额收益形式的CAPM模型"><a href="#拓展：超额收益形式的CAPM模型" class="headerlink" title="拓展：超额收益形式的CAPM模型"></a>拓展：超额收益形式的CAPM模型</h2><p>CAPM 模型的缺点也是很明显的：它的成立是基于一连串理想化的假设，这些假设在现实中并不全部成立，这必然使得 CAPM 的作用大打折扣：</p>
+<ul>
+<li>在理想条件下，股票只能获得平均基准收益；而现实中无法满足那些假设要求，股票的收益也不仅只有基准收益，还包括了超额收益，即 $\alpha$ 收益； </li>
+<li>$\beta$ 是一种系统性风险，是不可分散的，事实上风险证券中还存在另外一种风险：非系统风险，这是可以分散掉的风险，即随机误差项 $\epsilon$；</li>
+</ul>
+<p>加上上述两个因素，则有超额收益形式的 CAPM 模型：</p>
+<script type="math/tex; mode=display">
+E\left(r_{i}\right)=\alpha_i + r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right] + \epsilon_i</script>
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/09/09/CAPM/">https://lingfengzhu.github.io/2021/09/09/CAPM/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/09/09/CAPM/">September 9th 2021, 3:02:32 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/09/09/CAPM/">September 9th 2021, 3:08:48 pm</a>
+            <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/09/06/ERNIE/" title= "ERNIE">
+                    <div class="prevTitle">ERNIE</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:jolin.windy072@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/LingfengZhu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wechatQR.jpeg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.facebook.com/lingfeng.zhu.18/" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.linkedin.com/in/lingfeng-zhu-256315193/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="about">Powered by <a href="https://lingfengzhu.github.io/about/" target="_blank">Vinn</a></span><span class="iconfont-archer power">&#xe635;</span><span id="instituion-info">from <a href="https://www.wisc.edu/" target="_blank">UWM</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模型概述"><span class="toc-number">1.</span> <span class="toc-text">模型概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型假设"><span class="toc-number">2.</span> <span class="toc-text">模型假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型详情"><span class="toc-number">3.</span> <span class="toc-text">模型详情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型理解"><span class="toc-number">4.</span> <span class="toc-text">模型理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型原理"><span class="toc-number">5.</span> <span class="toc-text">模型原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-资本市场线-Capital-Market-Line"><span class="toc-number">5.1.</span> <span class="toc-text">1. 资本市场线 (Capital Market Line)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-图形推理过程"><span class="toc-number">5.1.1.</span> <span class="toc-text">1.1. 图形推理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-1"><span class="toc-number">5.1.1.1.</span> <span class="toc-text">Step.1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-2"><span class="toc-number">5.1.1.2.</span> <span class="toc-text">Step.2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-3"><span class="toc-number">5.1.1.3.</span> <span class="toc-text">Step.3</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-切点组合"><span class="toc-number">5.1.2.</span> <span class="toc-text">1.2. 切点组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-分离定理"><span class="toc-number">5.1.3.</span> <span class="toc-text">1.3. 分离定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-市场组合"><span class="toc-number">5.1.4.</span> <span class="toc-text">1.4. 市场组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-资本市场线-Capital-Market-Line"><span class="toc-number">5.1.5.</span> <span class="toc-text">1.5. 资本市场线 (Capital Market Line)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-1-线段-CM-之外的延长线也算资本市场线的原因"><span class="toc-number">5.1.5.1.</span> <span class="toc-text">1.5.1. 线段 CM 之外的延长线也算资本市场线的原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-2-资本市场线的几何公式表达"><span class="toc-number">5.1.5.2.</span> <span class="toc-text">1.5.2. 资本市场线的几何公式表达</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-证券市场线-Security-Market-Line-i-e-CAPM-模型的图形形式"><span class="toc-number">5.1.6.</span> <span class="toc-text">2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-证券市场线的公式表达-i-e-CAPM-模型的推理过程（Sharpe-的证明）"><span class="toc-number">5.1.6.1.</span> <span class="toc-text">2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-证券市场线-Security-Market-Line"><span class="toc-number">5.1.7.</span> <span class="toc-text">2.2. 证券市场线 (Security Market Line)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CML-和-SML-的对比"><span class="toc-number">5.2.</span> <span class="toc-text">3. CML 和 SML 的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拓展：超额收益形式的CAPM模型"><span class="toc-number">6.</span> <span class="toc-text">拓展：超额收益形式的CAPM模型</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 21
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/09</span><a class="archive-post-title" href= "/2021/09/09/CAPM/" >CAPM</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2021/09/06/ERNIE/" >ERNIE</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/03</span><a class="archive-post-title" href= "/2021/09/03/Two-Pointer/" >Two-Pointer</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2021/08/30/Federated-Learning/" >Federated Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2021/08/27/Transfer-Learning/" >Transfer Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Decorator/" >Python Decorator</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Python-args-and-kwargs/" >Python Syntax: *args and **kwargs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href= "/2021/07/05/Python-Logging/" >Python Logging</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2021/05/25/BERT/" >BERT</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/08</span><a class="archive-post-title" href= "/2021/05/08/Conda/" >Conda</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2021/01/06/Trie-Tree/" >Trie Tree</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2020/12/08/Gradient-Descent/" >Gradient Descent</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2020/11/16/Time-Complexity/" >Time Complexity</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2020/06/29/BinarySearch/" >Binary Search</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2020/04/26/Delta-Method-in-Deep-Learning/" >Delta Method in Deep Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/18</span><a class="archive-post-title" href= "/2020/04/18/BackTrack/" >Backtracking</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/16</span><a class="archive-post-title" href= "/2020/04/16/Python-Syntax-with/" >Python Syntax: with</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/COVID-Survival-Anaysis/" >COVID-19 Survival Analysis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/Hexo-Guideline/" >Hexo Guideline</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+    
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+    
+        <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
+    
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Lingfeng Zhu"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->    
+     
+    </body>
+</html>
+
+
