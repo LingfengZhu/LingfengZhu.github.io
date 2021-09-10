@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="Vinn&#39;s Studio">
 <meta property="og:description" content="This article is the Final project for STAT 732. I summarized the major results and main contributions of a recent statistical paper (published 2019) named On the Delta Method for Uncertainty Appr">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/flow.jpg">
-<meta property="og:image" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/spectrum.jpg">
+<meta property="og:image" content="https://lingfengzhu.github.io/.io//04/26/Delta-Method-in-Deep-Learning/flow.jpg">
+<meta property="og:image" content="https://lingfengzhu.github.io/.io//04/26/Delta-Method-in-Deep-Learning/spectrum.jpg">
 <meta property="article:published_time" content="2020-04-26T07:19:17.000Z">
 <meta property="article:modified_time" content="2021-09-10T12:26:37.536Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lingfengzhu.github.io/2020/04/26/Delta-Method-in-Deep-Learning/flow.jpg">
+<meta name="twitter:image" content="https://lingfengzhu.github.io/.io//04/26/Delta-Method-in-Deep-Learning/flow.jpg">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
@@ -410,11 +410,10 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <script type="text/javascript"
-  src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        <script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
-<link rel="dns-prefetch" href="//cdn.bootcss.com" />
+<link rel="dns-prefetch" href="//cdn.bootcss.com">
 
 <p>This article is the Final project for STAT 732. I summarized the major results and main contributions of a recent statistical <a href="https://arxiv.org/abs/1912.00832" target="_blank" rel="noopener">paper</a> (published 2019) named <strong>On the Delta Method for Uncertainty Approximation in Deep Learning</strong>, which utilizes large sample statistical theory in deep learning field and has significant future research potential. </p>
 <a id="more"></a>
@@ -461,14 +460,14 @@ F=\left[F_{i j}\right] \in \mathbb{R}^{T_{L} \times P}, F_{i j}=\left.\frac{\par
 <h3 id="Solving-the-Problems"><a href="#Solving-the-Problems" class="headerlink" title="Solving the Problems"></a>Solving the Problems</h3><p>The paper presents its approach to the Delta method in deep learning as a separate process carried out in <strong>two phases</strong> after the neural network has been trained. See <a href="#flow">Figure 1</a> for details.</p>
 <div id="flow"><center>Figure 1: The Delta method for quantifying the uncertainty in deep learning </center></div>
 
-<img src="/2020/04/26/Delta-Method-in-Deep-Learning/flow.jpg" class="" title="This is an image">
+<img src="/.io//04/26/Delta-Method-in-Deep-Learning/flow.jpg" class title="This is an image">
 <h4 id="Delta-Method-Initial-Phase"><a href="#Delta-Method-Initial-Phase" class="headerlink" title="Delta Method Initial Phase"></a>Delta Method Initial Phase</h4><p>This phase is carried out only once, and is done to compute an indirect approximation of the covariance matrix (8) based on an approximate eigendecomposition of the positive curvature subspace of the Hessian matrix. </p>
 <p>In this phase, people can efficiently compute eigenvalues and eigenvectors of the Hessian matrix via the <strong>Lanczos iteration</strong> and exact Hessian vector products. Since the method is not closely related to large sample statistical theory, I will not go deeper into the <strong>Lanczos iteration</strong> here. See  Python module <a href="https://github.com/gknilsen/pydeepdelta" target="_blank" rel="noopener"><code>pydeepdelta</code></a> for more details.</p>
 <h4 id="Delta-Method-Prediction-Phase"><a href="#Delta-Method-Prediction-Phase" class="headerlink" title="Delta Method Prediction Phase"></a>Delta Method Prediction Phase</h4><p>This second phase is carried out hand in hand with the regular neural network prediction process (2), and is used to approximate the associated prediction uncertainty governed by (7). This phase is based on the indirect covariance matrix approximation found in the <strong>Delta Method Initial Phase</strong>.</p>
 <p>Using the typical deep learning <strong>Hessian eigenvalue spectrum</strong>, the paper proposes a partitioning of the Hessian eigendecomposition which reveals that an approximation of the positive curvature subspace of the covariance matrix can be obtained without explicitly requiring to compute any of the $P-K$ Hessian eigenvectors and eigenvalues in the midpoint gap of the spectrum, where $P$ is the number of model parameters and $K$ is the number of utilized Hessian eigenpairs. I will not go deeper into the <strong>Hessian eigenvalue spectrum</strong> but focus on the approximation steps. See <a href="#spectrum">Figure 2</a> for an example of the spectrum.</p>
 <div id="spectrum"><center>Figure 2: A log-scale eigenvalue magnitude spectrum showing the first K/2 Hessian eigenvalues from each end of the full spectrum</center></div>
 
-<img src="/2020/04/26/Delta-Method-in-Deep-Learning/spectrum.jpg" class="" title="This is an image">
+<img src="/.io//04/26/Delta-Method-in-Deep-Learning/spectrum.jpg" class title="This is an image">
 <p>The full eigendecomposition of the Hessian matrix is deﬁned by</p>
 <script type="math/tex; mode=display">
 H(\hat{\omega})=Q \Lambda Q^{T} \in \mathbb{R}^{P \times P} \tag{10}</script><p>where $Q \in \mathbb{R}^{P \times P}$ is the matrix whose $k$th column is the eigenvector $q_k$ of $H(\hat{\omega})$, and $\Lambda\in \mathbb{R}^{P \times P}$ is the diagonal matrix whose diagonal elements are the corresponding eigenvalues, $\Lambda_{kk} = \lambda_k$, assuming that the eigenvalues are sorted so that $\lambda_1 \geq \lambda_2 \geq … \geq \lambda_P$.<br>The eigendecomposition of the Hessian matrix can be partitioned as follows,</p>
@@ -923,6 +922,8 @@ top:50vh;
     
     
     
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 22
@@ -1065,11 +1066,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
-        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
-    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
@@ -1118,9 +1119,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
-    
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
+    
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="greeting"><span class="iconfont-archer">&#xe60a;</span>greeting</span>
     
