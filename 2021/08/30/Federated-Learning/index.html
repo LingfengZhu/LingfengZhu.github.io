@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="Vinn&#39;s Studio">
 <meta property="og:description" content="联邦机器学习（又名联邦学习、联合学习、联盟学习）是一个机器学习框架，能有效帮助多个机构在满足用户隐私保护、数据安全和政府法规的要求下，进行数据使用和机器学习建模。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://lingfengzhu.github.io/.io//08/30/Federated-Learning/1.png">
-<meta property="og:image" content="https://lingfengzhu.github.io/.io//08/30/Federated-Learning/2.png">
-<meta property="og:image" content="https://lingfengzhu.github.io/.io//08/30/Federated-Learning/3.png">
-<meta property="og:image" content="https://lingfengzhu.github.io/.io//08/30/Federated-Learning/4.png">
-<meta property="og:image" content="https://lingfengzhu.github.io/.io//08/30/Federated-Learning/5.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Federated-Learning/1.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Federated-Learning/2.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Federated-Learning/3.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Federated-Learning/4.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Federated-Learning/5.png">
 <meta property="article:published_time" content="2021-08-30T07:08:32.000Z">
-<meta property="article:modified_time" content="2021-09-08T10:36:49.432Z">
+<meta property="article:modified_time" content="2021-09-13T13:45:23.778Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://lingfengzhu.github.io/.io//08/30/Federated-Learning/1.png">
+<meta name="twitter:image" content="https://lingfengzhu.github.io/images/Federated-Learning/1.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
@@ -431,25 +431,25 @@ height:50vh;
 |V_{FED}-V_{SUM} |<\delta</script><p> 这里 $\delta$ 是任意小的一个正值。</p>
 <h2 id="联邦学习的分类"><a href="#联邦学习的分类" class="headerlink" title="联邦学习的分类"></a>联邦学习的分类</h2><p>以<strong>孤岛数据的分布特点</strong>为依据对联邦学习<strong>进行分类</strong>。 考虑有多个数据拥有方，每个数据拥有方各自所持有的数据集 $D_i$ 可以用一个矩阵来表示： 矩阵的每一行代表一个样本，每一列代表一种特征；已标注数据的标签会在侧边栏内显示。在现实应用中，各个数据集的样本或特征不完全相同。具体而言，以包含两个数据拥有方的联邦学习为例，数据分布可以分为以下三种情况：</p>
 <h3 id="横向联邦学习"><a href="#横向联邦学习" class="headerlink" title="横向联邦学习"></a>横向联邦学习</h3><p>若两个数据集的特征重叠部分较大，而样本重叠部分较小，则考虑把数据集按照横坐标（即<strong>特征维度</strong>）切分，并取出<strong>双方特征相同而样本不完全相同</strong>的那部分数据进行训练（利用多方特征的交集作为特征，多方样本的并集作为样本），实现<strong>样本规模</strong>的扩充。这种方法叫做<strong>横向联邦学习</strong>。</p>
-<img src="/.io//08/30/Federated-Learning/1.png" class title="This is an image">
+<p><img src="/images/Federated-Learning/1.png" alt=""></p>
 <p>这种情况的典型例子就是联邦学习的参与企业<strong>位于不同地区，但是均属同一行业的情况</strong>（如地方性银行）。比如有两家<strong>不同地区银行</strong>，它们的用户群体分别来自各自所在的地区，因此两者各自的用户样本的交集很小。但是，它们的业务很相似，因此记录的用户特征是相同的。此时， 就可以使用横向联邦学习来构建联合模型。</p>
 <blockquote>
 <p>Google 在 2017 年提出了一个针对安卓手机模型更新的数据联合建模方案：在单个用户使用安卓手机时，不断在本地更新模型参数并将参数上传到安卓云上，从而使特征维度相同的各数据拥有方建立联合模型的一种联邦学习方案。</p>
 </blockquote>
 <h3 id="纵向联邦学习"><a href="#纵向联邦学习" class="headerlink" title="纵向联邦学习"></a>纵向联邦学习</h3><p>若两个数据集的样本重叠部分较大，而特征重叠部分较小，则考虑把数据集按照纵坐标 （即样本维度）切分，并取出<strong>双方样本相同而特征不完全相同</strong>的那部分数据进行训练（利用多方特征的并集作为特征，多方样本的交集作为样本），实现<strong>特征规模</strong>的扩充。 这种方法叫做<strong>纵向联邦学习</strong>。</p>
-<img src="/.io//08/30/Federated-Learning/2.png" class title="This is an image">
+<p><img src="/images/Federated-Learning/2.png" alt=""></p>
 <p> 这种情况的典型例子就是联邦学习的参与企业<strong>位于同一地区，但分属不同行业的情况</strong>。比如有两个不同机构，一家是某地的银行，另一家是同一个地方的电商。它们的用户群体很有可能都包含该地的大部分居民，因此用户样本的交集较大。但是，由于银行记录的都是用户的收支行为与信用评级，而电商则保有用户的浏览与购买历史，因此它们的用户特征交集较小。纵向联邦学习就是将这些不同特征在加密的状态下加以聚合，以增强模型能力的联邦学习。</p>
 <blockquote>
 <p>目前，逻辑回归模型，树型结构模型和神经网络模型等众多机器学习模型已经逐渐被证实能够建立在这个联邦体系上。</p>
 </blockquote>
 <h3 id="联邦迁移学习"><a href="#联邦迁移学习" class="headerlink" title="联邦迁移学习"></a>联邦迁移学习</h3><p>若两个数据集的样本与特征重叠部分都比较小，则简单的联合方法显然无法在这种情况下奏效。此时，可以利用<strong>迁移学习</strong>来克服数据或标签不足的情况。在联邦学习的框架（各个企业的自有数据不出本地，通过<strong>加密机制</strong>下的<strong>参数交换</strong>方式建立一虚拟的<strong>共有模型</strong>）下的迁移学习，就称为<strong>联邦迁移学习</strong>。</p>
-<img src="/.io//08/30/Federated-Learning/3.png" class title="This is an image">
+<p><img src="/images/Federated-Learning/3.png" alt=""></p>
 <p>这种情况表示联邦学习的参与企业<strong>位于不同地区，且所属行业也不同</strong>。比如有两个不同机构，一家是位于中国的银行，另一家是位于美国的电商。由于受到地域限制，这两家机构的用户群体交集很小。同时，由于机构类型的不同，二者的数据特征也只有小部分重合。在这种情况下，要想进行有效的联邦学习，就必须引入迁移学习， 来解决单边数据规模小和标签样本少的问题，从而提升模型的效果。</p>
 <blockquote>
-<p> 不难看出，在这个苛刻场景下都能有效的迁移学习方案，可以轻松应用于前两种场景，具备极大的适用性，因而迁移学习是联邦学习的核心内容。关于迁移学习的具体内容，参见<a href>迁移学习</a></p>
+<p> 不难看出，在这个苛刻场景下都能有效的迁移学习方案，可以轻松应用于前两种场景，具备极大的适用性，因而迁移学习是联邦学习的核心内容。关于迁移学习的具体内容，参见<a href="">迁移学习</a></p>
 </blockquote>
 <h2 id="联邦学习的系统架构"><a href="#联邦学习的系统架构" class="headerlink" title="联邦学习的系统架构"></a>联邦学习的系统架构</h2><p>以包含两个数据拥有方（即企业 A 和 B）的场景为例，介绍联邦学习的系统构架（ 该构架可扩展至包含多个数据拥有方的场景）。假设企业 A 和 B 想联合训练一个机器学习模型，它们的业务系统分别拥有各自用户的相关数据。此外，企业 B 还拥有它所持数据对应的标签数据。出于数据隐私和安全考虑，A 和 B 无法直接进行数据交换。此时，可使用联邦学习系统建立模型，系统构架由两部分构成，如下图所示：</p>
-<img src="/.io//08/30/Federated-Learning/4.png" class title="This is an image">
+<p><img src="/images/Federated-Learning/4.png" alt=""></p>
 <h3 id="第一部分：加密样本对齐"><a href="#第一部分：加密样本对齐" class="headerlink" title="第一部分：加密样本对齐"></a>第一部分：加密样本对齐</h3><p>由于两家企业的用户群体并非完全重合，系统利用基于加密的用户样本对齐技术，在 A 和 B 不公开各自数据的前提下确认双方的共有用户（并且不暴露相互不重叠的用户）， 以便联合这些用户的特征进行建模。</p>
 <h3 id="第二部分：加密模型训练"><a href="#第二部分：加密模型训练" class="headerlink" title="第二部分：加密模型训练"></a>第二部分：加密模型训练</h3><p>在确定共有用户群体后，就可以利用这些数据训练机器学习模型。为了保证训练过程中数据的保密性，需要借助第三方协作者 C 进行加密训练。训练过程可分为以下 4 步：</p>
 <ol>
@@ -459,7 +459,7 @@ height:50vh;
 <li>C 将解密后的梯度分别回传给 A 和 B，A 和 B 根据梯度更新各自模型的参数；</li>
 </ol>
 <p>迭代上述步骤直至损失函数收敛，这样就完成了整个训练过程。在<strong>样本对齐</strong>及<strong>模型训练</strong>过程中，A 和 B 各自的数据均保留在本地，且训练中的数据交互也不会导致数据隐私泄露。双方在联邦学习的帮助下得以实现合作训练模型。</p>
-<img src="/.io//08/30/Federated-Learning/5.png" class title="This is an image">
+<p><img src="/images/Federated-Learning/5.png" alt=""></p>
 
     </article>
     <!-- license  -->
@@ -468,7 +468,7 @@ height:50vh;
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2021/08/30/Federated-Learning/">https://lingfengzhu.github.io/2021/08/30/Federated-Learning/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2021/08/30/Federated-Learning/">August 30th 2021, 3:08:32 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/08/30/Federated-Learning/">September 8th 2021, 6:36:49 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/08/30/Federated-Learning/">September 13th 2021, 9:45:23 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -892,8 +892,6 @@ top:50vh;
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 22
@@ -1021,7 +1019,7 @@ top:50vh;
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/COVID-Survival-Anaysis/" >COVID-19 Survival Analysis</a>
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/COVID-Survival-Analysis/" >COVID-19 Survival Analysis</a>
         </li>
     
     
@@ -1034,17 +1032,17 @@ top:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
-    
-        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
-    
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+    
+        <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
+    
         <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
@@ -1083,17 +1081,17 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
-    
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
-    
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
-    
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
-        <span class="sidebar-category-name" data-categories="greeting"><span class="iconfont-archer">&#xe60a;</span>greeting</span>
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+    
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+    
+        <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
