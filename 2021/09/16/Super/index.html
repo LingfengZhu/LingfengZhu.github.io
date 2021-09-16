@@ -11,7 +11,7 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
     <meta name="author" content="Lingfeng Zhu">
     <meta name="renderer" content="webkit">
@@ -20,17 +20,22 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Vinn&#39;s Studio">
-<meta property="og:url" content="https://lingfengzhu.github.io/categories/Syntax/index.html">
+    <meta name="description" content="在 Python 中定义子类时，super() 用于继承父类的属性或方法。super() 一般用于子类的 __init()__ 方法中，防止它将父类的 __init()__ 方法覆盖掉。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Super">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/09/16/Super/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
+<meta property="og:description" content="在 Python 中定义子类时，super() 用于继承父类的属性或方法。super() 一般用于子类的 __init()__ 方法中，防止它将父类的 __init()__ 方法覆盖掉。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-16T07:49:04.000Z">
+<meta property="article:modified_time" content="2021-09-16T09:10:01.116Z">
 <meta property="article:author" content="Lingfeng Zhu">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Vinn&#39;s Studio</title>
+    <title>Super · Vinn&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -208,15 +213,26 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
+        <body class="post-body">
     
-<header class="header">
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Vinn&#39;s Studio</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Super</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Vinn's Studio</a>
 </header>
@@ -228,24 +244,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Super
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">551</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/09/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -346,244 +412,73 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/09/16/Super/" >
-            
-                <span>Super</span>
-        </a>
-        <div class="abstract-content">
-            <p>在 Python 中定义子类时，<code>super()</code> 用于继承父类的属性或方法。<code>super()</code> 一般用于子类的 <code>__init()__</code> 方法中，防止它将父类的 <code>__init()__</code> 方法覆盖掉。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>在 Python 中定义子类时，<code>super()</code> 用于继承父类的属性或方法。<code>super()</code> 一般用于子类的 <code>__init()__</code> 方法中，防止它将父类的 <code>__init()__</code> 方法覆盖掉。</p>
+<a id="more"></a>
+<h2 id="具体语法"><a href="#具体语法" class="headerlink" title="具体语法"></a>具体语法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">super(type, object-<span class="keyword">or</span>-type).method(some-arguments)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>type</code>：该<strong>子类</strong>的名称；</li>
+<li><code>object-or-type</code>：一般情况下为 <code>self</code>；</li>
+<li><code>method()</code>：需要被继承的父类<strong>方法</strong>；</li>
+<li><code>some-arguments</code>：被继承的父类<strong>方法</strong>的<strong>参数</strong>，如果父类中该方法<strong>没有传入参数</strong>或<strong>传入参数有默认值</strong>，则此处可以省略（将会直接使用参数的默认值）；</li>
+</ul>
+<p>注意：上述语法同时适用于 Python 2.x 与 Python 3.x，而对于 Python 3.x，该语法还可以直接省略为 <code>super().method(some-arguments)</code>；</p>
+<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><p>在定义子类时，如果给子类实现了 <code>__init__()</code> 方法，则默认它会覆盖掉父类的 <code>__init__()</code> 方法（导致父类中初始化定义的属性无法被子类访问），此时，可以使用 <code>super()</code> 将父类的 <code>__init__()</code> 也继承过来，使得子类可以同时访问两种 <code>__init__()</code> 方法中定义的属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">super(SonClass, self).__init__()</span><br></pre></td></tr></table></figure>
+<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name =<span class="string">"Adam"</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son0</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son1</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son2</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">        super(Son2, self).__init__()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son3</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">        super(Son3, self).__init__(name)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">son0 = Son0()</span><br><span class="line">son1 = Son1(<span class="number">18</span>)</span><br><span class="line">son2 = Son2(<span class="number">18</span>)</span><br><span class="line">son3 = Son3(<span class="string">"Cain"</span>, <span class="number">18</span>)</span><br><span class="line"></span><br><span class="line">print(son0.name)</span><br><span class="line">print(son1.name)</span><br><span class="line">print(son2.name)</span><br><span class="line">print(son3.name)</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Adam</span><br><span class="line">AttributeError: 'Son1' object has no attribute 'name'</span><br><span class="line">Adam</span><br><span class="line">Cain</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Son0</code>：直接继承父类的初始化方法及其属性；</li>
+<li><code>Son1</code>：子类中重新定义了 <code>__init__()</code>，因此将父类的 <code>__init__()</code> 覆盖，不再具有 <code>name</code> 属性，获得了 <code>age</code> 属性；</li>
+<li><code>Son2</code>：子类中重新定义了 <code>__init__()</code>，本该覆盖父类的 <code>__init__()</code>，但是使用了 <code>super()</code> 将父类的 <code>__init__()</code> 继承且直接使用了其默认的参数，因此能够同时访问 <code>name</code> 和 <code>age</code> 属性（其中 <code>name</code> 为父类中的默认值）；</li>
+<li><code>Son3</code>：子类中重新定义了 <code>__init__()</code>，本该覆盖父类的 <code>__init__()</code>，但是使用了 <code>super()</code> 将父类的 <code>__init__()</code> 继承且显式地指定了参数，因此能够同时访问 <code>name</code> 和 <code>age</code> 属性（且 <code>name</code> 的值可以自由传入）；</li>
+</ul>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/07/29/Decorator/" >
-            
-                <span>Python Decorator</span>
-        </a>
-        <div class="abstract-content">
-            <p>装饰器（Decorator）本质上是一个 Python 函数，它能够在不修改某函数原始代码的情况下，为该函数提供一些额外的功能。装饰器的返回值也是一个函数。装饰器经常被用于有切面需求的场景，如：插入日志、性能测试、权限管理、事务处理、缓存等场景。有了装饰器，开发者就能抽离出大量与函数功能本身无关的雷同代码并重复使用。一言以蔽之，装饰器的作用就是为已经存在的对象添加额外的功能。</p>
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">https://lingfengzhu.github.io/2021/09/16/Super/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">September 16th 2021, 3:49:04 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">September 16th 2021, 5:10:01 pm</a>
+            <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/07/29/Python-args-and-kwargs/" >
-            
-                <span>Python Syntax: *args and **kwargs</span>
-        </a>
-        <div class="abstract-content">
-            <p>Python 中不定长参数的一些使用方法。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/29</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/07/05/Python-Logging/" >
-            
-                <span>Python Logging</span>
-        </a>
-        <div class="abstract-content">
-            <p>通常在前期调试代码时，我们会使用 <code>print()</code> 在 IDE 控制台打印一些信息，判断运行情况。但在运行整个自动化测试项目的过程中，通过 <code>print()</code> 打印信息的方式获取运行情况显然行不通。这时就需要收集日志，每次运行后通过查看日志来获取项目运行情况。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/07/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/05/08/Conda/" >
-            
-                <span>Conda</span>
-        </a>
-        <div class="abstract-content">
-            <p>Some basic <code>conda</code> codes.</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/05/08</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Conda">Conda</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/02/05/Docker/" >
-            
-                <span>Docker</span>
-        </a>
-        <div class="abstract-content">
-            <p>Docker 的一些常用指令。</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/02/05</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Docker">Docker</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/04/16/Python-Syntax-with/" >
-            
-                <span>Python Syntax: with</span>
-        </a>
-        <div class="abstract-content">
-            <p>In this post, I will discuss the python syntax <code>with</code>. We can use this syntax in exception handling to make the code cleaner and much more readable. It simplifies the management of common resources like file streams.</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/04/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/03/27/Hexo-Guideline/" >
-            
-                <span>Hexo Guideline</span>
-        </a>
-        <div class="abstract-content">
-            <p>As the first post, this is the guideline for using <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. For any problems when using Hexo, check <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or ask on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/03/27</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Hexo">Hexo</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Web-Frontend">Web-Frontend</a>
-    
-</div>
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/09/10/TeachersDay/" title= "Happy Teacher's Day">
+                    <div class="prevTitle">Happy Teacher's Day</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -676,6 +571,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体语法"><span class="toc-number">1.</span> <span class="toc-text">具体语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要用途"><span class="toc-number">2.</span> <span class="toc-text">主要用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实例"><span class="toc-number">3.</span> <span class="toc-text">代码实例</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -1198,6 +1111,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
      
     </body>
 </html>
