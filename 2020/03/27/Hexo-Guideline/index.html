@@ -28,7 +28,7 @@
 <meta property="og:description" content="As the first post, this is the guideline for using Hexo! Check documentation for more info. For any problems when using Hexo, check troubleshooting or ask on GitHub.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-27T08:58:20.000Z">
-<meta property="article:modified_time" content="2021-09-18T05:47:50.275Z">
+<meta property="article:modified_time" content="2021-09-18T07:01:39.140Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Web-Frontend">
@@ -462,6 +462,8 @@ height:50vh;
 <p>Then, use the following code to jump to the anchor:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Some Text](#ItemName)</span><br></pre></td></tr></table></figure>
 <h3 id="include-math-formula-for-a-post-in-hexo">Include math formula for a post in <code>Hexo</code></h3>
+<p>First, you have to make sure that <code>pandoc</code> with version greater or equal to 2.0 was <a href="https://pandoc.org/installing.html" target="_blank" rel="noopener">installed</a> in your computer. Then use the following code to change the markdown <span class="math inline">\(\LaTeX\)</span> engine into <code>hexo-renderer-pandoc</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Uninstall default engine</span></span><br><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line"><span class="comment"># install hexo-renderer-pandoc</span></span><br><span class="line">npm install hexo-renderer-pandoc --save</span><br></pre></td></tr></table></figure>
 <p>Introduce <code>MathJax</code> engine into your post by adding the following codes after the <strong>front-matter</strong> (which are the codes between<code>---</code> in markdown syntax):</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">"https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Or you can use the following one if your domain name is in China:</p>
@@ -548,7 +550,7 @@ height:50vh;
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2020/03/27/Hexo-Guideline/">https://lingfengzhu.github.io/2020/03/27/Hexo-Guideline/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2020/03/27/Hexo-Guideline/">March 27th 2020, 4:58:20 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/03/27/Hexo-Guideline/">September 18th 2021, 1:47:50 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/03/27/Hexo-Guideline/">September 18th 2021, 3:01:39 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -990,9 +992,18 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 23
+        Total : 24
         </div>
         <!-- search  -->
         
@@ -1005,6 +1016,11 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/18</span><a class="archive-post-title" href= "/2021/09/18/PythonTips/" >PythonTips</a>
+        </li>
     
     
         <li class="archive-post-item">

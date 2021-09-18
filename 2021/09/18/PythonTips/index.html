@@ -20,21 +20,22 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta name="description" content="双指针指在遍历对象的过程中，不是普通的使用单个指针进行访问，而是使用两个相同方向（快慢指针）或者相反方向（对撞指针&#x2F;左右指针）的指针进行扫描，从而达到相应的目的，常用于有序数组中：双指针法充分使用了数组有序这一特征，从而在某些情况下简化一些运算。">
+    <meta name="description" content="Python 中的一些小提示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Two-Pointer">
-<meta property="og:url" content="https://lingfengzhu.github.io/2021/09/03/Two-Pointer/index.html">
+<meta property="og:title" content="PythonTips">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/09/18/PythonTips/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
-<meta property="og:description" content="双指针指在遍历对象的过程中，不是普通的使用单个指针进行访问，而是使用两个相同方向（快慢指针）或者相反方向（对撞指针&#x2F;左右指针）的指针进行扫描，从而达到相应的目的，常用于有序数组中：双指针法充分使用了数组有序这一特征，从而在某些情况下简化一些运算。">
+<meta property="og:description" content="Python 中的一些小提示。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-03T02:41:14.000Z">
-<meta property="article:modified_time" content="2021-09-08T10:34:34.948Z">
+<meta property="article:published_time" content="2021-09-18T07:05:14.000Z">
+<meta property="article:modified_time" content="2021-09-18T07:15:31.806Z">
 <meta property="article:author" content="Lingfeng Zhu">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Two-Pointer · Vinn&#39;s Studio</title>
+    <title>PythonTips · Vinn&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -229,7 +230,7 @@
                 <a href="/" >Vinn&#39;s Studio</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Two-Pointer</a>
+                <a href="#" class="post-name">PythonTips</a>
             </div>
     </div>
     
@@ -259,7 +260,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Two-Pointer
+            PythonTips
             <!-- 404 -->
             
         </h1>
@@ -276,14 +277,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">543</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">307</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2021/09/03</span>
+                    <span class="post-intro-time">2021/09/18</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -407,29 +414,33 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p><strong>双指针</strong>指在遍历对象的过程中，不是普通的使用单个指针进行访问，而是使用两个相同方向（快慢指针）或者相反方向（对撞指针/左右指针）的指针进行扫描，从而达到相应的目的，常用于<strong>有序数组</strong>中：双指针法充分使用了数组有序这一特征，从而在某些情况下简化一些运算。</p>
+        <p>Python 中的一些小提示。</p>
 <a id="more"></a>
-<h2 id="对撞指针">对撞指针</h2>
-<p>对撞指针（左右指针）是指在<strong>有序数组</strong>中，将指向最左侧的索引定义为左指针 <code>left</code>，指向最右侧的索引定义为右指针 <code>right</code>，然后从两头向中间进行数组遍历：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">twoPointer</span><span class="params">(nums)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = len(nums) - <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'Some Condition'</span>:</span><br><span class="line">            <span class="string">'Do Something'</span></span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="string">'Some Condition'</span>:</span><br><span class="line">            <span class="string">'Do Something'</span></span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="string">'Do Something'</span></span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
-<h2 id="快慢指针">快慢指针</h2>
-<p><strong>快慢指针</strong>也是双指针，但是两个指针从同一侧开始遍历数组，将这两个指针分别定义为快指针 <code>fast</code> 和慢指针 <code>slow</code>，两个指针以不同的<strong>策略</strong>移动，直到<strong>两个指针的值相等</strong>或<strong>快指针到达数组末尾</strong>（或其他特殊条件）为止，移动策略包括但不限于以下几种：</p>
-<ul>
-<li><code>fast</code> 每步移动两次，<code>slow</code> 每步移动一次：该策略常用于解决链表中的一些问题，例如 <a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">LeetCode 141.环形链表</a> 中判断给定链表中是否存在环；</li>
-<li><code>fast</code> 先行移动一定的步数，然后 <code>fast</code> 与 <code>slow</code> 一起移动：例如 <a href="https://leetcode-cn.com/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/" target="_blank" rel="noopener">链表中倒数第 k 个节点</a>；</li>
-<li><code>fast</code> 用于遍历整个有序数组，遍历过程中指向<strong>待处理</strong>序列的头部；同时 <code>slow</code> 用于标记<strong>已满足题目条件的</strong>序列，<code>slow</code> 左边的序列已经满足题目给出的要求：该策略常用于需要对<strong>有序数组</strong>本身进行 in-place 处理，使该数组满足某些条件的问题，例如 <a href="https://leetcode-cn.com/problems/move-zeroes/" target="_blank" rel="noopener">LeetCode 283. 移动零</a> 以及 <a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="noopener">LeetCode 26. 删除有序数组中的重复项</a> 等；</li>
-</ul>
-<p>上述第三种策略的模板如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">twoPointer</span><span class="params">(nums)</span>:</span></span><br><span class="line">    fast, slow = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> fast &lt; len(nums):</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'Some Condition'</span>:</span><br><span class="line">            <span class="string">'Do Someting'</span></span><br><span class="line">            slow += <span class="number">1</span></span><br><span class="line">        fast += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<h2 id="二维数组赋值问题">二维数组赋值问题</h2>
+<p>如果使用如下代码声明一个二维数组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray = [[<span class="number">0</span>] * <span class="number">5</span>] * <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>则可以得到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0]]</span><br></pre></td></tr></table></figure>
+<p>如果想要对这个二维数组某个元素进行赋值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>会发现整列都会被赋值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0]]</span><br></pre></td></tr></table></figure>
+<p>这是因为 <code>[[0] * 5] * 9</code> 表示的是 9 个指向 <code>[0]*5</code> 这个列表的引用，所以当修改其中的某一个值时，整个列表都会被改变。</p>
+<p>换一种初始化方式可以解决这个问题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray = [[<span class="number">0</span>] * <span class="number">5</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">9</span>)]</span><br></pre></td></tr></table></figure>
+<p>则可以对这个二维数组某个元素进行赋值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0]]</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
-            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/09/03/Two-Pointer/">https://lingfengzhu.github.io/2021/09/03/Two-Pointer/</a> 
-            <p>Published：<a href="https://lingfengzhu.github.io/2021/09/03/Two-Pointer/">September 3rd 2021, 10:41:14 am</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/09/03/Two-Pointer/">September 8th 2021, 6:34:34 pm</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/09/18/PythonTips/">https://lingfengzhu.github.io/2021/09/18/PythonTips/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/09/18/PythonTips/">September 18th 2021, 3:05:14 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/09/18/PythonTips/">September 18th 2021, 3:15:31 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -437,17 +448,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2021/09/06/ERNIE/" title= "ERNIE">
-                    <div class="nextTitle">ERNIE</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2021/08/30/Federated-Learning/" title= "Federated Learning">
-                    <div class="prevTitle">Federated Learning</div>
+                <a href= "/2021/09/16/Super/" title= "Super">
+                    <div class="prevTitle">Super</div>
                 </a>
             
         </li>
@@ -582,7 +588,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对撞指针"><span class="toc-number">1.</span> <span class="toc-text">对撞指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快慢指针"><span class="toc-number">2.</span> <span class="toc-text">快慢指针</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二维数组赋值问题"><span class="toc-number">1.</span> <span class="toc-text">二维数组赋值问题</span></a></li></ol>
                 
             </div>
         </div>
