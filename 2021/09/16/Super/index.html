@@ -20,15 +20,15 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta name="description" content="在 Python 中定义子类时，super() 用于继承父类的属性或方法。super() 一般用于子类的 __init()__ 方法中，防止它将父类的 __init()__ 方法覆盖掉。">
+    <meta name="description" content="This is an encrypted article, please enter the password or contact me if you want to see the contents.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Super">
 <meta property="og:url" content="https://lingfengzhu.github.io/2021/09/16/Super/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
-<meta property="og:description" content="在 Python 中定义子类时，super() 用于继承父类的属性或方法。super() 一般用于子类的 __init()__ 方法中，防止它将父类的 __init()__ 方法覆盖掉。">
+<meta property="og:description" content="This is an encrypted article, please enter the password or contact me if you want to see the contents.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-16T07:49:04.000Z">
-<meta property="article:modified_time" content="2021-09-16T09:10:01.116Z">
+<meta property="article:modified_time" content="2021-09-18T05:42:58.172Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -285,7 +285,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">551</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                        <span>Word count: <span class="post-count word-count">4</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -414,28 +414,18 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>在 Python 中定义子类时，<code>super()</code> 用于继承父类的属性或方法。<code>super()</code> 一般用于子类的 <code>__init()__</code> 方法中，防止它将父类的 <code>__init()__</code> 方法覆盖掉。</p>
-<a id="more"></a>
-<h2 id="具体语法"><a href="#具体语法" class="headerlink" title="具体语法"></a>具体语法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">super(type, object-<span class="keyword">or</span>-type).method(some-arguments)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>type</code>：该<strong>子类</strong>的名称；</li>
-<li><code>object-or-type</code>：一般情况下为 <code>self</code>；</li>
-<li><code>method()</code>：需要被继承的父类<strong>方法</strong>；</li>
-<li><code>some-arguments</code>：被继承的父类<strong>方法</strong>的<strong>参数</strong>，如果父类中该方法<strong>没有传入参数</strong>或<strong>传入参数有默认值</strong>，则此处可以省略（将会直接使用参数的默认值）；</li>
-</ul>
-<p>注意：上述语法同时适用于 Python 2.x 与 Python 3.x，而对于 Python 3.x，该语法还可以直接省略为 <code>super().method(some-arguments)</code>；</p>
-<h2 id="主要用途"><a href="#主要用途" class="headerlink" title="主要用途"></a>主要用途</h2><p>在定义子类时，如果给子类实现了 <code>__init__()</code> 方法，则默认它会覆盖掉父类的 <code>__init__()</code> 方法（导致父类中初始化定义的属性无法被子类访问），此时，可以使用 <code>super()</code> 将父类的 <code>__init__()</code> 也继承过来，使得子类可以同时访问两种 <code>__init__()</code> 方法中定义的属性：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">super(SonClass, self).__init__()</span><br></pre></td></tr></table></figure>
-<h2 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name =<span class="string">"Adam"</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son0</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son1</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son2</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">        super(Son2, self).__init__()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son3</span><span class="params">(Father)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, age)</span>:</span></span><br><span class="line">        self.age = age</span><br><span class="line">        super(Son3, self).__init__(name)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># test</span></span><br><span class="line">son0 = Son0()</span><br><span class="line">son1 = Son1(<span class="number">18</span>)</span><br><span class="line">son2 = Son2(<span class="number">18</span>)</span><br><span class="line">son3 = Son3(<span class="string">"Cain"</span>, <span class="number">18</span>)</span><br><span class="line"></span><br><span class="line">print(son0.name)</span><br><span class="line">print(son1.name)</span><br><span class="line">print(son2.name)</span><br><span class="line">print(son3.name)</span><br></pre></td></tr></table></figure>
-<p>结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Adam</span><br><span class="line">AttributeError: 'Son1' object has no attribute 'name'</span><br><span class="line">Adam</span><br><span class="line">Cain</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>Son0</code>：直接继承父类的初始化方法及其属性；</li>
-<li><code>Son1</code>：子类中重新定义了 <code>__init__()</code>，因此将父类的 <code>__init__()</code> 覆盖，不再具有 <code>name</code> 属性，获得了 <code>age</code> 属性；</li>
-<li><code>Son2</code>：子类中重新定义了 <code>__init__()</code>，本该覆盖父类的 <code>__init__()</code>，但是使用了 <code>super()</code> 将父类的 <code>__init__()</code> 继承且直接使用了其默认的参数，因此能够同时访问 <code>name</code> 和 <code>age</code> 属性（其中 <code>name</code> 为父类中的默认值）；</li>
-<li><code>Son3</code>：子类中重新定义了 <code>__init__()</code>，本该覆盖父类的 <code>__init__()</code>，但是使用了 <code>super()</code> 将父类的 <code>__init__()</code> 继承且显式地指定了参数，因此能够同时访问 <code>name</code> 和 <code>age</code> 属性（且 <code>name</code> 的值可以自由传入）；</li>
-</ul>
-
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Sorry, wrong password." data-whm="Sorry, wrong hash.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="3995fa4d64ea07389b1650a40fe23966520e72e535c5e08b47bb5cc3f977c06a">4630436162ade97ba2718b7d0c4b3b63a45d8ed46ae6cad3c3711c10ba34c2b574d22efc60045ed68baff35ada7f0c0e97bd6408d1c40da684f7f9ba85d866192f313bd3cb252bf0ef483564b085ae8b6e9f21407d6e2ae23f0c5d2f9ac81e750bc09f7981e05dcf98184d6d26ccd7e33028ef85bc12c397fab027deb0403135b1745cff9dca391d4e61410a63f24ec06618cfdfac81af3247194f0a8394f5fbee94d6b679d2f27d78aecb1626aefdb8bfc0e862393ac828306191cd0200dae29d74504908820a3df2dce5e3b6aac1022bbe0106b7f6521bd6958ce52f1417490ef80715f5276a07e8da92a910d332fa2502378454f97f609106cf4a4c845e0d9927b1820a4c258159521ac2f2a0e79c102f366cbb1459b5221f82a26174ce7589185e2dbcfe8474a766a2f910c7e32201fb9da2a59170986911f6e485ed8e9011643c28ce2820517f0cd27e538c6de0b1b44cf9006b389993b14fcd57d8313e4c0dfc74d2d6965736d25d06471d46ca19a5e8af2937b4561eb9bb4a74005e9d30659a65b56f52cb8a63043e1fb595780f9f4de220bf8d7ea4025acbea202503330ae634a07133917a807e43f37eb81279a512fa7701c80706317feba261b7e3e86ae1984a95343f2d92041ed5e24f31316d57574a90313b4a2a22f6f4412a7b4307986441b3f2d2ddfa213c7121dcd682b961c3857d4c630db3712d83458bb4d846b4eac30f0730f7bbd6bc39ed8c466a36cd6910f3d61f3c8b4b753f85a52e04a4cf92e646605e02c48c0caaadcee56dfd50c7a5a9e7a55afa6c2df1734b3761e1b2776185ec2aa640cef68a10ceab3e3c8dfe70c2d1d12d54f52567a11557c6bdedf158f0c86321563952ceba73172ed7383c5d313c020e6b09421cde1fc0a8359f9c7c741949f5328d63026b34d4be97b79d4af292daf273bcf4ee769c6391281ec4005e82f69c0023d16f9e4fadbf1f183cc07fb03d5239a1c93987e1c19da01fbf4fe65baf8daeb5fe823d0ba698c8ef0954966ea20ee2560b94ad1b40ad4d2eb817f8ba78b6e4754ca58b0f03c7862cd2f01ca6f3e3b59b0da47bbc6794879df40a382dcbffb10b184a29bfee35bf0ddf5dc8e69c289c39ed38371de2987ae319da355c15930914d435347bd86bee5e0c8cb56e4fe8698710c5881d0d55ba9fcc77e87d3d2126889f3effb42072f29523ade5dad44e479ba9cff3250f765c913a49dd204f86e091524bc990f8a4a613d4d8e20c94231cdc9dbc5e768c91e5e2cb6b1629d5a24d9f4cdec7304ce5c341efe405c67589c28d8011eae8ed276505ece3caa11cc84c0a05eff741c7de6d0b65c6fb1574ad190059922de0e8f6a78db7fb96c47cf8fed93afc60266bd050313b561cfbf7082b4bfe767d4cc5dba82bcbb947380646aed541d0f6260650265cd4bef33493ae192177a08055ca279ef604c5fef9e4244b9750e53663d48b91a640205ec3cddb7583dbb88355c631d33a18644d203e5562ea6e40ebbcebcd2c061ca0ce04bc36487405c526e7932f34dd9369098856e43533a9e4ca569aedc75d0a7ab211162fdc54d2809a7cd021077efa9b3a20dc670b10532276ea04124c159c4b9d2fb2650221388db0409ce9b0e4a89bb83c7caf3a36ae36d17cf967052577da34ccac94e952350140259a1d23b64a6f4b2116cd20e96b23b8efb815be615082eff998f18234c858c890b1ed37f1fa2fb61df4814b94ce606f2968b694f103e01f1c2e69fc282fbbd39130cf80f04c8b55b9d0a0906275d47040e6970e51a90abd8df457fc407d2ba445d1fcb633a952fe9d2f34d4a013985af9770e989018f2469319a74177e860a36f38cd55fa51ee308ddc227d3ac4afc5523ce3146779b1696554c8f3a67f2b37c1063be09e2dc298f5ccc01e0a8f155633ec9732992f64955145e9624cd8fe068e3f833e99a2d9ceb19a44f82e5afc4c6f5040d80940839319c26ce379b1f09abc579fee04af272a28a3760110b81a45bd3a6fbf2e292b86d2a41833bcface58f90a6e7f0fbfda98fcc8c8162d1c74c46282d19e026ef41bed798c87806eb0b0a42de0b15fd0f4cd2d1a9b0955cf07dd5d1711f4812823a237ef2111dbf716660997919a32c23ffa30b735831d106acfeb60eedd813df3b3d70fbbc5003a5862e523a53b2b14d770a03fae0979aa772ed9fc3d25492d7c51af92d1489bbdc321802caa8564eaa47272afdb4e0f9ac6caccb638d224b438aa98761569e2005d6f22c68f4cf0bffc9117029207ff4663295769253dcf47c8abebb8fb5b4662125272e56c1f137cbf06f84efec19a19f0bddd9ab6b795b7b3161848a03aa25381804d252225eb5ccaee017f38b7cba21aa55681486f1aaf5f1dc3ff3339e8d122bec0afcdadc4223184a64dff8613e7cc48374b0ae46cba860fd7c5c166b208b387f0a066d56140b76d29604e1191187a24b1750e411d9c4dd5a417c71fea714630f54bb6346b388a21d2dae2c56a308b36b8266a3e61eb57c16d279dcc5dd1e6ce55414e1454ed250856166759c2d482aa10a313c8564755d65b3b19d27852f88f94be5ea647f3d03ea371c31a1b515af86c3633efe2e554b1053e486c5f2d5eea1acefa7f42c827a56dc072930688b59bcf515cc0bdbf4a92acb526de7acdf8e4942a09a8717444b7589a0887a8d29b1ecf8ed71b5fe2b7f061ec5959ec8574f3ec4069e81b10a16889e53dbb25796329a5b30dc1e3609134032fcc7265844fcf5691fca6e945ea55555cecd48ca03c705223c08f9a3094b8bbc203bca0f6e489d7f86c6b603b07a8a602b9bd9581029b9ec2241dca49400f04824a65bd74f043ec0905096388332bb3c46522051944a1ffb67cf6b3c9605f19a0c323e39a131b494b4f86372ac5fe2b3052cf67eb4132f1c636bceee02dba4ebec22ee19d7aea90e6897aa1cb75e083d08e18eb92541749a041454fbefc6997520b919a493063a2f1976f770acb93379b5db51918f3733cc6d3fb15aaf527f3967becdecad3b87c17ccc423d7591afd2cac6785cc8ed407af51e62970ff1a45c83da08f8d6e615bc09e54e4f3e5d1ca23665bb1ff06a4a99ec0a50470b1b13097f43c68c3dbc5952f50776ffca93e0a32de81ab6e10e20a3d19f4ee020584b2ba9a58b2ac98cccb2f246cb4b4b7c24ea1ebb176b6d315cd9cc72bf15f4963e9bec59704277e55961778c8c3b628c64c2340989650f10ea4018933074e34cbaf6df8a38048112a7942efbcc6266882a313867a51fd9a9fa4c9b6eade7c799e39f7332444b19679a12c02ff01358ff0dbc7c340769c0d3dc6b01e4d1e58d7fa41ddd31d16321cdd801d30be67958eb0643d4ffbe0bb7a3a16e038c66b721304ed5060f2eeac1065c2bf93cbee58045807c692a35ca9b91eb66420ee70be557e7c05fe1194a1cd7e1ec7cb5516f1facc8620b43cd3b9242d997c6ef5154ff2680dba5498ad56dd7222937ea2b9acedf9b8c4c55cee917a781d086bbd572b9dac37f35a02b620a38e94f9c563b11d4a3138c377629697785b7a44a2da0a9d196e43e2dd0fc8139fc52cbd964446018ad8665f8d49131d6da5bb8347f0f7f2ccb9db092f80188166e45f651cc936ece694a780b69edc5fc945292877fe3c89fcea4f3bdff1a6b71e79a29485214fc544b11e5b95304e79dbbaaaf4ed976792f0702456f794b552453f288ea90329238c83665180bbc80c8644ac6bfc78f0ab8eb891fefee7e6e24a9463646e1fa0751018c4e37e6e363a05e476f73c4f09837a8e9f4ad651166af2f1dd86d929557aff5ff3416b032db1e89e632724f995f8fc4f784aab43f1a8cdec61e4cf2c0a1bf32341b079d8b73c1192b54577661380da9506244093b31fc785b0328da972d0b30941e9a0cd790dc0daabd7134533c965175bca98a207660041e2b40b2c5efb84600f88a01f98805ef12ba424dedcc6b3ba1e52b2dbba01ddfaa10c2a6b9adad8ea3b0d08b3b98354b33c8906af0c964431a6fd53ae5bd74ba54f1258f07afdf969071ff7ed0eb1ed6abdbd61e475f614513ebb1f2eb05f7ef990b535bcc2b9c616b373528c6b9ecf127dba944d79917806f737cd71feb3a691393f26b6dd60effa0836ff502a175883a4d74514dc9d7d2601c8f85bf08719a88592c713d88feb47b4a06cbfd99ae798e8a83d63b5a2b276e68f1e470f64c6c7f1909162594580e52a8240c04974d849794e50f73e120450dde33c2a56bb76550c268b4ba12e146f4160d78b45a7e08bd6eac95629b6e0f12358d560ad1905b4b8281cdcbe0adb8f1dd4a78f24f27f256c30b94ca216c02314d48c12c6700bb211420d6472af4ff3eae568e731b8ef1355c6f0937a5419a4b86f16a24845551826301cdd46ea6a47d731aa1940b0223895707cb4c6266ab479fee9c0e837c6a7820b186c0e7bfb1d7d397ba2f026bdfa9707029d6f9fe412acedbf4b0fc91f8acb00de4cef4882322d4993d459feb6e8f61939e741c582e99a011a4b9ea11e86481bc4ce70440c5f41c6c2749bee06bcca2dba763bfaebb4d970fd5d012ce5908e966d6d291f1ef095e53d28efd986571918302c62ddf18f19a688b5cdd98ad594e230108139093e9fc59c1865a1fd011b0c393aed2d09d4e89e24f5fc8685ccfef59fb804ecc3287148c92158d2ab046a79accd02dd302e2fd028fd1b3b062fa3a84e602a1713351aa118757ce3ae75b98b3ec441a290881a6accf08e0a26f83648f3b82724700e5267f433baf6794718417c15b6dabaf1f614b49c658546f10642d743bf96dc3c7a06267f22fd10d98c0627463b61fae55d1843f60465439f9f424b8a8e4d37bb116ffccf4c3a5b5f9678c61ee58145b1dd42cc147dae2f6f5e67acdadcac23c1594304bf41e719c53cb76587fbefeb041f79c4b5a6cd20f5ad4a188c0304182abd6bccb6991f287a2ff49e2115f57d1ead0c3d0f6d7f36d80e10fdbfbda2a157d9ce42877d08008343c316be757ae9e353a03d3da7cdc23b14746fc6ca74b46adc3c569c06bf33b7aeb94ff7cc87eca7d5dc662b6dbe775fa54a2ccd6b34acaa1d6f585711027ed85ade440a5cef5c408bd97f0b8e36fc774f34b3db3d42404bb206de470f99d78f1f04028d1f8d754bfcb01557ab5dcf5831c9e02d34a2f7b74be5ba002068f2edc2944db6a8902d48cac53a64d21cb7b9241c144b56e5679bfdf73c8c07406533b3364c1bc305a761d41c90e95369cca1bfc19d9d2f61b2b2031a5ee0174e2525c9cfd48b607f54c406ca8ff032de7818ae75049d5006a65526a93df9cf4246a3849bb07aa0244b622691b5105605b08cc43c0665a4f67476bb42dfe70c1bea205d92259a9fb2e4227530266260eddd3685503db198b19ee8bf5ad29fd23c2d13cbbc2d513ca305645ed47bca4a6a2b9c20754adb6cf895ce4d803f74b57bde35296b068a92011e7b24fb5546cf381ff5628668f3986525a19d7b80aaa9259e62bc6b50ee1b95f98fe2df178eb7d40b99c8de887b8ea9bd0e4eac7ffd588a4de4f9397d7ea58f2de84d482e7135def6b2d623c5e7a50c256319d0698af3c065553fca32c51a38ec56449655ee166e5237230d53c9689693a3ac2ca85ad881eaa7c51728e4d2b4a389d9b1b98d3fbc77050fc84db829dbf9b5f604c93f108e7d4f468b7cf1038a954aa116e374fdfb3ff5b2b161c6ad6c1174811a9e9c94050fe49d65257eb68bb79f6cb5c80ee0e2194bf4cc27c91009ef4e6e2ef8e789fd792e4d801cf3335bdfcf6a91fc299638af68744bf37b6003299e77cf84a7b6adab51f8f26d90af8d389c4256cc07d9864dca4583f9aadd23f7fbcb967ae873fa3af65b3495fef04412a7b221cf85d004c4170516b4c5b4dfb30187468655aa64c321f7b8f25dd448741d5f10f93fb092be5ce0c006d822a47178e17019f084abad9c32831a2fbb6e6940aa91dc8e891e30adfb8ce837ffb8c7cbf64839e222ee660deded317eaeb925a5b995009529ce237bb8d6b79b9382e46f4221c62849bf3510c2f5c09ba6c459e95da79ca924e90bf8db26ccb63ddf6ce8b087581380feee5dce558813f824d6ea4ba5b58dcbe7ecb4a244c6471de726e47e78467dd0e9f18c22d05dee1ef1fd7baac8129126fcefcf5bf77c57b186a89654d6713834af2ea81bb29d9133ec0005ae2c31348b15de50be50db87342310ee6a51906f4c6c232f81119436989864e9a67636e796eee7a547c19ef1ebe539a1b2b9b44640083152d4c5de870623176dc510a3105fd221d185b431268c5f65956d1515fe3c853716d724690f937b20c81e1517c67ddb85438674dbbe55f9d67b0b49ea8bac1f6cc10eded1edfc939b979c505fbf74d5c45e1dd8ce52e859c48f6b6c76e5344785e216418305e8959f2fcd508f70220e084896f4cd4cadaf9aa385712814b9ce746445014583cc4f4511e88e5606967d7389bcbfc1916affd314e9b7d1567671ee71aec160df4ba7b533e9d5ed3e012fc836e0ad6e7b57418601c648d34f4c6f95d39e3dcd81a8f1c34900afc48774241ca6cc63a1fdaf9d001e6a0a4c70aaacd4fa488116f90ec7ce84d17628ddad0fae14a6ad12819aa48e551b330eec4d6b93961e6f94e5aa9c455469972407bb019651ece50ed25b79daa02b40e5f705e88f45e742788b09496febc13a0558f74a80fe8a28c46e2416502f0ea8ef5540cc22cf7cadf19e6e65d9d355ada0b24710c3ef712c7928ad63fb06a9756a7209c396252890f5166dae5374326e62855a9096c8f1a044c5132daa9652a6c25c7951574ca132ca15f1f1f927325ac0e64bd96fc87329ca29203001adbcd5df5a298286bea76820dc23de3d1015f9aeb7080d368c5aacd6d753fa621086fee0b9710c8b44c2bcdf25ba51db42d63c580c05ff2b34e6746c923217278fd43dfe302201e4985ec6429569c74bdb1dbc7308202c48fcb5a891c8ad3a1187cf261e508b739188dd30a742f2d128ff660627b08fbe49326dfbfb6c24cf354b8bf924971ebec3877121ab6e71da42e4226be754e601b2310e4aa93858f39c4c06f3eaee3e09282ced1e4ca8373fe9e4a1bd18347a1137374a3dd489835c907a8ee44a5cc4f37f273f15e73ec9f3d079dad18ebd0ce95fefad9ddc995b43ac6434f0e4ebbaf48263bd8ca09f7efe5c00095caa080fc7ccbb9672303588e5abc17a31337fba0fcab3c3d802a3ec755019a01249e8f035e13a218a5c72dd7c47a79b409dc286284ce8c75d83b128f5a9eeb443a31d3190e9ee0a2a0fdf207fa1ce4416c66b5e1a7f2b792ed780700403bb9579bca74c12916583f921f41fd94ea77349a8649e2f7e00c92cd7cf24e4f408238937c5e66d510f35573c0e8e5e1d9b0acded7b15b3b586ddee55c4344e14934a5db65787931a6870ce3f2c65828e9042a9c2ffed875dbfbaaf738a77980f4cfdb55a8417f6ddc85b247c73b213efb3fca69f84a3be2e24ae05c46538650fa9c78ba0ea0a3ebdd064a8bf695b52f207ceb38f6fcbea6b5014fab72378e66a8fc06b47776bd0d2502904ed98547ca353818512cc21e2ed6910f3334495cf44c7093f8ca3315cbe26742f628d7b2296350762bcc88b0f5445ce712422dd092df0af406e1d51a027a91f00006d9fec28f0c555bf13414469aae3c28bc8c434c89399b3a7f98fe142870377902a15d7f4f0fb9e044d67be391d5a3a7be44ee83fdd18ec4fee8686bbc363df3b32f7a7178a3c28b6fe6d06ba501832eccfe1991ab78ab7e88e17a56716c7e490601c9ec7fb6f62c83cf80d0813ee275780d082a6254064b6acd7c9f4e8876d4c5912b3ca92f10399791398b703dd74929e34ef4e4e782c563e03a8d0235e4c3c770bd331d2a6b382f9115194a411ca7f8d62afcd380fa598cfde83e27ea60fa2554766656c8122d9ec66c51a9fae8b4c9d104139749a333cb8c13bff77e2a51b03c430064f8c615341caa60f39a25e50598928971243dd7041be09b2551e0a1b38e4f7dc11a46a0de3c2fcd651a854160b819bf340acd3ffe54087ce73e6b095458c261c1d67f868ee585293ffd86b64e5d5b07f34ef01657375004e9333a403ed3de49bf793b9a7c8cbb5a507d092c54f10cd8db0ef1bb541194b7d07dbe1e64cdcd20d52e15800ff2f8f165e0b0ef2987fd435108c7ab28d46e52a8d0ecb075979495841db0c64c73d77816921f5300a33e67b679c55f17eeda9643b76ed316511ec8846c819a446d5f7b8e7725e7d097f879fc71911cdc84f1e9fb61e03f73af632bcc50e9ca7848c2cffa283248fd54cd2867c4e527039282f07165bc917366a2d9078fe073728810fdf69207fef19dd0b5ca13de14e528335e69eb2ac4738463a3d66db0993437dc3689e5ebd1d55ee0397800076ef6e42bc7c421fd8a934d892686de09c25ee898de99dcb28d4212a86e6c171234f2de6ab18527053bbab9186e2f748544b967c581383a2b715fc9cd4a2c1ea6e4c29d73aa08a61278b529638731bca313d480976caad30f6e6686f60bf1897498ef6650fa0d4f03cb785a1fb008d5b804c5bf3dc23eb7946ab64250ba52583258927e69dcd86957a9c1aa00f5015fb668d07e4cabfe1f770488bdbd2ce7bd5dc54b2ff621389dffeff88ee8dd4b9f77ad15e4cf80b66b996926a0bb380e1ada4407c2cc6203d610a5dcb2a16bad56daca51d4b31194f5db89c5b09f4d42945e21ae0323d374fd5ca3a5e8d4d16ab2ebc611d6f1c6be7f3b47d80cd9ce2a1af9171b1cb3231067bd6c5a61f0f5ff65c8c5fb7c335c9a8566041add0d54c5aa5fefef53413db9cca2bd1be324b5e7b6fc0b6a965d76b0b9552989cc7758d1d014a07eba6dec6c9d08efd2a6e0c1b5e509a87704673f71372c8bfd044e8bf025ca1af4d1ba6890de79a123e4bc02146597ac487bfa83e5b6b5506bb20f2fb05c71e135512ccd43bbd0679e264cca1c911f0389d8c0e61e4f5437b1c9d80ed631e8d1966aa0a5b284f2ada99ca78489318176d1f45adedcb3ed2f310b186248616b892f05c5ead3646b857c53de35fb474b81c3f7cb926254dc316af0667c1e0e885c11143ecf3162b8185007d9a3488ba7ee9582d1028b85f8037ae29f21a5b7a1cfff73fa758d966111ebff6eb365c5fab75e650d7ae557cdea86be67ebe324ce78c6a28edbc486c0356c10be933b92034446b7cc2fecfc25ceb844794785ca997cc6c9967ba7d130962ae7f4a8233635c1af77d6ac5be7df94c8c7e75065cbfe07de036d3f175b5975a390200b0cf918a517a4363f0c096c22824c3b838024a017a5af93914ab294863199d3af635872e0449c97d816071e9a7358950cd09083ca33d4a473dd967d4733a3dd3e1d06d5cc4630d0bd0526c0a41ce1ddff43145ab1e3e36a23ce896ede286fe396240aee86dc7df8087d5e265e37ab0c8cdf67d3549333bb02bc16cea29ead5577880a11095441ea9510bc9077eaa72e5d73cf1f67486ecb13e426fce3f7426b30e7117a6528827d22f9a3b1fb715121c24a882a82c2f5d57583c6436b896d43851316eeb54fff78f4aec9681913f0e43bb05de2a6ee1115ceabf741400cd0b91adce86e46511c4ca72d92f4f7286f93dc0cb5bb5b1d4ea0378f0665370cbc295350d2ed201941558aef101877635dade992106d1df2c2382adb44f38735017e3a5efa5e86df278cff8e8d02e57c7450918d349eae8f0d609015c2f0e5064e4762d48be16b033767d636c0931cefba7dcabbf4a5e05e5a6658367dd2061df929006e89a175b8c53e27d67fabc03e33666ce93faee0dcb65555fe78bcde2a8b01adb8644bec03b81e115e8a6c6d0d4f71a3c25a8507f55276b1003274b2ce0eb7bea9c2b5031856823250531405f68cb9f896b050eeb4196fc3a617efa44788033fae0e56ef3b201d85853f5627d3203710184754202116c7afb5e13ab36ca54e567121797c9e7804a1d334efe07750142ef98f8ed7abd49dfb758ddc7a8385a00b7f063aac69a1990bd06d7c01b43b3d883db96d6662a73f37683111cbeb8bd28829c4a057621cf78586364ca8c8d656195041b9922888e64ae2c67f2f3e2074111f6be103f95481d76ceb415c82ccae0d376b328c39f707e6bbb4209167d4b018cb32d24ca53654c6bc75d925359f353bf1ad34166728d13019f76900a088a5541e78e3fec1d2c03e8ae7f066eb556be23efdb4addb21af503831a5c0b5884c63333385fbf5a26ca03129ef4338fa0c3e675c7dda5703879421f5be893bf9e06203d1e58ad558cee5f6c383aac005186c39808a7f964827760583a9c6faf99cc3bba027a49bcc6b4688064270533538ce5c59510348bdc08def630627e4944c0b7793bc131b7ce77ff98c40b63c94d7ae327f607b12fa42755314729475e392e583634d4ab2172d2b7b1b5dd96a4d1e16b5d4656b3f9ac37349637c048087329f75205f7038e9650b753a8a60c2cc3a641696a82c72edf45b53d40315dbf549d66716348ba36acc2cc4548be87a575960771631b922177959b12e27ead8bc7dba51792dbc223d1d509a12da05fe762fe7cd4e376bc3a5d328ff35d426fc666298220b6d21a5210dd30878bb7df15f6f072ddfe31ba71a3d26191e9bd28bd11bd94edd9df2440e1fe3e627608ef517f23062b694d0b3f56500d456473e7f69fe6a69a5fd504185229593d0f7522fa6fa7407df518a9dd0ac6d57d9d8f9d1cbcfc53a73137961e3aaabc2b6ae5b3dc18802a124685ceea65622bcb7c474f9bfb12ff04c6b7d202d34a3ebe7c2697a66343897e6efa6aa71d472e3423ec52798c1c9ae24ac79b3d7f806c2957dc5627d1759bd1ffd8a09c94e538c19c5d9a4fa8601ae37c40d4d5fb4e41cabb83be19a33bed6e2879793c5ec91f88c4eba1968a3cf4f97a16ad178e29a00f2265fb9ba074df2d114769d3e7f417664e2da04da43891ed08807994a548c7770a7c405ee9bd746cea1c15a5f6d7ec2de5f88b529c9baafdada5b20de5274d46d82ce2569e8e603ae4ec6ee966830526a8c66d33078a7c13817c2298334383fd672db431bbaa67bbb9bae0919e03691dd460fbfb9ecec787ae77750a502a4ae3e16e27ebebbcd3c46aa00d86a66d70f892f32e1d2a89b88ed2cb3a364dbb02e28ea863ed83851942da345a70f6924d1d5a96e52b95dc192d69f6ce4e8c6497c26c3ac677ed478215017fabce30a0569206529395254329f09025ed5e8ef02e659508</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Enter the password</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     </article>
     <!-- license  -->
     
@@ -443,7 +433,7 @@ height:50vh;
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">https://lingfengzhu.github.io/2021/09/16/Super/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">September 16th 2021, 3:49:04 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">September 16th 2021, 5:10:01 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/09/16/Super/">September 18th 2021, 1:42:58 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -570,10 +560,10 @@ height:50vh;
     
 </footer>
     </div>
-    <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
+        <!-- toc -->
+        
+        <div class="toc-wrapper" style=
+        
 
 
 
@@ -583,14 +573,20 @@ height:50vh;
 
 top:50vh;
 
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        >
+            <div class="toc-catalog">
+                <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+            </div>
+            
+                <div id="toc-div" style="display:none">
+            
+                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体语法"><span class="toc-number">1.</span> <span class="toc-text">具体语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要用途"><span class="toc-number">2.</span> <span class="toc-text">主要用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实例"><span class="toc-number">3.</span> <span class="toc-text">代码实例</span></a></li></ol>
+                
+            </div>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#具体语法"><span class="toc-number">1.</span> <span class="toc-text">具体语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要用途"><span class="toc-number">2.</span> <span class="toc-text">主要用途</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码实例"><span class="toc-number">3.</span> <span class="toc-text">代码实例</span></a></li></ol>
-    </div>
-    
-    <div class="back-top iconfont-archer">&#xe639;</div>
+        
+        <div class="back-top iconfont-archer">&#xe639;</div> 
     <div class="sidebar sidebar-hide">
     <ul class="sidebar-tabs sidebar-tabs-active-0">
         <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
@@ -600,6 +596,10 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
     
     
     
@@ -1020,11 +1020,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
-    
-        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
@@ -1067,15 +1067,15 @@ jsonContent:
         <div class="sidebar-panel-categories">
     <div class="sidebar-categories-name">
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
-    
         <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
         <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     
