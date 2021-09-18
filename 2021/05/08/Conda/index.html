@@ -416,50 +416,39 @@ height:50vh;
     <article class="article-entry">
         <p>Some basic <code>conda</code> codes.</p>
 <a id="more"></a>
-<h2 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h2><ul>
-<li><p>查看conda指令：<code>conda --help</code></p>
-</li>
-<li><p>检查conda版本：<code>conda --version</code></p>
-</li>
-<li><p>升级conda版本：<code>conda update conda</code></p>
-</li>
-<li><p>检查当前环境的python版本：<code>python --version</code></p>
-</li>
+<h2 id="基本查询">基本查询</h2>
+<ul>
+<li><p>查看conda指令：<code>conda --help</code></p></li>
+<li><p>检查conda版本：<code>conda --version</code></p></li>
+<li><p>升级conda版本：<code>conda update conda</code></p></li>
+<li><p>检查当前环境的python版本：<code>python --version</code></p></li>
 </ul>
-<h2 id="Conda-环境"><a href="#Conda-环境" class="headerlink" title="Conda 环境"></a>Conda 环境</h2><ul>
-<li>创建环境：<code>conda create -n &lt;envName&gt;</code></li>
-<li>创建环境（指定 Python 版本）：<code>conda create -n &lt;envName&gt; python=3.6</code></li>
-<li><p>删除环境：<code>conda remove -n &lt;envName&gt; --all</code></p>
-</li>
-<li><p>激活环境：(Linux, Mac OS X): <code>source activate &lt;envName&gt;</code>；(Windows): <code>conda activate &lt;envName&gt;</code></p>
-</li>
-<li><p>回到 base(root) 环境：(Linux, Mac OS X): <code>source deactivate</code>；(Windows): <code>conda deactivate</code></p>
-</li>
-<li><p>删除环境：<code>conda remove -n &lt;envName&gt; --all</code></p>
-</li>
-<li><p>在特定环境下安装库：<code>conda install -n &lt;envName&gt; &lt;packageName&gt;</code></p>
-</li>
-<li><p>在 jupyter 中添加特定的 conda 环境：</p>
-</li>
+<h2 id="conda-环境">Conda 环境</h2>
+<ul>
+<li><p>创建环境：<code>conda create -n &lt;envName&gt;</code></p></li>
+<li><p>创建环境（指定 Python 版本）：<code>conda create -n &lt;envName&gt; python=3.6</code></p></li>
+<li><p>删除环境：<code>conda remove -n &lt;envName&gt; --all</code></p></li>
+<li><p>激活环境：(Linux, Mac OS X): <code>source activate &lt;envName&gt;</code>；(Windows): <code>conda activate &lt;envName&gt;</code></p></li>
+<li><p>回到 base(root) 环境：(Linux, Mac OS X): <code>source deactivate</code>；(Windows): <code>conda deactivate</code></p></li>
+<li><p>删除环境：<code>conda remove -n &lt;envName&gt; --all</code></p></li>
+<li><p>在特定环境下安装库：<code>conda install -n &lt;envName&gt; &lt;packageName&gt;</code></p></li>
+<li><p>在 jupyter 中添加特定的 conda 环境：</p></li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 确保在需要添加的环境你内已经安装了 ipykernel</span></span><br><span class="line">conda install -n &lt;envName&gt; ipykernel</span><br><span class="line"><span class="meta">#</span><span class="bash"> 也可以在创建环境时直接同步安装 ipykernel</span></span><br><span class="line">conda create -n &lt;envName&gt; python=3.6 ipykernel</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 激活目标 conda 环境</span></span><br><span class="line">source activate &lt;envName&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将目标环境写入 notebook 的 kernel 中</span></span><br><span class="line">python -m ipykernel install --user --name &lt;envName&gt; --display-name "&lt;displayEnvName&gt;"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 例如，对于一个名为 NLP 的环境</span></span><br><span class="line">python -m ipykernel install --user --name NLP --display-name "NLP-Python 3"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 之后打开 jupyter notebook，此时，选择新建文件，就能新建该环境下的 notebook（选项显示为设置的展示名称）</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>在 jupyter 中删除特定的 conda 环境：</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看 jupyter 中安装了哪些虚拟环境</span></span><br><span class="line">jupyter kernelspec list</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除指定的虚拟环境</span></span><br><span class="line">jupyter kernelspec uninstall &lt;envName&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
-<li><p>查看已安装的包：<code>conda list</code></p>
-</li>
-<li><p>使用conda命令安装库：<code>conda install &lt;packageName&gt;</code></p>
-</li>
-<li><p>安装特定版本的库：<code>conda install &lt;packageName&gt;=&lt;packageVersion&gt;(e.g. numpy=1.13.0)</code></p>
-</li>
+<h2 id="安装">安装</h2>
+<ul>
+<li><p>查看已安装的包：<code>conda list</code></p></li>
+<li><p>使用conda命令安装库：<code>conda install &lt;packageName&gt;</code></p></li>
+<li><p>安装特定版本的库：<code>conda install &lt;packageName&gt;=&lt;packageVersion&gt;(e.g. numpy=1.13.0)</code></p></li>
 </ul>
-<h2 id="版本回滚"><a href="#版本回滚" class="headerlink" title="版本回滚"></a>版本回滚</h2><ul>
-<li><p>查看 conda 的历史环境版本（可以看到各个历史版本都会有一个对应的历史版本序号）：<code>conda list --revisions</code></p>
-</li>
-<li><p>回滚到以前的历史环境版本：<code>conda install --revision &lt;revisionNumber&gt;</code></p>
-</li>
+<h2 id="版本回滚">版本回滚</h2>
+<ul>
+<li><p>查看 conda 的历史环境版本（可以看到各个历史版本都会有一个对应的历史版本序号）：<code>conda list --revisions</code></p></li>
+<li><p>回滚到以前的历史环境版本：<code>conda install --revision &lt;revisionNumber&gt;</code></p></li>
 </ul>
 
     </article>
@@ -622,7 +611,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本查询"><span class="toc-number">1.</span> <span class="toc-text">基本查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conda-环境"><span class="toc-number">2.</span> <span class="toc-text">Conda 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#版本回滚"><span class="toc-number">4.</span> <span class="toc-text">版本回滚</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本查询"><span class="toc-number">1.</span> <span class="toc-text">基本查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conda-环境"><span class="toc-number">2.</span> <span class="toc-text">Conda 环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#版本回滚"><span class="toc-number">4.</span> <span class="toc-text">版本回滚</span></a></li></ol>
                 
             </div>
         </div>
@@ -637,6 +626,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
@@ -1061,11 +1052,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
-        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
-    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
@@ -1114,9 +1105,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
-    
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
+    
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     
