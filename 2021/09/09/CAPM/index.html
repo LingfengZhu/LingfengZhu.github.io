@@ -20,12 +20,12 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta name="description" content="资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票资">
+    <meta name="description" content="资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CAPM">
 <meta property="og:url" content="https://lingfengzhu.github.io/2021/09/09/CAPM/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
-<meta property="og:description" content="资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票资">
+<meta property="og:description" content="资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://lingfengzhu.github.io/images/CAPM/1.png">
 <meta property="og:image" content="https://lingfengzhu.github.io/images/CAPM/2.png">
@@ -419,15 +419,14 @@ height:50vh;
         <script type="text/javascript"
   src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
+
 <p>资本资产定价模型（(Capital Asset Pricing Model，CAPM） 由美国学者威廉·夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）等人在现代投资组合理论的基础上提出并发展，是现代金融市场价格理论的支柱，广泛应用于投资决策和公司理财领域。资本资产定价模型中，所谓资本资产主要指的是股票资产，而定价则<strong>试图解释资本市场如何决定股票收益率，进而决定股票价格</strong>。</p>
 <a id="more"></a>
-<h2 id="模型概述">模型概述</h2>
-<p>这个世界的一大基本规律是：<strong>风险越高，收益越高</strong>。当一个产品风险低而收益高时，一定会有大量资金涌入瓜分掉收益。因此，通过研究资本收益与风险之间的定量关系，我们可以判断金融产品价格的<strong>”合理性“</strong>：如果风险过高而价格过低，或风险过低而价格过高，就说明定价很可能不合理，价格变动的可能性较大。CAPM 模型就是用于<strong>研究资本的收益与风险之间的定量关系</strong>的模型。</p>
+<h2 id="模型概述"><a href="#模型概述" class="headerlink" title="模型概述"></a>模型概述</h2><p>这个世界的一大基本规律是：<strong>风险越高，收益越高</strong>。当一个产品风险低而收益高时，一定会有大量资金涌入瓜分掉收益。因此，通过研究资本收益与风险之间的定量关系，我们可以判断金融产品价格的<strong>”合理性“</strong>：如果风险过高而价格过低，或风险过低而价格过高，就说明定价很可能不合理，价格变动的可能性较大。CAPM 模型就是用于<strong>研究资本的收益与风险之间的定量关系</strong>的模型。</p>
 <p>在一些假设的基础上，CAPM 推导出了资产的定价模型，通过无风险利率、市场收益率、以及β系数可以得到某种资产的“理论”价格，从而帮助投资者对股票进行评价。</p>
-<h2 id="模型假设">模型假设</h2>
-<p>CAPM模型是建立在一系列假设的基础上的，其中主要包括：</p>
-<ol type="1">
-<li>所有投资者均追求单期财富的<strong>期望效用最大化</strong>，并以各备选组合的<strong>期望收益</strong>和<strong>标准差</strong>为基础进行组合选择；<span class="math inline">\(\leftarrow\)</span> 投资者希望期望收益达到最大，标准差（用于衡量风险）达到最小</li>
+<h2 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h2><p>CAPM模型是建立在一系列假设的基础上的，其中主要包括：</p>
+<ol>
+<li>所有投资者均追求单期财富的<strong>期望效用最大化</strong>，并以各备选组合的<strong>期望收益</strong>和<strong>标准差</strong>为基础进行组合选择；$\leftarrow$ 投资者希望期望收益达到最大，标准差（用于衡量风险）达到最小</li>
 <li>所有投资者都可以及时免费获得充分的市场信息；</li>
 <li>市场上<strong>有且只有</strong>一种<strong>无风险利率</strong>，且所有投资者均能以<strong>无风险利率</strong>无限制地借入或贷出资金；</li>
 <li>所有投资者拥有同样预期，即：对于所有资产收益的<strong>均值</strong>、<strong>方差</strong>和<strong>协方差</strong>等，投资者均有完全相同的主观估计；</li>
@@ -436,72 +435,66 @@ height:50vh;
 <li>所有投资者均为价格接受者，即：任何一个投资者的买卖行为都不会对股票价格产生影响；</li>
 <li>所有资产的数量是给定的和固定不变的。</li>
 </ol>
-<h2 id="模型详情">模型详情</h2>
-<p>对于一个给定的资产 <span class="math inline">\(i\)</span>，它的期望收益率和<strong>市场投资组合</strong>（包含市场上存在的所有资产种类，且各种资产所占的比例和每种资产的总市值占市场总市值的比例相同的投资组合，可以近似看做整个市场）的期望收益率之间的关系可以表示为： <span class="math display">\[
-E\left(r_{i}\right)=r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right]
-\]</span></p>
-<ul>
-<li>随机变量 <span class="math inline">\(r_i\)</span> 表示资产 <span class="math inline">\(i\)</span> 的收益率，<span class="math inline">\(E(r_i)\)</span> 表示资产 <span class="math inline">\(i\)</span> 的期望收益率（或普通股的资本成本率）；</li>
-<li>随机变量 <span class="math inline">\(r_M\)</span> 表示<strong>市场投资组合</strong>（详见 1.4. 中的定义）的收益率，<span class="math inline">\(E(r_M)\)</span> 表示<strong>市场组合</strong>的期望收益率（通常用股票价格指数收益率的<strong>平均值</strong>或所有股票的<strong>平均收益</strong>率来代替）；</li>
-<li>变量 <span class="math inline">\(r_f\)</span> 表示<strong>无风险收益率</strong>（通常以<strong>短期国债的利率</strong>或银行业间同业拆借利率来估计）；</li>
-<li><span class="math inline">\(\beta_{iM}\)</span> 表示风险资产 <span class="math inline">\(i\)</span> 的<strong>系统性风险系数</strong>，<span class="math inline">\(\beta_{iM} = \frac{Cov(r_i, r_M)}{Var(r_M)}\)</span>（通常利用单个风险资产和市场组合的历史数据进行计算，之后再进行显著性检验）；</li>
-<li><span class="math inline">\(E(r_M)-r_f\)</span> 就是<strong>市场风险溢价</strong>（Market Risk Premium），即<strong>市场投资组合</strong>的期望收益率与<strong>无风险收益率</strong>之差；</li>
+<h2 id="模型详情"><a href="#模型详情" class="headerlink" title="模型详情"></a>模型详情</h2><p>对于一个给定的资产 $i$，它的期望收益率和<strong>市场投资组合</strong>（包含市场上存在的所有资产种类，且各种资产所占的比例和每种资产的总市值占市场总市值的比例相同的投资组合，可以近似看做整个市场）的期望收益率之间的关系可以表示为：</p>
+<script type="math/tex; mode=display">
+E\left(r_{i}\right)=r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right]</script><ul>
+<li>随机变量 $r_i$ 表示资产 $i$ 的收益率，$E(r_i)$ 表示资产 $i$ 的期望收益率（或普通股的资本成本率）；</li>
+<li>随机变量 $r_M$ 表示<strong>市场投资组合</strong>（详见 1.4. 中的定义）的收益率，$E(r_M)$ 表示<strong>市场组合</strong>的期望收益率（通常用股票价格指数收益率的<strong>平均值</strong>或所有股票的<strong>平均收益</strong>率来代替）；</li>
+<li>变量 $r_f$ 表示<strong>无风险收益率</strong>（通常以<strong>短期国债的利率</strong>或银行业间同业拆借利率来估计）；</li>
+<li>$\beta_{iM}$ 表示风险资产 $i$ 的<strong>系统性风险系数</strong>，$\beta_{iM} = \frac{Cov(r_i, r_M)}{Var(r_M)}$（通常利用单个风险资产和市场组合的历史数据进行计算，之后再进行显著性检验）；</li>
+<li>$E(r_M)-r_f$ 就是<strong>市场风险溢价</strong>（Market Risk Premium），即<strong>市场投资组合</strong>的期望收益率与<strong>无风险收益率</strong>之差；</li>
 </ul>
-<h2 id="模型理解">模型理解</h2>
-<ol type="1">
-<li><p><strong>市场风险溢价</strong> <span class="math inline">\(E(r_M) - r_f\)</span> 就是<strong>证券投资市场的平均收益水平</strong>相对于<strong>无风险利率</strong>多出来的利润（可以理解为股票大盘相对于短期国债多出来的收益）：</p>
+<h2 id="模型理解"><a href="#模型理解" class="headerlink" title="模型理解"></a>模型理解</h2><ol>
+<li><p><strong>市场风险溢价</strong> $E(r_M) - r_f$ 就是<strong>证券投资市场的平均收益水平</strong>相对于<strong>无风险利率</strong>多出来的利润（可以理解为股票大盘相对于短期国债多出来的收益）：</p>
 <ul>
 <li>只有这个差值大于 0 时，才会有承担风险投资股票的理由；</li>
 <li>如果这个差值小于或等于 0，则投资股票的买收益还不如几乎零风险的国债；</li>
-</ul></li>
-<li><p><strong>系统性风险指数</strong> <span class="math inline">\(\beta_{iM}\)</span> 衡量了某个<strong>具体资产</strong> <span class="math inline">\(i\)</span> 的风险水平（波动水平）和<strong>整个证券投资市场平均</strong>风险水平（波动水平）的比值：</p>
+</ul>
+</li>
+<li><p><strong>系统性风险指数</strong> $\beta_{iM}$ 衡量了某个<strong>具体资产</strong> $i$ 的风险水平（波动水平）和<strong>整个证券投资市场平均</strong>风险水平（波动水平）的比值：</p>
 <ul>
-<li><span class="math inline">\(\beta_{iM}\)</span> 衡量了单个风险证券 <span class="math inline">\(i\)</span> 与整个市场组合 <span class="math inline">\(M\)</span> 的联动性：
+<li><p>$\beta_{iM}$ 衡量了单个风险证券 $i$ 与整个市场组合 $M$ 的联动性：</p>
 <ul>
-<li><span class="math inline">\(\beta_{iM} &gt; 1\)</span> 表示资产 <span class="math inline">\(i\)</span> 的波动（风险）大于市场平均水平，资产 <span class="math inline">\(i\)</span> 被称为“攻击性股票”，市场上涨/下跌时，其；升幅/跌幅较大（例如某资产 <span class="math inline">\(i\)</span> 的 <span class="math inline">\(\beta_{iM} = 10\)</span>，则当市场上涨/下跌 10% 时，该证券上涨/下跌 100%）；</li>
-<li><span class="math inline">\(\beta_{iM} &lt; 1\)</span> 表示资产 <span class="math inline">\(i\)</span> 的波动（风险）小于市场平均水平，资产 <span class="math inline">\(i\)</span> 被称为“防御性股票”，市场上涨/下跌时，其；升幅/跌幅较小（例如某资产 <span class="math inline">\(i\)</span> 的 <span class="math inline">\(\beta_{iM} = 0.1\)</span>，则当市场上涨/下跌 10% 时，该证券上涨/下跌 1%）；</li>
-<li><span class="math inline">\(\beta_{iM} = 1\)</span> 表示资产 <span class="math inline">\(i\)</span> 的波动（风险）与市场平均水平一致，资产 <span class="math inline">\(i\)</span> 被称为“中立性股票”，市场上涨/下跌时，其；升幅/跌幅与市场一致（例如某资产 <span class="math inline">\(i\)</span> 的 <span class="math inline">\(\beta_{iM} = 01\)</span>，当市场上涨/下跌 10% 时，该证券上涨/下跌 10%）；</li>
-</ul></li>
-<li><span class="math inline">\(\beta\)</span> 类似一种杠杆，代表了具体资产相对于<strong>市场组合</strong>的风险：<span class="math inline">\(\beta_{iM}\)</span> 越大，表明该具体资产 <span class="math inline">\(i\)</span> 的风险越大，则其相应的期望收益应该也越大（风险溢价）；</li>
-</ul></li>
-<li><p><strong>无风险收益率</strong> <span class="math inline">\(r_f\)</span> 是指没有风险的投资产品能够得到的投资回报率，任何有风险的投资的收益率都应该超过 <span class="math inline">\(r_f\)</span>，否则就没必要承担不确定性的风险了；</p></li>
-<li><p>综合上述几点，模型公式中，将特定资产 <span class="math inline">\(i\)</span> 的收益率定义为：保证达到<strong>无风险收益率</strong> <span class="math inline">\(r_f\)</span> 的条件下，再加上体现<strong>该资产系统性风险溢价</strong>的 <span class="math inline">\(\beta_{im}\)</span> 与体现<strong>证券投资市场风险溢价</strong>的 <span class="math inline">\(E(r_m)-r_f\)</span> 乘积。</p></li>
+<li>$\beta_{iM} &gt; 1$ 表示资产 $i$ 的波动（风险）大于市场平均水平，资产 $i$ 被称为“攻击性股票”，市场上涨/下跌时，其；升幅/跌幅较大（例如某资产 $i$ 的 $\beta_{iM} = 10$，则当市场上涨/下跌 10% 时，该证券上涨/下跌 100%）；</li>
+<li>$\beta_{iM} &lt; 1$ 表示资产 $i$ 的波动（风险）小于市场平均水平，资产 $i$ 被称为“防御性股票”，市场上涨/下跌时，其；升幅/跌幅较小（例如某资产 $i$ 的 $\beta_{iM} = 0.1$，则当市场上涨/下跌 10% 时，该证券上涨/下跌 1%）；</li>
+<li>$\beta_{iM} = 1$ 表示资产 $i$ 的波动（风险）与市场平均水平一致，资产 $i$ 被称为“中立性股票”，市场上涨/下跌时，其；升幅/跌幅与市场一致（例如某资产 $i$ 的 $\beta_{iM} = 01$，当市场上涨/下跌 10% 时，该证券上涨/下跌 10%）；</li>
+</ul>
+</li>
+<li><p>$\beta$ 类似一种杠杆，代表了具体资产相对于<strong>市场组合</strong>的风险：$\beta_{iM}$ 越大，表明该具体资产 $i$ 的风险越大，则其相应的期望收益应该也越大（风险溢价）；</p>
+</li>
+</ul>
+</li>
+<li><p><strong>无风险收益率</strong> $r_f$ 是指没有风险的投资产品能够得到的投资回报率，任何有风险的投资的收益率都应该超过 $r_f$，否则就没必要承担不确定性的风险了；</p>
+</li>
+<li><p>综合上述几点，模型公式中，将特定资产 $i$ 的收益率定义为：保证达到<strong>无风险收益率</strong> $r_f$ 的条件下，再加上体现<strong>该资产系统性风险溢价</strong>的 $\beta_{im}$ 与体现<strong>证券投资市场风险溢价</strong>的 $E(r_m)-r_f$ 乘积。</p>
+</li>
 </ol>
-<h2 id="模型原理">模型原理</h2>
-<h3 id="资本市场线-capital-market-line">1. 资本市场线 (Capital Market Line)</h3>
-<h4 id="图形推理过程">1.1. 图形推理过程</h4>
-<h5 id="step.1">Step.1</h5>
-<p>如下图所示，纵轴是某证券组合 P 的<strong>期望收益率</strong> <span class="math inline">\(E(r_P)\)</span>，横轴是该组合 P 的<strong>标准差</strong> <span class="math inline">\(\sigma_P\)</span>（标准差反映了组合收益的变动情况，即风险大小，标准差越大，收益变动越大，越不稳定，说明风险越大）；图中的每一个点都代表由某几个风险资产按一定比例组成的资产组合。假设图中<strong>灰色区域</strong>就是所有投资者的可行区域（灰色区域的<strong>黑色外沿线</strong>就是<strong>风险-收益双曲线</strong>），则在<strong>不考虑无风险资产时</strong>：</p>
+<h2 id="模型原理"><a href="#模型原理" class="headerlink" title="模型原理"></a>模型原理</h2><h3 id="1-资本市场线-Capital-Market-Line"><a href="#1-资本市场线-Capital-Market-Line" class="headerlink" title="1. 资本市场线 (Capital Market Line)"></a>1. 资本市场线 (Capital Market Line)</h3><h4 id="1-1-图形推理过程"><a href="#1-1-图形推理过程" class="headerlink" title="1.1. 图形推理过程"></a>1.1. 图形推理过程</h4><h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step.1"></a>Step.1</h5><p>如下图所示，纵轴是某证券组合 P 的<strong>期望收益率</strong> $E(r_P)$，横轴是该组合 P 的<strong>标准差</strong> $\sigma_P$（标准差反映了组合收益的变动情况，即风险大小，标准差越大，收益变动越大，越不稳定，说明风险越大）；图中的每一个点都代表由某几个风险资产按一定比例组成的资产组合。假设图中<strong>灰色区域</strong>就是所有投资者的可行区域（灰色区域的<strong>黑色外沿线</strong>就是<strong>风险-收益双曲线</strong>），则在<strong>不考虑无风险资产时</strong>：</p>
 <ul>
 <li>根据假设 1、2，我们知道投资者将会从所有风险证券组合构成的<strong>可行区域</strong>（下图的灰色区域）中选择其<strong>最优证券组合</strong>（最优组合就存在于灰色区域的<strong>外圈黑色沿线的上半部分</strong>：以某证券组合 A 点为例，在外沿线上面总能找到一个点 B，它的风险与 A 一样，但收益更高）；</li>
 <li>根据假设 4，我们知道对于所有投资者来说风险可行区域（灰色区域）都是相同的；</li>
 </ul>
-<p><img src="/images/CAPM/1.png" /></p>
-<h5 id="step.2">Step.2</h5>
-<p>若要考虑<strong>无风险资产</strong>，则由于假设 3，市场上有且只有一种无风险资产 C，其标准差（即风险）为 0（因此处于纵轴上），其期望收益率就是无风险利率 <span class="math inline">\(r_f\)</span>：</p>
+<p><img src="/images/CAPM/1.png" alt=""></p>
+<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step.2"></a>Step.2</h5><p>若要考虑<strong>无风险资产</strong>，则由于假设 3，市场上有且只有一种无风险资产 C，其标准差（即风险）为 0（因此处于纵轴上），其期望收益率就是无风险利率 $r_f$：</p>
 <ul>
-<li>投资者可以将钱全部投向于某个<strong>最优的资产组合</strong>（灰色区域的<strong>外圈黑色沿线的上半部分</strong>上的某个点，比如 B），那么获得的期望收益和承担的风险将是 <span class="math inline">\(E(r_B)\)</span> 和 <span class="math inline">\(\sigma_B\)</span>；</li>
-<li>投资者也可以将钱全部投向<strong>无风险资产</strong> C，那么获得收益和承担的风险将是 <span class="math inline">\(r_f\)</span> 和 0；</li>
+<li>投资者可以将钱全部投向于某个<strong>最优的资产组合</strong>（灰色区域的<strong>外圈黑色沿线的上半部分</strong>上的某个点，比如 B），那么获得的期望收益和承担的风险将是 $E(r_B)$ 和 $\sigma_B$；</li>
+<li>投资者也可以将钱全部投向<strong>无风险资产</strong> C，那么获得收益和承担的风险将是 $r_f$ 和 0；</li>
 <li>事情当然没有那么极端，更多投资者会考虑按一定的<strong>比例</strong>，把部分钱投资于某个<strong>最优资产组合</strong> B、部分投资于<strong>无风险资产</strong> C：将 CB 连线，在这条线段上的任何一个点都是资产组合 B 与资产组合 C 按照某个<strong>比例</strong>的<strong>再组合</strong>（这个具体<strong>比值</strong>决定了这个<strong>再组合</strong>在线段 CB 上的具体位置：例如，若 C 和 B 各占 50% 的比重，则这个<strong>再组合</strong>就在线段 BC 的中点）；</li>
 </ul>
-<p><img src="/images/CAPM/2.png" /></p>
-<h5 id="step.3">Step.3</h5>
-<p>事实上，在<strong>不考虑无风险资产</strong>的时候，<strong>黑色沿线上半部分</strong>上的点都是<strong>最优资产组合</strong>，但是在<strong>考虑无风险资产</strong>时，存在一个唯一的最优资产组合：</p>
+<p><img src="/images/CAPM/2.png" alt=""></p>
+<h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step.3"></a>Step.3</h5><p>事实上，在<strong>不考虑无风险资产</strong>的时候，<strong>黑色沿线上半部分</strong>上的点都是<strong>最优资产组合</strong>，但是在<strong>考虑无风险资产</strong>时，存在一个唯一的最优资产组合：</p>
 <ul>
 <li>若从 C 点向<strong>灰色区域的上半部分</strong>做一条切线，则切点 M 就是唯一的<strong>最优资产组合</strong>：从黑色沿线上半部分任取一个点 B，无论 B 如何选择，线段 CM 上的点均可以在相同<strong>标准差</strong>的情况下比 CB 上的点获取更高的期望收益；</li>
 <li>此时，由于假设 1，投资者们果断抛弃除 M 之外所有其他的风险组合；</li>
 </ul>
-<p><img src="/images/CAPM/3.png" /></p>
-<h4 id="切点组合">1.2. 切点组合</h4>
-<p>上述切点对应的风险组合（即点 M），就称为切点组合。</p>
-<h4 id="分离定理">1.3. 分离定理</h4>
-<p>分离定理又称分离特性，指在<strong>投资组合</strong>中可以以<strong>无风险利率</strong>自由借贷的情况下，投资人选择投资组合时都会选择<strong>无风险资产</strong>（即点 C）和<strong>最优风险投资组合</strong>（即切点 M）的<strong>再组合</strong>（即线段 CM 上的某个点），与个别投资者的偏好无关。</p>
+<p><img src="/images/CAPM/3.png" alt=""></p>
+<h4 id="1-2-切点组合"><a href="#1-2-切点组合" class="headerlink" title="1.2. 切点组合"></a>1.2. 切点组合</h4><p>上述切点对应的风险组合（即点 M），就称为切点组合。</p>
+<h4 id="1-3-分离定理"><a href="#1-3-分离定理" class="headerlink" title="1.3. 分离定理"></a>1.3. 分离定理</h4><p>分离定理又称分离特性，指在<strong>投资组合</strong>中可以以<strong>无风险利率</strong>自由借贷的情况下，投资人选择投资组合时都会选择<strong>无风险资产</strong>（即点 C）和<strong>最优风险投资组合</strong>（即切点 M）的<strong>再组合</strong>（即线段 CM 上的某个点），与个别投资者的偏好无关。</p>
 <ul>
 <li>因为这切点 M 相对于其他的投资组合在风险上或是报酬上都具有优势，所以不管谁投资都会选择 M；</li>
 <li>投资人对收益/风险的不同态度，只会影响<strong>投入的资金数量</strong>或<strong>无风险资产 C 与最优风险投资组合 M 的投入比例</strong>，而不会影响<strong>最优风险投资组合点</strong>（即切点 M）的位置；</li>
 </ul>
-<h4 id="市场组合">1.4. 市场组合</h4>
-<p>市场组合是指市场中<strong>所有风险资产</strong>的组合，且每种风险资产在该组合中所占的比重（即每种资产在该组合中的构成比例）<strong>等于</strong>这种风险资产的市值占市场所有风险资产总市值的比重（即每种资产的相对市值）。</p>
+<h4 id="1-4-市场组合"><a href="#1-4-市场组合" class="headerlink" title="1.4. 市场组合"></a>1.4. 市场组合</h4><p>市场组合是指市场中<strong>所有风险资产</strong>的组合，且每种风险资产在该组合中所占的比重（即每种资产在该组合中的构成比例）<strong>等于</strong>这种风险资产的市值占市场所有风险资产总市值的比重（即每种资产的相对市值）。</p>
 <blockquote>
 <p>定理：切点组合一定是市场组合</p>
 <p>简单证明：</p>
@@ -515,87 +508,78 @@ E\left(r_{i}\right)=r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right]
 </ul>
 <p>然后证明切点组合 M 中每种风险证券的构成比例等于该风险证券的相对市值</p>
 <ul>
-<li>假设市场中某个投资者 <span class="math inline">\(i\)</span> 持有的证券中，切点组合 M 的比例为 <span class="math inline">\(\alpha_i\)</span>，无风险资产的比例为 <span class="math inline">\(1-\alpha_i\)</span>，若用 <span class="math inline">\(\omega_{j}\)</span> 表示切点组合 M 中风险资产 <span class="math inline">\(j\)</span> 的权重，<span class="math inline">\(W_0^i\)</span> 表示投资者 <span class="math inline">\(i\)</span> 的初始财富，则有：
-<ol type="1">
-<li>投资者 <span class="math inline">\(i\)</span> 投资于 M 中某个风险资产 <span class="math inline">\(j\)</span> 的金额为 <span class="math inline">\(\alpha_iW_0^i\omega_{j}\)</span>；</li>
-<li>投资者 <span class="math inline">\(i\)</span> 投资于切点组合 M 中的总金额为 <span class="math inline">\(\alpha_iW_0^i\)</span>；</li>
-<li>由 1 得，市场中全体投资者投资于某个风险资产 <span class="math inline">\(j\)</span> 的总金额为 <span class="math inline">\(\sum_i\alpha_iW_0^i\omega_j\)</span>；</li>
-<li>由 2 得，市场中全体投资者投资于切点组合 M 的总财富为 <span class="math inline">\(V = \sum_i\alpha_iW_0^i\)</span>，显然这也就是投资于市场所有风险资产的总财富；</li>
-<li>由 4 得，若用 <span class="math inline">\(\gamma_j\)</span> 表示市场组合中风险资产 <span class="math inline">\(j\)</span> 的权重，则市场中投资于风险资产 <span class="math inline">\(j\)</span> 的总金额为 <span class="math inline">\(\gamma_jV = \sum_i\alpha_iW_0^i\gamma_j\)</span>；</li>
-<li>结合 3 和 5，有：<span class="math inline">\(\sum_i\alpha_iW_0^i\omega_j = \sum_i\alpha_iW_0^i\gamma_j\)</span>，即：<span class="math inline">\(\omega_j = \gamma_j, \forall j\)</span></li>
-</ol></li>
+<li>假设市场中某个投资者 $i$ 持有的证券中，切点组合  M 的比例为 $\alpha_i$，无风险资产的比例为 $1-\alpha_i$，若用 $\omega_{j}$ 表示切点组合 M 中风险资产 $j$ 的权重，$W_0^i$ 表示投资者 $i$ 的初始财富，则有：<ol>
+<li>投资者 $i$ 投资于 M 中某个风险资产 $j$ 的金额为 $\alpha_iW_0^i\omega_{j}$；</li>
+<li>投资者 $i$ 投资于切点组合 M 中的总金额为 $\alpha_iW_0^i$；</li>
+<li>由 1 得，市场中全体投资者投资于某个风险资产 $j$ 的总金额为 $\sum_i\alpha_iW_0^i\omega_j$；</li>
+<li>由 2 得，市场中全体投资者投资于切点组合 M 的总财富为 $V = \sum_i\alpha_iW_0^i$，显然这也就是投资于市场所有风险资产的总财富；</li>
+<li>由 4 得，若用 $\gamma_j$ 表示市场组合中风险资产 $j$ 的权重，则市场中投资于风险资产 $j$ 的总金额为 $\gamma_jV = \sum_i\alpha_iW_0^i\gamma_j$；</li>
+<li>结合 3 和 5，有：$\sum_i\alpha_iW_0^i\omega_j = \sum_i\alpha_iW_0^i\gamma_j$，即：$\omega_j = \gamma_j, \forall j$</li>
+</ol>
+</li>
 <li>可见，切点组合 M 中每种风险证券的构成比例均等于该风险证券的相对市值</li>
 </ul>
 </blockquote>
-<h4 id="资本市场线-capital-market-line-1">1.5. 资本市场线 (Capital Market Line)</h4>
-<p>线段 CM上的每个点代表 “风险组合M + 无风险资产C” 按一定比例搭配起来的一个再组合，这些再组合称为<strong>有效组合</strong>。从无风险资产 C 出发，穿过切点 M 的这条<strong>射线</strong>，就被称为<strong>资本市场线</strong>（CML）。它描述了<strong>有效组合的风险与收益之间的关系</strong>。</p>
-<p><img src="/images/CAPM/4.png" /></p>
-<h5 id="线段-cm-之外的延长线也算资本市场线的原因">1.5.1. 线段 CM 之外的延长线也算资本市场线的原因</h5>
-<p>这是因为假设 3 中提到没有卖空和买空的限制，投资者可以无限制地借入或者贷出<strong>无风险资金</strong>，投入到切点组合中。</p>
-<p>举一个例子，对于某风险厌恶<strong>较重</strong>的投资者来说，他可能会选择一半资金投资于无风险资产 C，一半资金投资于切点组合 M，那么他会选择有效组合 CM1： <span class="math display">\[
-CM1 = 0.5 C + 0.5 M
-\]</span> 对于某风险厌恶<strong>较轻</strong>的投资者来说，他可能会<strong>借入</strong>部分无风险资产 C（假设借入金额为本金的一半），连同自己的本金一起投入到切点组合 M 上，那么他会选择有效组合 CM2： <span class="math display">\[
-CM2 = -0.5 C + 1.5 M
-\]</span> 可见。CM1 位于线段 CM 上，而 CM2 则位于线段 CM 之外的延长线上。因此，延长线也算在<strong>资本市场线</strong>内，延长线上的点也都是<strong>有效组合</strong>。</p>
-<p><img src="/images/CAPM/5.png" /></p>
-<h5 id="资本市场线的几何公式表达">1.5.2. 资本市场线的几何公式表达</h5>
-<p>资本市场线描述了<strong>有效组合</strong>的<strong>风险</strong>和<strong>收益</strong>之间的关系。显然，代入直线的几何表达 <span class="math inline">\(y = kx + b\)</span>，这个关系的几何公式表达如下： <span class="math display">\[
-E(r_P) = r_f + \frac{E(r_M)-r_f}{\sigma_M}\sigma_P
-\]</span> <img src="/images/CAPM/6.png" /></p>
-<p>其中 <span class="math inline">\(E(r_M) - r_f\)</span> 其实就是切点组合 M 的<strong>风险溢价</strong>（或称为风险收益、风险报酬）。这条<strong>资本市场线</strong>就反应了有效组合的预期收益率（代表收益）与其标准差（代表风险）之间的关系。</p>
-<h4 id="证券市场线-security-market-line-i.e.-capm-模型的图形形式">2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式</h4>
-<p>CML 面向的对象是<strong>有效组合</strong>，如果将面向的对象改为单个风险证券，就能得到<strong>证券市场线</strong>（SML）。</p>
+<h4 id="1-5-资本市场线-Capital-Market-Line"><a href="#1-5-资本市场线-Capital-Market-Line" class="headerlink" title="1.5. 资本市场线 (Capital Market Line)"></a>1.5. 资本市场线 (Capital Market Line)</h4><p>线段 CM上的每个点代表 “风险组合M + 无风险资产C” 按一定比例搭配起来的一个再组合，这些再组合称为<strong>有效组合</strong>。从无风险资产 C 出发，穿过切点 M 的这条<strong>射线</strong>，就被称为<strong>资本市场线</strong>（CML）。它描述了<strong>有效组合的风险与收益之间的关系</strong>。</p>
+<p><img src="/images/CAPM/4.png" alt=""></p>
+<h5 id="1-5-1-线段-CM-之外的延长线也算资本市场线的原因"><a href="#1-5-1-线段-CM-之外的延长线也算资本市场线的原因" class="headerlink" title="1.5.1. 线段 CM 之外的延长线也算资本市场线的原因"></a>1.5.1. 线段 CM 之外的延长线也算资本市场线的原因</h5><p>这是因为假设 3 中提到没有卖空和买空的限制，投资者可以无限制地借入或者贷出<strong>无风险资金</strong>，投入到切点组合中。</p>
+<p>举一个例子，对于某风险厌恶<strong>较重</strong>的投资者来说，他可能会选择一半资金投资于无风险资产 C，一半资金投资于切点组合 M，那么他会选择有效组合 CM1：</p>
+<script type="math/tex; mode=display">
+CM1 = 0.5 C + 0.5 M</script><p>对于某风险厌恶<strong>较轻</strong>的投资者来说，他可能会<strong>借入</strong>部分无风险资产 C（假设借入金额为本金的一半），连同自己的本金一起投入到切点组合 M 上，那么他会选择有效组合 CM2：</p>
+<script type="math/tex; mode=display">
+CM2 = -0.5 C + 1.5 M</script><p>可见。CM1 位于线段 CM 上，而 CM2 则位于线段 CM 之外的延长线上。因此，延长线也算在<strong>资本市场线</strong>内，延长线上的点也都是<strong>有效组合</strong>。</p>
+<p><img src="/images/CAPM/5.png" alt=""></p>
+<h5 id="1-5-2-资本市场线的几何公式表达"><a href="#1-5-2-资本市场线的几何公式表达" class="headerlink" title="1.5.2. 资本市场线的几何公式表达"></a>1.5.2. 资本市场线的几何公式表达</h5><p>资本市场线描述了<strong>有效组合</strong>的<strong>风险</strong>和<strong>收益</strong>之间的关系。显然，代入直线的几何表达 $y = kx + b$，这个关系的几何公式表达如下：</p>
+<script type="math/tex; mode=display">
+E(r_P) = r_f + \frac{E(r_M)-r_f}{\sigma_M}\sigma_P</script><p><img src="/images/CAPM/6.png" alt=""></p>
+<p>其中 $E(r_M) - r_f$ 其实就是切点组合 M 的<strong>风险溢价</strong>（或称为风险收益、风险报酬）。这条<strong>资本市场线</strong>就反应了有效组合的预期收益率（代表收益）与其标准差（代表风险）之间的关系。</p>
+<h4 id="2-证券市场线-Security-Market-Line-i-e-CAPM-模型的图形形式"><a href="#2-证券市场线-Security-Market-Line-i-e-CAPM-模型的图形形式" class="headerlink" title="2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式"></a>2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式</h4><p>CML 面向的对象是<strong>有效组合</strong>，如果将面向的对象改为单个风险证券，就能得到<strong>证券市场线</strong>（SML）。</p>
 <ul>
-<li>由于单个证券本身是一个<strong>非有效</strong>的组合，始终位于 CML 的下方，因此<strong>不能</strong>直接代入 CML 的公式将单个证券 <span class="math inline">\(i\)</span> 的风险与收益关系表示为 <span class="math inline">\(E(r_i) = r_f + \frac{E(r_M)-r_f}{\sigma_M}\sigma_i\)</span>；</li>
+<li>由于单个证券本身是一个<strong>非有效</strong>的组合，始终位于 CML 的下方，因此<strong>不能</strong>直接代入 CML 的公式将单个证券 $i$ 的风险与收益关系表示为 $E(r_i) = r_f + \frac{E(r_M)-r_f}{\sigma_M}\sigma_i$； </li>
 </ul>
-<p><img src="/images/CAPM/7.png" /></p>
-<h5 id="证券市场线的公式表达-i.e.-capm-模型的推理过程sharpe-的证明">2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）</h5>
-<p>假设有一个资产组合 <span class="math inline">\(P\)</span>，其中投资于风险证券 <span class="math inline">\(i\)</span> 的比例为 <span class="math inline">\(x_i\)</span>，其他资产全部投资于市场组合 <span class="math inline">\(M\)</span>，则有： <span class="math display">\[
+<p><img src="/images/CAPM/7.png" alt=""></p>
+<h5 id="2-1-证券市场线的公式表达-i-e-CAPM-模型的推理过程（Sharpe-的证明）"><a href="#2-1-证券市场线的公式表达-i-e-CAPM-模型的推理过程（Sharpe-的证明）" class="headerlink" title="2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）"></a>2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）</h5><p>假设有一个资产组合 $P$，其中投资于风险证券 $i$ 的比例为 $x_i$，其他资产全部投资于市场组合 $M$，则有：</p>
+<script type="math/tex; mode=display">
 P = x_ii + (1-x_i)M\\
-r_P = x_ir_i + (1-x_i)r_M\\
-\]</span> 据此可以计算 <span class="math inline">\(P\)</span> 的<strong>期望收益率</strong>和<strong>标准差</strong>为： <span class="math display">\[
+r_P = x_ir_i + (1-x_i)r_M\\</script><p>据此可以计算 $P$ 的<strong>期望收益率</strong>和<strong>标准差</strong>为：</p>
+<script type="math/tex; mode=display">
 E(r_P) = x_iE(r_i) + (1-x_i)E(r_M) \\
 \sigma_P = \sqrt{Var(P)} = \sqrt{Var(x_ii + (1-x_i)M)} \\
 =\sqrt{x_i^2Var(i) + (1-x_i)^2Var(M) + 2x_i(1-x_i)Cov(i,M)} \\
-= \sqrt{x_i^2\sigma_i^2 + (1-x_i)^2\sigma_M^2 + 2x_i(1-x_i)\sigma_{iM}}
-\]</span> 其中 <span class="math inline">\(r_i\)</span> 表示资产 <span class="math inline">\(i\)</span> 的收益率；<span class="math inline">\(\sigma_i\)</span> 表示资产 <span class="math inline">\(i\)</span> 的标准差；<span class="math inline">\(\sigma_{iM}\)</span> 表示 <span class="math inline">\(i\)</span> 与 <span class="math inline">\(M\)</span> 的协方差；<span class="math inline">\(i,P,r_i,r_P\)</span> 均为随机变量。</p>
-<p>上述结果分别对变量 <span class="math inline">\(x_i\)</span> 求导： <span class="math display">\[
+= \sqrt{x_i^2\sigma_i^2 + (1-x_i)^2\sigma_M^2 + 2x_i(1-x_i)\sigma_{iM}}</script><p>其中 $r_i$ 表示资产 $i$ 的收益率；$\sigma_i$ 表示资产 $i$ 的标准差；$\sigma_{iM}$ 表示 $i$ 与 $M$ 的协方差；$i,P,r_i,r_P$ 均为随机变量。</p>
+<p>上述结果分别对变量 $x_i$ 求导：</p>
+<script type="math/tex; mode=display">
 \frac{\partial{E(r_P)}}{\partial{x_i}} = E(r_i) - E(r_M) \\
-\frac{\partial{\sigma_P}}{\partial{x_i}} = \frac{x_{i} \sigma_{i}^{2}-\sigma_{M}^{2}+x_{i} \sigma_{M}^{2}+\sigma_{i M}-2 x_{i} \sigma_{i M}}{\left(x_{i}^{2} \sigma_{i}^{2}+\left(1-x_{i}\right)^{2} \sigma_{M}^{2}+2 x_{i}\left(1-x_{i}\right) \sigma_{i M}\right)^{1 / 2}}
-\]</span> 显然所有这样的投资组合 <span class="math inline">\(P\)</span>，都位于线段 <span class="math inline">\(iM\)</span> 上。通过上述结果，可以计算出线段 <span class="math inline">\(iM\)</span> 的斜率为： <span class="math display">\[
-\frac{E(r_P)}{\sigma_P} = \frac{\partial{E(r_P)}}{\partial{x_i}}/\frac{\partial{\sigma_P}}{\partial{x_i}} = \frac{\left(E(r_{i})-E(r_{M})\right)\left(x_{i}^{2} \sigma_{i}^{2}+\left(1-x_{i}\right)^{2} \sigma_{M}^{2}+2 x_{i}\left(1-x_{i}\right) \sigma_{i M}\right)^{1 / 2}}{x_{i} \sigma_{i}^{2}-\sigma_{M}^{2}+x_{i} \sigma_{M}^{2}+\sigma_{i M}-2 x_{i} \sigma_{i M}}
-\]</span> 若取 <span class="math inline">\(x_i = 0\)</span>，即资产组合 <span class="math inline">\(P\)</span> 全部投资于市场组合 <span class="math inline">\(M\)</span>，则显然此时线段 <span class="math inline">\(iM\)</span> 应该与资本市场线 CML 重合：即在 <span class="math inline">\(x_i = 0\)</span> 时，线段 <span class="math inline">\(iM\)</span> 的斜率应当等于 CML 的斜率。</p>
-<p>将 <span class="math inline">\(x_i=0\)</span> 代入上式可得 <span class="math inline">\(iM\)</span> 此时的斜率为： <span class="math display">\[
-\frac{E(r_P)}{\sigma_P}\bigg|_{x_i=0} = \frac{\left(E(r_{i})-E(r_{M})\right) \sigma_{M}}{\sigma_{i M}-\sigma_{M}^{2}}
-\]</span> 该斜率与 CML 的斜率相等，即： <span class="math display">\[
-\frac{\left(E(r_{i})-E(r_{M})\right) \sigma_{M}}{\sigma_{i M}-\sigma_{M}^{2}} = \frac{E(r_M)-r_f}{\sigma_M}
-\]</span> 整理上式可得： <span class="math display">\[
-E(r_i) = r_f + \frac{E(r_M)-r_f}{\sigma_M^2}\sigma_{iM}
-\]</span> 根据 <span class="math inline">\(\beta\)</span> 系数的定义 <span class="math inline">\(\beta_{iM} = \frac{Cov(r_i, r_M)}{Var(r_M)} = \frac{\sigma_{iM}}{\sigma_M^2}\)</span>，则代入上式有： <span class="math display">\[
-E(r_i) = r_f + \beta_{iM}(E(r_M)-r_f)
-\]</span> 不难发现这就是 CAPM 模型的公式，若以风险证券 <span class="math inline">\(i\)</span> 对应的 <span class="math inline">\(\beta_{iM}\)</span> 作为横坐标，以 <span class="math inline">\(i\)</span> 的期望收益 <span class="math inline">\(E(r_i)\)</span> 作为纵坐标，则该公式唯一确定的那条射线就是<strong>证券市场线</strong>。</p>
-<h4 id="证券市场线-security-market-line">2.2. 证券市场线 (Security Market Line)</h4>
-<p>在考虑单个证券时，不再用标准差来度量风险，而是使用该证券对应的 <span class="math inline">\(\beta\)</span> 系数（<span class="math inline">\(\beta_{iM}\)</span> 反映了单个证券 <span class="math inline">\(i\)</span> 与整体市场组合 M 的联动性，而不是 <span class="math inline">\(i\)</span> 自己的离散程度），以风险证券 <span class="math inline">\(i\)</span> 对应的 <span class="math inline">\(\beta_{iM}\)</span> 作为横坐标，以 <span class="math inline">\(i\)</span> 的期望收益 <span class="math inline">\(E(r_i)\)</span> 作为纵坐标作图，画出 SML：</p>
-<p><img src="/images/CAPM/8.png" /></p>
-<h3 id="cml-和-sml-的对比">3. CML 和 SML 的对比</h3>
-<ol type="1">
-<li>横轴：SML 以 <span class="math inline">\(\beta\)</span> 系数为横轴，仅衡量系统性风险；CML 以标准差为横轴，既包括系统风险又包括非系统风险；</li>
-<li>纵轴：均为是期望收益率 <span class="math inline">\(E(r_P)\)</span>；</li>
-<li>斜率：SML 的斜率为 <span class="math inline">\(E(r_M)-r_f\)</span>，也称风险溢价，表示系统风险的风险价格；CML 的斜率为 <span class="math inline">\(\frac{E(r_M)-r_f}{\sigma_M}\)</span>，表示整体风险的风险价格；</li>
-<li>SML 利用 <span class="math inline">\(\beta\)</span> 系数描述市场均单项资产或资产组合的风险；CML利用整个资产组合的标准差描述风险，且仅适用于风险资产和无风险资产构成的有效组合，而无法描述单个证券；</li>
-<li>SML 和 CML 中 <span class="math inline">\(r_M\)</span> 的含义略有不同：在 SML 中表示“必要收益率”，即投资“前”要求得到的最低收益率；在 CML 中表示“期望收益率”，投资“后”期望获得的报酬率；</li>
+\frac{\partial{\sigma_P}}{\partial{x_i}} = \frac{x_{i} \sigma_{i}^{2}-\sigma_{M}^{2}+x_{i} \sigma_{M}^{2}+\sigma_{i M}-2 x_{i} \sigma_{i M}}{\left(x_{i}^{2} \sigma_{i}^{2}+\left(1-x_{i}\right)^{2} \sigma_{M}^{2}+2 x_{i}\left(1-x_{i}\right) \sigma_{i M}\right)^{1 / 2}}</script><p>显然所有这样的投资组合 $P$，都位于线段 $iM$ 上。通过上述结果，可以计算出线段 $iM$ 的斜率为：</p>
+<script type="math/tex; mode=display">
+\frac{E(r_P)}{\sigma_P} = \frac{\partial{E(r_P)}}{\partial{x_i}}/\frac{\partial{\sigma_P}}{\partial{x_i}} = \frac{\left(E(r_{i})-E(r_{M})\right)\left(x_{i}^{2} \sigma_{i}^{2}+\left(1-x_{i}\right)^{2} \sigma_{M}^{2}+2 x_{i}\left(1-x_{i}\right) \sigma_{i M}\right)^{1 / 2}}{x_{i} \sigma_{i}^{2}-\sigma_{M}^{2}+x_{i} \sigma_{M}^{2}+\sigma_{i M}-2 x_{i} \sigma_{i M}}</script><p>若取 $x_i = 0$，即资产组合 $P$ 全部投资于市场组合 $M$，则显然此时线段 $iM$ 应该与资本市场线 CML 重合：即在 $x_i = 0$ 时，线段 $iM$ 的斜率应当等于 CML 的斜率。</p>
+<p>将 $x_i=0$ 代入上式可得 $iM$ 此时的斜率为：</p>
+<script type="math/tex; mode=display">
+\frac{E(r_P)}{\sigma_P}\bigg|_{x_i=0} = \frac{\left(E(r_{i})-E(r_{M})\right) \sigma_{M}}{\sigma_{i M}-\sigma_{M}^{2}}</script><p>该斜率与 CML 的斜率相等，即：</p>
+<script type="math/tex; mode=display">
+\frac{\left(E(r_{i})-E(r_{M})\right) \sigma_{M}}{\sigma_{i M}-\sigma_{M}^{2}} = \frac{E(r_M)-r_f}{\sigma_M}</script><p>整理上式可得：</p>
+<script type="math/tex; mode=display">
+E(r_i) = r_f + \frac{E(r_M)-r_f}{\sigma_M^2}\sigma_{iM}</script><p>根据 $\beta$ 系数的定义 $\beta_{iM} = \frac{Cov(r_i, r_M)}{Var(r_M)} = \frac{\sigma_{iM}}{\sigma_M^2}$，则代入上式有：</p>
+<script type="math/tex; mode=display">
+E(r_i) = r_f + \beta_{iM}(E(r_M)-r_f)</script><p>不难发现这就是 CAPM 模型的公式，若以风险证券 $i$ 对应的 $\beta_{iM}$ 作为横坐标，以 $i$ 的期望收益 $E(r_i)$ 作为纵坐标，则该公式唯一确定的那条射线就是<strong>证券市场线</strong>。</p>
+<h4 id="2-2-证券市场线-Security-Market-Line"><a href="#2-2-证券市场线-Security-Market-Line" class="headerlink" title="2.2. 证券市场线 (Security Market Line)"></a>2.2. 证券市场线 (Security Market Line)</h4><p>在考虑单个证券时，不再用标准差来度量风险，而是使用该证券对应的 $\beta$ 系数（$\beta_{iM}$ 反映了单个证券 $i$ 与整体市场组合 M 的联动性，而不是 $i$ 自己的离散程度），以风险证券 $i$ 对应的 $\beta_{iM}$ 作为横坐标，以 $i$ 的期望收益 $E(r_i)$ 作为纵坐标作图，画出 SML：</p>
+<p><img src="/images/CAPM/8.png" alt=""></p>
+<h3 id="3-CML-和-SML-的对比"><a href="#3-CML-和-SML-的对比" class="headerlink" title="3. CML 和 SML 的对比"></a>3. CML 和 SML 的对比</h3><ol>
+<li>横轴：SML 以 $\beta$ 系数为横轴，仅衡量系统性风险；CML 以标准差为横轴，既包括系统风险又包括非系统风险；</li>
+<li>纵轴：均为是期望收益率 $E(r_P)$；</li>
+<li>斜率：SML 的斜率为 $E(r_M)-r_f$，也称风险溢价，表示系统风险的风险价格；CML 的斜率为 $\frac{E(r_M)-r_f}{\sigma_M}$，表示整体风险的风险价格；</li>
+<li>SML 利用 $\beta$ 系数描述市场均单项资产或资产组合的风险；CML利用整个资产组合的标准差描述风险，且仅适用于风险资产和无风险资产构成的有效组合，而无法描述单个证券；</li>
+<li>SML 和 CML 中 $r_M$ 的含义略有不同：在 SML 中表示“必要收益率”，即投资“前”要求得到的最低收益率；在 CML 中表示“期望收益率”，投资“后”期望获得的报酬率；</li>
 <li>SML 的作用在于将“必要报酬率”带入股票估价模型，计算股票的内在价值；CML 作用在于根据期望收益率确定投资组合的比例。</li>
 </ol>
-<h2 id="拓展超额收益形式的capm模型">拓展：超额收益形式的CAPM模型</h2>
-<p>CAPM 模型的缺点也是很明显的：它的成立是基于一连串理想化的假设，这些假设在现实中并不全部成立，这必然使得 CAPM 的作用大打折扣：</p>
+<h2 id="拓展：超额收益形式的CAPM模型"><a href="#拓展：超额收益形式的CAPM模型" class="headerlink" title="拓展：超额收益形式的CAPM模型"></a>拓展：超额收益形式的CAPM模型</h2><p>CAPM 模型的缺点也是很明显的：它的成立是基于一连串理想化的假设，这些假设在现实中并不全部成立，这必然使得 CAPM 的作用大打折扣：</p>
 <ul>
-<li>在理想条件下，股票只能获得平均基准收益；而现实中无法满足那些假设要求，股票的收益也不仅只有基准收益，还包括了超额收益，即 <span class="math inline">\(\alpha\)</span> 收益；</li>
-<li><span class="math inline">\(\beta\)</span> 是一种系统性风险，是不可分散的，事实上风险证券中还存在另外一种风险：非系统风险，这是可以分散掉的风险，即随机误差项 <span class="math inline">\(\epsilon\)</span>；</li>
+<li>在理想条件下，股票只能获得平均基准收益；而现实中无法满足那些假设要求，股票的收益也不仅只有基准收益，还包括了超额收益，即 $\alpha$ 收益； </li>
+<li>$\beta$ 是一种系统性风险，是不可分散的，事实上风险证券中还存在另外一种风险：非系统风险，这是可以分散掉的风险，即随机误差项 $\epsilon$；</li>
 </ul>
-<p>加上上述两个因素，则有超额收益形式的 CAPM 模型： <span class="math display">\[
-E\left(r_{i}\right)=\alpha_i + r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right] + \epsilon_i
-\]</span></p>
-
+<p>加上上述两个因素，则有超额收益形式的 CAPM 模型：</p>
+<script type="math/tex; mode=display">
+E\left(r_{i}\right)=\alpha_i + r_{f}+\beta_{i M}\left[E\left(r_{M}\right)-r_{f}\right] + \epsilon_i</script>
     </article>
     <!-- license  -->
     
@@ -756,7 +740,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模型概述"><span class="toc-number">1.</span> <span class="toc-text">模型概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型假设"><span class="toc-number">2.</span> <span class="toc-text">模型假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型详情"><span class="toc-number">3.</span> <span class="toc-text">模型详情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型理解"><span class="toc-number">4.</span> <span class="toc-text">模型理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型原理"><span class="toc-number">5.</span> <span class="toc-text">模型原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资本市场线-capital-market-line"><span class="toc-number">5.1.</span> <span class="toc-text">1. 资本市场线 (Capital Market Line)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#图形推理过程"><span class="toc-number">5.1.1.</span> <span class="toc-text">1.1. 图形推理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#step.1"><span class="toc-number">5.1.1.1.</span> <span class="toc-text">Step.1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step.2"><span class="toc-number">5.1.1.2.</span> <span class="toc-text">Step.2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#step.3"><span class="toc-number">5.1.1.3.</span> <span class="toc-text">Step.3</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#切点组合"><span class="toc-number">5.1.2.</span> <span class="toc-text">1.2. 切点组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分离定理"><span class="toc-number">5.1.3.</span> <span class="toc-text">1.3. 分离定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#市场组合"><span class="toc-number">5.1.4.</span> <span class="toc-text">1.4. 市场组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#资本市场线-capital-market-line-1"><span class="toc-number">5.1.5.</span> <span class="toc-text">1.5. 资本市场线 (Capital Market Line)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线段-cm-之外的延长线也算资本市场线的原因"><span class="toc-number">5.1.5.1.</span> <span class="toc-text">1.5.1. 线段 CM 之外的延长线也算资本市场线的原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#资本市场线的几何公式表达"><span class="toc-number">5.1.5.2.</span> <span class="toc-text">1.5.2. 资本市场线的几何公式表达</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#证券市场线-security-market-line-i.e.-capm-模型的图形形式"><span class="toc-number">5.1.6.</span> <span class="toc-text">2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#证券市场线的公式表达-i.e.-capm-模型的推理过程sharpe-的证明"><span class="toc-number">5.1.6.1.</span> <span class="toc-text">2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#证券市场线-security-market-line"><span class="toc-number">5.1.7.</span> <span class="toc-text">2.2. 证券市场线 (Security Market Line)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cml-和-sml-的对比"><span class="toc-number">5.2.</span> <span class="toc-text">3. CML 和 SML 的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拓展超额收益形式的capm模型"><span class="toc-number">6.</span> <span class="toc-text">拓展：超额收益形式的CAPM模型</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模型概述"><span class="toc-number">1.</span> <span class="toc-text">模型概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型假设"><span class="toc-number">2.</span> <span class="toc-text">模型假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型详情"><span class="toc-number">3.</span> <span class="toc-text">模型详情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型理解"><span class="toc-number">4.</span> <span class="toc-text">模型理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模型原理"><span class="toc-number">5.</span> <span class="toc-text">模型原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-资本市场线-Capital-Market-Line"><span class="toc-number">5.1.</span> <span class="toc-text">1. 资本市场线 (Capital Market Line)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-图形推理过程"><span class="toc-number">5.1.1.</span> <span class="toc-text">1.1. 图形推理过程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-1"><span class="toc-number">5.1.1.1.</span> <span class="toc-text">Step.1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-2"><span class="toc-number">5.1.1.2.</span> <span class="toc-text">Step.2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-3"><span class="toc-number">5.1.1.3.</span> <span class="toc-text">Step.3</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-切点组合"><span class="toc-number">5.1.2.</span> <span class="toc-text">1.2. 切点组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-分离定理"><span class="toc-number">5.1.3.</span> <span class="toc-text">1.3. 分离定理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-4-市场组合"><span class="toc-number">5.1.4.</span> <span class="toc-text">1.4. 市场组合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-资本市场线-Capital-Market-Line"><span class="toc-number">5.1.5.</span> <span class="toc-text">1.5. 资本市场线 (Capital Market Line)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-1-线段-CM-之外的延长线也算资本市场线的原因"><span class="toc-number">5.1.5.1.</span> <span class="toc-text">1.5.1. 线段 CM 之外的延长线也算资本市场线的原因</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5-2-资本市场线的几何公式表达"><span class="toc-number">5.1.5.2.</span> <span class="toc-text">1.5.2. 资本市场线的几何公式表达</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-证券市场线-Security-Market-Line-i-e-CAPM-模型的图形形式"><span class="toc-number">5.1.6.</span> <span class="toc-text">2. 证券市场线 (Security Market Line) i.e. CAPM 模型的图形形式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-证券市场线的公式表达-i-e-CAPM-模型的推理过程（Sharpe-的证明）"><span class="toc-number">5.1.6.1.</span> <span class="toc-text">2.1. 证券市场线的公式表达 i.e. CAPM 模型的推理过程（Sharpe 的证明）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-证券市场线-Security-Market-Line"><span class="toc-number">5.1.7.</span> <span class="toc-text">2.2. 证券市场线 (Security Market Line)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CML-和-SML-的对比"><span class="toc-number">5.2.</span> <span class="toc-text">3. CML 和 SML 的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拓展：超额收益形式的CAPM模型"><span class="toc-number">6.</span> <span class="toc-text">拓展：超额收益形式的CAPM模型</span></a></li></ol>
                 
             </div>
         </div>
@@ -1057,9 +1041,30 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 24
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -1072,11 +1077,6 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/18</span><a class="archive-post-title" href= "/2021/09/18/PythonTips/" >PythonTips</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1140,6 +1140,11 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2021/03/18/PythonTips/" >PythonTips</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
         </li>
     
@@ -1170,6 +1175,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2020/09/23/Pytorch/" >pytorch</a>
         </li>
     
     
@@ -1209,19 +1219,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
-    
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
         <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pytorch"><span class="iconfont-archer">&#xe606;</span>Pytorch</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1260,11 +1272,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     
@@ -1301,7 +1313,24 @@ jsonContent:
     </div>
     <!-- async load share.js -->
     
-        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->    
      
     </body>
 </html>

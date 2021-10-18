@@ -20,21 +20,22 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta name="description" content="算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括时间资源和内存资源。复杂度也叫渐进复杂度，包括时间复杂度和空间复杂度，用来粗略分析执行效率与数据规模之间的增长趋势关系，越高阶复杂度的算法，执行效率越低。复杂度分析是数据结构与算法的核心精髓，旨在不依赖硬件、宿主环境、数据集的情况下，粗略推导，考究出算法的效率和资源消耗情况。">
+    <meta name="description" content="Python 中的一些小提示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Time Complexity">
-<meta property="og:url" content="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/index.html">
+<meta property="og:title" content="PythonTips">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/03/18/PythonTips/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
-<meta property="og:description" content="算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括时间资源和内存资源。复杂度也叫渐进复杂度，包括时间复杂度和空间复杂度，用来粗略分析执行效率与数据规模之间的增长趋势关系，越高阶复杂度的算法，执行效率越低。复杂度分析是数据结构与算法的核心精髓，旨在不依赖硬件、宿主环境、数据集的情况下，粗略推导，考究出算法的效率和资源消耗情况。">
+<meta property="og:description" content="Python 中的一些小提示。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-16T12:01:14.000Z">
-<meta property="article:modified_time" content="2021-09-08T10:34:53.722Z">
+<meta property="article:published_time" content="2021-03-18T07:05:14.000Z">
+<meta property="article:modified_time" content="2021-09-28T07:33:33.553Z">
 <meta property="article:author" content="Lingfeng Zhu">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Time Complexity · Vinn&#39;s Studio</title>
+    <title>PythonTips · Vinn&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -229,7 +230,7 @@
                 <a href="/" >Vinn&#39;s Studio</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Time Complexity</a>
+                <a href="#" class="post-name">PythonTips</a>
             </div>
     </div>
     
@@ -259,7 +260,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Time Complexity
+            PythonTips
             <!-- 404 -->
             
         </h1>
@@ -276,14 +277,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1k</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.6k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/11/16</span>
+                    <span class="post-intro-time">2021/03/18</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -407,57 +414,69 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <script type="text/javascript"
-  src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<p>算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括<strong>时间资源</strong>和<strong>内存资源</strong>。复杂度也叫渐进复杂度，包括<strong>时间复杂度</strong>和<strong>空间复杂度</strong>，用来粗略分析执行效率与数据规模之间的增长趋势关系，越高阶复杂度的算法，执行效率越低。复杂度分析是数据结构与算法的核心精髓，旨在不依赖硬件、宿主环境、数据集的情况下，粗略推导，考究出算法的效率和资源消耗情况。</p>
- <a id="more"></a>
-<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>在 CPU 的角度看待程序，那么每行代码执行的操作都是类似的，属于如下三种情况：</p>
-<ul>
-<li>读数据</li>
-<li>写数据</li>
-<li>运算</li>
-</ul>
-<p>尽管每段代码执行的时间都不一定一样，但在粗略的估计中，可以假设每行代码执行一次所需的时间均是单位时间（unit_time），一个算法的时间耗费就是该算法中所有语句的执行时间之和。</p>
-<h3 id="无穷小量与无穷大量的阶"><a href="#无穷小量与无穷大量的阶" class="headerlink" title="无穷小量与无穷大量的阶"></a>无穷小量与无穷大量的阶</h3><p>通俗的语言来说：</p>
-<ol>
-<li>$f(x)=o(g(x))$ 是指：在 $x$ 取极限的时候，$f(x)$ 相对于 $g(x)$ 是可以忽略的小量</li>
-<li>$f(x)=O(g(x))$ 是指：在 $x$ 取极限的时候，$g(x)$ 可以控制/限制住 $f(x)$，即 $f(x)$ 的增长规模/增长率/数量级不可能超过 $g(x)$ 的增长规模/增长率/数量级</li>
-</ol>
-<p>严谨定义：</p>
-<ol>
-<li>若 $\lim\limits_{x \to x_0}\frac{f(x)}{g(x)} = 0$，则表示当 $x \to x_0$ 时，$f(x)$ 趋于零的速度比 $g(x)$ 快。称为当 $x \to x_0$ 时，$f(x)$ 关于 $g(x)$ 是<strong>高阶无穷小量</strong>，记为 $f(x)=o(g(x))$；</li>
-<li>若存在 $A &gt; 0$ 使得在 $x_0$ 的某个去中心领域中，有 $\left|\frac{f(x)}{g(x)}\right| \leq A$ 成立，则称当 $x \to x_0$ 时，$\left|\frac{f(x)}{g(x)}\right|$ 是有界量，记为 $f(x)=O(g(x))$；</li>
-</ol>
-<h3 id="大-O-表示法"><a href="#大-O-表示法" class="headerlink" title="大 O 表示法"></a>大 O 表示法</h3><p>当问题规模增长时， 基本操作次数必定也会增长， 而我们关心的是这个执行次数以什么样的数量级增长。所谓数量级可以理解为增长率。这个所谓的数量级本质上就是算法的<strong>渐近时间复杂度</strong>（asymptotic time complexity）， 简称为时间复杂度。</p>
-<p>一个算法花费的时间与算法中语句的执行次数成正比例，若用语句的执行次数 $T(n)$（称为<strong>语句频度</strong>或<strong>时间频度</strong>，是问题规模 $n$ 的一个函数）代表算法的时间复杂度，则可以找到一个满足下式的显式辅助函数 $f(n)$ ，用于表示时间复杂度：</p>
-<script type="math/tex; mode=display">
-T(n) = O(f(n))</script><p>其中：</p>
-<ul>
-<li>$n$​：表示问题的规模/数据的规模；</li>
-<li>$T(n)$​：算法中语句的执行次数（称为<strong>语句频度</strong>或<strong>时间频度</strong>），代表代码的总执行时间，即时间复杂度；</li>
-<li>$f(n)$​：辅助函数，满足：当 $n \to \infty$​ 时，存在 $A$，使得 $\left|\frac{T(n)}{f(n)}\right| \leq A$ 成立​，即：$T(n)$ 的数量级不可能超过 $f(n)$</li>
-</ul>
-<h3 id="常见语句的时间复杂度"><a href="#常见语句的时间复杂度" class="headerlink" title="常见语句的时间复杂度"></a>常见语句的时间复杂度</h3><h4 id="in-语句"><a href="#in-语句" class="headerlink" title="in 语句"></a>in 语句</h4><p><code>python</code> 代码常用 <code>in</code> 来判断一个元素是否在 <code>list</code> 中，而对于长度为 n 的不同数据结构，<code>in</code> 语句判断的时间复杂度如下：</p>
+        <p>Python 中的一些小提示。</p>
+<a id="more"></a>
+<h2 id="关于引用-Reference"><a href="#关于引用-Reference" class="headerlink" title="关于引用 (Reference)"></a>关于引用 (Reference)</h2><h3 id="引用-Reference-与复制-Copy"><a href="#引用-Reference-与复制-Copy" class="headerlink" title="引用 (Reference) 与复制 (Copy)"></a>引用 (Reference) 与复制 (Copy)</h3><h4 id="引用：浅复制-Shallow-Copy"><a href="#引用：浅复制-Shallow-Copy" class="headerlink" title="引用：浅复制 (Shallow Copy)"></a>引用：浅复制 (Shallow Copy)</h4><p><strong>浅复制</strong>只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存。Python 中的<strong>引用</strong>就是一种浅复制。</p>
+<p>在将一个变量赋值给另一个变量时，若变量必须保存<strong>可变数据类型</strong>的值（例如列表或字典），Python 就会使用<strong>引用</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">source = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">target = source</span><br><span class="line"></span><br><span class="line">source[<span class="number">1</span>] = <span class="string">"hello"</span></span><br><span class="line">target[<span class="number">3</span>] = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">print(source)</span><br><span class="line">print(target)</span><br></pre></td></tr></table></figure>
+<p>此处 <code>target = source</code> 只会将指向 <code>source</code> 中列表的<strong>引用</strong>赋值到 <code>target</code>，而不是列表值的本身，这就意味存储在 <code>target</code> 和 <code>source</code> 中的值（此处的两个<strong>值</strong>就是两个<strong>引用</strong>）现在指向了同一个列表，因此，此时对其中任意一个变量的<strong>值</strong>进行<a href="#operation"><strong>操作</strong></a>都会影响到那个被指向的列表，从而<strong>同时</strong>改变两个变量的值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[0, <span class="string">'hello'</span>, 2, None, 4, 5]</span><br><span class="line">[0, <span class="string">'hello'</span>, 2, None, 4, 5]</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>in list : o(n)<br>in set  : o(1)<br>in dict : o(1)</p>
+<p><div id="operation">注意：</div><br>此处的<strong>操作</strong>指对变量的<strong>值</strong>的操作，不包括对变量本身的<strong>完全重新赋值</strong>。显然，只有对变量的值（此处的<strong>值</strong>就是<strong>引用</strong>）进行的<strong>修改</strong>才会影响到<strong>引用</strong>指向的内容，如果给这个变量赋一个全新的值，则它将直接覆盖掉这个<strong>引用</strong>，而不是对引用指向的内容进行修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">source = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">target = source</span><br><span class="line"></span><br><span class="line">source = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>]</span><br><span class="line"></span><br><span class="line">print(source)</span><br><span class="line">print(target)</span><br></pre></td></tr></table></figure>
+<p>此处对 <code>source</code> 进行了完全重新的赋值（而不是对 <code>source</code> 的值进行一些操作），因此，并不会对 <code>target</code> 造成影响：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>]</span><br><span class="line">[0, 1, 2, 3, 4, 5]</span><br></pre></td></tr></table></figure>
 </blockquote>
-<h4 id="for-语句"><a href="#for-语句" class="headerlink" title="for 语句"></a>for 语句</h4><p>一个 <code>for</code> 循环的时间复杂度等于<strong>循环次数</strong>乘以<strong>循环体代码</strong>的复杂度；</p>
-<h3 id="if-else-语句"><a href="#if-else-语句" class="headerlink" title="if-else 语句"></a>if-else 语句</h3><p> <code>if-else</code> 结构的复杂度取决于 <code>if</code> 的<strong>条件判断复杂度</strong>和两个<strong>分支部分的复杂度</strong>，总体复杂度取三者中数量级最大的那个；</p>
-<h3 id="常见复杂度量级"><a href="#常见复杂度量级" class="headerlink" title="常见复杂度量级"></a>常见复杂度量级</h3><p>当 $n \to \infty$ 时，有：</p>
-<script type="math/tex; mode=display">
-O(1) < O(\log{n}) < O(n) < O(n\log{n}) < O(n^2) < O(n^3) < O(2^n) < O(n!) < O(n^n)</script><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.cnblogs.com/jonins/p/9950799.html" target="_blank" rel="noopener">https://www.cnblogs.com/jonins/p/9950799.html</a></p>
-<p><a href="https://www.cnblogs.com/jonins/p/9956752.html" target="_blank" rel="noopener">https://www.cnblogs.com/jonins/p/9956752.html</a></p>
+<hr>
+<h4 id="深复制-Deep-Copy"><a href="#深复制-Deep-Copy" class="headerlink" title="深复制 (Deep Copy)"></a>深复制 (Deep Copy)</h4><p><strong>深复制</strong>会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会影响原对象。</p>
+<p>在将一个变量赋值给另一个变量时，若变量需要保存的是<strong>不可变数据类型</strong>的值（例如字符串、整型或元组），Python 变量就会<strong>深复制</strong>值本身：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">source = <span class="number">42</span></span><br><span class="line">target = source</span><br><span class="line"></span><br><span class="line">source = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">print(source)</span><br><span class="line">print(target)</span><br></pre></td></tr></table></figure>
+<p>将 42 赋值给变量 <code>source</code>，然后复制 <code>source</code> 的值并将其赋值给变量 <code>target</code>；当稍后将 <code>source</code> 中的值改变成 100 时，并不会影响 <code>target</code> 中的值（这是因为这两个变量是不同的变量，保存了不同的对象），因此输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">100</span><br><span class="line">45</span><br></pre></td></tr></table></figure>
+<h3 id="Python-复制模块"><a href="#Python-复制模块" class="headerlink" title="Python 复制模块"></a>Python 复制模块</h3><p>对于<strong>可变数据类型</strong>（例如列表或字典），如果不想使用<strong>引用（浅复制）</strong>，而是使用<strong>深复制</strong>进行赋值，可以使用 <code>copy</code> 库中的函数：</p>
+<ul>
+<li><code>copy.copy()</code>：对于<strong>简单</strong>对象（指不存在嵌套结构的对象），该函数可以实现<strong>深复制</strong>，但是对于一个<strong>复杂</strong>对象（指存在嵌套结构的列表或字典）的<strong>子对象</strong>，则只能实现<strong>浅复制</strong>；</li>
+<li><code>copy.deepcopy()</code>：对于所有对象，都能实现<strong>深复制</strong>；</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line">source = [<span class="number">1</span>, <span class="number">2</span>, [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line">target0 = source</span><br><span class="line">target1 = copy.copy(source)</span><br><span class="line">target2 = copy.deepcopy(source)</span><br><span class="line"></span><br><span class="line">print(target1 == target2) <span class="comment"># 查看 target1 与 target2 的值是否相等</span></span><br><span class="line">print(target1 <span class="keyword">is</span> target2) <span class="comment"># 查看 target1 与 target2 是否是同一个对象</span></span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改原列表的一个元素</span></span><br><span class="line">source[<span class="number">1</span>] = <span class="string">'two'</span></span><br><span class="line">print(target0)</span><br><span class="line">print(target1)</span><br><span class="line">print(target2)</span><br><span class="line">print()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改原列表的嵌套子列表中的一个元素</span></span><br><span class="line">source[<span class="number">2</span>][<span class="number">0</span>] = <span class="string">'three'</span></span><br><span class="line">print(target0)</span><br><span class="line">print(target1)</span><br><span class="line">print(target2)</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># target1 与 target2 的值相等，但是不是同一个对象（它们分别是原列表 source 的一个复制）</span></span><br><span class="line">True</span><br><span class="line">False</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改原列表的一个元素，直接赋值的 target0 使用了引用，因此受到影响；其他两个变量则不受影响</span></span><br><span class="line">[1, <span class="string">'two'</span>, [3, 4]]</span><br><span class="line">[1, 2, [3, 4]]</span><br><span class="line">[1, 2, [3, 4]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改原列表的嵌套子列表中的一个元素，只有完全深复制的 target2 不受影响</span></span><br><span class="line">[1, <span class="string">'two'</span>, [<span class="string">'three'</span>, 4]]</span><br><span class="line">[1, 2, [<span class="string">'three'</span>, 4]]</span><br><span class="line">[1, 2, [3, 4]]</span><br></pre></td></tr></table></figure>
+<h3 id="实例一：函数传递引用"><a href="#实例一：函数传递引用" class="headerlink" title="实例一：函数传递引用"></a>实例一：函数传递引用</h3><p>当函数被调用时：</p>
+<ul>
+<li><strong>可变数据类型</strong>（例如列表或字典）的实际参数以<strong>引用</strong>的形式传入函数中（即函数中的形式参数是实际参数的<strong>引用</strong>），针对这些形式参数的操作会反应到函数外的实际参数；</li>
+<li><strong>不可变数据类型</strong>（例如字符串、整型或元组）的实际参数则会以<strong>复制</strong>的形式传入函数中（即函数中的形式参数是实际参数的<strong>复制</strong>），针对这些形式参数的操作不会影响函数外的实际参数；</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">eggs</span><span class="params">(para1, para2)</span>:</span></span><br><span class="line">     para1.append(<span class="string">'bacon'</span>)</span><br><span class="line">     para2 += <span class="string">'bacon'</span></span><br><span class="line"></span><br><span class="line">former = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">'toast'</span>]</span><br><span class="line">latter = <span class="string">'Cheese'</span></span><br><span class="line"></span><br><span class="line">eggs(former, latter)</span><br><span class="line"></span><br><span class="line">print(former)</span><br><span class="line">print(latter)</span><br></pre></td></tr></table></figure>
+<p>此处 <code>eggs()</code> 函数分别对形式参数 <code>para1</code> 和 <code>para2</code> 做了一些操作，不同之处在于：</p>
+<ul>
+<li><code>para1</code> 的值来自实际参数 <code>former</code>，这是一个列表，因此传入到 <code>para1</code> 的是一个指向列表 <code>[1, 2, &#39;toast&#39;]</code> 的<strong>引用</strong>，所以 <code>eggs()</code> 进行的操作会反馈到 <code>former</code> 上；</li>
+<li><code>para2</code> 的值来自实际参数 <code>latter</code>，这是一个字符串，因此传入到 <code>para2</code> 的是字符串 <code>&#39;Cheese&#39;</code> 的一个<strong>复制</strong>，所以 <code>eggs()</code> 进行的操作不会影响 <code>latter</code>；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, <span class="string">'toast'</span>, <span class="string">'bacon'</span>]</span><br><span class="line">Cheese</span><br></pre></td></tr></table></figure>
+<h3 id="实例二：二维数组赋值问题"><a href="#实例二：二维数组赋值问题" class="headerlink" title="实例二：二维数组赋值问题"></a>实例二：二维数组赋值问题</h3><p>如果使用如下代码声明一个二维数组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray = [[<span class="number">0</span>] * <span class="number">5</span>] * <span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>则可以得到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0]]</span><br></pre></td></tr></table></figure>
+<p>如果想要对这个二维数组某个元素进行赋值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>会发现整列都会被赋值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0]]</span><br></pre></td></tr></table></figure>
+<p>这是因为 <code>[[0] * 5] * 9</code> 表示的是 9 个指向 <code>[0]*5</code> 这个列表的<strong>引用</strong>，所以当修改其中的某一个值时，整个列表都会被改变。</p>
+<p>换一种初始化方式可以解决这个问题：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray = [[<span class="number">0</span>] * <span class="number">5</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">9</span>)]</span><br></pre></td></tr></table></figure>
+<p>则可以对这个二维数组某个元素进行赋值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myArray[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 1, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0],</span><br><span class="line"> [0, 0, 0, 0, 0]]</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
-            <p>Original Link：<a href="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/">https://lingfengzhu.github.io/2020/11/16/Time-Complexity/</a> 
-            <p>Published：<a href="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/">November 16th 2020, 8:01:14 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/">September 8th 2021, 6:34:53 pm</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/03/18/PythonTips/">https://lingfengzhu.github.io/2021/03/18/PythonTips/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/03/18/PythonTips/">March 18th 2021, 3:05:14 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/03/18/PythonTips/">September 28th 2021, 3:33:33 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -466,16 +485,16 @@ O(1) < O(\log{n}) < O(n) < O(n\log{n}) < O(n^2) < O(n^3) < O(2^n) < O(n!) < O(n^
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/12/08/Gradient-Descent/" title= "Gradient Descent">
-                    <div class="nextTitle">Gradient Descent</div>
+                <a href= "/2021/05/08/Conda/" title= "Conda">
+                    <div class="nextTitle">Conda</div>
                 </a>
             
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/11/15/SortAlgorithm/" title= "Sort Algorithm">
-                    <div class="prevTitle">Sort Algorithm</div>
+                <a href= "/2021/02/05/Docker/" title= "Docker">
+                    <div class="prevTitle">Docker</div>
                 </a>
             
         </li>
@@ -610,7 +629,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂度分析"><span class="toc-number">1.</span> <span class="toc-text">复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无穷小量与无穷大量的阶"><span class="toc-number">1.1.</span> <span class="toc-text">无穷小量与无穷大量的阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大-O-表示法"><span class="toc-number">1.2.</span> <span class="toc-text">大 O 表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见语句的时间复杂度"><span class="toc-number">1.3.</span> <span class="toc-text">常见语句的时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#in-语句"><span class="toc-number">1.3.1.</span> <span class="toc-text">in 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-语句"><span class="toc-number">1.3.2.</span> <span class="toc-text">for 语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#if-else-语句"><span class="toc-number">1.4.</span> <span class="toc-text">if-else 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见复杂度量级"><span class="toc-number">1.5.</span> <span class="toc-text">常见复杂度量级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">2.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于引用-Reference"><span class="toc-number">1.</span> <span class="toc-text">关于引用 (Reference)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引用-Reference-与复制-Copy"><span class="toc-number">1.1.</span> <span class="toc-text">引用 (Reference) 与复制 (Copy)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用：浅复制-Shallow-Copy"><span class="toc-number">1.1.1.</span> <span class="toc-text">引用：浅复制 (Shallow Copy)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#深复制-Deep-Copy"><span class="toc-number">1.1.2.</span> <span class="toc-text">深复制 (Deep Copy)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-复制模块"><span class="toc-number">1.2.</span> <span class="toc-text">Python 复制模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例一：函数传递引用"><span class="toc-number">1.3.</span> <span class="toc-text">实例一：函数传递引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例二：二维数组赋值问题"><span class="toc-number">1.4.</span> <span class="toc-text">实例二：二维数组赋值问题</span></a></li></ol></li></ol>
                 
             </div>
         </div>
@@ -1183,24 +1202,7 @@ jsonContent:
     </div>
     <!-- async load share.js -->
     
-        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
      
     </body>
 </html>

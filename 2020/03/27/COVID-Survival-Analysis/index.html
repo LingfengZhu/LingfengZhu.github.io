@@ -423,90 +423,40 @@ height:50vh;
     <article class="article-entry">
         <p>On March 11, 2020, the World Health Organization (WHO) declared COVID-19 a global pandemic. COVID-19 is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). It has now spread over 185 countries or territories with more than 300,000 reported cases, claiming the lives of more than 13,000. Amid the escalating fear over the spread of the disease, it is nonetheless often reported in the mass media that vulnerability to COVID-19 is highly age-specific, with older adults the most vulnerable to its worst effects. Indeed, according to a recent <a href="https://github.com/cmrivers/ncov" target="_blank" rel="noopener">study</a> conducted by the China Centers for Disease Control and Prevention (China CDC), the case fatality rate (CFR; proportion of deaths among the confirmed cases) for patients 70 years or older can be as high as 8%-14.8%, while that for the non-elderly (&lt;50 years old) remains steadily below 0.4%.</p>
 <p>To confirm the validity of such reports and findings, we aim to formally assess the age difference in the case fatality rate by analyzing publicly available COVID-19 epidemiological datasets using survival analysis methodology.</p>
-##
-<center>
-Data Set
-</center>
-<hr />
-<p>To that end, we use the online data pulled from the Korea Centers for Disease Control &amp; Prevention (Korea CDC) and prepared by the DS4C (Data Science for COVID-19) Project. The particular dataset of interest is <code>PatientInfo.csv</code>, which contains subject-level data for over 2000 confirmed COVID-19 cases in South Korea. Key variables include:</p>
+<h2 id="Data-Set"><a href="#Data-Set" class="headerlink" title="Data Set"></a><center>Data Set</center></h2><hr>
+<p>To that end, we use the online data pulled from the Korea Centers for Disease Control &amp; Prevention (Korea CDC) and prepared by the DS4C (Data Science for COVID-19) Project. The particular dataset of interest is <code>PatientInfo.csv</code>, which contains subject-level data for over 2000 confirmed COVID-19 cases in South Korea. Key variables include: </p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">patient_id: the ID of the patient</span><br><span class="line">sex: the sex of the patient </span><br><span class="line">age: the age of the patient </span><br><span class="line">confirmed_date: the date of being confirmed</span><br><span class="line">released_date: the date of being released</span><br><span class="line">deceased_date: the date of being deceased (death)</span><br><span class="line">state: isolated / released / deceased</span><br></pre></td></tr></table></figure>
-##
-<center>
-Data Cleaning
-</center>
-<hr />
+<h2 id="Data-Cleaning"><a href="#Data-Cleaning" class="headerlink" title="Data Cleaning"></a><center>Data Cleaning</center></h2><hr>
 <p>To perform the data cleaning, I use different methods for different patients. My main ideas are as follows.</p>
-<h3 id="missing-state">Missing State</h3>
-<p>For those with a missing state variable, I will just drop them. That was because from my perspective, state is an important variable in survival analysis. Without state, we do not know whether an observation is deceased or not. To avoid any mistake caused by incorrect state imputation, I choose to drop those with a missing state variable.</p>
-<h3 id="isolated-patients">Isolated Patients</h3>
-<p>For the isolated patients, I will use the date on which the data set is last updated (2020-03-21) as the censoring date.</p>
-<h3 id="released-patients">Released Patients</h3>
-<p>For the released patients, I will use the release date as censoring date. If the released date is not provided but the confirmed date is provided, I will use the "confirmed date + overall average isolation time duration (which is about 14 days)" as the censoring date.</p>
-<h3 id="deceased-patients">Deceased Patients</h3>
-<p>For the deceased patients, the deceased date is just the death date. For those with a missing deceased date, if the confirmed date is provided, I will use "confirmed date + overall average time duration between confirmed and death" as the death date.</p>
-<h3 id="missing-confirmed-date">Missing Confirmed Date</h3>
-<p>For those with a missing confirmed date, if the censoring/death date is available from above methods and the original data set, I will perform a weighted sampling to pick a date between the first confirmed date among all the patients and this patient's censoring/death date as his/her confirmed date. The weight is generated from the counts of every confirmed dates: The more patients were confirmed during a specific date, the higher weight this date will receive.</p>
-<h3 id="missing-age">Missing Age</h3>
-<p>For those with a missing age, if the birth year is available, I will calculate his/her age from his/her birth year. If a patient has both missing age and missing birth year, I will drop this observation because of the importance of age in this analysis. (For calculation of crude CFRs, maybe we can also include those with missing age as separate categories in order to gain a fuller picture. )</p>
-<h3 id="missing-gender">Missing Gender</h3>
-<p>For those with a missing gender, I will randomly assign a gender to them: the probabilities of being assigned to be a male and being assigned to be a female are the same. (Also. you can include those with missing gender as separate categories. )</p>
-<h3 id="outcome-of-interest">Outcome of interest</h3>
-<p>Time from being confirmed and censoring/death is the outcome of interest. For those with a confirmed date after his/her deceased date, I will drop them because they were confirmed after their death.</p>
-##
-<center>
-Descriptive Analysis
-</center>
-<hr />
+<h3 id="Missing-State"><a href="#Missing-State" class="headerlink" title="Missing State"></a>Missing State</h3><p>For those with a missing state variable, I will just drop them. That was because from my perspective, state is an important variable in survival analysis. Without state, we do not know whether an observation is deceased or not. To avoid any mistake caused by incorrect state imputation, I choose to drop those with a missing state variable.</p>
+<h3 id="Isolated-Patients"><a href="#Isolated-Patients" class="headerlink" title="Isolated Patients"></a>Isolated Patients</h3><p>For the isolated patients, I will use the date on which the data set is last updated (2020-03-21) as the censoring date.</p>
+<h3 id="Released-Patients"><a href="#Released-Patients" class="headerlink" title="Released Patients"></a>Released Patients</h3><p> For the released patients, I will use the release date as censoring date. If the released date is not provided but the confirmed date is provided, I will use the “confirmed date + overall average isolation time duration (which is about 14 days)” as the censoring date.</p>
+<h3 id="Deceased-Patients"><a href="#Deceased-Patients" class="headerlink" title="Deceased Patients"></a>Deceased Patients</h3><p>For the deceased patients, the deceased date is just the death date. For those with a missing deceased date, if the confirmed date is provided, I will use “confirmed date + overall average time duration between confirmed and death” as the death date.</p>
+<h3 id="Missing-Confirmed-Date"><a href="#Missing-Confirmed-Date" class="headerlink" title="Missing Confirmed Date"></a>Missing Confirmed Date</h3><p>For those with a missing confirmed date, if the censoring/death date is available from above methods and the original data set, I will perform a weighted sampling to pick a date between the first confirmed date among all the patients and this patient’s censoring/death date as his/her confirmed date. The weight is generated from the counts of every confirmed dates: The more patients were confirmed during a specific date, the higher weight this date will receive.</p>
+<h3 id="Missing-Age"><a href="#Missing-Age" class="headerlink" title="Missing Age"></a>Missing Age</h3><p>For those with a missing age, if the birth year is available, I will calculate his/her age from his/her birth year. If a patient has both missing age and missing birth year, I will drop this observation because of the importance of age in this analysis. (For calculation of crude CFRs, maybe we can also include those with missing age as separate categories in order to gain a fuller picture. )</p>
+<h3 id="Missing-Gender"><a href="#Missing-Gender" class="headerlink" title="Missing Gender"></a>Missing Gender</h3><p>For those with a missing gender, I will randomly assign a gender to them: the probabilities of being assigned to be a male and being assigned to be a female are the same. (Also. you can include those with missing gender as separate categories. )</p>
+<h3 id="Outcome-of-interest"><a href="#Outcome-of-interest" class="headerlink" title="Outcome of interest"></a>Outcome of interest</h3><p>Time from being confirmed and censoring/death is the outcome of interest. For those with a confirmed date after his/her deceased date, I will drop them because they were confirmed after their death.</p>
+<h2 id="Descriptive-Analysis"><a href="#Descriptive-Analysis" class="headerlink" title="Descriptive Analysis"></a><center>Descriptive Analysis</center></h2><hr>
 <p>Divide the study sample into 5 age groups: &lt;= 40s, 50s, 60s​, 70s and &gt;= 80s. <a href="#CFRs">Figure 1</a> shows the age-speciﬁc CFRs calculated from both this cleaned data and the study by the China CDC. From <a href="#CFRs">Figure 1</a>, we can see that for younger patients (especially those who &lt;=50s​), CFRs from this data set and the study by China CDC are very close to each other. However, for older patients (those who&gt;= 60s​), CFRs from China CDC are higher than those from this data set.</p>
-<div id="CFRs">
-<center>
-Figure 1: Age-specific CFRs
-</center>
-</div>
-<p><img src="/images/COVID-Survival-Analysis/CFRs.png" /></p>
-##
-<center>
-Survival Analysis
-</center>
-<hr />
-<h3 id="km-curves-log-rank-test">KM Curves &amp; Log-rank Test</h3>
-<p><a href="#KMs">Figure 2</a> shows the gender-speciﬁc and age-speciﬁc Kaplan—Meier curves for the case survival probabilities.</p>
-<div id="KMs">
-<center>
-Figure 2: KM Curves
-</center>
-</div>
-<p><img src="/images/COVID-Survival-Analysis/KMs.png" /></p>
+<p><div id="CFRs"><center>Figure 1: Age-specific CFRs</center></div><br><img src="/images/COVID-Survival-Analysis/CFRs.png" alt=""></p>
+<h2 id="Survival-Analysis"><a href="#Survival-Analysis" class="headerlink" title="Survival Analysis"></a><center>Survival Analysis</center></h2><hr>
+<h3 id="KM-Curves-amp-Log-rank-Test"><a href="#KM-Curves-amp-Log-rank-Test" class="headerlink" title="KM Curves &amp; Log-rank Test"></a>KM Curves &amp; Log-rank Test</h3><p><a href="#KMs">Figure 2</a> shows the gender-speciﬁc and age-speciﬁc Kaplan—Meier curves for the case survival probabilities. </p>
+<p><div id="KMs"><center>Figure 2: KM Curves</center></div><br><img src="/images/COVID-Survival-Analysis/KMs.png" alt=""></p>
 <p>The gender-stratiﬁed log-rank test results can be seen as follows:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Call:</span><br><span class="line">survdiff(formula = Surv(time, state) ~ age + strata(sex), data = covid)</span><br><span class="line"></span><br><span class="line">             N Observed Expected (O-E)^<span class="number">2</span>/E (O-E)^<span class="number">2</span>/V</span><br><span class="line">age=&lt;=40s <span class="number">1143</span>        <span class="number">2</span>    <span class="number">17.24</span>   <span class="number">13.4701</span>   <span class="number">33.3935</span></span><br><span class="line">age=50s    <span class="number">394</span>        <span class="number">5</span>     <span class="number">5.40</span>    <span class="number">0.0292</span>    <span class="number">0.0361</span></span><br><span class="line">age=60s    <span class="number">238</span>        <span class="number">6</span>     <span class="number">3.55</span>    <span class="number">1.6964</span>    <span class="number">1.9366</span></span><br><span class="line">age=70s    <span class="number">119</span>        <span class="number">8</span>     <span class="number">1.57</span>   <span class="number">26.2214</span>   <span class="number">27.7918</span></span><br><span class="line">age=&gt;=80s  <span class="number">103</span>        <span class="number">8</span>     <span class="number">1.24</span>   <span class="number">36.7229</span>   <span class="number">38.5403</span></span><br><span class="line"></span><br><span class="line"> Chisq= <span class="number">78.6</span>  on <span class="number">4</span> degrees of freedom, p= <span class="number">3e-16</span></span><br></pre></td></tr></table></figure>
-<p>The p-value is about <code>3e-16</code>, suggesting that, controlling for gender status, age has a highly significant effect on the survival rate. From the results above in this section, we may come to a conclusion that COVID-19 is more dangerous for older patients than younger patients, and females are more likely to survival than males to some extent.</p>
-<h3 id="cox-proportional-hazards-model">Cox proportional hazards model</h3>
-<p>I also fitted a Cox proportional hazards model with age groups (with &gt;=80s as reference group) and gender as covariates. The summary table of this model is as follows:</p>
+<p>The p-value is about <code>3e-16</code>,  suggesting that, controlling for gender status, age has a highly significant effect on the survival rate.<br>From the results above in this section, we may come to a conclusion that COVID-19 is more dangerous for older patients than younger patients, and females are more likely to survival than males to some extent.</p>
+<h3 id="Cox-proportional-hazards-model"><a href="#Cox-proportional-hazards-model" class="headerlink" title="Cox proportional hazards model"></a>Cox proportional hazards model</h3><p>I also fitted a Cox proportional hazards model with age groups (with &gt;=80s as reference group) and gender as covariates. The summary table of this model is as follows:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Call:</span><br><span class="line">coxph(formula = Surv(time, state) ~ age + sex, data = covid)</span><br><span class="line"></span><br><span class="line">  n= <span class="number">1997</span>, number of events= <span class="number">29</span> </span><br><span class="line"></span><br><span class="line">              coef exp(coef) se(coef)      z Pr(&gt;|z|)    </span><br><span class="line">age&lt;=40s  -<span class="number">4.05347</span>   <span class="number">0.01736</span>  <span class="number">0.79237</span> -<span class="number">5.116</span> <span class="number">3.13e-07</span> ***</span><br><span class="line">age50s    -<span class="number">1.95918</span>   <span class="number">0.14097</span>  <span class="number">0.57081</span> -<span class="number">3.432</span> <span class="number">0.000599</span> ***</span><br><span class="line">age60s    -<span class="number">1.36863</span>   <span class="number">0.25445</span>  <span class="number">0.54248</span> -<span class="number">2.523</span> <span class="number">0.011638</span> *  </span><br><span class="line">age70s    -<span class="number">0.25268</span>   <span class="number">0.77671</span>  <span class="number">0.50066</span> -<span class="number">0.505</span> <span class="number">0.613768</span>    </span><br><span class="line">sexfemale -<span class="number">1.46996</span>   <span class="number">0.22993</span>  <span class="number">0.41769</span> -<span class="number">3.519</span> <span class="number">0.000433</span> ***</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">          exp(coef) exp(-coef) lower <span class="number">.95</span> upper <span class="number">.95</span></span><br><span class="line">age&lt;=40s    <span class="number">0.01736</span>     <span class="number">57.597</span>  <span class="number">0.003674</span>   <span class="number">0.08205</span></span><br><span class="line">age50s      <span class="number">0.14097</span>      <span class="number">7.094</span>  <span class="number">0.046054</span>   <span class="number">0.43153</span></span><br><span class="line">age60s      <span class="number">0.25445</span>      <span class="number">3.930</span>  <span class="number">0.087872</span>   <span class="number">0.73683</span></span><br><span class="line">age70s      <span class="number">0.77671</span>      <span class="number">1.287</span>  <span class="number">0.291140</span>   <span class="number">2.07215</span></span><br><span class="line">sexfemale   <span class="number">0.22993</span>      <span class="number">4.349</span>  <span class="number">0.101406</span>   <span class="number">0.52137</span></span><br><span class="line"></span><br><span class="line">Concordance= <span class="number">0.867</span>  (se = <span class="number">0.029</span> )</span><br><span class="line">Likelihood ratio test= <span class="number">63.33</span>  on <span class="number">5</span> df,   p=<span class="number">2e-12</span></span><br><span class="line">Wald test            = <span class="number">45.92</span>  on <span class="number">5</span> df,   p=<span class="number">9e-09</span></span><br><span class="line">Score (logrank) test = <span class="number">82.33</span>  on <span class="number">5</span> df,   p=<span class="number">3e-16</span></span><br></pre></td></tr></table></figure>
 <p>From <a href="#CoxSnell">Figure 3</a>, We can see that the points are mostly clustered around the identity line, indicating that overall the model fits the data reasonably well.</p>
-<div id="CoxSnell">
-<center>
-Figure 3: Nelsen–Aalen estimates of Cox-Snell residuals
-</center>
-</div>
-<p><img src="/images/COVID-Survival-Analysis/CoxSnell.png" /></p>
+<p><div id="CoxSnell"><center>Figure 3: Nelsen–Aalen estimates of Cox-Snell residuals</center></div><br><img src="/images/COVID-Survival-Analysis/CoxSnell.png" alt=""></p>
 <p>I also conducted the chi-square tests on proportionality. The test results are as follows:</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">              rho  chisq     p</span><br><span class="line">age&lt;=40s  -<span class="number">0.2459</span> <span class="number">1.7308</span> <span class="number">0.188</span></span><br><span class="line">age50s    -<span class="number">0.1142</span> <span class="number">0.3825</span> <span class="number">0.536</span></span><br><span class="line">age60s     <span class="number">0.0807</span> <span class="number">0.1862</span> <span class="number">0.666</span></span><br><span class="line">age70s    -<span class="number">0.1259</span> <span class="number">0.4570</span> <span class="number">0.499</span></span><br><span class="line">sexfemale -<span class="number">0.0432</span> <span class="number">0.0531</span> <span class="number">0.818</span></span><br><span class="line">GLOBAL         <span class="literal">NA</span> <span class="number">3.1689</span> <span class="number">0.674</span></span><br></pre></td></tr></table></figure>
 <p>The p-value of global test on proportionality was 0.674, greater than 0.05, which means that the global proportionality test was non-significant.</p>
-<h3 id="wald-test">Wald Test</h3>
-<p>Finally, I conducted a Wald test on the effect of age (chi-square with 4 degrees of freedom). The resulting p-value was about <code>2.5e-7​</code>, which indicates that age does have significant effect on the survival rate of COVID-19.</p>
+<h3 id="Wald-Test"><a href="#Wald-Test" class="headerlink" title="Wald Test"></a>Wald Test</h3><p>Finally, I conducted a Wald test on the effect of age (chi-square with 4 degrees of freedom). The resulting p-value was about <code>2.5e-7​</code>, which indicates that age does have significant effect on the survival rate of COVID-19.</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Wald test with df of 4</span></span><br><span class="line"><span class="comment"># H_0: beta_1=beta_2=beta_3=beta_4=0</span></span><br><span class="line">beta_q = obj$coefficients[<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line">Sigma_q = obj$var[<span class="number">1</span>:<span class="number">4</span>,<span class="number">1</span>:<span class="number">4</span>]</span><br><span class="line"><span class="comment">#chisq statistic with 4 d.f.</span></span><br><span class="line">chisqStat = t(beta_q)%*%solve(Sigma_q)%*%beta_q</span><br><span class="line">print(chisqStat) <span class="comment"># 36.30768</span></span><br><span class="line"><span class="comment">#p-value</span></span><br><span class="line">pval = <span class="number">1</span> - pchisq(chisqStat, df = <span class="number">4</span>)</span><br><span class="line">print(pval) <span class="comment"># 2.501175e-07</span></span><br></pre></td></tr></table></figure>
-##
-<center>
-Summary
-</center>
-<hr />
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a><center>Summary</center></h2><hr>
 <p>To draw a conclusion, above analysis indicates that patients suffering from COVID-19 with different age and gender have different survival rate. In general, younger patients are more likely to survive compared with older patients. Besides, female patients, rather than male patients suffering from COVID-19, are more likely to survive.</p>
-##
-<center>
-Acknowledgement
-</center>
-<hr />
+<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a><center>Acknowledgement</center></h2><hr>
 <p>BMI/STAT 741, UW-Madison</p>
 <p><br/></p>
 <p><br/></p>
@@ -672,7 +622,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#missing-state"><span class="toc-number">1.</span> <span class="toc-text">Missing State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isolated-patients"><span class="toc-number">2.</span> <span class="toc-text">Isolated Patients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#released-patients"><span class="toc-number">3.</span> <span class="toc-text">Released Patients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deceased-patients"><span class="toc-number">4.</span> <span class="toc-text">Deceased Patients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#missing-confirmed-date"><span class="toc-number">5.</span> <span class="toc-text">Missing Confirmed Date</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#missing-age"><span class="toc-number">6.</span> <span class="toc-text">Missing Age</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#missing-gender"><span class="toc-number">7.</span> <span class="toc-text">Missing Gender</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#outcome-of-interest"><span class="toc-number">8.</span> <span class="toc-text">Outcome of interest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#km-curves-log-rank-test"><span class="toc-number">9.</span> <span class="toc-text">KM Curves &amp; Log-rank Test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cox-proportional-hazards-model"><span class="toc-number">10.</span> <span class="toc-text">Cox proportional hazards model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wald-test"><span class="toc-number">11.</span> <span class="toc-text">Wald Test</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Set"><span class="toc-number">1.</span> <span class="toc-text">Data Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Cleaning"><span class="toc-number">2.</span> <span class="toc-text">Data Cleaning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-State"><span class="toc-number">2.1.</span> <span class="toc-text">Missing State</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Isolated-Patients"><span class="toc-number">2.2.</span> <span class="toc-text">Isolated Patients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Released-Patients"><span class="toc-number">2.3.</span> <span class="toc-text">Released Patients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deceased-Patients"><span class="toc-number">2.4.</span> <span class="toc-text">Deceased Patients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-Confirmed-Date"><span class="toc-number">2.5.</span> <span class="toc-text">Missing Confirmed Date</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-Age"><span class="toc-number">2.6.</span> <span class="toc-text">Missing Age</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-Gender"><span class="toc-number">2.7.</span> <span class="toc-text">Missing Gender</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Outcome-of-interest"><span class="toc-number">2.8.</span> <span class="toc-text">Outcome of interest</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Descriptive-Analysis"><span class="toc-number">3.</span> <span class="toc-text">Descriptive Analysis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Survival-Analysis"><span class="toc-number">4.</span> <span class="toc-text">Survival Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#KM-Curves-amp-Log-rank-Test"><span class="toc-number">4.1.</span> <span class="toc-text">KM Curves &amp; Log-rank Test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cox-proportional-hazards-model"><span class="toc-number">4.2.</span> <span class="toc-text">Cox proportional hazards model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wald-Test"><span class="toc-number">4.3.</span> <span class="toc-text">Wald Test</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Acknowledgement"><span class="toc-number">6.</span> <span class="toc-text">Acknowledgement</span></a></li></ol>
                 
             </div>
         </div>
@@ -973,9 +923,30 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 24
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -988,11 +959,6 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/18</span><a class="archive-post-title" href= "/2021/09/18/PythonTips/" >PythonTips</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1056,6 +1022,11 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2021/03/18/PythonTips/" >PythonTips</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
         </li>
     
@@ -1086,6 +1057,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2020/09/23/Pytorch/" >pytorch</a>
         </li>
     
     
@@ -1125,19 +1101,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
-    
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
         <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pytorch"><span class="iconfont-archer">&#xe606;</span>Pytorch</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1176,11 +1154,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     

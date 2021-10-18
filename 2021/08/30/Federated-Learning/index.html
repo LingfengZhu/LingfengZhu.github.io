@@ -284,7 +284,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">3.3k</span>Reading time: <span class="post-count reading-time">11 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.5k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -415,65 +415,51 @@ height:50vh;
     <article class="article-entry">
         <p>联邦机器学习（又名联邦学习、联合学习、联盟学习）是一个机器学习框架，能有效帮助多个机构在满足用户隐私保护、数据安全和政府法规的要求下，进行数据使用和机器学习建模。</p>
 <a id="more"></a>
-<h2 id="联邦学习背景和重要性">联邦学习背景和重要性</h2>
-<h3 id="数据孤岛">数据孤岛</h3>
-<p>数据源之间存在着<strong>难以打破的壁垒</strong>，一般情况下人工智能的所需要的数据会涉及多个领域，例如在基于人工智能的产品推荐服务中，产品销售方拥有产品的数据、用户购买商 品的数据，但是没有用户购买能力和支付习惯的数据。在大多数行业中，数据是以<strong>孤岛</strong>的形式存在的，由于<strong>行业竞争、隐私安全、行政手续复杂</strong>等问题，即使是在同一个公司的不同部门之间实现数据整合也面临着重重阻力，在现实中想要将分散在各地、各个机构的数据进行整合几乎是不可能的，或者说所需的成本是巨大的。</p>
-<h3 id="gdpr与人工智能挑战">GDPR与人工智能挑战</h3>
-<p>随着大数据的进一步发展，重视数据隐私和安全已经成为了世界性的趋势。每一次公众数据的泄露都会引起媒体和公众的极大关注，例如 Facebook 的数据泄露事件就引起了大规模的抗议行动。同时各国都在加强对数据安全和隐私的保护，欧盟引入的新法案《通用数据保护条例》（General Data Protection Regulation, GDPR）表明，对用户数据隐私和安全管理的日趋严格将是世界趋势，这给人工智能领域带来了前所未有的挑战。研究界和企业界目前的情况是：收集数据的一方通常不是使用数据的一方，如 A 方收集数据，转移到 B 方清洗，再转移到 C 方建模，最后将模型卖给 D 方使用。这种数据在实体间转移、交换和交易的形式违反了 GDPR，并可能遭到法案严厉的惩罚。人工智能的学界和企业界目前暂无较好的解决方案来应对这些挑战。</p>
-<h3 id="联邦学习成为可行的解决方案">联邦学习成为可行的解决方案</h3>
-<p>如何在满足数据隐私、安全和监管要求的前提下，设计一个机器学习框架，让人工智能系统能够更加高效、准确的共同使用各自的数据，是当前人工智能发展的一个重要课题。人们把研究的重点转移到如何解决<strong>数据孤岛</strong>的问题，提出一个满足隐私保护和数据安全的一个可行的解决方案，叫做联邦学习。联邦学习的特点是：</p>
+<h2 id="联邦学习背景和重要性"><a href="#联邦学习背景和重要性" class="headerlink" title="联邦学习背景和重要性"></a>联邦学习背景和重要性</h2><h3 id="数据孤岛"><a href="#数据孤岛" class="headerlink" title="数据孤岛"></a>数据孤岛</h3><p>数据源之间存在着<strong>难以打破的壁垒</strong>，一般情况下人工智能的所需要的数据会涉及多个领域，例如在基于人工智能的产品推荐服务中，产品销售方拥有产品的数据、用户购买商 品的数据，但是没有用户购买能力和支付习惯的数据。在大多数行业中，数据是以<strong>孤岛</strong>的形式存在的，由于<strong>行业竞争、隐私安全、行政手续复杂</strong>等问题，即使是在同一个公司的不同部门之间实现数据整合也面临着重重阻力，在现实中想要将分散在各地、各个机构的数据进行整合几乎是不可能的，或者说所需的成本是巨大的。</p>
+<h3 id="GDPR与人工智能挑战"><a href="#GDPR与人工智能挑战" class="headerlink" title="GDPR与人工智能挑战"></a>GDPR与人工智能挑战</h3><p>随着大数据的进一步发展，重视数据隐私和安全已经成为了世界性的趋势。每一次公众数据的泄露都会引起媒体和公众的极大关注，例如 Facebook 的数据泄露事件就引起了大规模的抗议行动。同时各国都在加强对数据安全和隐私的保护，欧盟引入的新法案《通用数据保护条例》（General Data Protection Regulation, GDPR）表明，对用户数据隐私和安全管理的日趋严格将是世界趋势，这给人工智能领域带来了前所未有的挑战。研究界和企业界目前的情况是：收集数据的一方通常不是使用数据的一方，如 A 方收集数据，转移到 B 方清洗，再转移到 C 方建模，最后将模型卖给 D 方使用。这种数据在实体间转移、交换和交易的形式违反了 GDPR，并可能遭到法案严厉的惩罚。人工智能的学界和企业界目前暂无较好的解决方案来应对这些挑战。</p>
+<h3 id="联邦学习成为可行的解决方案"><a href="#联邦学习成为可行的解决方案" class="headerlink" title="联邦学习成为可行的解决方案"></a>联邦学习成为可行的解决方案</h3><p>如何在满足数据隐私、安全和监管要求的前提下，设计一个机器学习框架，让人工智能系统能够更加高效、准确的共同使用各自的数据，是当前人工智能发展的一个重要课题。人们把研究的重点转移到如何解决<strong>数据孤岛</strong>的问题，提出一个满足隐私保护和数据安全的一个可行的解决方案，叫做联邦学习。联邦学习的特点是：</p>
 <ul>
 <li>各方数据都保留在本地，不泄露隐私也不违反法规；</li>
 <li>各个参与者联合数据建立虚拟的共有模型，并且共同获益的体系；</li>
 <li>在联邦学习的体系下，各个参与者的身份和地位相同；</li>
 <li>联邦学习的建模效果和将整个数据集放在一处建模的效果相同或至少相差不大；</li>
 </ul>
-<h2 id="联邦学习的定义">联邦学习的定义</h2>
-<h3 id="联邦学习概述">联邦学习概述</h3>
-<p>假设有两个不同的企业 A 和 B，它们拥有不同数据。比如，企业 A 有用户特征数据；企业 B 有产品特征数据和标注数据。这两个企业按照上述 GDPR 准则是不能粗暴地把双方数据加以合并的，因为数据的原始提供者，即他们各自的用户并没有机会来同意这样做。假设双方各自建立了一个任务模型（可以是分类或预测），而这些任务也已经在获得数据时得到了各自用户的认可。但是，由于数据不完整（例如企业 A 缺少标签数据，企业 B 缺少特征数据）， 或者数据不充分 （数据量不足以建立好的模型）等原因，在各端的模型有可能无法建立或效果并不理想。</p>
+<h2 id="联邦学习的定义"><a href="#联邦学习的定义" class="headerlink" title="联邦学习的定义"></a>联邦学习的定义</h2><h3 id="联邦学习概述"><a href="#联邦学习概述" class="headerlink" title="联邦学习概述"></a>联邦学习概述</h3><p>假设有两个不同的企业 A 和 B，它们拥有不同数据。比如，企业 A 有用户特征数据；企业 B 有产品特征数据和标注数据。这两个企业按照上述 GDPR 准则是不能粗暴地把双方数据加以合并的，因为数据的原始提供者，即他们各自的用户并没有机会来同意这样做。假设双方各自建立了一个任务模型（可以是分类或预测），而这些任务也已经在获得数据时得到了各自用户的认可。但是，由于数据不完整（例如企业 A 缺少标签数据，企业 B 缺少特征数据）， 或者数据不充分 （数据量不足以建立好的模型）等原因，在各端的模型有可能无法建立或效果并不理想。 </p>
 <p><strong>联邦学习</strong>就是为了解决这个问题： 它希望做到各个企业的自有数据不出本地，而后联邦系统可以通过<strong>加密机制</strong>下的<strong>参数交换</strong>方式（即在不违反数据隐私法规情况下），建立一 个虚拟的<strong>共有模型</strong>。这个虚拟模型就好像大家把数据聚合在一起建立的最优模型一样。但是在建立虚拟模型的时候，数据本身不移动，也不泄露隐私或影响数据合规，建好的模型在各自的区域仅为本地的目标服务。在这样一个联邦机制下，各个参与者的身份和地位相同，这个机制就是<strong>联邦学习</strong>。联邦系统帮助企业建立了“共同富裕”的策略。</p>
-<h3 id="联邦学习定义">联邦学习定义</h3>
-<p>当多个数据拥有方（例如企业）<span class="math inline">\(F_i, i=1…N\)</span> 想要联合他们各自的数据 <span class="math inline">\(D_i\)</span> 训练机器学习模型时，<strong>传统做法</strong>是把数据整合到一方并利用数据 <span class="math inline">\(D=\{D_i\}，i=1…N\)</span> 进行训练并得到模型 <span class="math inline">\(M_{SUM}\)</span>。然而，该方案由于其涉及到的隐私和数据安全等法律问题通常难以实施。为解决这一问题，提出了联邦学习。<strong>联邦学习</strong>是指：使数据拥有方 <span class="math inline">\(F_i\)</span> 在不用给出己方数据 <span class="math inline">\(D_i\)</span> 的情况下也可进行模型训练并得到模型 <span class="math inline">\(M_{FED}\)</span> 的计算过程，且该过程能够保证模型 <span class="math inline">\(M_{FED}\)</span> 的效果 <span class="math inline">\(V_{FED}\)</span> 与模型 <span class="math inline">\(M_{SUM}\)</span> 的效果 <span class="math inline">\(V_{SUM}\)</span> 间的差距足够小，即 <span class="math inline">\(M_{FED}\)</span> 满足： <span class="math display">\[
-|V_{FED}-V_{SUM} |&lt;\delta
-\]</span> 这里 <span class="math inline">\(\delta\)</span> 是任意小的一个正值。</p>
-<h2 id="联邦学习的分类">联邦学习的分类</h2>
-<p>以<strong>孤岛数据的分布特点</strong>为依据对联邦学习<strong>进行分类</strong>。 考虑有多个数据拥有方，每个数据拥有方各自所持有的数据集 <span class="math inline">\(D_i\)</span> 可以用一个矩阵来表示： 矩阵的每一行代表一个样本，每一列代表一种特征；已标注数据的标签会在侧边栏内显示。在现实应用中，各个数据集的样本或特征不完全相同。具体而言，以包含两个数据拥有方的联邦学习为例，数据分布可以分为以下三种情况：</p>
-<h3 id="横向联邦学习">横向联邦学习</h3>
-<p>若两个数据集的特征重叠部分较大，而样本重叠部分较小，则考虑把数据集按照横坐标（即<strong>特征维度</strong>）切分，并取出<strong>双方特征相同而样本不完全相同</strong>的那部分数据进行训练（利用多方特征的交集作为特征，多方样本的并集作为样本），实现<strong>样本规模</strong>的扩充。这种方法叫做<strong>横向联邦学习</strong>。</p>
-<p><img src="/images/Federated-Learning/1.png" /></p>
+<h3 id="联邦学习定义"><a href="#联邦学习定义" class="headerlink" title="联邦学习定义"></a>联邦学习定义</h3><p>当多个数据拥有方（例如企业）$F_i, i=1…N$ 想要联合他们各自的数据 $D_i$ 训练机器学习模型时，<strong>传统做法</strong>是把数据整合到一方并利用数据 $D=\{D_i\}，i=1…N$ 进行训练并得到模型 $M_{SUM}$。然而，该方案由于其涉及到的隐私和数据安全等法律问题通常难以实施。为解决这一问题，提出了联邦学习。<strong>联邦学习</strong>是指：使数据拥有方 $F_i$ 在不用给出己方数据 $D_i$ 的情况下也可进行模型训练并得到模型 $M_{FED}$ 的计算过程，且该过程能够保证模型 $M_{FED}$ 的效果 $V_{FED}$ 与模型 $M_{SUM}$ 的效果 $V_{SUM}$ 间的差距足够小，即 $M_{FED}$ 满足：</p>
+<script type="math/tex; mode=display">
+|V_{FED}-V_{SUM} |<\delta</script><p> 这里 $\delta$ 是任意小的一个正值。</p>
+<h2 id="联邦学习的分类"><a href="#联邦学习的分类" class="headerlink" title="联邦学习的分类"></a>联邦学习的分类</h2><p>以<strong>孤岛数据的分布特点</strong>为依据对联邦学习<strong>进行分类</strong>。 考虑有多个数据拥有方，每个数据拥有方各自所持有的数据集 $D_i$ 可以用一个矩阵来表示： 矩阵的每一行代表一个样本，每一列代表一种特征；已标注数据的标签会在侧边栏内显示。在现实应用中，各个数据集的样本或特征不完全相同。具体而言，以包含两个数据拥有方的联邦学习为例，数据分布可以分为以下三种情况：</p>
+<h3 id="横向联邦学习"><a href="#横向联邦学习" class="headerlink" title="横向联邦学习"></a>横向联邦学习</h3><p>若两个数据集的特征重叠部分较大，而样本重叠部分较小，则考虑把数据集按照横坐标（即<strong>特征维度</strong>）切分，并取出<strong>双方特征相同而样本不完全相同</strong>的那部分数据进行训练（利用多方特征的交集作为特征，多方样本的并集作为样本），实现<strong>样本规模</strong>的扩充。这种方法叫做<strong>横向联邦学习</strong>。</p>
+<p><img src="/images/Federated-Learning/1.png" alt=""></p>
 <p>这种情况的典型例子就是联邦学习的参与企业<strong>位于不同地区，但是均属同一行业的情况</strong>（如地方性银行）。比如有两家<strong>不同地区银行</strong>，它们的用户群体分别来自各自所在的地区，因此两者各自的用户样本的交集很小。但是，它们的业务很相似，因此记录的用户特征是相同的。此时， 就可以使用横向联邦学习来构建联合模型。</p>
 <blockquote>
 <p>Google 在 2017 年提出了一个针对安卓手机模型更新的数据联合建模方案：在单个用户使用安卓手机时，不断在本地更新模型参数并将参数上传到安卓云上，从而使特征维度相同的各数据拥有方建立联合模型的一种联邦学习方案。</p>
 </blockquote>
-<h3 id="纵向联邦学习">纵向联邦学习</h3>
-<p>若两个数据集的样本重叠部分较大，而特征重叠部分较小，则考虑把数据集按照纵坐标 （即样本维度）切分，并取出<strong>双方样本相同而特征不完全相同</strong>的那部分数据进行训练（利用多方特征的并集作为特征，多方样本的交集作为样本），实现<strong>特征规模</strong>的扩充。 这种方法叫做<strong>纵向联邦学习</strong>。</p>
-<p><img src="/images/Federated-Learning/2.png" /></p>
-<p>这种情况的典型例子就是联邦学习的参与企业<strong>位于同一地区，但分属不同行业的情况</strong>。比如有两个不同机构，一家是某地的银行，另一家是同一个地方的电商。它们的用户群体很有可能都包含该地的大部分居民，因此用户样本的交集较大。但是，由于银行记录的都是用户的收支行为与信用评级，而电商则保有用户的浏览与购买历史，因此它们的用户特征交集较小。纵向联邦学习就是将这些不同特征在加密的状态下加以聚合，以增强模型能力的联邦学习。</p>
+<h3 id="纵向联邦学习"><a href="#纵向联邦学习" class="headerlink" title="纵向联邦学习"></a>纵向联邦学习</h3><p>若两个数据集的样本重叠部分较大，而特征重叠部分较小，则考虑把数据集按照纵坐标 （即样本维度）切分，并取出<strong>双方样本相同而特征不完全相同</strong>的那部分数据进行训练（利用多方特征的并集作为特征，多方样本的交集作为样本），实现<strong>特征规模</strong>的扩充。 这种方法叫做<strong>纵向联邦学习</strong>。</p>
+<p><img src="/images/Federated-Learning/2.png" alt=""></p>
+<p> 这种情况的典型例子就是联邦学习的参与企业<strong>位于同一地区，但分属不同行业的情况</strong>。比如有两个不同机构，一家是某地的银行，另一家是同一个地方的电商。它们的用户群体很有可能都包含该地的大部分居民，因此用户样本的交集较大。但是，由于银行记录的都是用户的收支行为与信用评级，而电商则保有用户的浏览与购买历史，因此它们的用户特征交集较小。纵向联邦学习就是将这些不同特征在加密的状态下加以聚合，以增强模型能力的联邦学习。</p>
 <blockquote>
 <p>目前，逻辑回归模型，树型结构模型和神经网络模型等众多机器学习模型已经逐渐被证实能够建立在这个联邦体系上。</p>
 </blockquote>
-<h3 id="联邦迁移学习">联邦迁移学习</h3>
-<p>若两个数据集的样本与特征重叠部分都比较小，则简单的联合方法显然无法在这种情况下奏效。此时，可以利用<strong>迁移学习</strong>来克服数据或标签不足的情况。在联邦学习的框架（各个企业的自有数据不出本地，通过<strong>加密机制</strong>下的<strong>参数交换</strong>方式建立一虚拟的<strong>共有模型</strong>）下的迁移学习，就称为<strong>联邦迁移学习</strong>。</p>
-<p><img src="/images/Federated-Learning/3.png" /></p>
+<h3 id="联邦迁移学习"><a href="#联邦迁移学习" class="headerlink" title="联邦迁移学习"></a>联邦迁移学习</h3><p>若两个数据集的样本与特征重叠部分都比较小，则简单的联合方法显然无法在这种情况下奏效。此时，可以利用<strong>迁移学习</strong>来克服数据或标签不足的情况。在联邦学习的框架（各个企业的自有数据不出本地，通过<strong>加密机制</strong>下的<strong>参数交换</strong>方式建立一虚拟的<strong>共有模型</strong>）下的迁移学习，就称为<strong>联邦迁移学习</strong>。</p>
+<p><img src="/images/Federated-Learning/3.png" alt=""></p>
 <p>这种情况表示联邦学习的参与企业<strong>位于不同地区，且所属行业也不同</strong>。比如有两个不同机构，一家是位于中国的银行，另一家是位于美国的电商。由于受到地域限制，这两家机构的用户群体交集很小。同时，由于机构类型的不同，二者的数据特征也只有小部分重合。在这种情况下，要想进行有效的联邦学习，就必须引入迁移学习， 来解决单边数据规模小和标签样本少的问题，从而提升模型的效果。</p>
 <blockquote>
-<p>不难看出，在这个苛刻场景下都能有效的迁移学习方案，可以轻松应用于前两种场景，具备极大的适用性，因而迁移学习是联邦学习的核心内容。关于迁移学习的具体内容，参见<a href="">迁移学习</a></p>
+<p> 不难看出，在这个苛刻场景下都能有效的迁移学习方案，可以轻松应用于前两种场景，具备极大的适用性，因而迁移学习是联邦学习的核心内容。关于迁移学习的具体内容，参见<a href="">迁移学习</a></p>
 </blockquote>
-<h2 id="联邦学习的系统架构">联邦学习的系统架构</h2>
-<p>以包含两个数据拥有方（即企业 A 和 B）的场景为例，介绍联邦学习的系统构架（ 该构架可扩展至包含多个数据拥有方的场景）。假设企业 A 和 B 想联合训练一个机器学习模型，它们的业务系统分别拥有各自用户的相关数据。此外，企业 B 还拥有它所持数据对应的标签数据。出于数据隐私和安全考虑，A 和 B 无法直接进行数据交换。此时，可使用联邦学习系统建立模型，系统构架由两部分构成，如下图所示：</p>
-<p><img src="/images/Federated-Learning/4.png" /></p>
-<h3 id="第一部分加密样本对齐">第一部分：加密样本对齐</h3>
-<p>由于两家企业的用户群体并非完全重合，系统利用基于加密的用户样本对齐技术，在 A 和 B 不公开各自数据的前提下确认双方的共有用户（并且不暴露相互不重叠的用户）， 以便联合这些用户的特征进行建模。</p>
-<h3 id="第二部分加密模型训练">第二部分：加密模型训练</h3>
-<p>在确定共有用户群体后，就可以利用这些数据训练机器学习模型。为了保证训练过程中数据的保密性，需要借助第三方协作者 C 进行加密训练。训练过程可分为以下 4 步：</p>
-<ol type="1">
+<h2 id="联邦学习的系统架构"><a href="#联邦学习的系统架构" class="headerlink" title="联邦学习的系统架构"></a>联邦学习的系统架构</h2><p>以包含两个数据拥有方（即企业 A 和 B）的场景为例，介绍联邦学习的系统构架（ 该构架可扩展至包含多个数据拥有方的场景）。假设企业 A 和 B 想联合训练一个机器学习模型，它们的业务系统分别拥有各自用户的相关数据。此外，企业 B 还拥有它所持数据对应的标签数据。出于数据隐私和安全考虑，A 和 B 无法直接进行数据交换。此时，可使用联邦学习系统建立模型，系统构架由两部分构成，如下图所示：</p>
+<p><img src="/images/Federated-Learning/4.png" alt=""></p>
+<h3 id="第一部分：加密样本对齐"><a href="#第一部分：加密样本对齐" class="headerlink" title="第一部分：加密样本对齐"></a>第一部分：加密样本对齐</h3><p>由于两家企业的用户群体并非完全重合，系统利用基于加密的用户样本对齐技术，在 A 和 B 不公开各自数据的前提下确认双方的共有用户（并且不暴露相互不重叠的用户）， 以便联合这些用户的特征进行建模。</p>
+<h3 id="第二部分：加密模型训练"><a href="#第二部分：加密模型训练" class="headerlink" title="第二部分：加密模型训练"></a>第二部分：加密模型训练</h3><p>在确定共有用户群体后，就可以利用这些数据训练机器学习模型。为了保证训练过程中数据的保密性，需要借助第三方协作者 C 进行加密训练。训练过程可分为以下 4 步：</p>
+<ol>
 <li>协作者 C 把公钥分发给 A 和 B，用以对训练过程中需要交换的数据进行加密；</li>
 <li>A 和 B 之间以加密形式交互<strong>用于计算梯度的中间结果</strong>；</li>
 <li>A 和 B 分别基于<strong>加密的梯度值</strong>进行计算，同时 B 根据其标签数据计算损失函数的值，并把这些结果汇总给 C，C 通过汇总结果计算总梯度并将其解密；</li>
 <li>C 将解密后的梯度分别回传给 A 和 B，A 和 B 根据梯度更新各自模型的参数；</li>
 </ol>
 <p>迭代上述步骤直至损失函数收敛，这样就完成了整个训练过程。在<strong>样本对齐</strong>及<strong>模型训练</strong>过程中，A 和 B 各自的数据均保留在本地，且训练中的数据交互也不会导致数据隐私泄露。双方在联邦学习的帮助下得以实现合作训练模型。</p>
-<p><img src="/images/Federated-Learning/5.png" /></p>
+<p><img src="/images/Federated-Learning/5.png" alt=""></p>
 
     </article>
     <!-- license  -->
@@ -635,7 +621,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习背景和重要性"><span class="toc-number">1.</span> <span class="toc-text">联邦学习背景和重要性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据孤岛"><span class="toc-number">1.1.</span> <span class="toc-text">数据孤岛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gdpr与人工智能挑战"><span class="toc-number">1.2.</span> <span class="toc-text">GDPR与人工智能挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦学习成为可行的解决方案"><span class="toc-number">1.3.</span> <span class="toc-text">联邦学习成为可行的解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习的定义"><span class="toc-number">2.</span> <span class="toc-text">联邦学习的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦学习概述"><span class="toc-number">2.1.</span> <span class="toc-text">联邦学习概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦学习定义"><span class="toc-number">2.2.</span> <span class="toc-text">联邦学习定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习的分类"><span class="toc-number">3.</span> <span class="toc-text">联邦学习的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#横向联邦学习"><span class="toc-number">3.1.</span> <span class="toc-text">横向联邦学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#纵向联邦学习"><span class="toc-number">3.2.</span> <span class="toc-text">纵向联邦学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦迁移学习"><span class="toc-number">3.3.</span> <span class="toc-text">联邦迁移学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习的系统架构"><span class="toc-number">4.</span> <span class="toc-text">联邦学习的系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一部分加密样本对齐"><span class="toc-number">4.1.</span> <span class="toc-text">第一部分：加密样本对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二部分加密模型训练"><span class="toc-number">4.2.</span> <span class="toc-text">第二部分：加密模型训练</span></a></li></ol></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习背景和重要性"><span class="toc-number">1.</span> <span class="toc-text">联邦学习背景和重要性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据孤岛"><span class="toc-number">1.1.</span> <span class="toc-text">数据孤岛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GDPR与人工智能挑战"><span class="toc-number">1.2.</span> <span class="toc-text">GDPR与人工智能挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦学习成为可行的解决方案"><span class="toc-number">1.3.</span> <span class="toc-text">联邦学习成为可行的解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习的定义"><span class="toc-number">2.</span> <span class="toc-text">联邦学习的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦学习概述"><span class="toc-number">2.1.</span> <span class="toc-text">联邦学习概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦学习定义"><span class="toc-number">2.2.</span> <span class="toc-text">联邦学习定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习的分类"><span class="toc-number">3.</span> <span class="toc-text">联邦学习的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#横向联邦学习"><span class="toc-number">3.1.</span> <span class="toc-text">横向联邦学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#纵向联邦学习"><span class="toc-number">3.2.</span> <span class="toc-text">纵向联邦学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#联邦迁移学习"><span class="toc-number">3.3.</span> <span class="toc-text">联邦迁移学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联邦学习的系统架构"><span class="toc-number">4.</span> <span class="toc-text">联邦学习的系统架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一部分：加密样本对齐"><span class="toc-number">4.1.</span> <span class="toc-text">第一部分：加密样本对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二部分：加密模型训练"><span class="toc-number">4.2.</span> <span class="toc-text">第二部分：加密模型训练</span></a></li></ol></li></ol>
                 
             </div>
         </div>
@@ -936,9 +922,30 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 24
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -951,11 +958,6 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/18</span><a class="archive-post-title" href= "/2021/09/18/PythonTips/" >PythonTips</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1019,6 +1021,11 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2021/03/18/PythonTips/" >PythonTips</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
         </li>
     
@@ -1049,6 +1056,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2020/09/23/Pytorch/" >pytorch</a>
         </li>
     
     
@@ -1088,19 +1100,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
-    
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
         <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pytorch"><span class="iconfont-archer">&#xe606;</span>Pytorch</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1139,11 +1153,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     
@@ -1180,7 +1194,24 @@ jsonContent:
     </div>
     <!-- async load share.js -->
     
-        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->    
      
     </body>
 </html>

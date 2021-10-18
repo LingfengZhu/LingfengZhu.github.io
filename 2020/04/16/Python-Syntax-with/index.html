@@ -416,11 +416,7 @@ height:50vh;
     <article class="article-entry">
         <p>In this post, I will discuss the python syntax <code>with</code>. We can use this syntax in exception handling to make the code cleaner and much more readable. It simplifies the management of common resources like file streams.</p>
 <a id="more"></a>
-##
-<center>
-Introduction
-</center>
-<hr />
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><center>Introduction</center></h2><hr>
 <p>In python, we can use <code>try</code> and <code>except</code> as follows:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>: <span class="comment"># Try to do something</span></span><br><span class="line">    do something</span><br><span class="line"><span class="keyword">except</span>: <span class="comment"># If error occurs</span></span><br><span class="line">    do something</span><br><span class="line"><span class="keyword">finally</span>: <span class="comment"># After that, clean and release the resource</span></span><br><span class="line">    do someting</span><br></pre></td></tr></table></figure>
 <p>For example:</p>
@@ -428,30 +424,18 @@ Introduction
 <p>We can use a shorter code to the exact same thing:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'aFile.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br></pre></td></tr></table></figure>
 <p>As we can see, <code>with</code> can make the code shorter.</p>
-##
-<center>
-Definitions
-</center>
-<hr />
+<h2 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a><center>Definitions</center></h2><hr>
 <p>To use <code>with</code> in python, there are some definitions to understand:</p>
-<h3 id="context-management-protocol">Context Management Protocol</h3>
-<p>Context Management Protocol contains two methods: <code>.__enter__()</code> and <code>.__exit__()</code>. The former (<code>.__enter__()</code> method) is to allocate resource, while the latter (<code>.__exit__()</code> method) is to free the resource.</p>
+<h3 id="Context-Management-Protocol"><a href="#Context-Management-Protocol" class="headerlink" title="Context Management Protocol"></a>Context Management Protocol</h3><p>Context Management Protocol contains two methods: <code>.__enter__()</code> and <code>.__exit__()</code>. The former (<code>.__enter__()</code> method) is to allocate resource, while the latter (<code>.__exit__()</code> method) is to free the resource.</p>
 <p>An object with these two methods can be processed by <code>with</code>.</p>
-<h3 id="context-manager">Context Manager</h3>
-<p>An object with methods <code>.__enter__()</code> and <code>.__exit__()</code> is called context manager. For this example, the <strong>output</strong> of <code>open('aFile.txt')</code> (which is an object) is the context manager.</p>
-<h3 id="context-expression">Context Expression</h3>
-<p>The syntax after <code>with</code> is called context expression. This syntax should return a context manager. For this example, <code>open('aFile.txt')</code> is a context expression.</p>
-<h3 id="with-body">With-body</h3>
-<p>The syntaxes wrapped up by <code>with</code> syntax are called with-body. For this example, <code>data = f.read()</code> is the with-body.</p>
-##
-<center>
-Usage
-</center>
-<hr />
+<h3 id="Context-Manager"><a href="#Context-Manager" class="headerlink" title="Context Manager"></a>Context Manager</h3><p>An object with methods <code>.__enter__()</code> and <code>.__exit__()</code> is called context manager. For this example, the <strong>output</strong> of <code>open(&#39;aFile.txt&#39;)</code> (which is an object) is the context manager.</p>
+<h3 id="Context-Expression"><a href="#Context-Expression" class="headerlink" title="Context Expression"></a>Context Expression</h3><p>The syntax after <code>with</code> is called context expression. This syntax should return a context manager. For this example, <code>open(&#39;aFile.txt&#39;)</code> is a context expression.</p>
+<h3 id="With-body"><a href="#With-body" class="headerlink" title="With-body"></a>With-body</h3><p>The syntaxes wrapped up by <code>with</code> syntax are called with-body. For this example, <code>data = f.read()</code> is the with-body.</p>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a><center>Usage</center></h2><hr>
 <p>The standard format of <code>with</code> syntax is as follows:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> conetext_expression [<span class="keyword">as</span> target(s)]:</span><br><span class="line">    <span class="comment"># with-body code here</span></span><br></pre></td></tr></table></figure>
 <p>Then the process of <code>with</code> syntax is:</p>
-<ol type="1">
+<ol>
 <li>Execute <code>.__enter__()</code> method, the output of this method will be assigned to variable <code>target</code>.</li>
 <li>Execute with-body syntaxes.</li>
 <li>Execute <code>.__exit__()</code> method.</li>
@@ -466,11 +450,7 @@ Usage
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> Manager(<span class="string">'Amy'</span>) <span class="keyword">as</span> test:</span><br><span class="line">    <span class="keyword">raise</span>(Exception)</span><br><span class="line">    print(<span class="string">"[with-body]: The name is %s."</span> % test.name)</span><br></pre></td></tr></table></figure>
 <p>The output is as follows:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Enter Amy]: Allocate resource.</span><br><span class="line">[Exit Amy]: Free resource.</span><br><span class="line">[Exit Amy]: Exited with exception raised.</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">  File <span class="string">"..."</span>, line 27, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    raise(Exception)</span><br></pre></td></tr></table></figure>
-##
-<center>
-Function nested()
-</center>
-<hr />
+<h2 id="Function-nested"><a href="#Function-nested" class="headerlink" title="Function nested()"></a><center>Function nested()</center></h2><hr>
 <p>Module <code>contextlib</code> provided three objects, <code>contextmanager</code>, function <code>nested()</code> and <code>closing</code>. I will focus on <code>nested()</code> here.</p>
 <p>Function <code>nested()</code> can organize many Context Managers together without nested syntaxes.</p>
 <p>See this example:</p>
@@ -638,7 +618,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#context-management-protocol"><span class="toc-number">1.</span> <span class="toc-text">Context Management Protocol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#context-manager"><span class="toc-number">2.</span> <span class="toc-text">Context Manager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#context-expression"><span class="toc-number">3.</span> <span class="toc-text">Context Expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with-body"><span class="toc-number">4.</span> <span class="toc-text">With-body</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Definitions"><span class="toc-number">2.</span> <span class="toc-text">Definitions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Management-Protocol"><span class="toc-number">2.1.</span> <span class="toc-text">Context Management Protocol</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Manager"><span class="toc-number">2.2.</span> <span class="toc-text">Context Manager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Context-Expression"><span class="toc-number">2.3.</span> <span class="toc-text">Context Expression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#With-body"><span class="toc-number">2.4.</span> <span class="toc-text">With-body</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Usage"><span class="toc-number">3.</span> <span class="toc-text">Usage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-nested"><span class="toc-number">4.</span> <span class="toc-text">Function nested()</span></a></li></ol>
                 
             </div>
         </div>
@@ -939,9 +919,30 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 24
+        Total : 25
         </div>
         <!-- search  -->
         
@@ -954,11 +955,6 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/18</span><a class="archive-post-title" href= "/2021/09/18/PythonTips/" >PythonTips</a>
-        </li>
     
     
         <li class="archive-post-item">
@@ -1022,6 +1018,11 @@ top:50vh;
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2021/03/18/PythonTips/" >PythonTips</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
         </li>
     
@@ -1052,6 +1053,11 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2020/09/23/Pytorch/" >pytorch</a>
         </li>
     
     
@@ -1091,19 +1097,21 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
-    
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
         <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pytorch"><span class="iconfont-archer">&#xe606;</span>Pytorch</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
@@ -1142,11 +1150,11 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
         <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
-        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
     
