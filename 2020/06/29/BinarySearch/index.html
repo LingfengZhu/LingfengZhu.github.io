@@ -212,7 +212,7 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -278,7 +278,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">608</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">618</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -408,7 +408,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <p>Binary search can reduce the time complexity to O(logN) for <strong>sorted</strong> items' search. I summarized a framework to slove all the binary search problems under different situation in this post.</p>
-<a id="more"></a>
+<span id="more"></span>
 ##
 <center>
 Framework
@@ -425,7 +425,7 @@ Framework
 <p>Where <code>nums</code> is the given list of numbers and <code>target</code> is the target number.</p>
 <h3 id="main-framework">Main Framework</h3>
 <p>The main framework of binary search can be seen as follows:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span><span class="params">(nums, target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="string">'Right Boundary'</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="string">'Continue Condition'</span>:</span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="string">'Target Found'</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            <span class="string">'Search One Part'</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            <span class="string">'Search The Other Part'</span></span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span>(<span class="params">nums, target</span>):</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="string">&#x27;Right Boundary&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="string">&#x27;Continue Condition&#x27;</span>:</span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="string">&#x27;Target Found&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            <span class="string">&#x27;Search One Part&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            <span class="string">&#x27;Search The Other Part&#x27;</span></span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
 <p>Where <code>nums</code> is the given list of numbers and <code>target</code> is the target number.</p>
 ##
 <center>
@@ -454,7 +454,7 @@ Examples
 <hr />
 <h3 id="search-a-number">Search a number</h3>
 <p>Given a list of numbers <code>nums</code> and a number <code>target</code>, try to find out if <code>target</code> is in <code>nums</code> or not. If so, return the index of <code>target</code>; otherwise, return -1.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span><span class="params">(nums, target)</span>:</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = len(nums)<span class="number">-1</span> <span class="comment"># Right Boundary</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> left &lt;= right: <span class="comment"># Continue Condition</span></span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="keyword">return</span> mid <span class="comment"># Target Found</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            left = mid + <span class="number">1</span> <span class="comment"># Search One Part</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            right = mid - <span class="number">1</span> <span class="comment"># Search The Other Part</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span>(<span class="params">nums, target</span>):</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="built_in">len</span>(nums)-<span class="number">1</span> <span class="comment"># Right Boundary</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> left &lt;= right: <span class="comment"># Continue Condition</span></span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="keyword">return</span> mid <span class="comment"># Target Found</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            left = mid + <span class="number">1</span> <span class="comment"># Search One Part</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            right = mid - <span class="number">1</span> <span class="comment"># Search The Other Part</span></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
@@ -464,7 +464,7 @@ Examples
             <p>Original Link：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">https://lingfengzhu.github.io/2020/06/29/BinarySearch/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">June 29th 2020, 8:30:08 am</a>
             <p>Updated：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">September 8th 2021, 6:37:42 pm</a>
-            <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+            <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
     <!-- paginator  -->
@@ -932,6 +932,18 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 25
@@ -1089,11 +1101,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
@@ -1142,13 +1154,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
         <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
-        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
-    
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
+    
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>

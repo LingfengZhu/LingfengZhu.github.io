@@ -213,7 +213,7 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
         <body class="post-body">
@@ -285,7 +285,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">953</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">983</span>Reading time: <span class="post-count reading-time">3 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -415,7 +415,7 @@ height:50vh;
             <main class="main post-page">
     <article class="article-entry">
         <p>Python 中不定长参数的一些使用方法。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>在定义函数时传入的形式参数中，有些是函数运行所必需的参数，在函数被调用时，这些参数必须以正确的顺序传入，传入的数量必须和声明时的一样，不然会出现语法错误。这些必须以正确形式传入的参数称为<strong>必备参数</strong>。</p>
 <p>同时，有些形式参数并不是函数运行所必需的，输入这些参数能够对函数的输出结果造成一定影响，但是没有它们也不影响函数的正常运行。开发者在定义函数时也不能确定这类参数的具体数量，这些参数就是<strong>可变参数</strong>。</p>
 <p>形式参数 <code>*args</code> 和 <code>**kwargs</code> 被称为<strong>不定长参数</strong>，在定义函数时用来处理<strong>可变参数</strong>。注意：args 和 kwargs <strong>可以</strong>修改为其它变量名，重要的其实只是星号。</p>
@@ -431,22 +431,22 @@ height:50vh;
 </ul>
 <h2 id="args-的用法">*args 的用法</h2>
 <p>在定义函数时，<code>*args</code> 以<strong>元组（tuple）</strong>的形式传递一个<strong>可变参数列表</strong>给函数，这个参数列表的长度未知，甚至长度可以为 0：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_args</span><span class="params">(first, *args)</span>:</span></span><br><span class="line">    print(<span class="string">'Required argument: '</span>, first)</span><br><span class="line">    print(type(args))</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> args:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">'Optional argument: '</span>, v)</span><br><span class="line">        </span><br><span class="line">test_args(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_args</span>(<span class="params">first, *args</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Required argument: &#x27;</span>, first)</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">type</span>(args))</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> args:</span><br><span class="line">        <span class="built_in">print</span> (<span class="string">&#x27;Optional argument: &#x27;</span>, v)</span><br><span class="line">        </span><br><span class="line">test_args(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 <p>第一个形式参数 <code>first</code> 是必须要传入的参数，而后面三个形式参数以可变参数列表的形式传入函数，并且是作为元组 tuple 来使用的。代码的运行结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Required argument:  1</span><br><span class="line">&lt;class 'tuple'&gt;</span><br><span class="line">Optional argument:  2</span><br><span class="line">Optional argument:  3</span><br><span class="line">Optional argument:  4</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Required argument:  1</span><br><span class="line">&lt;class &#x27;tuple&#x27;&gt;</span><br><span class="line">Optional argument:  2</span><br><span class="line">Optional argument:  3</span><br><span class="line">Optional argument:  4</span><br></pre></td></tr></table></figure>
 <h2 id="kwargs-的用法">**kwargs 的用法</h2>
 <p>在定义函数时，<code>**kwargs</code> 是以<strong>字典（dict）</strong>的形式，将一个可变的<strong>参数名-参数值字典</strong>传给函数，同样，该字典的长度可以为 0 或为其他值：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_kwargs</span><span class="params">(first, *args, **kwargs)</span>:</span></span><br><span class="line">   print(<span class="string">'Required argument: '</span>, first)</span><br><span class="line">   print(type(kwargs))</span><br><span class="line">   <span class="keyword">for</span> v <span class="keyword">in</span> args:</span><br><span class="line">      <span class="keyword">print</span> (<span class="string">'Optional argument (args): '</span>, v)</span><br><span class="line">   <span class="keyword">for</span> k, v <span class="keyword">in</span> kwargs.items():</span><br><span class="line">      <span class="keyword">print</span> (<span class="string">'Optional argument %s (kwargs): %s'</span> % (k, v))</span><br><span class="line"></span><br><span class="line">test_kwargs(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, k1=<span class="number">5</span>, k2=<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_kwargs</span>(<span class="params">first, *args, **kwargs</span>):</span></span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&#x27;Required argument: &#x27;</span>, first)</span><br><span class="line">   <span class="built_in">print</span>(<span class="built_in">type</span>(kwargs))</span><br><span class="line">   <span class="keyword">for</span> v <span class="keyword">in</span> args:</span><br><span class="line">      <span class="built_in">print</span> (<span class="string">&#x27;Optional argument (args): &#x27;</span>, v)</span><br><span class="line">   <span class="keyword">for</span> k, v <span class="keyword">in</span> kwargs.items():</span><br><span class="line">      <span class="built_in">print</span> (<span class="string">&#x27;Optional argument %s (kwargs): %s&#x27;</span> % (k, v))</span><br><span class="line"></span><br><span class="line">test_kwargs(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, k1=<span class="number">5</span>, k2=<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
 <p>代码的运行结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Required argument:  1</span><br><span class="line">&lt;class 'dict'&gt;</span><br><span class="line">Optional argument (args):  2</span><br><span class="line">Optional argument (args):  3</span><br><span class="line">Optional argument (args):  4</span><br><span class="line">Optional argument k2 (kwargs): 6</span><br><span class="line">Optional argument k1 (kwargs): 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Required argument:  1</span><br><span class="line">&lt;class &#x27;dict&#x27;&gt;</span><br><span class="line">Optional argument (args):  2</span><br><span class="line">Optional argument (args):  3</span><br><span class="line">Optional argument (args):  4</span><br><span class="line">Optional argument k2 (kwargs): 6</span><br><span class="line">Optional argument k1 (kwargs): 5</span><br></pre></td></tr></table></figure>
 <h2 id="调用函数">调用函数</h2>
 <p><code>*args</code> 和 <code>**kwargs</code> 不仅可以在函数定义中使用，还可以在函数调用中使用。在调用时使用它们，就相当于对实际参数进行 pack（打包）和 unpack（解包）。</p>
 <p>对于 <code>*args</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_args_kwargs</span><span class="params">(arg1, arg2, arg3)</span>:</span></span><br><span class="line">    print(<span class="string">"arg1:"</span>, arg1)</span><br><span class="line">    print(<span class="string">"arg2:"</span>, arg2)</span><br><span class="line">    print(<span class="string">"arg3:"</span>, arg3)</span><br><span class="line"></span><br><span class="line">args = (<span class="string">"two"</span>, <span class="number">3</span>, <span class="number">5</span>) <span class="comment"># 将实际参数打包为 tuple</span></span><br><span class="line">test_args_kwargs(*args) <span class="comment"># 传入函数中解包</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_args_kwargs</span>(<span class="params">arg1, arg2, arg3</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;arg1:&quot;</span>, arg1)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;arg2:&quot;</span>, arg2)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;arg3:&quot;</span>, arg3)</span><br><span class="line"></span><br><span class="line">args = (<span class="string">&quot;two&quot;</span>, <span class="number">3</span>, <span class="number">5</span>) <span class="comment"># 将实际参数打包为 tuple</span></span><br><span class="line">test_args_kwargs(*args) <span class="comment"># 传入函数中解包</span></span><br></pre></td></tr></table></figure>
 <p>输出结果为：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arg1: two</span><br><span class="line">arg2: 3</span><br><span class="line">arg3: 5</span><br></pre></td></tr></table></figure>
 <p>对于 <code>**kwargs</code>：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kwargs = &#123;<span class="string">"arg3"</span>: <span class="number">3</span>, <span class="string">"arg2"</span>: <span class="string">"two"</span>, <span class="string">"arg1"</span>: <span class="number">5</span>&#125; <span class="comment"># 将实际参数打包为 dict</span></span><br><span class="line">test_args_kwargs(**kwargs) <span class="comment"># 传入函数中解包</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kwargs = &#123;<span class="string">&quot;arg3&quot;</span>: <span class="number">3</span>, <span class="string">&quot;arg2&quot;</span>: <span class="string">&quot;two&quot;</span>, <span class="string">&quot;arg1&quot;</span>: <span class="number">5</span>&#125; <span class="comment"># 将实际参数打包为 dict</span></span><br><span class="line">test_args_kwargs(**kwargs) <span class="comment"># 传入函数中解包</span></span><br></pre></td></tr></table></figure>
 <p>输出结果为：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arg1: 5</span><br><span class="line">arg2: two</span><br><span class="line">arg3: 3</span><br></pre></td></tr></table></figure>
 <p>args和kwargs组合起来可以传入任意的参数，这在参数未知的情况下是很有效的，同时加强了函数的可拓展性。</p>
@@ -459,7 +459,7 @@ height:50vh;
             <p>Original Link：<a href="https://lingfengzhu.github.io/2021/07/29/Python-args-and-kwargs/">https://lingfengzhu.github.io/2021/07/29/Python-args-and-kwargs/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2021/07/29/Python-args-and-kwargs/">July 29th 2021, 2:57:06 pm</a>
             <p>Updated：<a href="https://lingfengzhu.github.io/2021/07/29/Python-args-and-kwargs/">September 8th 2021, 6:38:44 pm</a>
-            <p>Copyright：This Article Uses <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+            <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
     <!-- paginator  -->
@@ -611,7 +611,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实参与形参"><span class="toc-number">1.</span> <span class="toc-text">实参与形参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#args-的用法"><span class="toc-number">2.</span> <span class="toc-text">*args 的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kwargs-的用法"><span class="toc-number">3.</span> <span class="toc-text">**kwargs 的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用函数"><span class="toc-number">4.</span> <span class="toc-text">调用函数</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E5%8F%82%E4%B8%8E%E5%BD%A2%E5%8F%82"><span class="toc-number">1.</span> <span class="toc-text">实参与形参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#args-%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">*args 的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kwargs-%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">**kwargs 的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">调用函数</span></a></li></ol>
                 
             </div>
         </div>
@@ -626,6 +626,18 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -1084,11 +1096,11 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
@@ -1137,13 +1149,13 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
         <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
     
-        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
-    
         <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
+    
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
