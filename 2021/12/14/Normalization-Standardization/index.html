@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Lingfeng Zhu">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Lingfeng Zhu">
+    
+    <meta name="keywords" content="machine learning,deep learning,recommender system">
+    
+    <meta name="description" content="">
+    <meta name="description" content="特征工程中的一些常用特征缩放方法：归一化（Normalization）与标准化（standardization）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Normalization &amp; Standardization">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/index.html">
+<meta property="og:site_name" content="Vinn&#39;s Studio">
+<meta property="og:description" content="特征工程中的一些常用特征缩放方法：归一化（Normalization）与标准化（standardization）。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/Original.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/StandardScaler.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/MinMaxScaler.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/MaxAbsScaler.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/MaxAbsScaler.png">
+<meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/RobustScaler.png">
+<meta property="article:published_time" content="2021-12-14T08:04:38.000Z">
+<meta property="article:modified_time" content="2021-12-15T08:19:05.608Z">
+<meta property="article:author" content="Lingfeng Zhu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/Original.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>Normalization &amp; Standardization · Vinn&#39;s Studio</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+    
+        <body class="post-body">
+    
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Vinn&#39;s Studio</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Normalization & Standardization</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Vinn's Studio</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Normalization & Standardization
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.5k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/12/14</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <script type="text/javascript"
+  src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<p>特征工程中的一些常用特征缩放方法：归一化（Normalization）与标准化（standardization）。</p>
+<span id="more"></span>
+<h2 id="normalization-standardization-的作用">Normalization &amp; Standardization 的作用</h2>
+<p>特征缩放主要是为了：</p>
+<ol type="1">
+<li>消除量纲：使不同量纲的特征处于同一数量级，减少方差大/数量级大的特征的影响，使模型更准确；</li>
+<li>加快学习算法的收敛速度；</li>
+</ol>
+<h2 id="normalization-standardization-的原理">Normalization &amp; Standardization 的原理</h2>
+<p>假设一个数据集包括「身高」和「体重」两个特征（它们都满足正态分布），画出原始数据图像为：</p>
+<p><img src="/images/Normalization-Standardization/Original.png" /></p>
+<h3 id="standardization">Standardization</h3>
+<p>又叫 z-score 归一化。Standardization 能够将特征数据平移 + 缩放成一个均值为 0，方差为 1 的分布（不改变原始分布）： <span class="math display">\[
+x_i^{\prime}=\frac{x_i-\bar{x}_i}{\sigma_i}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> 表示某个样本的某个特征（<span class="math inline">\(i\)</span>）的值；</li>
+<li><span class="math inline">\(x_i^{\prime}\)</span> 表示经过变换后该样本的该特征的值；</li>
+<li><span class="math inline">\(\bar{x}_i\)</span> 表示该特征的均值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+<li><span class="math inline">\(\sigma_i\)</span> 表示该特征的标准差；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+</ul>
+<p>在 scikit-learn 库的 <code>preprocessing</code> 中，<code>StandardScaler()</code> 函数对应这一缩放方法。案例数据集使用 Standardization 后分布图像为：</p>
+<p><img src="/images/Normalization-Standardization/StandardScaler.png" /></p>
+<h3 id="rescaling">Rescaling</h3>
+<p>又叫 min-max 归一化。Rescaling 将特征数据的取值范围平移 + 缩放到 0 和 1 之间（按比例缩放，不改变分布）： <span class="math display">\[
+x_i^{\prime}=\frac{x_i-\max(x_i)}{\max (x_i)-\min (x_i)}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> 表示某个样本的某个特征（<span class="math inline">\(i\)</span>）的值；</li>
+<li><span class="math inline">\(x_i^{\prime}\)</span> 表示经过变换后该样本的该特征的值；</li>
+<li><span class="math inline">\(\max(x_i)\)</span> 表示该特征的最大值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+<li><span class="math inline">\(\min(x_i)\)</span> 表示该特征的最小值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+</ul>
+<p>在 scikit-learn 库的 <code>preprocessing</code> 中，<code>MinMaxScaler()</code> 函数对应这一缩放方法。案例数据集使用 Rescaling 后分布图像为：</p>
+<p><img src="/images/Normalization-Standardization/MinMaxScaler.png" /></p>
+<h3 id="mean-normalization">Mean Normalization</h3>
+<p>Mean Normalization 将特征数据平移为均值等于 1，缩放为<strong>取值范围区间长度</strong>为 1 的一个分布（按比例缩放，不改变分布）： <span class="math display">\[
+x_i^{\prime}=\frac{x_i-\bar{x}_i}{\max (x_i)-\min (x_i)}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> 表示某个样本的某个特征（<span class="math inline">\(i\)</span>）的值；</li>
+<li><span class="math inline">\(x_i^{\prime}\)</span> 表示经过变换后该样本的该特征的值；</li>
+<li><span class="math inline">\(\bar{x}_i\)</span> 表示该特征的均值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+<li><span class="math inline">\(\max(x_i)\)</span> 表示该特征的最大值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+<li><span class="math inline">\(\min(x_i)\)</span> 表示该特征的最小值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+</ul>
+<h3 id="max-abs-scaler">Max Abs Scaler</h3>
+<p>Max Abs Scaler 将特征数据的取值范围缩放到 -1 和 1 之间（按比例缩放，不改变分布）： <span class="math display">\[
+x_i^\prime = \frac{x_i}{\max(|x_i|)}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> 表示某个样本的某个特征（<span class="math inline">\(i\)</span>）的值；</li>
+<li><span class="math inline">\(x_i^{\prime}\)</span> 表示经过变换后该样本的该特征的值；</li>
+<li><span class="math inline">\(\max(|x_i|)\)</span> 表示该特征的最大绝对值；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+</ul>
+<p>在 scikit-learn 库的 <code>preprocessing</code> 中，<code>MaxAbsScaler()</code> 函数对应这一缩放方法。案例数据集使用 Rescaling 后分布图像为：</p>
+<p><img src="/images/Normalization-Standardization/MaxAbsScaler.png" /></p>
+<h3 id="normalization">Normalization</h3>
+<p>又叫 Scaling to unit length 归一化或 Length-one 归一化。该方法将每个样本的特征向量<strong>分别</strong>缩放为范数等于 1 的向量（保留原始数据的分布；由于样本特征向量范数被限定为 1，则特征数据的值域也被限定在 0 和 1 之间），从而剔除特征强度的影响： <span class="math display">\[
+x_i^{\prime}=\frac{x_i}{\|\vec{x}\|_p}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> 表示某个样本的某个特征（<span class="math inline">\(i\)</span>）的值；</li>
+<li><span class="math inline">\(x_i^{\prime}\)</span> 表示经过变换后该样本的该特征的值；</li>
+<li><span class="math inline">\(\|\vec{x}\|_p\)</span> 表示该样本的特征向量 <span class="math inline">\(\vec{x}\)</span> 的 p-范数（p-norm）的值；<span class="math inline">\(\leftarrow\)</span> 对该样本的所有特征值进行计算得到</li>
+</ul>
+<p>在 scikit-learn 库的 <code>preprocessing</code> 中，<code>Normalizer()</code> 函数对应这一缩放方法（默认为 L2-范数）。案例数据集使用 Rescaling 后分布图像为：</p>
+<p><img src="/images/Normalization-Standardization/MaxAbsScaler.png" /></p>
+<h3 id="robust-scaler">Robust Scaler</h3>
+<p>Robust Scaler 使用对<strong>异常值</strong>鲁棒的统计信息来缩放特征。使用该方法进行缩放可以减小异常值的影响： <span class="math display">\[
+x_{i}{ }^{\prime}=\frac{x_{i}-median(x_i)}{I Q R(x_i)}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(x_i\)</span> 表示某个样本的某个特征（<span class="math inline">\(i\)</span>）的值；</li>
+<li><span class="math inline">\(x_i^{\prime}\)</span> 表示经过变换后该样本的该特征的值；</li>
+<li><span class="math inline">\(median(x_i)\)</span> 表示该特征的中位数；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+<li><span class="math inline">\(IQR(x_i)\)</span> 表示该特征的四分位距（Inter-Quartile Range，即 25% 分位数和 75% 分位数之间的差值）；<span class="math inline">\(\leftarrow\)</span> 对所有样本的该特征值进行计算得到</li>
+</ul>
+<p>在 scikit-learn 库的 <code>preprocessing</code> 中，<code>RobustScaler()</code> 函数对应这一缩放方法（默认为 L2-范数）。案例数据集使用 Rescaling 后分布图像为：</p>
+<p><img src="/images/Normalization-Standardization/RobustScaler.png" /></p>
+<h3 id="non-linear-normalization">Non-linear Normalization</h3>
+<p>非线性归一化对特征数据进行 <code>log()</code>、<code>exp()</code>、<code>arctan()</code>、<code>sigmoid()</code> 等非线性变换，以得到各种不同的效果：</p>
+<ul>
+<li><code>log()</code> 在 [0,1] 上有很强的区分度；</li>
+<li><code>arctan()</code> 可以将任意实数转换到 <span class="math inline">\([-\pi/2, \pi/2]\)</span> 区间；</li>
+<li><code>sigmoid()</code> 可以将任意实数映射到 (0, 1) 区间；</li>
+<li>此外还有 Box-Cox 变换等更高级的变换方法；</li>
+</ul>
+<h2 id="codes">Codes</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot</span>(<span class="params">data, title</span>):</span></span><br><span class="line">    sns.set_style(<span class="string">&#x27;dark&#x27;</span>)</span><br><span class="line">    f, ax = plt.subplots(figsize=(<span class="number">15</span>, <span class="number">10</span>))</span><br><span class="line">    ax.<span class="built_in">set</span>(ylabel=<span class="string">&#x27;frequency&#x27;</span>)</span><br><span class="line">    ax.<span class="built_in">set</span>(xlabel=<span class="string">&#x27;height(blue) / weight(green)&#x27;</span>)</span><br><span class="line">    ax.<span class="built_in">set</span>(title=title)</span><br><span class="line">    sns.distplot(data[:, <span class="number">0</span>:<span class="number">1</span>], color=<span class="string">&#x27;blue&#x27;</span>)</span><br><span class="line">    sns.distplot(data[:, <span class="number">1</span>:<span class="number">2</span>], color=<span class="string">&#x27;green&#x27;</span>)</span><br><span class="line">    plt.savefig(title + <span class="string">&#x27;.png&#x27;</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># generate the data</span></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line">height = np.random.normal(loc=<span class="number">168</span>, scale=<span class="number">5</span>, size=<span class="number">1000</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">weight = np.random.normal(loc=<span class="number">70</span>, scale=<span class="number">10</span>, size=<span class="number">1000</span>).reshape(-<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the original data</span></span><br><span class="line">original_data = np.concatenate((height, weight), axis=<span class="number">1</span>)</span><br><span class="line">plot(original_data, <span class="string">&#x27;Original&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># standardization / z-score</span></span><br><span class="line">standard_scaler_data = preprocessing.StandardScaler().fit_transform(original_data)</span><br><span class="line">plot(standard_scaler_data, <span class="string">&#x27;StandardScaler&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># rescaling / min max scaler</span></span><br><span class="line">min_max_scaler_data = preprocessing.MinMaxScaler().fit_transform(original_data)</span><br><span class="line">plot(min_max_scaler_data, <span class="string">&#x27;MinMaxScaler&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># max abs scaler</span></span><br><span class="line">max_abs_scaler_data = preprocessing.MaxAbsScaler().fit_transform(original_data)</span><br><span class="line">plot(max_abs_scaler_data, <span class="string">&#x27;MaxAbsScaler&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalization / Scaling to unit length</span></span><br><span class="line">normalizer_data = preprocessing.Normalizer().fit_transform(original_data)</span><br><span class="line">plot(normalizer_data, <span class="string">&#x27;Normalizer&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># robust scaler</span></span><br><span class="line">robust_scaler_data = preprocessing.RobustScaler().fit_transform(original_data)</span><br><span class="line">plot(robust_scaler_data, <span class="string">&#x27;RobustScaler&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">December 14th 2021, 4:04:38 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">December 15th 2021, 4:19:05 pm</a>
+            <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/11/02/DCN/" title= "Deep & Cross Network">
+                    <div class="prevTitle">Deep & Cross Network</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:jolin.windy072@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/LingfengZhu" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+            
+                <span class="iconfont-archer wechat" title=wechat>
+                  
+                  <img class="profile-qr" src="/assets/wechatQR.jpeg" />
+                </span>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.facebook.com/lingfeng.zhu.18/" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="//www.linkedin.com/in/lingfeng-zhu-256315193/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="about">Powered by <a href="https://lingfengzhu.github.io/about/" target="_blank">Vinn</a></span><span class="iconfont-archer power">&#xe635;</span><span id="instituion-info">from <a href="https://www.wisc.edu/" target="_blank">UWM</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+        <!-- toc -->
+        
+        <div class="toc-wrapper" style=
+        
+
+
+
+
+
+
+
+top:50vh;
+
+        >
+            <div class="toc-catalog">
+                <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+            </div>
+            
+                <div id="toc-div">
+            
+                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#normalization-standardization-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.</span> <span class="toc-text">Normalization &amp; Standardization 的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#normalization-standardization-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">Normalization &amp; Standardization 的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#standardization"><span class="toc-number">2.1.</span> <span class="toc-text">Standardization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rescaling"><span class="toc-number">2.2.</span> <span class="toc-text">Rescaling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mean-normalization"><span class="toc-number">2.3.</span> <span class="toc-text">Mean Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#max-abs-scaler"><span class="toc-number">2.4.</span> <span class="toc-text">Max Abs Scaler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#normalization"><span class="toc-number">2.5.</span> <span class="toc-text">Normalization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#robust-scaler"><span class="toc-number">2.6.</span> <span class="toc-text">Robust Scaler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#non-linear-normalization"><span class="toc-number">2.7.</span> <span class="toc-text">Non-linear Normalization</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#codes"><span class="toc-number">3.</span> <span class="toc-text">Codes</span></a></li></ol>
+                
+            </div>
+        </div>
+        
+        <div class="back-top iconfont-archer">&#xe639;</div> 
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 29
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2021 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/14</span><a class="archive-post-title" href= "/2021/12/14/Normalization-Standardization/" >Normalization & Standardization</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/02</span><a class="archive-post-title" href= "/2021/11/02/DCN/" >Deep & Cross Network</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/27</span><a class="archive-post-title" href= "/2021/10/27/OHLC/" >OHLC</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/25</span><a class="archive-post-title" href= "/2021/10/25/Pseudo-Labelling/" >Pseudo Labelling</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2021/09/16/Super/" >Super</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2021/09/10/TeachersDay/" >Happy Teacher's Day</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/09</span><a class="archive-post-title" href= "/2021/09/09/CAPM/" >CAPM</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/06</span><a class="archive-post-title" href= "/2021/09/06/ERNIE/" >ERNIE</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/03</span><a class="archive-post-title" href= "/2021/09/03/Two-Pointer/" >Two-Pointer</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/30</span><a class="archive-post-title" href= "/2021/08/30/Federated-Learning/" >Federated Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2021/08/27/Transfer-Learning/" >Transfer Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Decorator/" >Python Decorator</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/29</span><a class="archive-post-title" href= "/2021/07/29/Python-args-and-kwargs/" >Python Syntax: *args and **kwargs</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/05</span><a class="archive-post-title" href= "/2021/07/05/Python-Logging/" >Python Logging</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/25</span><a class="archive-post-title" href= "/2021/05/25/BERT/" >BERT</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/08</span><a class="archive-post-title" href= "/2021/05/08/Conda/" >Conda</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/18</span><a class="archive-post-title" href= "/2021/03/18/PythonTips/" >PythonTips</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/05</span><a class="archive-post-title" href= "/2021/02/05/Docker/" >Docker</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2021/01/06/Trie-Tree/" >Trie Tree</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/08</span><a class="archive-post-title" href= "/2020/12/08/Gradient-Descent/" >Gradient Descent</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2020/11/16/Time-Complexity/" >Time Complexity</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span><a class="archive-post-title" href= "/2020/11/15/SortAlgorithm/" >Sort Algorithm</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2020/09/23/Pytorch/" >pytorch</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/29</span><a class="archive-post-title" href= "/2020/06/29/BinarySearch/" >Binary Search</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/26</span><a class="archive-post-title" href= "/2020/04/26/Delta-Method-in-Deep-Learning/" >Delta Method in Deep Learning</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/18</span><a class="archive-post-title" href= "/2020/04/18/BackTrack/" >Backtracking</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/16</span><a class="archive-post-title" href= "/2020/04/16/Python-Syntax-with/" >Python Syntax: with</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/COVID-Survival-Analysis/" >COVID-19 Survival Analysis</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/Hexo-Guideline/" >Hexo Guideline</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
+    
+        <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
+    
+        <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
+    
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
+    
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
+    
+        <span class="sidebar-tag-name" data-tags="Web-Frontend"><span class="iconfont-archer">&#xe606;</span>Web-Frontend</span>
+    
+        <span class="sidebar-tag-name" data-tags="Pytorch"><span class="iconfont-archer">&#xe606;</span>Pytorch</span>
+    
+        <span class="sidebar-tag-name" data-tags="RecSys"><span class="iconfont-archer">&#xe606;</span>RecSys</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="Deep-Learning"><span class="iconfont-archer">&#xe60a;</span>Deep-Learning</span>
+    
+        <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
+    
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
+    
+        <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
+    
+        <span class="sidebar-category-name" data-categories="Machine-Learning"><span class="iconfont-archer">&#xe60a;</span>Machine-Learning</span>
+    
+        <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Lingfeng Zhu"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
+     
+    </body>
+</html>
+
+
