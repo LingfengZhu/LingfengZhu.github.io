@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://lingfengzhu.github.io/images/DCN/DCN.png">
 <meta property="og:image" content="https://lingfengzhu.github.io/images/DCN/DCN2.png">
 <meta property="article:published_time" content="2021-11-02T03:14:38.000Z">
-<meta property="article:modified_time" content="2021-12-15T05:48:15.669Z">
+<meta property="article:modified_time" content="2021-12-20T07:33:50.046Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta property="article:tag" content="RecSys">
 <meta name="twitter:card" content="summary">
@@ -439,7 +439,7 @@ height:50vh;
 <p>特征的阶（degree）：可以类比多项式的阶，两个普通特征相乘得到的组合特征称为二阶特征，三个普通特征相乘得到的组合则称为三阶特征，一个特征的平方也是二阶特征，一个特征的立方则是三阶特征，以此类推。决策树中每条从根到叶的路径都可以视为一个高阶组合特征（该路径上涉及到的普通特征越多，则该组合特征阶数越高）、神经网络的每个神经元其实也都可以视作一个高阶组合特征（该神经元的计算涉及到的普通特征越多，则该组合特征阶数越高）。</p>
 </blockquote>
 <h2 id="deep-cross-network">Deep &amp; Cross Network</h2>
-<p>DCN 全称Deep &amp; Cross Network，是谷歌和斯坦福大学在 2017 年提出的用于 Ad Click Prediction 的模型。DCN 在学习<strong>特定阶数</strong>组合特征的时候效率非常高，而且同样不需要特征工程，引入的额外的复杂度也是微乎其微的。</p>
+<p>DCN 全称 Deep &amp; Cross Network，是谷歌和斯坦福大学在 2017 年提出的用于 Ad Click Prediction 的模型。DCN 在学习<strong>特定阶数</strong>组合特征的时候效率非常高，而且同样不需要特征工程，引入的额外的复杂度也是微乎其微的。</p>
 <h3 id="dcn-的特点优势">DCN 的特点/优势</h3>
 <ol type="1">
 <li>在 WDL 的结构基础上，提出一种新型的交叉网络结构（Cross Network）替代 Wide 侧的 hand-craft 特征：Cross Network 在每一层都应用 feature crossing，高效地学习了有限阶数 (bounded degree) 的组合特征，不需要人工设计的特征工程；</li>
@@ -577,7 +577,7 @@ p=\sigma\left(\left[x_{L_{c}}^{T}, h_{L_{d}}^{T}\right] w_{\text {logits }}\righ
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2021/11/02/DCN/">https://lingfengzhu.github.io/2021/11/02/DCN/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2021/11/02/DCN/">November 2nd 2021, 11:14:38 am</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/11/02/DCN/">December 15th 2021, 1:48:15 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/11/02/DCN/">December 20th 2021, 3:33:50 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -730,7 +730,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ctr-%E9%A2%84%E4%BC%B0"><span class="toc-number">1.</span> <span class="toc-text">CTR 预估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ctr-%E9%A2%84%E4%BC%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">CTR 预估的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ctr-%E9%A2%84%E4%BC%B0%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">1.2.</span> <span class="toc-text">CTR 预估的发展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deep-cross-network"><span class="toc-number">2.</span> <span class="toc-text">Deep &amp; Cross Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dcn-%E7%9A%84%E7%89%B9%E7%82%B9%E4%BC%98%E5%8A%BF"><span class="toc-number">2.1.</span> <span class="toc-text">DCN 的特点&#x2F;优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dcn-%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text">DCN 的网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dcn-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.3.</span> <span class="toc-text">DCN 的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#embedding-and-stacking-layer"><span class="toc-number">2.3.1.</span> <span class="toc-text">Embedding and Stacking Layer</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#embedding"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">Embedding</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#stacking"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">Stacking</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cross-network"><span class="toc-number">2.3.2.</span> <span class="toc-text">Cross Network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#deep-network"><span class="toc-number">2.3.3.</span> <span class="toc-text">Deep Network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#combination-layer"><span class="toc-number">2.3.4.</span> <span class="toc-text">Combination Layer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ctr-%E9%A2%84%E4%BC%B0"><span class="toc-text">CTR 预估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ctr-%E9%A2%84%E4%BC%B0%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">CTR 预估的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ctr-%E9%A2%84%E4%BC%B0%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-text">CTR 预估的发展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#deep-cross-network"><span class="toc-text">Deep &amp; Cross Network</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dcn-%E7%9A%84%E7%89%B9%E7%82%B9%E4%BC%98%E5%8A%BF"><span class="toc-text">DCN 的特点&#x2F;优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dcn-%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-text">DCN 的网络结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dcn-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-text">DCN 的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#embedding-and-stacking-layer"><span class="toc-text">Embedding and Stacking Layer</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#embedding"><span class="toc-text">Embedding</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#stacking"><span class="toc-text">Stacking</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cross-network"><span class="toc-text">Cross Network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#deep-network"><span class="toc-text">Deep Network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#combination-layer"><span class="toc-text">Combination Layer</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-text">参考文献</span></a></li></ol>
                 
             </div>
         </div>
@@ -1108,9 +1108,26 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 29
+        Total : 30
         </div>
         <!-- search  -->
         
@@ -1123,6 +1140,11 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/20</span><a class="archive-post-title" href= "/2021/12/20/Quanti-Trading/" >Quantitative Trading</a>
+        </li>
     
     
         <li class="archive-post-item">

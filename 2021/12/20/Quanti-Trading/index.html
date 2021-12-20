@@ -20,21 +20,21 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta name="description" content="算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括时间资源和内存资源。复杂度也叫渐进复杂度，包括时间复杂度和空间复杂度，用来粗略分析执行效率与数据规模之间的增长趋势关系，越高阶复杂度的算法，执行效率越低。复杂度分析是数据结构与算法的核心精髓，旨在不依赖硬件、宿主环境、数据集的情况下，粗略推导，考究出算法的效率和资源消耗情况。">
+    <meta name="description" content="量化交易的一些背景知识和理论框架。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Time Complexity">
-<meta property="og:url" content="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/index.html">
+<meta property="og:title" content="Quantitative Trading">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
-<meta property="og:description" content="算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括时间资源和内存资源。复杂度也叫渐进复杂度，包括时间复杂度和空间复杂度，用来粗略分析执行效率与数据规模之间的增长趋势关系，越高阶复杂度的算法，执行效率越低。复杂度分析是数据结构与算法的核心精髓，旨在不依赖硬件、宿主环境、数据集的情况下，粗略推导，考究出算法的效率和资源消耗情况。">
+<meta property="og:description" content="量化交易的一些背景知识和理论框架。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-16T12:01:14.000Z">
-<meta property="article:modified_time" content="2021-12-16T07:58:00.353Z">
+<meta property="article:published_time" content="2021-12-20T06:17:46.000Z">
+<meta property="article:modified_time" content="2021-12-20T08:23:33.675Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Time Complexity · Vinn&#39;s Studio</title>
+    <title>Quantitative Trading · Vinn&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -229,7 +229,7 @@
                 <a href="/" >Vinn&#39;s Studio</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Time Complexity</a>
+                <a href="#" class="post-name">Quantitative Trading</a>
             </div>
     </div>
     
@@ -259,7 +259,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Time Complexity
+            Quantitative Trading
             <!-- 404 -->
             
         </h1>
@@ -278,12 +278,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">1k</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">236</span>Reading time: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/11/16</span>
+                    <span class="post-intro-time">2021/12/20</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -407,68 +407,32 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <script type="text/javascript"
-  src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<p>算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括<strong>时间资源</strong>和<strong>内存资源</strong>。复杂度也叫渐进复杂度，包括<strong>时间复杂度</strong>和<strong>空间复杂度</strong>，用来粗略分析执行效率与数据规模之间的增长趋势关系，越高阶复杂度的算法，执行效率越低。复杂度分析是数据结构与算法的核心精髓，旨在不依赖硬件、宿主环境、数据集的情况下，粗略推导，考究出算法的效率和资源消耗情况。</p>
-<p><span id="more"></span></p>
-<h2 id="复杂度分析">复杂度分析</h2>
-<p>在 CPU 的角度看待程序，那么每行代码执行的操作都是类似的，属于如下三种情况：</p>
-<ul>
-<li>读数据</li>
-<li>写数据</li>
-<li>运算</li>
-</ul>
-<p>尽管每段代码执行的时间都不一定一样，但在粗略的估计中，可以假设每行代码执行一次所需的时间均是单位时间（unit_time），一个算法的时间耗费就是该算法中所有语句的执行时间之和。</p>
-<h3 id="无穷小量与无穷大量的阶">无穷小量与无穷大量的阶</h3>
-<p>通俗的语言来说：</p>
-<ol type="1">
-<li><span class="math inline">\(f(x)=o(g(x))\)</span> 是指：在 <span class="math inline">\(x\)</span> 取极限的时候，<span class="math inline">\(f(x)\)</span> 相对于 <span class="math inline">\(g(x)\)</span> 是可以忽略的小量</li>
-<li><span class="math inline">\(f(x)=O(g(x))\)</span> 是指：在 <span class="math inline">\(x\)</span> 取极限的时候，<span class="math inline">\(g(x)\)</span> 可以控制/限制住 <span class="math inline">\(f(x)\)</span>，即 <span class="math inline">\(f(x)\)</span> 的增长规模/增长率/数量级不可能超过 <span class="math inline">\(g(x)\)</span> 的增长规模/增长率/数量级</li>
-</ol>
-<p>严谨定义：</p>
-<ol type="1">
-<li>若 <span class="math inline">\(\lim\limits_{x \to x_0}\frac{f(x)}{g(x)} = 0\)</span>，则表示当 <span class="math inline">\(x \to x_0\)</span> 时，<span class="math inline">\(f(x)\)</span> 趋于零的速度比 <span class="math inline">\(g(x)\)</span> 快。称为当 <span class="math inline">\(x \to x_0\)</span> 时，<span class="math inline">\(f(x)\)</span> 关于 <span class="math inline">\(g(x)\)</span> 是<strong>高阶无穷小量</strong>，记为 <span class="math inline">\(f(x)=o(g(x))\)</span>；</li>
-<li>若存在 <span class="math inline">\(A &gt; 0\)</span> 使得在 <span class="math inline">\(x_0\)</span> 的某个去中心领域中，有 <span class="math inline">\(\left|\frac{f(x)}{g(x)}\right| \leq A\)</span> 成立，则称当 <span class="math inline">\(x \to x_0\)</span> 时，<span class="math inline">\(\left|\frac{f(x)}{g(x)}\right|\)</span> 是有界量，记为 <span class="math inline">\(f(x)=O(g(x))\)</span>；</li>
-</ol>
-<h3 id="大-o-表示法">大 O 表示法</h3>
-<p>当问题规模增长时， 基本操作次数必定也会增长， 而我们关心的是这个执行次数以什么样的数量级增长。所谓数量级可以理解为增长率。这个所谓的数量级本质上就是算法的<strong>渐近时间复杂度</strong>（asymptotic time complexity）， 简称为时间复杂度。</p>
-<p>一个算法花费的时间与算法中语句的执行次数成正比例，若用语句的执行次数 <span class="math inline">\(T(n)\)</span>（称为<strong>语句频度</strong>或<strong>时间频度</strong>，是问题规模 <span class="math inline">\(n\)</span> 的一个函数）代表算法的时间复杂度，则可以找到一个满足下式的显式辅助函数 <span class="math inline">\(f(n)\)</span> ，用于表示时间复杂度： <span class="math display">\[
-T(n) = O(f(n))
-\]</span> 其中：</p>
-<ul>
-<li><span class="math inline">\(n\)</span>​：表示问题的规模/数据的规模；</li>
-<li><span class="math inline">\(T(n)\)</span>​：算法中语句的执行次数（称为<strong>语句频度</strong>或<strong>时间频度</strong>），代表代码的总执行时间，即时间复杂度；</li>
-<li><span class="math inline">\(f(n)\)</span>​：辅助函数，满足：当 <span class="math inline">\(n \to \infty\)</span>​ 时，存在 <span class="math inline">\(A\)</span>，使得 <span class="math inline">\(\left|\frac{T(n)}{f(n)}\right| \leq A\)</span> 成立​，即：<span class="math inline">\(T(n)\)</span> 的数量级不可能超过 <span class="math inline">\(f(n)\)</span></li>
-</ul>
-<h3 id="常见语句的时间复杂度">常见语句的时间复杂度</h3>
-<h4 id="in-语句">in 语句</h4>
-<p><code>python</code> 代码常用 <code>in</code> 来判断一个元素是否在 <code>list</code> 中，而对于长度为 n 的不同数据结构，<code>in</code> 语句判断的时间复杂度如下：</p>
-<ul>
-<li>in list : o(n)</li>
-<li>in set : o(1)</li>
-<li>in dict : o(1)</li>
-</ul>
-<h4 id="for-语句">for 语句</h4>
-<p>一个 <code>for</code> 循环的时间复杂度等于<strong>循环次数</strong>乘以<strong>循环体代码</strong>的复杂度；</p>
-<h3 id="if-else-语句">if-else 语句</h3>
-<p><code>if-else</code> 结构的复杂度取决于 <code>if</code> 的<strong>条件判断复杂度</strong>和两个<strong>分支部分的复杂度</strong>，总体复杂度取三者中数量级最大的那个；</p>
-<h3 id="常见复杂度量级">常见复杂度量级</h3>
-<p>当 <span class="math inline">\(n \to \infty\)</span> 时，有： <span class="math display">\[
-O(1) &lt; O(\log{n}) &lt; O(n) &lt; O(n\log{n}) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!) &lt; O(n^n)
-\]</span></p>
-<h2 id="参考资料">参考资料</h2>
-<p>https://www.cnblogs.com/jonins/p/9950799.html</p>
-<p>https://www.cnblogs.com/jonins/p/9956752.html</p>
+        <p>量化交易的一些背景知识和理论框架。</p>
+<span id="more"></span>
+<p>现代金融投资理论主要由<strong>投资组合理论</strong>、<strong>资本资产定价模型（CAPM）</strong>、<strong>套利定价理论（APT）</strong>、<strong>有效市场假说</strong>、<strong>期权定价理论</strong>以及<strong>行为金融理论</strong>等组成。这些理论的发展极大地改变了过去主要依赖基本分析的传统投资管理实践，使现代投资管理日益朝着系统化、科学化、组合化的方向发展。</p>
+<pre class="mermaid">graph LR;
+投资策略-->主动投资;
+投资策略-->被动投资;
+主动投资-->传统投资;
+主动投资-->量化投资;
+传统投资-->基本面分析;
+传统投资-->技术分析;
+量化投资-->量化选股;
+量化投资-->量化择时;
+量化投资-->统计套利;
+量化投资-->算法交易;
+量化投资-->其他套利;
+被动投资-->指数基金;
+被动投资-->指数复制;</pre>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
-            <p>Original Link：<a href="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/">https://lingfengzhu.github.io/2020/11/16/Time-Complexity/</a> 
-            <p>Published：<a href="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/">November 16th 2020, 8:01:14 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/11/16/Time-Complexity/">December 16th 2021, 3:58:00 pm</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">December 20th 2021, 2:17:46 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">December 20th 2021, 4:23:33 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -476,17 +440,12 @@ O(1) &lt; O(\log{n}) &lt; O(n) &lt; O(n\log{n}) &lt; O(n^2) &lt; O(n^3) &lt; O(2
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/12/08/Gradient-Descent/" title= "Gradient Descent">
-                    <div class="nextTitle">Gradient Descent</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/11/15/SortAlgorithm/" title= "Sort Algorithm">
-                    <div class="prevTitle">Sort Algorithm</div>
+                <a href= "/2021/12/14/Normalization-Standardization/" title= "Normalization & Standardization">
+                    <div class="prevTitle">Normalization & Standardization</div>
                 </a>
             
         </li>
@@ -621,7 +580,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-text">复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%A9%B7%E5%B0%8F%E9%87%8F%E4%B8%8E%E6%97%A0%E7%A9%B7%E5%A4%A7%E9%87%8F%E7%9A%84%E9%98%B6"><span class="toc-text">无穷小量与无穷大量的阶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7-o-%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-text">大 O 表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E8%AF%AD%E5%8F%A5%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">常见语句的时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#in-%E8%AF%AD%E5%8F%A5"><span class="toc-text">in 语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-%E8%AF%AD%E5%8F%A5"><span class="toc-text">for 语句</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#if-else-%E8%AF%AD%E5%8F%A5"><span class="toc-text">if-else 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%A4%8D%E6%9D%82%E5%BA%A6%E9%87%8F%E7%BA%A7"><span class="toc-text">常见复杂度量级</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol>
+                
                 
             </div>
         </div>
