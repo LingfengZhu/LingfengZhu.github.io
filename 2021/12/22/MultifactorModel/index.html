@@ -11,7 +11,7 @@
 
 
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
     <meta name="author" content="Lingfeng Zhu">
     <meta name="renderer" content="webkit">
@@ -20,17 +20,21 @@
     <meta name="keywords" content="machine learning,deep learning,recommender system">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Vinn&#39;s Studio">
-<meta property="og:url" content="https://lingfengzhu.github.io/categories/Greeting/index.html">
+    <meta name="description" content="多因子量化选股。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Multifactor Model">
+<meta property="og:url" content="https://lingfengzhu.github.io/2021/12/22/MultifactorModel/index.html">
 <meta property="og:site_name" content="Vinn&#39;s Studio">
+<meta property="og:description" content="多因子量化选股。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-22T07:45:48.000Z">
+<meta property="article:modified_time" content="2021-12-25T07:56:32.514Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>Vinn&#39;s Studio</title>
+    <title>Multifactor Model · Vinn&#39;s Studio</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -208,15 +212,26 @@
     
     <!-- 谷歌统计  -->
     
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
     
+        <body class="post-body">
     
-<header class="header">
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Vinn&#39;s Studio</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Multifactor Model</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Vinn's Studio</a>
 </header>
@@ -228,24 +243,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(https://source.unsplash.com/random)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Multifactor Model
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2021/12/22</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -346,33 +405,102 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/09/10/TeachersDay/" >
-            
-                <span>Happy Teacher&#39;s Day</span>
-        </a>
-        <div class="abstract-content">
-            Teachers Day Wishes For YOU.
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/10</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>多因子量化选股。</p>
+<span id="more"></span>
+<p>多因子量化选股的原理不难理解，即认为股票收益率是由一系列<strong>因素（因子）</strong>决定的，根据经济金融理论或市场经验寻找这些因子，然后通过对历史数据的拟合和统计分析进行验证和筛选，最后以这些因子的组合作为选股标准，买入满足这些因子的股票。在实践中，多因子量化选股已经是一个相对成熟且大致框架较为固定的策略，具体可分为五个步骤，分别为<strong>因子选取、因子有效性检验、因子筛选、综合评分模型</strong>以及<strong>模型的评价和改进</strong>。</p>
+<h2 id="多因子选股策略的优缺点">多因子选股策略的优缺点</h2>
+<p>多因子量化选股本质是基于历史数据的统计分析，通过寻找那些与股票收益率最相关的因子，并基于套利定价理论（APT），将多个影响因子进行组合，构建综合选股指标来筛选股票。多因子选股研究的对象主要是因子，因此单因子的回测和有效性检验是整个多因子模型的重要组成部分。</p>
+<ul>
+<li><strong>缺点</strong>：任何一个多因子选股模型具有一定的时效性、风险性，需要使用者根据市场情况进行调整和更新，这是多因子选股策略存在的不足。</li>
+<li><strong>优点：</strong>多因子选股模型作为一种量化投资选股策略，最大的优势在于其结果是根据客观的数据和完整的模型得出的，可以避免交易者个人主观意念的干扰，具有一定客观性。</li>
+</ul>
+<h2 id="因子的选择">因子的选择</h2>
+<p>多因子选股模型的第一步是发掘各类与股票收益率相关的因子，因子的选择主要基于经济逻辑和市场经验，在经典的规模、估值、动量、波动率等全市场通用因子基础上，根据宏观、行业、公司基本面、市场特征，结合各类特异因子来构造投资组合。影响股价收益的因子多种多样，见仁见智，参考券商研报总结，有以下几类（还可以继续细分和挖掘）：</p>
+<ol type="1">
+<li><strong>市场整体</strong>：市场因子、系统性风险等；</li>
+<li><strong>估值因子</strong>：市盈率、市净率、市销率、 市现率、 企业价值倍数、 PEG 等；</li>
+<li><strong>成长因子</strong>：营业收入增长率、营业利润增长率、净利润增长率、每股收益增长率、净资产增长率、股东权益增长率、经营活动产生的现金流量金额增长率等；</li>
+<li><strong>盈利能力因子</strong>：销售净利率、毛利率、净资产收益率、资产收益率、营业费用比例、财务费用比例、息税前利润与营业总收入比等；</li>
+<li><strong>动量反转因子</strong>：前期涨跌幅等；</li>
+<li><strong>交投因子</strong>：前期换手率、量比等；</li>
+<li><strong>规模因子</strong>：流通市值、总市值、自由流通市值、流通股本、总股本等；</li>
+<li><strong>股价波动因子</strong>：前期股价振幅、日收益率标准差等；</li>
+<li><strong>分析师预测因子</strong>：预测净利润增长率、预测主营业务增长率、盈利预测调整等。</li>
+</ol>
+<h2 id="因子有效性的检验">因子有效性的检验</h2>
+<p>一般检验方法主要采用<strong>排序</strong>的方法检验候选因子的选股有效性。例如：可以<strong>每月检验</strong>。</p>
+<blockquote>
+<p>具体而言，对于任意一个候选因子，在模型形成期的第一个月初开始计算市场中每只正常交易股票的该因子的大小，按从小到大的顺序对样本股票进行排序，并平均分为 N 个组合，一直持有到月末，在下月初再按同样的方法重新构建 N 个组合并持有到月末，一直重复到模型形成期末（候选组合的数量是一个超参数。具体参数的最优选择，需要用历史数据进行检验）。</p>
+</blockquote>
+<h2 id="剔除冗余因子">剔除冗余因子</h2>
+<p>不同的选股因子可能由于内在的驱动因素大致相同等原因，所选出的组合在个股构成和收益等方面具有较高的一致性，因此其中的一些因子需要作为冗余因子剔除， 而只保留同类因子中收益最好，区分度最高的一个因子。例如成交量指标和流通量指标之间具有比较明显的相关性。流通盘越大的，成交量一般也会比较大，因此在选股模型中，这两个因子只选择其中一个。</p>
+<p>冗余因子剔除的方法：假设需要选出 K 个有效因子，样本期共 M 月，那么具体的冗余因子剔除步骤为：</p>
+<ol type="1">
+<li>先对不同因子下的 N 个组合进行打分，分值与该组合在整个模型形成期的收益相关，收益越大，分值越高；</li>
+<li>按月计算个股的不同因子得分间的相关性矩阵；</li>
+<li>在计算完每月因子得分相关性矩阵后，计算整个样本期内相关性矩阵的平均值；</li>
+<li>设定一个得分相关性阀值，筛选出得分相关性平均值矩阵中大于该阀值的元素所对应的因子，这些因子中只保留与其他因子相关性较小、有效性更强的因子，而其它因子则作为冗余因子剔除。</li>
+</ol>
+<h3 id="多因子选股的判断方法">多因子选股的判断方法</h3>
+<p>多因子选股的判断方法分为<strong>回归法（OLS）</strong>和<strong>打分法</strong>。</p>
+<h3 id="回归法">回归法</h3>
+<p>回归方法是利用股票历史收益率对筛选出的多因子进行回归，估计出回归方程系数，然后将最新的因子带入回归方程估计股票未来收益，以此为依据进行选股。回归方法的问题是很难找到一个精确拟合的回归方程，模型误差比较大。</p>
+<h3 id="打分法">打分法</h3>
+<p>打分法是根据各个因子的大小对股票进行打分，然后根据一定的权重加权得到一个总分，根据总分对股票进行筛选。例如每个月初，对市场中正常交易的个股计算每个因子的最新得分并按照一定的权重求得所有因子的平均分。最后，根据模型所得出的综合平均分对股票进行排序，然后根据需要选择排名靠前的股票。例如，选取得分最高的前 20%股票，或者选取得分最高的 50 到 100 只股票等等。打分法操作简单，但是权重的确定比较困难，对结果的影响较大。</p>
+<h2 id="模型的评价及持续改进">模型的评价及持续改进</h2>
+<p>多因子量化选股模型建立在市场无效或弱有效的前提之下，随着使用多因子选股模型的交易者数量的不断增加，有的因子会逐渐失效，而另一些新的因素可能被验证有效而加入到模型当中。此外，一些因子可能在过去的市场环境下比较有效，而随着市场风格的改变，这些因子可能短期内失效，而另外一些以前无效的因子会在当前市场环境下表现较好。</p>
+<p>在计算综合评分的过程中，各因子得分的权重设计、交易成本考虑和风险控制等都存在进一步改进的空间。因此在综合评分选股模型的使用过程中会对选用的因子、模型本身做持续的再评价和不断的改进以适应变化的市场环境。因子和参数的获取只能通过历史数据回测来获得，但是在回测过程中，防止出现过度优化也很重要的。</p>
+
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
+            <p>Original Link：<a href="https://lingfengzhu.github.io/2021/12/22/MultifactorModel/">https://lingfengzhu.github.io/2021/12/22/MultifactorModel/</a> 
+            <p>Published：<a href="https://lingfengzhu.github.io/2021/12/22/MultifactorModel/">December 22nd 2021, 3:45:48 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/22/MultifactorModel/">December 25th 2021, 3:56:32 pm</a>
+            <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2021/12/23/Topological-Sorting/" title= "Topological Sorting">
+                    <div class="nextTitle">Topological Sorting</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2021/12/20/Quanti-Trading/" title= "Quantitative Trading">
+                    <div class="prevTitle">Quantitative Trading</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -465,6 +593,30 @@
 </footer>
     </div>
         <!-- toc -->
+        
+        <div class="toc-wrapper" style=
+        
+
+
+
+
+
+
+
+top:50vh;
+
+        >
+            <div class="toc-catalog">
+                <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+            </div>
+            
+                <div id="toc-div">
+            
+                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%9B%A0%E5%AD%90%E9%80%89%E8%82%A1%E7%AD%96%E7%95%A5%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">多因子选股策略的优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%A0%E5%AD%90%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">因子的选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%A0%E5%AD%90%E6%9C%89%E6%95%88%E6%80%A7%E7%9A%84%E6%A3%80%E9%AA%8C"><span class="toc-text">因子有效性的检验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%94%E9%99%A4%E5%86%97%E4%BD%99%E5%9B%A0%E5%AD%90"><span class="toc-text">剔除冗余因子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E5%9B%A0%E5%AD%90%E9%80%89%E8%82%A1%E7%9A%84%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95"><span class="toc-text">多因子选股的判断方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E5%BD%92%E6%B3%95"><span class="toc-text">回归法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%88%86%E6%B3%95"><span class="toc-text">打分法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AF%84%E4%BB%B7%E5%8F%8A%E6%8C%81%E7%BB%AD%E6%94%B9%E8%BF%9B"><span class="toc-text">模型的评价及持续改进</span></a></li></ol>
+                
+            </div>
+        </div>
         
         <div class="back-top iconfont-archer">&#xe639;</div> 
     <div class="sidebar sidebar-hide">
@@ -854,9 +1006,32 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 30
+        Total : 31
         </div>
         <!-- search  -->
         
@@ -869,6 +1044,16 @@
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href= "/2021/12/23/Topological-Sorting/" >Topological Sorting</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2021/12/22/MultifactorModel/" >Multifactor Model</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -898,11 +1083,6 @@
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2021/09/16/Super/" >Super</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2021/09/10/TeachersDay/" >Happy Teacher's Day</a>
         </li>
     
     
@@ -1099,8 +1279,6 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
-        <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
-    
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
     <div class="sidebar-categories-list"></div>
@@ -1133,7 +1311,18 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
+    <!-- mermaid -->
+    
+        <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js'></script>
+        <script>
+            if (window.mermaid) {
+                    mermaid.initialize({ theme: 'dark' });
+                }
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
     </body>
 </html>
 

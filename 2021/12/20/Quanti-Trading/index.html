@@ -28,7 +28,7 @@
 <meta property="og:description" content="量化交易的一些背景知识和理论框架。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-20T06:17:46.000Z">
-<meta property="article:modified_time" content="2021-12-20T08:23:33.675Z">
+<meta property="article:modified_time" content="2021-12-22T07:34:36.522Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
@@ -278,7 +278,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">236</span>Reading time: <span class="post-count reading-time">1 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.8k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -409,21 +409,70 @@ height:50vh;
     <article class="article-entry">
         <p>量化交易的一些背景知识和理论框架。</p>
 <span id="more"></span>
+<h2 id="量化交易">量化交易</h2>
+<p>量化交易是指以先进的<strong>数学模型</strong>替代人为的主观判断，利用<strong>计算机技术</strong>从庞大的历史数据中海选能带来超额收益的多种“大概率”事件以制定策略，极大地减少了投资者情绪波动的影响，避免在市场极度狂热或悲观的情况下作出非理性的投资决策。</p>
+<pre class="mermaid">graph TB;
+  投资策略-->主动投资 & 被动投资;
+  主动投资-->传统投资 & 量化投资;
+  传统投资-->基本面分析 & 技术分析;
+  量化投资-->量化选股 & 量化择时 & 统计套利 & 算法交易 & 其他套利;
+  被动投资-->指数基金 & 指数复制;</pre>
+<h2 id="现代金融投资理论">现代金融投资理论</h2>
 <p>现代金融投资理论主要由<strong>投资组合理论</strong>、<strong>资本资产定价模型（CAPM）</strong>、<strong>套利定价理论（APT）</strong>、<strong>有效市场假说</strong>、<strong>期权定价理论</strong>以及<strong>行为金融理论</strong>等组成。这些理论的发展极大地改变了过去主要依赖基本分析的传统投资管理实践，使现代投资管理日益朝着系统化、科学化、组合化的方向发展。</p>
 <pre class="mermaid">graph LR;
-投资策略-->主动投资;
-投资策略-->被动投资;
-主动投资-->传统投资;
-主动投资-->量化投资;
-传统投资-->基本面分析;
-传统投资-->技术分析;
-量化投资-->量化选股;
-量化投资-->量化择时;
-量化投资-->统计套利;
-量化投资-->算法交易;
-量化投资-->其他套利;
-被动投资-->指数基金;
-被动投资-->指数复制;</pre>
+  投资组合理论 & 资本资产定价理论 & 套利定价理论 --- A(现代投资理论);
+  A(现代投资理论) --- 有效市场理论 & 行为金融理论 & 期权定价理论;</pre>
+<p>1952 年马柯维茨（Markowitz）在 The Journal of Finance（金融学最顶级的学术期刊）上发表了《证券组合选择》论文，开启了现代证券组合管理理论的先河。马柯维茨开创性地引入了<strong>均值</strong>和<strong>方差</strong>来定量刻画股票投资的收益和风险（被认为是量化交易策略的鼻祖），建立了确定最佳资产组合的基本模型。</p>
+<h2 id="capm">CAPM</h2>
+<p>其后，越来越多的经济金融学者通过数量化的模型以及周边市场和投资交易问题。夏普（William Sharpe）、林特尔（John Lintner）、特里诺（Jack Treynor）和莫辛（Jan Mossin）分别于 1964、1965 和 1966 年在马柯维茨投资组合理论基础上，发展出了<strong>资本资产定价模型（CAPM）</strong>。该模型不仅提供了评价收益-风险相互转换特征的可运作框架，也为投资组合分析、基金绩效评价提供了重要的理论基础。</p>
+<pre class="mermaid">graph LR;
+  Cfalse -->|组合表现优于市场| Alpha;   
+  A(证券组合超额收益) -.等于.- Alpha;
+  Efalse -->|组合波动性高于市场| Beta;
+  Alpha -.加.- Beta;
+  Beta -.乘.- B(市场超额收益);
+  Dfalse -->|组合表现不及市场| Alpha;
+  Ffalse -->|组合波动性低于市场| Beta;</pre>
+<h2 id="apt">APT</h2>
+<p>CAPM 模型认为所有证券的收益率都与唯一的<strong>公共因子（市场证券组合）</strong>的收益率存在着线性关系。1976年，针对 CAPM 模型存在不可检验性的缺陷，罗斯（Stephen Ross）提出了<strong>套利定价理论（Arbitrage Pricing Theory，APT）</strong>。套利定价理论以收益率形成过程的多因子模型为基础，认为证券收益率与一组因子线性相关，这组因子代表证券收益率的一些基本因素。事实上，当收益率通过单一因子（市场组合）形成时，将会发现套利定价理论形成了一种与资本资产定价模型相同的关系。因此，套利定价理论其实是一种广义的资本资产定价模型，该理论成了多因子量化选股模型的重要理论基础。</p>
+<h2 id="多因子模型">多因子模型</h2>
+<p>但是套利定价理论并没有指出影响证券收益的具体因素，在应用中需要预先判断哪些因素可能影响证券收益，并使用统计分析方法进行验证。研究者从不同角度出发，发现了各类影响证券收益的因子，比较经典的有 <strong>Fama-French 三因子模型</strong>。</p>
+<pre class="mermaid">graph LR;
+  动量 & 换手率 & 量比 & 波动 & Z[...] --- A(技术面因子);
+  机器学习 & 深度学习 & Y[...] --- B(统计法数据挖掘);
+  A & B --- C{多因子模型};
+  C --- D(宏观因子) & E(基本面因子);
+  D --- GDP增长 & 工业增加值 & 通货膨胀率 & 利率 & X[...];
+  E --- F[估值 PE/PB] & 成长 & 盈利能力 & 市销率 & W[...];</pre>
+<h3 id="三因子">三因子</h3>
+<p>市场中的<strong>小市值、价值股表现明显超过市场</strong>，而<strong>这一效应不能用 CAPM 模型解释</strong>。1981年，大卫·布斯和雷克斯·桑奎菲尔德成立了维度投资顾问公司，买入小市值、低估值的股票，获得了高额回报。1992年，Fama 和 French 对美国股票市场决定不同股票回报率差异的因素的研究发现，股票的市场的 beta 值不能解释不同股票回报率的差异，而上市公司的<strong>市值、账面市值比、市盈率</strong>可以解释股票回报率的差异，因此提出了著名的<strong>三因子模型</strong>。</p>
+<h3 id="四因子">四因子</h3>
+<p>随着市场交易实践和研究的不断深入，研究者又发现市场中的动量现象无法用三因子模型解释。1997年，卡哈特（Carhart）认为研究股票收益应在 Fama 和 French 的三因子模型基础上加入<strong>动量效应</strong>，构建<strong>四因子模型</strong>。动量是物理学名词，是与物体的质量和速度相关的物理量，一般而言，一个物体的<strong>动量</strong>指的是这个物体在它运动方向上保持运动的<strong>趋势</strong>。而股市中的动量投资策略依据的就是动量效应，又称为“惯性效应”，即某个时段跌得最深或长得最凶的股票往往会沿着原来的方向继续运动。</p>
+<h3 id="五因子">五因子</h3>
+<p>虽然四因子模型将股票收益与价格本身联系起来了，但与公司价值关系不大。从直觉上理解，在其他条件一定的情况下，财务质量高的上市公司应该带来更高的投资回报，因此有必要引入刻画<strong>公司资产质量的因子</strong>。2013年，Fama 的学生阿斯内斯 (Asness) 对<strong>公司“质量”</strong>进行量化，并提出了<strong>五因子模型</strong>。</p>
+<h3 id="六因子">六因子</h3>
+<p>后来，研究者们又发现<strong>低波动率（低 beta）</strong>股票组合的<strong>实际收益</strong>比<strong>高波动率（高 beta）</strong>股票组合的要高，这一现象无法用五因子模型解释，于是法拉瑞利等于 2013 年又将<strong>波动率因子</strong>引入，建立了<strong>六因子模型</strong>。</p>
+<pre class="mermaid">graph LR;
+  套利定价理论 --> A(多因子模型);
+  A --> B[Smart beta 策略];
+  A --> 多因子量化选股策略
+
+  subgraph 三因子模型
+    价值投资;
+  end
+  subgraph 四因子模型
+    动量投资;
+  end
+  subgraph 五因子模型
+    质量投资;
+  end
+  subgraph 六因子模型
+    波动率投资;
+  end
+  
+  价值投资 --> 动量投资;
+  动量投资 --> 质量投资;
+  质量投资 --> 波动率投资;</pre>
 
     </article>
     <!-- license  -->
@@ -432,13 +481,18 @@ height:50vh;
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">December 20th 2021, 2:17:46 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">December 20th 2021, 4:23:33 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/20/Quanti-Trading/">December 22nd 2021, 3:34:36 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2021/12/22/MultifactorModel/" title= "Multifactor Model">
+                    <div class="nextTitle">Multifactor Model</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -580,7 +634,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8F%E5%8C%96%E4%BA%A4%E6%98%93"><span class="toc-text">量化交易</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3%E9%87%91%E8%9E%8D%E6%8A%95%E8%B5%84%E7%90%86%E8%AE%BA"><span class="toc-text">现代金融投资理论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#capm"><span class="toc-text">CAPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#apt"><span class="toc-text">APT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E5%9B%A0%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-text">多因子模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%9B%A0%E5%AD%90"><span class="toc-text">三因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%9B%A0%E5%AD%90"><span class="toc-text">四因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E5%9B%A0%E5%AD%90"><span class="toc-text">五因子</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E5%9B%A0%E5%AD%90"><span class="toc-text">六因子</span></a></li></ol></li></ol>
                 
             </div>
         </div>
@@ -973,9 +1027,32 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 30
+        Total : 31
         </div>
         <!-- search  -->
         
@@ -988,6 +1065,16 @@ top:50vh;
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/23</span><a class="archive-post-title" href= "/2021/12/23/Topological-Sorting/" >Topological Sorting</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/22</span><a class="archive-post-title" href= "/2021/12/22/MultifactorModel/" >Multifactor Model</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1017,11 +1104,6 @@ top:50vh;
     
         <li class="archive-post-item">
             <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2021/09/16/Super/" >Super</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2021/09/10/TeachersDay/" >Happy Teacher's Day</a>
         </li>
     
     
@@ -1218,8 +1300,6 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Finance"><span class="iconfont-archer">&#xe60a;</span>Finance</span>
     
-        <span class="sidebar-category-name" data-categories="Greeting"><span class="iconfont-archer">&#xe60a;</span>Greeting</span>
-    
     </div>
     <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
     <div class="sidebar-categories-list"></div>
@@ -1253,8 +1333,17 @@ jsonContent:
     </div>
     <!-- async load share.js -->
     
-        <script src="/scripts/share.js" async></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->    
+        <script src="/scripts/share.js" async></script>    
      
+    <!-- mermaid -->
+    
+        <script src='https://cdn.jsdelivr.net/npm/mermaid@8.11.0/dist/mermaid.min.js'></script>
+        <script>
+            if (window.mermaid) {
+                    mermaid.initialize({ theme: 'dark' });
+                }
+        </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
     </body>
 </html>
 
