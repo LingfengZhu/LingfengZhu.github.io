@@ -367,6 +367,63 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2022/01/08/Dynamic-Programming/" >
+            
+                <span>Dynamic Programming</span>
+        </a>
+        <div class="abstract-content">
+            
+
+从子问题解决原问题，动态规划一般有自顶向下和自底向上两种编写方式
+Bottom-Up
+自底向上 (Bottom-Up)，形式上对应迭代 (iteration)：巧妙地安排求解顺序，从最小的子问题开始利用循环逐步计算并将结果存在 dp 数组里，基于子问题的结果向后计算。
+
+以计算斐波那契数列的第 n 个数为例，普通循环结构的求解方式如下：
+123456789def Fibonacci(n):a = 0b = 1if n == 1: return aif n == 2: return b# 迭代步骤for i in range(2, n):  a, b = b, a+breturn b
+...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/08</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2022/01/06/BitwiseOperation/" >
+            
+                <span>Bitwise Operation</span>
+        </a>
+        <div class="abstract-content">
+            <script type="text/javascript"
+  src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<p>计算机中的数在内存中都是以二进制 (Binary) 形式进行存储的，用位运算 (Bitwise Operation) 可以直接对整数在内存中的二进制位进行操作，因此其执行效率非常高，在程序中尽量使用位运算进行操作，这会大大提高程序的性能。</p>
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2022/01/06</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2021/12/23/Topological-Sorting/" >
             
                 <span>Topological Sorting</span>
@@ -557,58 +614,6 @@ height:50vh;
             <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/09/09/CAPM/" >
-            
-                <span>CAPM</span>
-        </a>
-        <div class="abstract-content">
-            This is an encrypted article, please enter the password or contact me if you want to see the contents.
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/09</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2021/09/06/ERNIE/" >
-            
-                <span>ERNIE</span>
-        </a>
-        <div class="abstract-content">
-            This is an encrypted article, please enter the password or contact me if you want to see the contents.
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2021/09/06</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "NLP">NLP</a>
     
 </div>
             
@@ -1228,9 +1233,33 @@ height:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 33
         </div>
         <!-- search  -->
         
@@ -1240,6 +1269,25 @@ height:50vh;
     
     
     
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2022/01/08/Dynamic-Programming/" >Dynamic Programming</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2022/01/06/BitwiseOperation/" >Bitwise Operation</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
@@ -1415,15 +1463,15 @@ height:50vh;
     
         <span class="sidebar-tag-name" data-tags="NLP"><span class="iconfont-archer">&#xe606;</span>NLP</span>
     
+        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+    
         <span class="sidebar-tag-name" data-tags="Survival Analysis"><span class="iconfont-archer">&#xe606;</span>Survival Analysis</span>
     
         <span class="sidebar-tag-name" data-tags="COVID-19"><span class="iconfont-archer">&#xe606;</span>COVID-19</span>
     
-        <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
+        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
     
         <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
-        <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
@@ -1470,9 +1518,9 @@ jsonContent:
     
         <span class="sidebar-category-name" data-categories="Algorithm"><span class="iconfont-archer">&#xe60a;</span>Algorithm</span>
     
-        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
-    
         <span class="sidebar-category-name" data-categories="Syntax"><span class="iconfont-archer">&#xe60a;</span>Syntax</span>
+    
+        <span class="sidebar-category-name" data-categories="Statistics"><span class="iconfont-archer">&#xe60a;</span>Statistics</span>
     
         <span class="sidebar-category-name" data-categories="Machine-Learning"><span class="iconfont-archer">&#xe60a;</span>Machine-Learning</span>
     

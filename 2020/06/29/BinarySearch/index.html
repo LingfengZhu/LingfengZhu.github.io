@@ -28,7 +28,7 @@
 <meta property="og:description" content="Binary search can reduce the time complexity to O(logN) for sorted items&#39; search. I summarized a framework to slove all the binary search problems under different situation in this post.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-29T00:30:08.000Z">
-<meta property="article:modified_time" content="2021-09-08T10:37:42.784Z">
+<meta property="article:modified_time" content="2022-01-20T07:17:49.163Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
@@ -278,7 +278,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">618</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                        <span>Word count: <span class="post-count word-count">1.1k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -409,12 +409,8 @@ height:50vh;
     <article class="article-entry">
         <p>Binary search can reduce the time complexity to O(logN) for <strong>sorted</strong> items' search. I summarized a framework to slove all the binary search problems under different situation in this post.</p>
 <span id="more"></span>
-##
-<center>
-Framework
-</center>
-<hr />
-<h3 id="main-factors">Main Factors</h3>
+<h2 id="framework">1. Framework</h2>
+<h3 id="main-factors">1.1. Main Factors</h3>
 <p>Here are some modifiable main factors for binary search problems.</p>
 <ol type="1">
 <li><strong>Right Boundary</strong>: The right boundary of the search range. <code>len(nums)</code> or <code>len(nums)-1</code> are some commen choices.</li>
@@ -423,38 +419,43 @@ Framework
 <li><strong>Search One/Other Part</strong>: If the target is not found, you wil then search the two divided parts. <code>left = mid+1</code> and <code>left = mid</code> are 2 examples.</li>
 </ol>
 <p>Where <code>nums</code> is the given list of numbers and <code>target</code> is the target number.</p>
-<h3 id="main-framework">Main Framework</h3>
+<h3 id="main-framework">1.2. Main Framework</h3>
 <p>The main framework of binary search can be seen as follows:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span>(<span class="params">nums, target</span>):</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="string">&#x27;Right Boundary&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> <span class="string">&#x27;Continue Condition&#x27;</span>:</span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="string">&#x27;Target Found&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            <span class="string">&#x27;Search One Part&#x27;</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            <span class="string">&#x27;Search The Other Part&#x27;</span></span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
 <p>Where <code>nums</code> is the given list of numbers and <code>target</code> is the target number.</p>
-##
-<center>
-Some Points
-</center>
-<hr />
+<h2 id="some-points">2. Some Points</h2>
 <p>Based on different choices of <code>right</code>, our search interval can be different: If you let <code>right = len(nums)</code>, then to search over <code>nums</code>, the index search interval should be <code>[left, right)</code>; If you let <code>right = len(nums)-1</code>, then to search over <code>nums</code>, the index search interval should be <code>[left, right]</code>. In a word, based on how you set <code>right</code>, the search interval has two forms: <code>[·,·)</code> or <code>[·,·]</code>. Different forms have different settings, choose the suitable one based on specific problems.</p>
-<h3 id="form-1-search-left-right">Form 1: Search <code>[left, right)</code></h3>
+<h3 id="form-one-search-left-right">2.1. Form One: Search <code>[left, right)</code></h3>
 <ol type="1">
 <li><strong>Right Boundary</strong>: <code>right = len(nums)</code></li>
 <li><strong>Continue Condition</strong>: <code>while(left &lt; right)</code>; the loop will stop when <code>left == right</code>, at which time the search interval is <code>[right, right)</code>, which is an empty interval meaning that the loop should be stopped.</li>
 <li><strong>Search One/Other Part</strong>: Each step we take a <code>mid</code> away, and then the search interval is divided into two parts: <code>[left, mid)</code> and <code>[mid+1, right)</code>. To search the first part, we have <code>right = mid</code>; To search the latter part, we have <code>left = mid+1</code>.</li>
 </ol>
-<h3 id="form-2-search-left-right">Form 2: Search <code>[left, right]</code></h3>
+<h3 id="form-two-search-left-right">2.2. Form Two: Search <code>[left, right]</code></h3>
 <ol type="1">
 <li><strong>Right Boundary</strong>: <code>right = len(nums)-1</code></li>
 <li><strong>Continue Condition</strong>: <code>while(left &lt;= right)</code>; the loop will stop when <code>left == right+1</code>, at which time the search interval is <code>[right+1, right]</code>, which is an empty interval meaning that the loop should be stopped.</li>
 <li><strong>Search One/Other Part</strong>: Each step we take a <code>mid</code> away, and then the search interval is divided into two parts: <code>[left, mid-1]</code> and <code>[mid+1, right]</code>. To search the first part, we have <code>right = mid-1</code>; To search the latter part, we have <code>left = mid+1</code>.</li>
 </ol>
-<h3 id="notice">Notice</h3>
+<h3 id="notice">2.3. Notice</h3>
 <p>When the loop stops, all the items on the left of <code>left</code> will satisfies the <code>if-else</code> condition of <code>left = mid+1</code>；all the items on the right of <code>right</code> will satisfies the <code>if-else</code> condition of <code>right = mid</code> or <code>right = mid-1</code>.</p>
-##
-<center>
-Examples
-</center>
-<hr />
-<h3 id="search-a-number">Search a number</h3>
+<h2 id="examples">3. Examples</h2>
+<h3 id="search-a-number">3.1. Search a number</h3>
 <p>Given a list of numbers <code>nums</code> and a number <code>target</code>, try to find out if <code>target</code> is in <code>nums</code> or not. If so, return the index of <code>target</code>; otherwise, return -1.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span>(<span class="params">nums, target</span>):</span></span><br><span class="line">    left = <span class="number">0</span></span><br><span class="line">    right = <span class="built_in">len</span>(nums)-<span class="number">1</span> <span class="comment"># Right Boundary</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> left &lt;= right: <span class="comment"># Continue Condition</span></span><br><span class="line">        mid = (left + right) // <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> nums[mid] == target:</span><br><span class="line">            <span class="keyword">return</span> mid <span class="comment"># Target Found</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &lt; target:</span><br><span class="line">            left = mid + <span class="number">1</span> <span class="comment"># Search One Part</span></span><br><span class="line">        <span class="keyword">elif</span> nums[mid] &gt; target:</span><br><span class="line">            right = mid - <span class="number">1</span> <span class="comment"># Search The Other Part</span></span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="koko-eating-bananas-leetcode-875">3.2. Koko Eating Bananas (LeetCode 875)</h3>
+<p>Koko loves to eat bananas. There are <code>n</code> piles of bananas, the i-th pile has <code>piles[i]</code> bananas. The guards have gone and will come back in <code>h</code> hours.</p>
+<p>Koko can decide her bananas-per-hour eating speed of <code>k</code>. Each hour, she chooses some pile of bananas and eats <code>k</code> bananas from that pile. If the pile has less than k bananas, she eats all of them instead and will not eat any more bananas during this hour.</p>
+<p>Koko likes to eat slowly but still wants to finish eating all the bananas before the guards return.</p>
+<p>Return the minimum integer <code>k</code> such that she can eat all the bananas within <code>h</code> hours.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: piles = [3,6,7,11], h = 8</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: piles = [30,11,23,4,20], h = 5</span><br><span class="line">Output: 30</span><br></pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: piles = [30,11,23,4,20], h = 6</span><br><span class="line">Output: 23</span><br></pre></td></tr></table></figure>
+<p>To find the minimum <code>k</code>, we can binary search <code>k</code> from <code>0</code> to <code>max(piles)</code>, and check if it satisfies the condition (to finish eating all the bananas before the guards return):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Form One: [left, right)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minEatingSpeed</span>(<span class="params">self, piles: <span class="type">List</span>[<span class="built_in">int</span>], h: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span>  </span><br><span class="line">    <span class="comment"># Initalize the left and right boundaries     </span></span><br><span class="line">    left = <span class="number">1</span></span><br><span class="line">    right = <span class="built_in">max</span>(piles)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> left &lt; right:</span><br><span class="line">        <span class="comment"># Get the middle index between left and right boundary indexes.</span></span><br><span class="line">        <span class="comment"># hour_spent stands for the total hour Koko spends.</span></span><br><span class="line">        middle = (left + right) // <span class="number">2</span>            </span><br><span class="line">        hour_spent = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Iterate over the piles and calculate hour_spent.</span></span><br><span class="line">        <span class="comment"># We increase the hour_spent by ceil(pile / middle)</span></span><br><span class="line">        <span class="keyword">for</span> pile <span class="keyword">in</span> piles:</span><br><span class="line">            hour_spent += math.ceil(pile / middle)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Check if middle is a workable speed, and cut the search space by half.</span></span><br><span class="line">        <span class="keyword">if</span> hour_spent &lt;= h:</span><br><span class="line">            right = middle</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            left = middle + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Once the left and right boundaries coincide, we find the target value,</span></span><br><span class="line">    <span class="comment"># that is, the minimum workable eating speed.</span></span><br><span class="line">    <span class="keyword">return</span> right</span><br><span class="line"></span><br><span class="line"><span class="comment">### Form Two: [left, right]</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minEatingSpeed</span>(<span class="params">self, piles: <span class="type">List</span>[<span class="built_in">int</span>], h: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span>  </span><br><span class="line">    <span class="comment"># Initalize the left and right boundaries     </span></span><br><span class="line">    left = <span class="number">1</span></span><br><span class="line">    right = <span class="built_in">max</span>(piles)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        <span class="comment"># Get the middle index between left and right boundary indexes.</span></span><br><span class="line">        <span class="comment"># hour_spent stands for the total hour Koko spends.</span></span><br><span class="line">        middle = (left + right) // <span class="number">2</span>            </span><br><span class="line">        hour_spent = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Iterate over the piles and calculate hour_spent.</span></span><br><span class="line">        <span class="comment"># We increase the hour_spent by ceil(pile / middle)</span></span><br><span class="line">        <span class="keyword">for</span> pile <span class="keyword">in</span> piles:</span><br><span class="line">            hour_spent += math.ceil(pile / middle)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Check if middle is a workable speed, and cut the search space by half.</span></span><br><span class="line">        <span class="keyword">if</span> hour_spent &lt;= h:</span><br><span class="line">            right = middle - <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            left = middle + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Once the left and right boundaries coincide, we find the target value,</span></span><br><span class="line">    <span class="comment"># that is, the minimum workable eating speed.</span></span><br><span class="line">    <span class="keyword">return</span> left</span><br></pre></td></tr></table></figure>
 
     </article>
     <!-- license  -->
@@ -463,7 +464,7 @@ Examples
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">https://lingfengzhu.github.io/2020/06/29/BinarySearch/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">June 29th 2020, 8:30:08 am</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">September 8th 2021, 6:37:42 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2020/06/29/BinarySearch/">January 20th 2022, 3:17:49 pm</a>
             <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -616,7 +617,7 @@ top:50vh;
                 <div id="toc-div">
             
                 
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-factors"><span class="toc-text">Main Factors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-framework"><span class="toc-text">Main Framework</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#form-1-search-left-right"><span class="toc-text">Form 1: Search [left, right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#form-2-search-left-right"><span class="toc-text">Form 2: Search [left, right]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#notice"><span class="toc-text">Notice</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#search-a-number"><span class="toc-text">Search a number</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#framework"><span class="toc-text">1. Framework</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-factors"><span class="toc-text">1.1. Main Factors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main-framework"><span class="toc-text">1.2. Main Framework</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#some-points"><span class="toc-text">2. Some Points</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#form-one-search-left-right"><span class="toc-text">2.1. Form One: Search [left, right)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#form-two-search-left-right"><span class="toc-text">2.2. Form Two: Search [left, right]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#notice"><span class="toc-text">2.3. Notice</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#examples"><span class="toc-text">3. Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#search-a-number"><span class="toc-text">3.1. Search a number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#koko-eating-bananas-leetcode-875"><span class="toc-text">3.2. Koko Eating Bananas (LeetCode 875)</span></a></li></ol></li></ol>
                 
             </div>
         </div>
@@ -1032,9 +1033,33 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 33
         </div>
         <!-- search  -->
         
@@ -1044,6 +1069,25 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2022/01/08/Dynamic-Programming/" >Dynamic Programming</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2022/01/06/BitwiseOperation/" >Bitwise Operation</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
@@ -1225,9 +1269,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     

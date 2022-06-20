@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/MaxAbsScaler.png">
 <meta property="og:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/RobustScaler.png">
 <meta property="article:published_time" content="2021-12-14T08:04:38.000Z">
-<meta property="article:modified_time" content="2021-12-15T08:19:05.608Z">
+<meta property="article:modified_time" content="2022-02-08T01:58:13.733Z">
 <meta property="article:author" content="Lingfeng Zhu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://lingfengzhu.github.io/images/Normalization-Standardization/Original.png">
@@ -453,7 +453,7 @@ x_i^{\prime}=\frac{x_i-\max(x_i)}{\max (x_i)-\min (x_i)}
 <p>在 scikit-learn 库的 <code>preprocessing</code> 中，<code>MinMaxScaler()</code> 函数对应这一缩放方法。案例数据集使用 Rescaling 后分布图像为：</p>
 <p><img src="/images/Normalization-Standardization/MinMaxScaler.png" /></p>
 <h3 id="mean-normalization">Mean Normalization</h3>
-<p>Mean Normalization 将特征数据平移为均值等于 1，缩放为<strong>取值范围区间长度</strong>为 1 的一个分布（按比例缩放，不改变分布）： <span class="math display">\[
+<p>Mean Normalization 将特征数据平移为均值等于 0，缩放为<strong>取值范围区间长度</strong>为 1 的一个分布（按比例缩放，不改变分布）： <span class="math display">\[
 x_i^{\prime}=\frac{x_i-\bar{x}_i}{\max (x_i)-\min (x_i)}
 \]</span> 其中：</p>
 <ul>
@@ -515,7 +515,7 @@ x_{i}{ }^{\prime}=\frac{x_{i}-median(x_i)}{I Q R(x_i)}
             <p>Author：<a href="https://lingfengzhu.github.io">Lingfeng Zhu</a>
             <p>Original Link：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/</a> 
             <p>Published：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">December 14th 2021, 4:04:38 pm</a>
-            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">December 15th 2021, 4:19:05 pm</a>
+            <p>Updated：<a href="https://lingfengzhu.github.io/2021/12/14/Normalization-Standardization/">February 8th 2022, 9:58:13 am</a>
             <p>Copyright：This Article Uses <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">Attribution-NonCommercial 4.0 International</a> as the license</p> 
         </div>
     
@@ -1084,9 +1084,33 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 31
+        Total : 33
         </div>
         <!-- search  -->
         
@@ -1096,6 +1120,25 @@ top:50vh;
     
     
     
+    
+    <div class="archive-year"> 2022 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/08</span><a class="archive-post-title" href= "/2022/01/08/Dynamic-Programming/" >Dynamic Programming</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/06</span><a class="archive-post-title" href= "/2022/01/06/BitwiseOperation/" >Bitwise Operation</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2021 </div>
     <ul class="year-list">
@@ -1277,9 +1320,9 @@ top:50vh;
     
         <span class="sidebar-tag-name" data-tags="Conda"><span class="iconfont-archer">&#xe606;</span>Conda</span>
     
-        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
-    
         <span class="sidebar-tag-name" data-tags="Docker"><span class="iconfont-archer">&#xe606;</span>Docker</span>
+    
+        <span class="sidebar-tag-name" data-tags="Python"><span class="iconfont-archer">&#xe606;</span>Python</span>
     
         <span class="sidebar-tag-name" data-tags="Hexo"><span class="iconfont-archer">&#xe606;</span>Hexo</span>
     
